@@ -10,7 +10,11 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="match_parent"
-        android:layout_height="230dp"
+        android:layout_height="260dp"
+        app:cardBackgroundColor="#CCE10D"
+        app:cardCornerRadius="30dp"
+        app:cardElevation="-1dp"
+        app:contentPadding="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -18,7 +22,7 @@
     </androidx.cardview.widget.CardView>
 
     <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/store_image"
+        android:id="@+id/storeImage"
         android:layout_width="match_parent"
         android:layout_height="120dp"
         android:layout_margin="10dp"
@@ -31,7 +35,7 @@
         app:srcCompat="@drawable/hamburger" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/txtName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
@@ -40,27 +44,27 @@
         android:textColor="@color/black"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/textView4"
+        app:layout_constraintBottom_toTopOf="@+id/txtDescription"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/store_image"
+        app:layout_constraintTop_toBottomOf="@+id/storeImage"
         app:layout_constraintVertical_chainStyle="packed" />
 
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/txtPriceClass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="$$"
         android:textColor="@color/purple_700"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/textView2"
-        app:layout_constraintEnd_toEndOf="@+id/textView2"
-        app:layout_constraintStart_toStartOf="@+id/textView2"
-        app:layout_constraintTop_toBottomOf="@+id/store_image" />
+        app:layout_constraintBottom_toTopOf="@+id/txtDistance"
+        app:layout_constraintEnd_toEndOf="@+id/txtDistance"
+        app:layout_constraintStart_toStartOf="@+id/txtDistance"
+        app:layout_constraintTop_toBottomOf="@+id/storeImage" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/txtDistance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="2,7km"
@@ -70,7 +74,7 @@
         app:layout_constraintBottom_toTopOf="@+id/ratingBar"
         app:layout_constraintEnd_toEndOf="@+id/ratingBar"
         app:layout_constraintStart_toStartOf="@+id/ratingBar"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintTop_toBottomOf="@+id/txtPriceClass" />
 
 
     <RatingBar
@@ -81,10 +85,10 @@
         android:contentDescription="@string/app_name"
         app:layout_constraintBottom_toBottomOf="@+id/cardView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/txtDistance" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/txtDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="15dp"
@@ -93,8 +97,8 @@
         android:textSize="16sp"
         android:textStyle="normal"
         app:layout_constraintBottom_toBottomOf="@+id/cardView"
-        app:layout_constraintStart_toStartOf="@+id/textView"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintStart_toStartOf="@+id/txtName"
+        app:layout_constraintTop_toBottomOf="@+id/txtName" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
