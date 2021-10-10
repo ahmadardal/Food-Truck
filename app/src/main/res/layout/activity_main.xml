@@ -8,30 +8,34 @@
     android:backgroundTintMode="multiply"
     tools:context=".MainActivity">
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="187dp"
-        android:layout_height="174dp"
-        android:layout_marginTop="50dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logo_foodtruck" />
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ic_menu"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="4dp"
+        android:src="@drawable/ic_menu_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.026"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textView"
-        android:layout_width="225dp"
+        android:layout_width="200dp"
         android:layout_height="35dp"
-        android:layout_marginTop="25dp"
-        android:text="welcome to Food Truck Kartan"
+        android:text="@string/Welcome_to_Food_Truck_Kartan"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="#FFBBBC"
         android:textSize="14sp"
         android:textStyle="bold"
+        app:constraint_referenced_ids="ic_menu"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/editTextTextPersonName3"
@@ -41,7 +45,7 @@
         android:background="@drawable/transparent_plaintext"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Username"
+        android:text="@string/Username"
         android:textAlignment="center"
         android:textColor="#FFFFFF"
         android:textSize="14sp"
@@ -56,8 +60,8 @@
         android:layout_marginTop="20dp"
         android:background="@drawable/transparent_plaintext"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Password"
+        android:inputType="textPassword"
+        android:text="@string/Password"
         android:textAlignment="center"
         android:textColor="#FFFFFF"
         android:textSize="14sp"
@@ -90,7 +94,7 @@
         android:layout_height="50dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/login_button"
-        android:text="Login"
+        android:text="@string/Bt_Login"
         android:textColor="#EF3D64"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
