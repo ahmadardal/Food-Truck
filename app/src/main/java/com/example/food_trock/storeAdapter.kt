@@ -1,6 +1,7 @@
 package com.example.food_trock
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,9 +14,21 @@ import com.google.android.material.imageview.ShapeableImageView
 class storeAdapter(val context: Context, val storeList: List<Store> ) :
     RecyclerView.Adapter<storeAdapter.storeViewHolder>() {
 
+    private lateinit var mListener : onItemClickListener
+
+    interface onItemClickListener {
+        fun onItemClick(position: Int)
+    }
+
+    fun setOnItemClickListener(listener: onItemClickListener) {
+
+        mListener = listener
+
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): storeViewHolder {
         val itemView = LayoutInflater.from(context).inflate(R.layout.store_item, parent, false)
-        return storeViewHolder(itemView)
+        return storeViewHolder(itemView, mListener)
     }
 
     override fun onBindViewHolder(holder: storeViewHolder, position: Int) {
@@ -41,7 +54,7 @@ class storeAdapter(val context: Context, val storeList: List<Store> ) :
         return storeList.size
     }
 
-    class storeViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
+    inner class storeViewHolder(itemView : View, listener: onItemClickListener) : RecyclerView.ViewHolder(itemView) {
 
         var cardView: CardView = itemView.findViewById(R.id.cardView)
         val storeImage: ShapeableImageView = itemView.findViewById(R.id.storeImage)
@@ -50,6 +63,12 @@ class storeAdapter(val context: Context, val storeList: List<Store> ) :
         val txtPriceClass: TextView = itemView.findViewById(R.id.txtPriceClass)
         val txtDistance: TextView = itemView.findViewById(R.id.txtDistance)
         val ratingBar: RatingBar = itemView.findViewById(R.id.ratingBar)
+
+        init {
+            itemView.setOnClickListener {
+                listener.onItemClick(adapterPosition)
+            }
+        }
 
     }
 

@@ -3,6 +3,8 @@ package com.example.food_trock
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.ContactsContract
+import android.util.Log
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -16,6 +18,15 @@ class MainActivity : AppCompatActivity() {
 
         recyclerView = findViewById(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = storeAdapter(this, DataManager.stores)
+        var storeAdapter = storeAdapter(this, DataManager.stores)
+        recyclerView.adapter = storeAdapter
+
+        storeAdapter.setOnItemClickListener(object: storeAdapter.onItemClickListener{
+            override fun onItemClick(position: Int) {
+
+                Log.e("TEST", "TEST")
+
+            }
+        })
     }
 }
