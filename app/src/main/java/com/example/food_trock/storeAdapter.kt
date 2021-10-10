@@ -23,9 +23,18 @@ class storeAdapter(val context: Context, val storeList: List<Store> ) :
         holder.storeImage.setImageResource(currentItem.storeImage)
         holder.txtName.text = currentItem.storeName
         holder.txtDescription.text = currentItem.storeDescription
-        holder.txtPriceClass.text = currentItem.storePriceClass
-        holder.txtDistance.text = currentItem.storeDistance
+        holder.txtPriceClass.text = currentItem.storePriceClass.toString()
+        holder.txtDistance.text = currentItem.storeDistance.toString()
         holder.ratingBar.rating = currentItem.storeRating.toFloat()
+
+        if (currentItem.storePriceClass <= 70) {
+            holder.txtPriceClass.text = "$"
+        } else if (currentItem.storePriceClass in 80..105) {
+            holder.txtPriceClass.text = "$$"
+        } else
+            holder.txtPriceClass.text = "$$$"
+
+
     }
 
     override fun getItemCount(): Int {
