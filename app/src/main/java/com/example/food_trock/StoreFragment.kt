@@ -14,7 +14,7 @@ class StoreFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         return super.onCreateView(inflater, container, savedInstanceState)
-        val view = inflater.inflate()
+        
     }
 
 }
