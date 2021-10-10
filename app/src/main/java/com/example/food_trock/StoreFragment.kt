@@ -1,6 +1,7 @@
 package com.example.food_trock
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +14,14 @@ class StoreFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return super.onCreateView(inflater, container, savedInstanceState)
+
+        var data: String? = arguments?.getString("storeName")
+
+        Log.e("TEST",data!!)
+
+        val view = inflater.inflate(R.layout.store_fragment, container, false,)
+
+        return view
 
     }
 
