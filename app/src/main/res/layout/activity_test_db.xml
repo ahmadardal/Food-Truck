@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/testDB_background"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:context=".TestDB">
+
+    <TextView
+        android:id="@+id/tv_database_test"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40sp"
+        android:text="Database test"
+        android:textColor="@color/black"
+        android:textSize="40sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/btn_get_data"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="20sp"
+        android:layout_marginTop="60sp"
+        android:layout_marginEnd="20sp"
+        android:background="@drawable/shape_button_rounded"
+        android:foreground="?attr/selectableItemBackground"
+        android:gravity="center"
+        android:paddingTop="8sp"
+        android:paddingBottom="8sp"
+        android:text="Hämta data"
+        android:textColor="@android:color/white"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/btn_post_data"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="20sp"
+        android:layout_marginTop="20sp"
+        android:layout_marginBottom="30sp"
+        android:layout_marginEnd="20sp"
+        android:background="@drawable/white_border_shape_button_rounded"
+        android:foreground="?attr/selectableItemBackground"
+        android:gravity="center"
+        android:paddingTop="8sp"
+        android:paddingBottom="8sp"
+        android:text="Skicka data"
+        android:textColor="#0C90F1"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/tv_card_output"
+        android:layout_width="match_parent"
+        android:layout_height="320dp"
+        android:background="@drawable/shape_db_output_card_view"
+        android:layout_gravity="end"
+        android:layout_margin="20dp"
+        android:visibility="gone"
+        tools:visibility="visible" />
+
+</LinearLayout>
