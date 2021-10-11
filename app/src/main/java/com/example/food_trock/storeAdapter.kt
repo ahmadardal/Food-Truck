@@ -37,7 +37,7 @@ class storeAdapter(val context: Context, val storeList: List<Store> ) :
         holder.txtName.text = currentItem.storeName
         holder.txtDescription.text = currentItem.storeDescription
         holder.txtPriceClass.text = currentItem.storePriceClass.toString()
-        holder.txtDistance.text = currentItem.storeDistance.toString()
+        holder.txtDistance.text = currentItem.storeDistance
         holder.ratingBar.rating = currentItem.storeRating.toFloat()
 
         if (currentItem.storePriceClass <= 70) {

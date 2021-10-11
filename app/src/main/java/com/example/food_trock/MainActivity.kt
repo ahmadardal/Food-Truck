@@ -28,18 +28,29 @@ class MainActivity : AppCompatActivity() {
 
                 val storeFragment = StoreFragment()
 
+                var selectedStore: Store = storeAdapter.storeList[position]
                 val bundle = Bundle()
-                bundle.putString("storeName","hej")
                 storeFragment.arguments = bundle
+                bundle.putString("storeName", selectedStore.storeName)
+                bundle.putString("storeDescription", selectedStore.storeDescription)
+                bundle.putInt("storePriceClass", selectedStore.storePriceClass)
+                bundle.putString("storeDistance", selectedStore.storeDistance)
+
 
                 val transaction = supportFragmentManager.beginTransaction()
                 transaction.add(R.id.container, storeFragment, "store")
                 transaction.commit()
 
 
-
-
                 Log.e("TEST", "TEST")
+
+
+                var storeName: String = selectedStore.storeName
+                var storeDescription: String = selectedStore.storeDescription
+                var storePriceClass: Int = selectedStore.storePriceClass
+                var storeDistance: String = selectedStore.storeDistance
+
+
 
             }
         })
