@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.testlayout">
+    package="com.example.food_trock">
 
     <application
         android:allowBackup="true"
@@ -10,16 +10,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TestLayout">
         <activity
-            android:name=".editOwnerProfil"
+            android:name="com.example.food_trock.editOwnerProfil"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity
-            android:name=".inLoggninOwner"
+            android:name="com.example.food_trock.inLoggninOwner"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
-        <activity android:name=".MainActivity" />
+        <activity android:name="com.example.food_trock.MainActivity" />
         <activity
-            android:name=".SplashActivity"
+            android:name="com.example.food_trock.SplashActivity"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>

@@ -1,4 +1,4 @@
-package com.example.testlayout
+package com.example.food_trock
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

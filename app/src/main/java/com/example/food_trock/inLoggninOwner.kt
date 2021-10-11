@@ -1,4 +1,4 @@
-package com.example.testlayout
+package com.example.food_trock
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity

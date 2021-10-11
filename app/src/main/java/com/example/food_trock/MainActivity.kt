@@ -1,11 +1,11 @@
-package com.example.testlayout
+package com.example.food_trock
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 
-class editOwnerProfil : AppCompatActivity() {
+class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_edit_owner_profil)
+        setContentView(R.layout.activity_main)
     }
 }
