@@ -5,6 +5,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 
@@ -27,6 +29,7 @@ class StoreFragment : Fragment() {
         val view = inflater.inflate(R.layout.store_fragment, container, false,)
 
 
+        val returnBtn = view.findViewById<ImageButton>(R.id.storeReturnBtn)
         txtStoreName = view.findViewById(R.id.txtStoreName)
         txtStoreInfo = view.findViewById(R.id.txtStoreInfo)
         txtPriceClass = view.findViewById(R.id.txtPriceClass)
@@ -49,6 +52,10 @@ class StoreFragment : Fragment() {
                 txtPriceClass.text = "$$"
             } else
                 txtPriceClass.text = "$$$"
+        }
+
+        returnBtn.setOnClickListener() {
+            activity?.supportFragmentManager?.beginTransaction()?.remove(this)?.commit()
         }
 
         return view
