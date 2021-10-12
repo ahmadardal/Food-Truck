@@ -8,10 +8,22 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.FoodTrock">
+        android:theme="@style/Theme.AppCompat">
         <activity
-            android:name=".inLoggningAct"
+            android:name=".models.editOwnerProfil"
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        <activity
+            android:name=".models.inLoggningActivity"
             android:exported="true" />
+        <activity
+            android:name=".models.inLoggninOwner"
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        <activity
+            android:name=".models.SplashActivity"
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity
             android:name=".StoreActivity"
             android:exported="true"/>

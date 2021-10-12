@@ -1,4 +1,14 @@
 <resources>
-    <string name="app_name">Food-Trock</string>
-    <string name="Loggin">Logga In</string>
+    <string name="app_name">TestLayout</string>
+    <string name="Username">Username</string>
+    <string name="Password">Password</string>
+    <string name="Welcome_to_Food_Truck_Kartan">welcome to Food Truck Kartan</string>
+    <string name="Edit_profile">Edit profile</string>
+    <string name="Bt_Login">Login</string>
+    <string name="Bt_LogOut">Log Out</string>
+    <string name="Text_EditImage">Edit Image</string>
+    <string name="Describe_Truck">Describe your Truck</string>
+    <string name="My_Menu">My menu</string>
+    <string name="Opening_hours">Opening Hours</string>
+    <string name="Status">Status</string>
 </resources>
