@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/testDB_background"
+    android:background="@color/white"
     android:gravity="center_horizontal"
     android:orientation="vertical"
     tools:context=".TestDB">
@@ -42,8 +42,8 @@
         android:layout_gravity="center"
         android:layout_marginStart="20sp"
         android:layout_marginTop="20sp"
-        android:layout_marginBottom="30sp"
         android:layout_marginEnd="20sp"
+        android:layout_marginBottom="30sp"
         android:background="@drawable/white_border_shape_button_rounded"
         android:foreground="?attr/selectableItemBackground"
         android:gravity="center"
@@ -57,9 +57,9 @@
         android:id="@+id/tv_card_output"
         android:layout_width="match_parent"
         android:layout_height="320dp"
-        android:background="@drawable/shape_db_output_card_view"
         android:layout_gravity="end"
         android:layout_margin="20dp"
+        android:background="@drawable/shape_db_output_card_view"
         android:visibility="gone"
         tools:visibility="visible" />
 
