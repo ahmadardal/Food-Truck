@@ -6,7 +6,7 @@
     android:background="@color/white"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    tools:context=".TestDB">
+    tools:context=".activities.TestDB">
 
     <TextView
         android:id="@+id/tv_database_test"

@@ -1,4 +1,4 @@
-package com.example.food_trock
+package com.example.food_trock.models
 
 import android.widget.RatingBar
 import androidx.cardview.widget.CardView

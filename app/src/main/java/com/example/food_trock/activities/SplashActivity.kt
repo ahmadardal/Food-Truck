@@ -1,4 +1,4 @@
-package com.example.food_trock.models
+package com.example.food_trock.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity

@@ -1,10 +1,15 @@
-package com.example.food_trock
+package com.example.food_trock.activities
 
 import android.os.Bundle
 import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.appcompat.app.AppCompatActivity
+import com.example.food_trock.DataManager
+import com.example.food_trock.R
+import com.example.food_trock.models.Store
+import com.example.food_trock.fragments.StoreFragment
+import com.example.food_trock.adapters.storeAdapter
 
 class StoreActivity : AppCompatActivity() {
 

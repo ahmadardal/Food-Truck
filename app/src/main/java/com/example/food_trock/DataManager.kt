@@ -1,5 +1,7 @@
 package com.example.food_trock
 
+import com.example.food_trock.models.Store
+
 object DataManager {
 
     val stores = mutableListOf<Store>()

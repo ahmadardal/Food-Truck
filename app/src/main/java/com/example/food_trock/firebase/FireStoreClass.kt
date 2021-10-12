@@ -1,11 +1,7 @@
 package com.example.food_trock.firebase
 
-import android.util.Log
-import com.example.food_trock.TestDB
-import com.example.food_trock.models.FoodTruckProfile
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.SetOptions
 
 class FireStoreClass {
 

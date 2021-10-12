@@ -1,13 +1,11 @@
-package com.example.food_trock
+package com.example.food_trock.activities
 
-import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.WindowManager
 import android.widget.Button
 import android.widget.TextView
-import androidx.recyclerview.widget.RecyclerView
+import com.example.food_trock.R
 import com.example.food_trock.models.FoodTruckProfile
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
