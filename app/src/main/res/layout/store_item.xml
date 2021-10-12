@@ -10,7 +10,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="match_parent"
-        android:layout_height="240dp"
+        android:layout_height="220dp"
         app:cardCornerRadius="20dp"
         app:cardElevation="-5dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -50,56 +50,40 @@
                 android:id="@+id/txtName"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
-                android:layout_marginTop="115dp"
                 android:text="Ortens Truck"
                 android:textColor="@color/black"
                 android:textSize="19sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/txtDescription"
+                app:layout_constraintBottom_toTopOf="@+id/ratingBar"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.056"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView2" />
-
-            <TextView
-                android:id="@+id/txtDescription"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Description"
-                android:textColor="@color/black"
-                android:textSize="13sp"
-                android:textStyle="normal"
-                app:layout_constraintBottom_toTopOf="@+id/imageView2"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.049"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtName" />
+                app:layout_constraintTop_toBottomOf="@+id/storeImage" />
 
             <RatingBar
                 android:id="@+id/ratingBar"
                 android:layout_width="110dp"
                 android:layout_height="25dp"
                 android:contentDescription="@string/app_name"
-                app:layout_constraintBottom_toTopOf="@+id/imageView2"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.943"
+                app:layout_constraintHorizontal_bias="0.056"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtDistance" />
+                app:layout_constraintTop_toBottomOf="@+id/txtName" />
 
             <TextView
                 android:id="@+id/txtPriceClass"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="142dp"
                 android:text="$$"
                 android:textColor="@color/purple_700"
                 android:textSize="21sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/txtDistance"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.836"
+                app:layout_constraintHorizontal_bias="0.869"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+                app:layout_constraintTop_toBottomOf="@+id/storeImage" />
 
             <TextView
                 android:id="@+id/txtDistance"
@@ -109,9 +93,9 @@
                 android:textColor="@color/purple_700"
                 android:textSize="14sp"
                 android:textStyle="normal"
-                app:layout_constraintBottom_toTopOf="@+id/ratingBar"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.847"
+                app:layout_constraintHorizontal_bias="0.881"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txtPriceClass" />
         </androidx.constraintlayout.widget.ConstraintLayout>
