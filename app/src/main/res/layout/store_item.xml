@@ -31,7 +31,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/cardView"
-        app:shapeAppearanceOverlay="@style/RoundCorner"
         app:srcCompat="@drawable/hamburger" />
 
     <TextView
