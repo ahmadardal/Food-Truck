@@ -10,23 +10,26 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
         <activity
+            android:name=".activities.OwnerProfileActivity"
+            android:exported="true" />
+        <activity
             android:name=".activities.editOwnerProfil"
             android:exported="true"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".activities.inLoggningActivity"
             android:exported="true" />
         <activity
             android:name=".activities.inLoggninOwner"
             android:exported="true"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".activities.SplashActivity"
             android:exported="true"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".activities.StoreActivity"
-            android:exported="true"/>
+            android:exported="true" />
         <activity
             android:name=".activities.TestDB"
             android:exported="true" />
