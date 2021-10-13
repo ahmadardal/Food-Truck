@@ -36,7 +36,6 @@ class storeAdapter(val context: Context, val storeList: List<Store> ) :
         val currentItem = storeList[position]
         holder.storeImage.setImageResource(currentItem.storeImage)
         holder.txtName.text = currentItem.storeName
-        holder.txtDescription.text = currentItem.storeDescription
         holder.txtPriceClass.text = currentItem.storePriceClass.toString()
         holder.txtDistance.text = currentItem.storeDistance
         holder.ratingBar.rating = currentItem.storeRating.toFloat()
@@ -60,7 +59,6 @@ class storeAdapter(val context: Context, val storeList: List<Store> ) :
         var cardView: CardView = itemView.findViewById(R.id.cardView)
         val storeImage: ShapeableImageView = itemView.findViewById(R.id.storeImage)
         val txtName: TextView = itemView.findViewById(R.id.txtName)
-        val txtDescription: TextView = itemView.findViewById(R.id.txtDescription)
         val txtPriceClass: TextView = itemView.findViewById(R.id.txtPriceClass)
         val txtDistance: TextView = itemView.findViewById(R.id.txtDistance)
         val ratingBar: RatingBar = itemView.findViewById(R.id.ratingBar)

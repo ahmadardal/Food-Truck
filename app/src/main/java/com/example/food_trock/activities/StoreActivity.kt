@@ -34,7 +34,6 @@ class StoreActivity : AppCompatActivity() {
                 val bundle = Bundle()
                 storeFragment.arguments = bundle
                 bundle.putString("storeName", selectedStore.storeName)
-                bundle.putString("storeDescription", selectedStore.storeDescription)
                 bundle.putInt("storePriceClass", selectedStore.storePriceClass)
                 bundle.putString("storeDistance", selectedStore.storeDistance)
 
@@ -48,7 +47,6 @@ class StoreActivity : AppCompatActivity() {
 
 
                 var storeName: String = selectedStore.storeName
-                var storeDescription: String = selectedStore.storeDescription
                 var storePriceClass: Int = selectedStore.storePriceClass
                 var storeDistance: String = selectedStore.storeDistance
 

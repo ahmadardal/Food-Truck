@@ -30,17 +30,14 @@ class StoreFragment : Fragment() {
 
         val returnBtn = view.findViewById<ImageButton>(R.id.storeReturnBtn)
         txtStoreName = view.findViewById(R.id.txtStoreName)
-        txtStoreInfo = view.findViewById(R.id.txtStoreInfo)
         txtPriceClass = view.findViewById(R.id.txtPriceClass)
         txtDistance = view.findViewById(R.id.txtDistance)
 
         var storeName: String? = arguments?.getString("storeName")
-        var storeDescription: String? = arguments?.getString("storeName")
         var storePriceClass: Int? = arguments?.getInt("storePriceClass")
         var storeDistance: String? = arguments?.getString("storeDistance")
 
         txtStoreName.text = storeName
-        txtStoreInfo.text = storeDescription
         txtPriceClass.text = storePriceClass.toString()
         txtDistance.text = storeDistance
 

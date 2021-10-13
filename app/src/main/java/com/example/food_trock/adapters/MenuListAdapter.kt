@@ -25,7 +25,6 @@ RecyclerView.Adapter<menuListAdapter.menuViewHolder>(){
         val currentItem = menuList[position]
         holder.itemIMG.setImageResource(currentItem.menuIMG)
         holder.txtItemName.text = currentItem.menuName
-        holder.txtItemInfo.text = currentItem.menuDescription
         holder.txtItemPrice.text = currentItem.menuPrice.toString()
 
     }
@@ -37,7 +36,6 @@ RecyclerView.Adapter<menuListAdapter.menuViewHolder>(){
     inner class menuViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
         val itemIMG: ImageView = itemView.findViewById(R.id.ItemIMG)
         val txtItemName: TextView = itemView.findViewById(R.id.txtItemName)
-        val txtItemInfo: TextView = itemView.findViewById(R.id.txtDescription)
         val txtItemPrice: TextView = itemView.findViewById(R.id.txtItemPrice)
     }
 

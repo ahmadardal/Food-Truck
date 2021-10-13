@@ -1,8 +1,7 @@
 <resources>
-    <string name="app_name">TestLayout</string>
+    <string name="app_name">FoodTruck</string>
     <string name="Username">Username</string>
     <string name="Password">Password</string>
-    <string name="Welcome_to_Food_Truck_Kartan">welcome to Food Truck Kartan</string>
     <string name="Edit_profile">Edit profile</string>
     <string name="Bt_Login">Login</string>
     <string name="Bt_LogOut">Log Out</string>
