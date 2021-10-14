@@ -6,53 +6,68 @@
     android:layout_height="match_parent"
     android:background="@drawable/main_background"
     android:backgroundTintMode="multiply"
-    tools:context=".activities.inLoggningActivity">
+    tools:context=".MainActivity">
 
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/ic_menu"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="4dp"
-        android:src="@drawable/ic_menu_24"
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="187dp"
+        android:layout_height="174dp"
+        android:layout_marginTop="50dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.026"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo_foodtruck" />
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="225dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="25dp"
+        android:text="welcome to Food Truck Kartan"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="#FFBBBC"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
-    <androidx.appcompat.widget.AppCompatEditText
+    <EditText
         android:id="@+id/userNameActI"
         android:layout_width="300dp"
         android:layout_height="50dp"
+        android:layout_marginTop="65dp"
         android:background="@drawable/transparent_plaintext"
         android:ems="10"
+        android:hint="Username"
         android:inputType="textPersonName"
-        android:text="@string/Username"
-        android:textAlignment="center"
+        android:paddingStart="70dp"
+        android:textAlignment="viewStart"
         android:textColor="#FFFFFF"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="100dp" />
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-    <androidx.appcompat.widget.AppCompatEditText
+    <EditText
         android:id="@+id/passwordActI"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/transparent_plaintext"
         android:ems="10"
-        android:inputType="textPassword"
-        android:text="@string/Password"
-        android:textAlignment="center"
+        android:hint="password"
+        android:inputType="textPersonName"
+        android:paddingStart="70dp"
+        android:textAlignment="viewStart"
         android:textColor="#FFFFFF"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/userNameActI" />
 
-    <androidx.appcompat.widget.AppCompatImageView
+    <ImageView
         android:id="@+id/imageViewTruck"
         android:layout_width="66dp"
         android:layout_height="57dp"
@@ -62,7 +77,7 @@
         app:layout_constraintVertical_bias="0.45"
         app:srcCompat="@drawable/usericon" />
 
-    <androidx.appcompat.widget.AppCompatImageView
+    <ImageView
         android:id="@+id/imageView3"
         android:layout_width="66dp"
         android:layout_height="57dp"
@@ -77,7 +92,7 @@
         android:layout_height="50dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/login_button"
-        android:text="@string/Bt_Login"
+        android:text="Login"
         android:textColor="#EF3D64"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -86,6 +101,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/passwordActI"
         app:layout_constraintVertical_bias="0.178" />
+
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"

@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/main_background"
+    android:textAlignment="viewStart"
+    tools:context=".activities.RegisterAccount">
+
+    <ImageView
+        android:id="@+id/imageView9"
+        android:layout_width="66dp"
+        android:layout_height="57dp"
+        app:layout_constraintBottom_toBottomOf="@+id/passwordConfirmaion"
+        app:layout_constraintStart_toStartOf="@+id/passwordConfirmaion"
+        app:layout_constraintTop_toTopOf="@+id/passwordConfirmaion"
+        app:srcCompat="@drawable/lock" />
+
+    <EditText
+        android:id="@+id/passwordConfirmaion"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/transparent_plaintext"
+        android:ems="10"
+        android:hint="Confirm your password"
+        android:inputType="textPersonName"
+        android:paddingStart="70dp"
+        android:textAlignment="viewStart"
+        android:textColor="#FFFFFF"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/passwordActRA" />
+
+    <EditText
+        android:id="@+id/fullNameActRA"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/transparent_plaintext"
+        android:ems="10"
+        android:hint="Full name"
+        android:inputType="textPersonName"
+        android:paddingStart="70dp"
+        android:textAlignment="viewStart"
+        android:textColor="#FFFFFF"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cutomerButton" />
+
+    <EditText
+        android:id="@+id/userNameActRA"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/transparent_plaintext"
+        android:ems="10"
+        android:hint="Username"
+        android:inputType="textPersonName"
+        android:paddingStart="70dp"
+        android:textAlignment="viewStart"
+        android:textColor="#FFFFFF"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fullNameActRA" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="66dp"
+        android:layout_height="57dp"
+        app:layout_constraintBottom_toBottomOf="@+id/fullNameActRA"
+        app:layout_constraintStart_toStartOf="@+id/fullNameActRA"
+        app:layout_constraintTop_toTopOf="@+id/fullNameActRA"
+        app:srcCompat="@drawable/usericon" />
+
+    <ImageView
+        android:id="@+id/imageView10"
+        android:layout_width="66dp"
+        android:layout_height="57dp"
+        app:layout_constraintBottom_toBottomOf="@+id/userNameActRA"
+        app:layout_constraintStart_toStartOf="@+id/userNameActRA"
+        app:layout_constraintTop_toTopOf="@+id/userNameActRA"
+        app:srcCompat="@drawable/usericon" />
+
+    <EditText
+        android:id="@+id/passwordActRA"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/transparent_plaintext"
+        android:ems="10"
+        android:hint="Password"
+        android:inputType="textPersonName"
+        android:paddingStart="70dp"
+        android:textAlignment="viewStart"
+        android:textColor="#FFFFFF"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/userNameActRA" />
+
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="66dp"
+        android:layout_height="57dp"
+        app:layout_constraintBottom_toBottomOf="@+id/passwordActRA"
+        app:layout_constraintStart_toStartOf="@+id/passwordActRA"
+        app:layout_constraintTop_toTopOf="@+id/passwordActRA"
+        app:srcCompat="@drawable/lock" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/registerButtonActRA"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="50dp"
+        android:background="@drawable/login_button"
+        android:text="Register"
+        android:textColor="#EF3D64"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/passwordConfirmaion"
+        app:layout_constraintVertical_bias="0.178" />
+
+    <ImageView
+        android:id="@+id/LogoActRA"
+        android:layout_width="85dp"
+        android:layout_height="78dp"
+        android:layout_marginTop="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo_foodtruck" />
+
+    <TextView
+        android:id="@+id/textViewActRA"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Please Register Your Data"
+        android:textAlignment="center"
+        android:textColor="#FFBBBC"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/LogoActRA" />
+
+    <ImageButton
+        android:id="@+id/truckOwnerButton"
+        android:layout_width="106dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="28dp"
+        android:background="@drawable/inactive_food_owner"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.33"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewActRA" />
+
+    <ImageButton
+        android:id="@+id/cutomerButton"
+        android:layout_width="108dp"
+        android:layout_height="100dp"
+        android:background="@drawable/active_customer"
+        app:layout_constraintBottom_toBottomOf="@+id/truckOwnerButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.51"
+        app:layout_constraintStart_toStartOf="@+id/truckOwnerButton"
+        app:layout_constraintTop_toTopOf="@+id/truckOwnerButton" />
+</androidx.constraintlayout.widget.ConstraintLayout>
