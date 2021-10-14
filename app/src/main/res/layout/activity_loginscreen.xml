@@ -10,34 +10,18 @@
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="187dp"
-        android:layout_height="174dp"
+        android:layout_width="217dp"
+        android:layout_height="204dp"
         android:layout_marginTop="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/logo_foodtruck" />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="225dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="25dp"
-        android:text="welcome to Food Truck Kartan"
-        android:textAlignment="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColor="#FFBBBC"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
-
     <EditText
         android:id="@+id/userNameActI"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:layout_marginTop="65dp"
         android:background="@drawable/transparent_plaintext"
         android:ems="10"
         android:hint="Username"
@@ -46,9 +30,11 @@
         android:textAlignment="viewStart"
         android:textColor="#FFFFFF"
         android:textSize="14sp"
+        android:layout_marginTop="50dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
     <EditText
         android:id="@+id/passwordActI"
