@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/main_background"
     android:textAlignment="viewStart"
-    tools:context=".activities.RegisterAccount">
+    tools:context=".activities.RegisterAccountActivity">
 
     <ImageView
         android:id="@+id/imageView9"
