@@ -30,7 +30,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/main_background" />
+                app:srcCompat="@color/white" />
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/storeImage"
@@ -81,7 +81,7 @@
                 android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/txtDistance"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.869"
+                app:layout_constraintHorizontal_bias="0.885"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/storeImage" />
 
@@ -95,7 +95,7 @@
                 android:textStyle="normal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.881"
+                app:layout_constraintHorizontal_bias="0.898"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txtPriceClass" />
         </androidx.constraintlayout.widget.ConstraintLayout>
