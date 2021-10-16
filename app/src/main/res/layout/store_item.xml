@@ -50,14 +50,12 @@
 
             <RatingBar
                 android:id="@+id/ratingBar"
-                android:layout_width="245dp"
-                android:layout_height="44dp"
-                android:background="@color/purple_500"
+                android:layout_width="110dp"
+                android:layout_height="25dp"
                 android:contentDescription="@string/app_name"
-                android:numStars="5"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.000"
+                app:layout_constraintHorizontal_bias="0.056"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txtName" />
 
