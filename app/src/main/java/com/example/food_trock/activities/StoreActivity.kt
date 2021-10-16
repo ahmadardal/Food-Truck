@@ -62,12 +62,15 @@ class StoreActivity : AppCompatActivity() {
             }
         })
 
+        /*
         val user = auth.currentUser
         val store = Store(
             user?.uid, R.drawable.kebab, "Kebab", 50, "10km", 0, false
         )
         val email = "pikachu@test.se"
         val password = "hello123"
+
+         */
 
 
 
