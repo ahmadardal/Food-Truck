@@ -1,6 +1,7 @@
 package com.example.food_trock.activities
 
 import android.os.Bundle
+import android.provider.ContactsContract
 import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -10,9 +11,13 @@ import com.example.food_trock.R
 import com.example.food_trock.models.Store
 import com.example.food_trock.fragments.StoreFragment
 import com.example.food_trock.adapters.storeAdapter
+import com.example.food_trock.models.StoreStatus
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.EventListener
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.FirebaseFirestoreException
+import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
@@ -54,42 +59,197 @@ class StoreActivity : AppCompatActivity() {
 
 
 
-
             }
         })
 
-        val raisStore = Store(R.drawable.hamburger,"Rai Pizzeria", 100, "10km",)
-        val email = "rai@test.se"
-        val password = "123456"
-        /*
-        auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { result ->
-            if(result.isSuccessful) {
-                Log.e("TEST","onCreateUser: successful")
+        val user = auth.currentUser
+        val store = Store(
+            user?.uid, R.drawable.hamburger, "Burgers2", 50, "2.5km", 0, false
+        )
+        val email = "robin@test.se"
+        val password = "hello123"
+
+
+
+/*
+        auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { task ->
+            if(task.isSuccessful) {
+                Log.e("TEST","onCreate: account created")
             } else {
-                Log.e("TEST", "onCreateUser: unsuccessful")
+                Log.e("TEST","onCreate: failed")
             }
+        }
+
+
+
+
+
+
+
+
+
+
+        auth.signInWithEmailAndPassword(email,password).addOnCompleteListener { task ->
+            if(task.isSuccessful) {
+                Log.e("TEST","onCreate: login successful")
+            }
+
+ */
+
+
+
+
+
+        //db.collection("FoodTrucks").add(store)
+
+
+
+
+
+
+
+
+/*
+        val storeUID = StoreStatus(store.userID)
+        if (user != null) {
+            db.collection("users").document(user.uid).collection("truckInfo").add(store)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        db.collection("foodtruckUID").add(storeUID)
+                        Log.e("TEST", "onCreate: store added")
+                    }
+                }
+
         }
 
  */
-        /*
-        val user = auth.currentUser
-        auth.signInWithEmailAndPassword(email, password).addOnCompleteListener { result ->
-            if(result.isSuccessful) {
-                Log.e("TEST","onLogin: successful user: ${user!!.email}")
 
+
+
+       /* if (user != null) {
+            db.collection("users").document(user.uid).collection("truckInfo")
+                .addSnapshotListener {snapshot ,e ->
+                    if(snapshot != null){
+                        for(document in snapshot.documents) {
+                            val store = document.toObject(Store::class.java)
+                            if (store != null) {
+                                db.collection("truckList").add(store)
+                            }
+                            Log.e("TEST","onCreate:${store}")
+                        }
+                    }
+                }
+        }
+
+        */
+        /*
+        db.collection("users").document("C8p53Hnej2bXMZsJghLjGKlfLWH3").collection("truckInfo")
+            .addSnapshotListener(object: EventListener<QuerySnapshot>{
+            override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?) {
+                DataManager.stores.clear()
+                if (value != null) {
+                    for(document in value.documents) {
+                        val store = document.toObject(Store::class.java)
+                        if (store != null) {
+                            if (store.storeOnline) {
+                                DataManager.stores.add(store)
+                            } else if (!store.storeOnline) {
+                                DataManager.stores.remove(store)
+                            }
+
+                        }
+                        recyclerView.adapter?.notifyDataSetChanged()
+                    }
+
+                }
+            }
+        })
+
+         */
+
+
+        /*
+        db.collection("foodtruckUID").addSnapshotListener{snapshot,e ->
+            if(snapshot != null) {
+                for (document in snapshot.documents) {
+                    val storeID = document.toObject(StoreStatus::class.java)
+                    if (storeID != null) {
+                        DataManager.listOfUID.add(storeID)
+                        cardUpdater()
+                    }
+                }
             }
         }
 
          */
 
-        /*
-        if (user != null) {
-            db.collection("users").document(user.uid).collection("truckInfo").add(raisStore)
-        }
-         */
 
 
+
+        db.collection("FoodTrucks").addSnapshotListener(object: EventListener<QuerySnapshot> {
+            override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?) {
+                DataManager.stores.clear()
+                if (value != null) {
+                    for(document in value.documents) {
+                        val store = document.toObject(Store::class.java)
+                        if(store != null) {
+                            if(store.storeOnline) {
+                                DataManager.stores.add(store)
+                            } else if (!store.storeOnline) {
+                                DataManager.stores.remove(store)
+                            }
+                        }
+                        recyclerView.adapter?.notifyDataSetChanged()
+                    }
+                }
+            }
+        })
 
 
     }
+    /*
+    fun cardUpdater () {
+        for (storeID in DataManager.listOfUID) {
+            storeID.storeUID?.let { db.collection("users").document(it) }
+                ?.collection("truckInfo")
+                ?.addSnapshotListener(object : EventListener<QuerySnapshot> {
+                    override fun onEvent(
+                        value: QuerySnapshot?,
+                        error: FirebaseFirestoreException?
+                    ) {
+                        DataManager.stores.clear()
+                        if (value != null) {
+                            for (document in value.documents) {
+                                val store = document.toObject(Store::class.java)
+                                if (store != null) {
+                                    if (store.storeOnline) {
+                                        DataManager.stores.add(store)
+                                    } else if (!store.storeOnline) {
+                                        DataManager.stores.remove(store)
+                                    }
+                                }
+                                recyclerView.adapter?.notifyDataSetChanged()
+                            }
+                        }
+                    }
+                })
+        }
+    }
+
+     */
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
