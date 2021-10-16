@@ -8,16 +8,20 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.FoodTruck">
+        android:theme="@style/Theme.AppCompat.NoActionBar">
         <activity
-            android:name=".activities.OwnerSettingsActivity"
+            android:name=".activities.OwnerProfileActivity"
+
+            android:exported="true" />
+        <activity
+            android:name=".activities.editOwnerProfil"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:name=".activities.LoginActivity"
+            android:name=".activities.inLoggningActivity"
             android:exported="true" />
         <activity
-            android:name=".activities.RegisterAccountActivity"
+            android:name=".activities.inLoggninOwner"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
@@ -26,15 +30,13 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".activities.StoreActivity"
-            android:exported="true"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+            android:exported="true" />
         <activity
             android:name=".activities.TestDB"
             android:exported="true" />
         <activity
             android:name=".MainActivity"
-            android:exported="true"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

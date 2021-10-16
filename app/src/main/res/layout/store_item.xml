@@ -2,9 +2,9 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_margin="12dp">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="10dp">
 
 
     <androidx.cardview.widget.CardView
@@ -12,24 +12,37 @@
         android:layout_width="match_parent"
         android:layout_height="220dp"
         app:cardCornerRadius="20dp"
+        app:cardElevation="-5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#FFFFFF">
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/main_background" />
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/storeImage"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
-                android:background="#FFFFFF"
                 android:scaleType="centerCrop"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView2"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/imageView2"
+                app:layout_constraintVertical_bias="0.0"
                 app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
                 app:srcCompat="@drawable/hamburger" />
 
@@ -37,10 +50,9 @@
                 android:id="@+id/txtName"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
-                android:fontFamily="sans-serif-condensed"
                 android:text="Ortens Truck"
-                android:textColor="#3A3939"
-                android:textSize="22sp"
+                android:textColor="@color/black"
+                android:textSize="19sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/ratingBar"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -50,14 +62,12 @@
 
             <RatingBar
                 android:id="@+id/ratingBar"
-                android:layout_width="245dp"
-                android:layout_height="44dp"
-                android:background="@color/purple_500"
+                android:layout_width="110dp"
+                android:layout_height="25dp"
                 android:contentDescription="@string/app_name"
-                android:numStars="5"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.000"
+                app:layout_constraintHorizontal_bias="0.056"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txtName" />
 
@@ -66,12 +76,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="$$"
-                android:textColor="#20A822"
+                android:textColor="@color/purple_700"
                 android:textSize="21sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/txtDistance"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.885"
+                app:layout_constraintHorizontal_bias="0.869"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/storeImage" />
 
@@ -80,12 +90,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="2,7km"
-                android:textColor="#2D2C30"
+                android:textColor="@color/purple_700"
                 android:textSize="14sp"
                 android:textStyle="normal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.898"
+                app:layout_constraintHorizontal_bias="0.881"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txtPriceClass" />
         </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,7 +1,8 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.FoodTruck" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowActionBarOverlay">false</item>
+        <item name="windowActionBarOverlay">false</item> <!-- for ActionBarSherlock -->
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_500</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
@@ -17,22 +18,13 @@
         <item name="android:windowFullscreen">true</item>
         <item name="colorPrimaryDark">@android:color/holo_orange_dark</item>
         <item name="android:windowNoTitle">true</item>
-        <item name="android:windowBackground">@color/white</item>
 
 
 
         <!-- Customize your theme here. -->
     </style>
-    <style name="Theme.AppCompat.Light.NoActionBar.FullScreen" parent="@style/Theme.AppCompat.Light.NoActionBar">
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:windowActionBar">false</item>
-        <item name="android:windowFullscreen">true</item>
-        <item name="android:windowContentOverlay">@null</item>
-    </style>
 
     <style name="ShapeAppearanceOverlay.App.CornerSize50Percent" parent="">
-        <item name="cornerSizeTopLeft">20dp</item>
-        <item name="cornerSizeTopRight">20dp</item>
-        <item name="cornerFamilyTopRight">rounded</item>
+        <item name="cornerSize">20dp</item>
     </style>
 </resources>

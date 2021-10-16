@@ -23,6 +23,8 @@ class StoreFragment : Fragment() {
     ): View? {
 
 
+        //Log.e("TEST",data!!)
+
         val view = inflater.inflate(R.layout.store_fragment, container, false,)
 
 
