@@ -1,6 +1,7 @@
 package com.example.food_trock.activities
 
 import android.os.Bundle
+import android.provider.ContactsContract
 import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -43,7 +44,6 @@ class StoreActivity : AppCompatActivity() {
 
                 val storeFragment = StoreFragment()
 
-                /*
                 var selectedStore: Store = storeAdapter.storeList[position]
                 val bundle = Bundle()
                 storeFragment.arguments = bundle
@@ -51,97 +51,202 @@ class StoreActivity : AppCompatActivity() {
                 bundle.putInt("storePriceClass", selectedStore.storePriceClass)
                 bundle.putString("storeDistance", selectedStore.storeDistance)
 
-                 */
-
 
                 val transaction = supportFragmentManager.beginTransaction()
                 transaction.add(R.id.container, storeFragment, "store")
                 transaction.commit()
 
+
+
             }
         })
 
-
-        val store1 = Store(R.drawable.hamburger, "Burgers",120,"2.5km",0,false)
-
+        /*val user = auth.currentUser
+        val store = Store(user?.uid, R.drawable.hamburger, "Burgers2", 50, "2.5km", 0, false)
         val email = "robin@test.se"
-        val password = "hello123"
-       /* auth.createUserWithEmailAndPassword(email,password).addOnCompleteListener { task ->
+        val password = "hello123"*/
+
+
+
+/*
+        auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { task ->
             if(task.isSuccessful) {
-                Log.e("TEST","onCreateAccount: successful")
-            }  else {
-                Log.e("TEST","onCreateAccount: unsuccessful")
+                Log.e("TEST","onCreate: account created")
+            } else {
+                Log.e("TEST","onCreate: failed")
             }
         }
 
 
-        auth.signInWithEmailAndPassword(email,password)
-            .addOnCompleteListener { task ->
-                if(task.isSuccessful) {
-                    Log.e("TEST","onLogin: successful")
-                } else {
-                    Log.e("TEST","onLogin: unsuccessful")
-                }
+
+
+
+
+
+
+
+
+        auth.signInWithEmailAndPassword(email,password).addOnCompleteListener { task ->
+            if(task.isSuccessful) {
+                Log.e("TEST","onCreate: login successful")
             }
-        val user = auth.currentUser
+
+ */
+
+
+
+
+
+        //db.collection("FoodTrucks").add(store)
+
+
+
+
+
+
+
+
+/*
+        val storeUID = StoreStatus(store.userID)
         if (user != null) {
-            db.collection("users").document(user.uid).collection("truckInfo")
-                .add(store1).addOnCompleteListener { task ->
-                    Log.e("TEST","onStoreCreate: success")
+            db.collection("users").document(user.uid).collection("truckInfo").add(store)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        db.collection("foodtruckUID").add(storeUID)
+                        Log.e("TEST", "onCreate: store added")
+                    }
                 }
-        } else {
-            Log.e("TEST","onStoreCreate: store not created")
+
         }
 
+ */
 
-        */
 
-        /*
-        db.collection("users").
-        addSnapshotListener(object: EventListener<QuerySnapshot> {
-            override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?) {
-                DataManager.stores.clear()
-                for(document in value!!.documents) {
-                    val store = document.toObject(Store::class.java)
-                    if(store != null) {
-                        if (store.storeOnline) {
-                            DataManager.stores.add(store)
-                        } else if (!store.storeOnline) {
-                            DataManager.stores.remove(store)
+
+       /* if (user != null) {
+            db.collection("users").document(user.uid).collection("truckInfo")
+                .addSnapshotListener {snapshot ,e ->
+                    if(snapshot != null){
+                        for(document in snapshot.documents) {
+                            val store = document.toObject(Store::class.java)
+                            if (store != null) {
+                                db.collection("truckList").add(store)
+                            }
+                            Log.e("TEST","onCreate:${store}")
                         }
                     }
                 }
-                recyclerView.adapter?.notifyDataSetChanged()
-            }
+        }
 
-
-        })
-
-         */
-        val user = auth.currentUser
-        if (user != null) {
-            db.collection("users").document(user.uid).collection("truckInfo")
-                . addSnapshotListener(object: EventListener<QuerySnapshot> {
-                    override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?) {
-                        DataManager.stores.clear()
-                        for(document in value!!.documents) {
-                            val store = document.toObject(Store::class.java)
-                            if(store != null) {
-                                if (store.storeOnline) {
-                                    DataManager.stores.add(store)
-                                } else if (!store.storeOnline) {
-                                    DataManager.stores.remove(store)
-                                }
+        */
+        /*
+        db.collection("users").document("C8p53Hnej2bXMZsJghLjGKlfLWH3").collection("truckInfo")
+            .addSnapshotListener(object: EventListener<QuerySnapshot>{
+            override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?) {
+                DataManager.stores.clear()
+                if (value != null) {
+                    for(document in value.documents) {
+                        val store = document.toObject(Store::class.java)
+                        if (store != null) {
+                            if (store.storeOnline) {
+                                DataManager.stores.add(store)
+                            } else if (!store.storeOnline) {
+                                DataManager.stores.remove(store)
                             }
+
                         }
                         recyclerView.adapter?.notifyDataSetChanged()
                     }
 
+                }
+            }
+        })
 
-                })
+         */
+
+
+        /*
+        db.collection("foodtruckUID").addSnapshotListener{snapshot,e ->
+            if(snapshot != null) {
+                for (document in snapshot.documents) {
+                    val storeID = document.toObject(StoreStatus::class.java)
+                    if (storeID != null) {
+                        DataManager.listOfUID.add(storeID)
+                        cardUpdater()
+                    }
+                }
+            }
         }
 
+         */
+
+
+
+
+        db.collection("FoodTrucks").addSnapshotListener(object: EventListener<QuerySnapshot> {
+            override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?) {
+                DataManager.stores.clear()
+                if (value != null) {
+                    for(document in value.documents) {
+                        val store = document.toObject(Store::class.java)
+                        if(store != null) {
+                            if(store.storeOnline) {
+                                DataManager.stores.add(store)
+                            } else if (!store.storeOnline) {
+                                DataManager.stores.remove(store)
+                            }
+                        }
+                        recyclerView.adapter?.notifyDataSetChanged()
+                    }
+                }
+            }
+        })
 
 
     }
+    /*
+    fun cardUpdater () {
+        for (storeID in DataManager.listOfUID) {
+            storeID.storeUID?.let { db.collection("users").document(it) }
+                ?.collection("truckInfo")
+                ?.addSnapshotListener(object : EventListener<QuerySnapshot> {
+                    override fun onEvent(
+                        value: QuerySnapshot?,
+                        error: FirebaseFirestoreException?
+                    ) {
+                        DataManager.stores.clear()
+                        if (value != null) {
+                            for (document in value.documents) {
+                                val store = document.toObject(Store::class.java)
+                                if (store != null) {
+                                    if (store.storeOnline) {
+                                        DataManager.stores.add(store)
+                                    } else if (!store.storeOnline) {
+                                        DataManager.stores.remove(store)
+                                    }
+                                }
+                                recyclerView.adapter?.notifyDataSetChanged()
+                            }
+                        }
+                    }
+                })
+        }
+    }
+
+     */
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
