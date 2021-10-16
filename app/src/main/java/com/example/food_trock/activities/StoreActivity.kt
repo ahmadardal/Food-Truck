@@ -11,7 +11,6 @@ import com.example.food_trock.R
 import com.example.food_trock.models.Store
 import com.example.food_trock.fragments.StoreFragment
 import com.example.food_trock.adapters.storeAdapter
-import com.example.food_trock.models.StoreStatus
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.EventListener
@@ -62,12 +61,10 @@ class StoreActivity : AppCompatActivity() {
             }
         })
 
-        val user = auth.currentUser
-        val store = Store(
-            user?.uid, R.drawable.hamburger, "Burgers2", 50, "2.5km", 0, false
-        )
+        /*val user = auth.currentUser
+        val store = Store(user?.uid, R.drawable.hamburger, "Burgers2", 50, "2.5km", 0, false)
         val email = "robin@test.se"
-        val password = "hello123"
+        val password = "hello123"*/
 
 
 
