@@ -1,7 +1,12 @@
 package com.example.food_trock.firebase
 
+import android.util.Log
+import com.example.food_trock.activities.RegisterAccountActivity
+import com.example.food_trock.utils.Constants
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.SetOptions
+import com.google.firebase.firestore.auth.User
 
 class FireStoreClass {
 
@@ -20,6 +25,31 @@ class FireStoreClass {
         }
 
         return currentUserID
+    }
+
+    /**
+     * A function to make an entry of the registered user in the firestore database.
+     */
+    fun registerUser(activity: RegisterAccountActivity, userInfo: com.example.food_trock.models.User) {
+
+        mFireStore.collection(Constants.USERS)
+            // Document ID for users fields. Here the document it is the User ID.
+            .document(getCurrentUserID())
+            // Here the userInfo are Field and the SetOption is set to merge. It is for if we wants to merge
+            .set(userInfo, SetOptions.merge())
+            .addOnSuccessListener {
+
+                // Here call a function of base activity for transferring the result to it.
+                activity.userRegisteredSuccess()
+            }
+            .addOnFailureListener { e ->
+                activity.hideProgressDialog()
+                Log.e(
+                    activity.javaClass.simpleName,
+                    "Error writing document",
+                    e
+                )
+            }
     }
 
 
