@@ -1,5 +1,8 @@
 package com.example.food_trock.activities
 
+import android.content.Intent
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -10,10 +13,35 @@ import com.example.food_trock.R
 import com.example.food_trock.models.Store
 import com.example.food_trock.fragments.StoreFragment
 import com.example.food_trock.adapters.storeAdapter
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.database.collection.LLRBNode
 
 class StoreActivity : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView
+    private lateinit var bottomNavigationView: BottomNavigationView
+
+
+    private val navigation = BottomNavigationView.OnNavigationItemSelectedListener { item ->
+        when (item.itemId) {
+            R.id.trucks -> {
+                return@OnNavigationItemSelectedListener false
+            }
+            R.id.settings -> {
+                item.isChecked = true
+                val intent = Intent(this@StoreActivity, OwnerSettingsActivity::class.java)
+                startActivity(intent)
+                return@OnNavigationItemSelectedListener true
+            }
+            R.id.maps -> {
+/*                val intent = Intent(this@MainActivity, MyRecipes::class.java)
+                startActivity(intent)
+                return@OnNavigationItemSelectedListener true*/
+            }
+        }
+        false
+
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,6 +51,14 @@ class StoreActivity : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
         var storeAdapter = storeAdapter(this, DataManager.stores)
         recyclerView.adapter = storeAdapter
+
+        bottomNavigationView = findViewById(R.id.bottom_navigation)
+        bottomNavigationView.setOnNavigationItemSelectedListener(navigation)
+        bottomNavigationView.menu.getItem(0).isCheckable = false
+
+
+
+
 
         storeAdapter.setOnItemClickListener(object : storeAdapter.onItemClickListener {
             override fun onItemClick(position: Int) {

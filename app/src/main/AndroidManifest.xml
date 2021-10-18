@@ -14,28 +14,23 @@
 
             android:exported="true" />
         <activity
-            android:name=".activities.editOwnerProfil"
-            android:exported="true"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity
-            android:name=".activities.inLoggningActivity"
+            android:name=".activities.OwnerSettingsActivity"
+            android:theme="@style/AppTheme"
             android:exported="true" />
-        <activity
-            android:name=".activities.inLoggninOwner"
-            android:exported="true"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".activities.SplashActivity"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".activities.StoreActivity"
+            android:theme="@style/AppTheme"
             android:exported="true" />
         <activity
             android:name=".activities.TestDB"
             android:exported="true" />
         <activity
             android:name=".MainActivity"
+            android:theme="@style/AppTheme"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
