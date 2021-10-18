@@ -1,5 +1,6 @@
 package com.example.food_trock.activities
 
+import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -17,10 +18,7 @@ import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.squareup.okhttp.Dispatcher
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.tasks.await
+
 
 class OwnerSettingsActivity : AppCompatActivity() {
 
@@ -40,6 +38,7 @@ class OwnerSettingsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_owner_settings)
 
         var saveChangesBtn = findViewById<Button>(R.id.saveChangesBtn)
+        var logOutBTN= findViewById<Button>(R.id.bt_Logout)
         var switchBtn = findViewById<Switch>(R.id.switchBtn)
         txtStatus = findViewById(R.id.txtStatus)
         db = Firebase.firestore
@@ -88,6 +87,9 @@ class OwnerSettingsActivity : AppCompatActivity() {
 
 
         }
+        logOutBTN.setOnClickListener {
+            logOut()
+        }
     }
 
 
@@ -135,6 +137,15 @@ class OwnerSettingsActivity : AppCompatActivity() {
     private fun requestLocationPermission () {
         // TODO: 2021-10-18 Ask for location permission and set the current location of truck
         // TODO: Function is placed inside switch status button.
+    }
+
+    private fun logOut(){
+        if(auth.currentUser != null){
+            auth.signOut()
+            val intent= Intent(this, LoginActivity::class.java )
+            startActivity(intent)
+        }
+
     }
 
 }
