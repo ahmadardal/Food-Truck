@@ -81,8 +81,7 @@ class StoreActivity : AppCompatActivity() {
         })
 
 
-        val store = Store(
-            user?.uid, R.drawable.hamburger, "Burgers", 50, "10km", 0, false
+        val store = Store(R.drawable.hamburger, "Burgers", 50, "10km", 0, false
         )
         val email = "pikachu@test.se"
         val password = "hello123"
@@ -107,8 +106,12 @@ class StoreActivity : AppCompatActivity() {
 
  */
 
+        /*
+        if (user != null) {
+            db.collection("FoodTrucks").document(user.uid).set(store)
+        }
 
-        //db.collection("FoodTrucks").add(store)
+         */
 
 
         db.collection("FoodTrucks").addSnapshotListener(object: EventListener<QuerySnapshot> {

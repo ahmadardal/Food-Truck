@@ -1,13 +1,13 @@
 package com.example.food_trock.activities
 
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.Window
 import android.view.WindowManager
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageView
+import android.widget.*
+import androidx.appcompat.widget.SwitchCompat
 import com.example.food_trock.R
 import com.example.food_trock.models.Store
 import com.google.firebase.auth.FirebaseAuth
@@ -29,6 +29,7 @@ class OwnerSettingsActivity : AppCompatActivity() {
     lateinit var editTruckName: EditText
     lateinit var editTruckPrice: EditText
     lateinit var ownerProfileIMG: ImageView
+    lateinit var txtStatus: TextView
     val foodTruckCollectionRef = Firebase.firestore.collection("FoodTrucks")
 
 
@@ -38,7 +39,9 @@ class OwnerSettingsActivity : AppCompatActivity() {
             WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_owner_settings)
 
-        var btnSaveChanges = findViewById<Button>(R.id.saveChangesBtn)
+        var saveChangesBtn = findViewById<Button>(R.id.saveChangesBtn)
+        var switchBtn = findViewById<Switch>(R.id.switchBtn)
+        txtStatus = findViewById(R.id.txtStatus)
         db = Firebase.firestore
         auth = Firebase.auth
 
@@ -46,10 +49,44 @@ class OwnerSettingsActivity : AppCompatActivity() {
         editTruckPrice = findViewById(R.id.editTruckPrice)
 
 
-        btnSaveChanges.setOnClickListener() {
+
+
+        //Checks if the owners shop is online or offline. Sets the switch status.
+        auth.currentUser?.let { foodTruckCollectionRef.document(it.uid).get().addOnSuccessListener { result ->
+            if(result != null) {
+                val store = result.toObject(Store::class.java)
+                if (store != null) {
+                    if(store.storeOnline) {
+                        switchBtn.isChecked = true
+                    }
+                }
+            }
+        } }
+
+
+        // Saves the new truck map and updates database, other values are untouched.
+        saveChangesBtn.setOnClickListener() {
             /*val oldTruck = getOldStoreInfo()*/
             val newTruckMap = getNewStoreMap()
             updateStore(/*oldTruck,*/newTruckMap)
+        }
+
+        // Checks and unchecks the switch button.
+        switchBtn.setOnCheckedChangeListener { _, isChecked ->
+            when (switchBtn.isChecked) {
+                true -> {
+                    txtStatus.text = "Online"
+                    txtStatus.setTextColor(Color.parseColor("#FF5EC538"))
+                    auth.currentUser?.let { foodTruckCollectionRef.document(it.uid).update("storeOnline", true) }
+                }
+                false -> {
+                    txtStatus.text = "Offline"
+                    txtStatus.setTextColor(Color.parseColor("#BCBABA"))
+                    auth.currentUser?.let { foodTruckCollectionRef.document(it.uid).update("storeOnline", false) }
+                }
+            }
+
+
         }
     }
 
@@ -74,7 +111,7 @@ class OwnerSettingsActivity : AppCompatActivity() {
  */
 
 
-
+    // Creates a new store map based on info from editTexts, returns the map.
     private fun getNewStoreMap (): Map<String, Any> {
         val truckName = editTruckName.text.toString()
         val truckPrice = editTruckPrice.text.toString()
@@ -88,19 +125,16 @@ class OwnerSettingsActivity : AppCompatActivity() {
         return map
     }
 
+    // Sets the newTruckMap, does not replace untouched values.
     private fun updateStore (/*truck: Store,*/newTruckMap: Map<String, Any>) {
-        foodTruckCollectionRef.addSnapshotListener {snapshot,e ->
-            if(snapshot != null) {
-                for(document in snapshot.documents) {
-                    val store = document.toObject(Store::class.java)
-                    if(store != null && store.userID == auth.currentUser?.uid) {
-                        Log.e("TEST","onUpdateStore: DocumentID: ${document.id}")
-                        db.collection("FoodTrucks").document(document.id)
-                            .set(newTruckMap, SetOptions.merge())
-                    }
-                }
-            }
-        }
+        auth.currentUser?.let { foodTruckCollectionRef.document(it.uid).set(newTruckMap, SetOptions.merge()) }
+
+
+    }
+
+    private fun requestLocationPermission () {
+        // TODO: 2021-10-18 Ask for location permission and set the current location of truck
+        // TODO: Function is placed inside switch status button.
     }
 
 }

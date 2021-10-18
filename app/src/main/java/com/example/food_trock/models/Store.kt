@@ -4,7 +4,7 @@ import android.widget.RatingBar
 import androidx.cardview.widget.CardView
 import com.google.firebase.firestore.DocumentId
 
-data class Store(var userID: String? = null,
+data class Store(
                  var storeImage: Int = 0,
                  var storeName: String = "",
                  var storePriceClass: Int = 0,

@@ -7,83 +7,11 @@
     android:background="@drawable/main_background">
 
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardView3"
-        android:layout_width="140dp"
-        android:layout_height="140dp"
-        android:layout_marginTop="90dp"
-        app:cardCornerRadius="70dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageView
-            android:id="@+id/ownerProfileImage"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            app:srcCompat="@android:drawable/sym_def_app_icon" />
-    </androidx.cardview.widget.CardView>
-
-    <TextView
-        android:id="@+id/text_RedigeraBild"
-        android:layout_width="207dp"
-        android:layout_height="25dp"
-        android:layout_marginTop="5dp"
-        android:text="SELECT PHOTO"
-        android:textAlignment="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColor="#FFBBBC"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView3" />
-
-    <EditText
-        android:id="@+id/editTruckName"
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:background="@drawable/transparent_plaintext"
-        android:ems="10"
-        android:hint="Name of your truck"
-        android:inputType="textPersonName"
-        android:paddingStart="70dp"
-        android:textAlignment="viewStart"
-        android:textColor="#FFFFFF"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.449" />
-
-    <EditText
-        android:id="@+id/editTruckPrice"
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:background="@drawable/transparent_plaintext"
-        android:ems="10"
-        android:hint="Average price of menu"
-        android:inputType="textPersonName"
-        android:paddingStart="70dp"
-        android:textAlignment="viewStart"
-        android:textColor="#FFFFFF"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTruckName"
-        app:layout_constraintVertical_bias="0.089" />
-
     <Switch
-        android:id="@+id/bt_Switch"
+        android:id="@+id/switchBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="120dp"
+        android:layout_marginBottom="112dp"
         android:minHeight="48dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -92,7 +20,7 @@
         tools:ignore="UseSwitchCompatOrMaterialXml" />
 
     <TextView
-        android:id="@+id/text_Status"
+        android:id="@+id/txtFoodTruckStatus"
         android:layout_width="178dp"
         android:layout_height="25dp"
         android:text="FoodTruck status"
@@ -102,7 +30,25 @@
         android:textSize="16sp"
         android:textStyle="bold"
         app:constraint_referenced_ids="ic_menu"
-        app:layout_constraintBottom_toTopOf="@+id/bt_Switch"
+        app:layout_constraintBottom_toTopOf="@+id/switchBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTruckPrice"
+        app:layout_constraintVertical_bias="0.774" />
+
+    <TextView
+        android:id="@+id/txtStatus"
+        android:layout_width="178dp"
+        android:layout_height="25dp"
+        android:text="Offline"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="#D1CBCB"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:constraint_referenced_ids="ic_menu"
+        app:layout_constraintBottom_toTopOf="@+id/switchBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
@@ -122,7 +68,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bt_Switch"
+        app:layout_constraintTop_toBottomOf="@+id/switchBtn"
         app:layout_constraintVertical_bias="0.285" />
 
     <Button
@@ -136,28 +82,104 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTruckPrice"
-        app:layout_constraintVertical_bias="0.097" />
+        app:layout_constraintVertical_bias="0.088" />
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="66dp"
-        android:layout_height="57dp"
-        android:layout_marginStart="52dp"
-        app:layout_constraintBottom_toBottomOf="@+id/editTruckName"
+    <EditText
+        android:id="@+id/editTruckName"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:background="@drawable/transparent_plaintext"
+        android:ems="10"
+        android:hint="Name of your truck"
+        android:inputType="textPersonName"
+        android:paddingStart="70dp"
+        android:textAlignment="viewStart"
+        android:textColor="#FFFFFF"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.486"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/editTruckName"
-        app:srcCompat="@drawable/editicon" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.414" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView3"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:layout_marginTop="64dp"
+        app:cardCornerRadius="70dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/ownerProfileImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/user_image" />
+    </androidx.cardview.widget.CardView>
+
+    <EditText
+        android:id="@+id/editTruckPrice"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:background="@drawable/transparent_plaintext"
+        android:ems="10"
+        android:hint="Average price of menu"
+        android:inputType="textPersonName"
+        android:paddingStart="70dp"
+        android:textAlignment="viewStart"
+        android:textColor="#FFFFFF"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.486"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTruckName"
+        app:layout_constraintVertical_bias="0.083" />
+
+    <TextView
+        android:id="@+id/text_RedigeraBild"
+        android:layout_width="207dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="4dp"
+        android:text="SELECT PHOTO"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="#FFBBBC"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView3" />
 
     <ImageView
         android:id="@+id/imageView7"
         android:layout_width="66dp"
         android:layout_height="57dp"
-        android:layout_marginStart="52dp"
+        android:layout_marginStart="48dp"
         app:layout_constraintBottom_toBottomOf="@+id/editTruckPrice"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/editTruckPrice"
+        app:layout_constraintVertical_bias="0.571"
+        app:srcCompat="@drawable/editicon" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="66dp"
+        android:layout_height="57dp"
+        android:layout_marginStart="48dp"
+        app:layout_constraintBottom_toBottomOf="@+id/editTruckName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/editTruckName"
+        app:layout_constraintVertical_bias="0.571"
         app:srcCompat="@drawable/editicon" />
 
 
