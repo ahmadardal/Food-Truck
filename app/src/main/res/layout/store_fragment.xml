@@ -8,7 +8,7 @@
     android:clickable="true">
 
     <ImageView
-        android:id="@+id/imageViewTruck"
+        android:id="@+id/imagewView2"
         android:layout_width="match_parent"
         android:layout_height="225dp"
         android:scaleType="fitXY"
@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewTruck">
+        app:layout_constraintTop_toBottomOf="@+id/imagewView2">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

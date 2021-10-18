@@ -1,8 +1,15 @@
 package com.example.food_trock.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.provider.ContactsContract
 import android.util.Log
+import android.view.Window
+import android.view.WindowManager
+import android.widget.EditText
+import android.widget.ImageButton
+import android.widget.SearchView
+import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.appcompat.app.AppCompatActivity
@@ -24,20 +31,30 @@ import com.google.firebase.ktx.Firebase
 class StoreActivity : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView
+    lateinit var storeSize: TextView
     lateinit var db: FirebaseFirestore
     lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        this.requestWindowFeature(Window.FEATURE_NO_TITLE);    this.getWindow().setFlags(
+            WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_store)
 
+
+        storeSize = findViewById(R.id.txtStoreSize)
         recyclerView = findViewById(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
         var storeAdapter = storeAdapter(this, DataManager.stores)
         recyclerView.adapter = storeAdapter
+        val search = findViewById<EditText>(R.id.searchView)
+        val loginBtn = findViewById<ImageButton>(R.id.loginBtn)
+
 
         db = Firebase.firestore
         auth = Firebase.auth
+        val user = auth.currentUser
 
         storeAdapter.setOnItemClickListener(object : storeAdapter.onItemClickListener {
             override fun onItemClick(position: Int) {
@@ -51,6 +68,7 @@ class StoreActivity : AppCompatActivity() {
                 bundle.putString("storeName", selectedStore.storeName)
                 bundle.putInt("storePriceClass", selectedStore.storePriceClass)
                 bundle.putString("storeDistance", selectedStore.storeDistance)
+                bundle.putInt("storeImage",selectedStore.storeImage)
 
 
                 val transaction = supportFragmentManager.beginTransaction()
@@ -62,16 +80,12 @@ class StoreActivity : AppCompatActivity() {
             }
         })
 
-        /*
-        val user = auth.currentUser
+
         val store = Store(
-            user?.uid, R.drawable.kebab, "Kebab", 50, "10km", 0, false
+            user?.uid, R.drawable.hamburger, "Burgers", 50, "10km", 0, false
         )
         val email = "pikachu@test.se"
         val password = "hello123"
-
-         */
-
 
 
 /*
@@ -85,119 +99,16 @@ class StoreActivity : AppCompatActivity() {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
         auth.signInWithEmailAndPassword(email,password).addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 Log.e("TEST", "onCreate: login successful")
             }
         }
 
-
-
-
-
-
-
-
-
-
-
-        db.collection("FoodTrucks").add(store)
-
-
-
-
-
-
  */
 
 
-
-/*
-        val storeUID = StoreStatus(store.userID)
-        if (user != null) {
-            db.collection("users").document(user.uid).collection("truckInfo").add(store)
-                .addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        db.collection("foodtruckUID").add(storeUID)
-                        Log.e("TEST", "onCreate: store added")
-                    }
-                }
-
-        }
-
- */
-
-
-
-       /* if (user != null) {
-            db.collection("users").document(user.uid).collection("truckInfo")
-                .addSnapshotListener {snapshot ,e ->
-                    if(snapshot != null){
-                        for(document in snapshot.documents) {
-                            val store = document.toObject(Store::class.java)
-                            if (store != null) {
-                                db.collection("truckList").add(store)
-                            }
-                            Log.e("TEST","onCreate:${store}")
-                        }
-                    }
-                }
-        }
-
-        */
-        /*
-        db.collection("users").document("C8p53Hnej2bXMZsJghLjGKlfLWH3").collection("truckInfo")
-            .addSnapshotListener(object: EventListener<QuerySnapshot>{
-            override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?) {
-                DataManager.stores.clear()
-                if (value != null) {
-                    for(document in value.documents) {
-                        val store = document.toObject(Store::class.java)
-                        if (store != null) {
-                            if (store.storeOnline) {
-                                DataManager.stores.add(store)
-                            } else if (!store.storeOnline) {
-                                DataManager.stores.remove(store)
-                            }
-
-                        }
-                        recyclerView.adapter?.notifyDataSetChanged()
-                    }
-
-                }
-            }
-        })
-
-         */
-
-
-        /*
-        db.collection("foodtruckUID").addSnapshotListener{snapshot,e ->
-            if(snapshot != null) {
-                for (document in snapshot.documents) {
-                    val storeID = document.toObject(StoreStatus::class.java)
-                    if (storeID != null) {
-                        DataManager.listOfUID.add(storeID)
-                        cardUpdater()
-                    }
-                }
-            }
-        }
-
-         */
-
-
+        //db.collection("FoodTrucks").add(store)
 
 
         db.collection("FoodTrucks").addSnapshotListener(object: EventListener<QuerySnapshot> {
@@ -213,6 +124,7 @@ class StoreActivity : AppCompatActivity() {
                                 DataManager.stores.remove(store)
                             }
                         }
+                        storeSize.text = "Result: ${DataManager.stores.size}"
                         recyclerView.adapter?.notifyDataSetChanged()
                     }
                 }
@@ -220,37 +132,22 @@ class StoreActivity : AppCompatActivity() {
         })
 
 
-    }
-    /*
-    fun cardUpdater () {
-        for (storeID in DataManager.listOfUID) {
-            storeID.storeUID?.let { db.collection("users").document(it) }
-                ?.collection("truckInfo")
-                ?.addSnapshotListener(object : EventListener<QuerySnapshot> {
-                    override fun onEvent(
-                        value: QuerySnapshot?,
-                        error: FirebaseFirestoreException?
-                    ) {
-                        DataManager.stores.clear()
-                        if (value != null) {
-                            for (document in value.documents) {
-                                val store = document.toObject(Store::class.java)
-                                if (store != null) {
-                                    if (store.storeOnline) {
-                                        DataManager.stores.add(store)
-                                    } else if (!store.storeOnline) {
-                                        DataManager.stores.remove(store)
-                                    }
-                                }
-                                recyclerView.adapter?.notifyDataSetChanged()
-                            }
-                        }
-                    }
-                })
+        loginBtn.setOnClickListener() {
+            OpenUserProfile()
         }
+
+
     }
 
-     */
+    fun OpenUserProfile() {
+        if (auth.currentUser != null) {
+            val intent = Intent(this, OwnerSettingsActivity::class.java)
+            startActivity(intent)
+        } else {
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+        }
+    }
 }
 
 

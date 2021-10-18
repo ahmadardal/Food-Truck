@@ -19,7 +19,7 @@
         app:srcCompat="@drawable/logo_foodtruck" />
 
     <EditText
-        android:id="@+id/userNameActI"
+        android:id="@+id/editTruckName"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:background="@drawable/transparent_plaintext"
@@ -51,15 +51,15 @@
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userNameActI" />
+        app:layout_constraintTop_toBottomOf="@+id/editTruckName" />
 
     <ImageView
-        android:id="@+id/imageViewTruck"
+        android:id="@+id/imagewView2"
         android:layout_width="66dp"
         android:layout_height="57dp"
-        app:layout_constraintBottom_toBottomOf="@+id/userNameActI"
-        app:layout_constraintStart_toStartOf="@+id/userNameActI"
-        app:layout_constraintTop_toTopOf="@+id/userNameActI"
+        app:layout_constraintBottom_toBottomOf="@+id/editTruckName"
+        app:layout_constraintStart_toStartOf="@+id/editTruckName"
+        app:layout_constraintTop_toTopOf="@+id/editTruckName"
         app:layout_constraintVertical_bias="0.45"
         app:srcCompat="@drawable/usericon" />
 

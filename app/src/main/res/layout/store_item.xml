@@ -2,14 +2,13 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_margin="12dp">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="220dp"
         app:cardCornerRadius="20dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -21,16 +20,19 @@
             android:layout_height="match_parent"
             android:background="#FFFFFF">
 
-            <com.google.android.material.imageview.ShapeableImageView
+            <ImageView
                 android:id="@+id/storeImage"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
                 android:background="#FFFFFF"
                 android:scaleType="centerCrop"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0"
                 app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
                 app:srcCompat="@drawable/hamburger" />
 
@@ -38,11 +40,10 @@
                 android:id="@+id/txtName"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
-                android:fontFamily="sans-serif-condensed"
+                android:fontFamily="sans-serif-condensed-medium"
                 android:text="Ortens Truck"
                 android:textColor="#3A3939"
                 android:textSize="22sp"
-                android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/ratingBar"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.056"
@@ -51,12 +52,14 @@
 
             <RatingBar
                 android:id="@+id/ratingBar"
-                android:layout_width="110dp"
-                android:layout_height="25dp"
+                style="?android:attr/ratingBarStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:contentDescription="@string/app_name"
+                android:numStars="5"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.056"
+                app:layout_constraintHorizontal_bias="0.048"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txtName" />
 
@@ -65,7 +68,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="$$"
-                android:textColor="#20A822"
+                android:textColor="#242524"
                 android:textSize="21sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/txtDistance"
@@ -73,6 +76,7 @@
                 app:layout_constraintHorizontal_bias="0.885"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/storeImage" />
+
 
             <TextView
                 android:id="@+id/txtDistance"
@@ -87,6 +91,7 @@
                 app:layout_constraintHorizontal_bias="0.898"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txtPriceClass" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>

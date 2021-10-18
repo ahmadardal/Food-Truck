@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.food_trock.R
@@ -15,6 +16,7 @@ class StoreFragment : Fragment() {
     lateinit var txtStoreInfo: TextView
     lateinit var txtPriceClass: TextView
     lateinit var txtDistance: TextView
+    lateinit var storeImage: ImageView
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,14 +34,20 @@ class StoreFragment : Fragment() {
         txtStoreName = view.findViewById(R.id.txtStoreName)
         txtPriceClass = view.findViewById(R.id.txtPriceClass)
         txtDistance = view.findViewById(R.id.txtDistance)
+        storeImage = view.findViewById(R.id.imagewView2)
 
         var storeName: String? = arguments?.getString("storeName")
         var storePriceClass: Int? = arguments?.getInt("storePriceClass")
         var storeDistance: String? = arguments?.getString("storeDistance")
+        var storeIMG: Int? = arguments?.getInt("storeImage")
 
         txtStoreName.text = storeName
         txtPriceClass.text = storePriceClass.toString()
         txtDistance.text = storeDistance
+        if (storeIMG != null) {
+            storeImage.setImageResource(storeIMG)
+        }
+
 
         if (storePriceClass != null) {
             if (storePriceClass <= 70) {

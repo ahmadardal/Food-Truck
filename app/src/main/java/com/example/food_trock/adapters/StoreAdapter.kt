@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
 import androidx.cardview.widget.CardView
@@ -57,7 +58,7 @@ class storeAdapter(val context: Context, val storeList: List<Store> ) :
     inner class storeViewHolder(itemView : View, listener: onItemClickListener) : RecyclerView.ViewHolder(itemView) {
 
         var cardView: CardView = itemView.findViewById(R.id.cardView)
-        val storeImage: ShapeableImageView = itemView.findViewById(R.id.storeImage)
+        val storeImage: ImageView = itemView.findViewById(R.id.storeImage)
         val txtName: TextView = itemView.findViewById(R.id.txtName)
         val txtPriceClass: TextView = itemView.findViewById(R.id.txtPriceClass)
         val txtDistance: TextView = itemView.findViewById(R.id.txtDistance)
