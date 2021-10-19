@@ -29,7 +29,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/main_background" />
+                app:srcCompat="@color/white" />
 
             <ImageView
                 android:id="@+id/storeImage"
@@ -76,8 +76,9 @@
                 android:id="@+id/txtPriceClass"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:text="$$"
-                android:textColor="#242524"
+                android:textColor="#3A3939"
                 android:textSize="21sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/txtDistance"
@@ -92,7 +93,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="2,7km"
-                android:textColor="@color/purple_700"
+                android:textColor="#3A3939"
                 android:textSize="14sp"
                 android:textStyle="normal"
                 app:layout_constraintBottom_toBottomOf="parent"

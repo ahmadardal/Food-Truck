@@ -112,16 +112,6 @@ class StoreActivity : AppCompatActivity() {
                 transaction.commit()
 
 
-                Log.e("TEST", "TEST")
-
-
-                var storeName: String = selectedStore.storeName
-                var storePriceClass: Int = selectedStore.storePriceClass
-                var storeDistance: String = selectedStore.storeDistance
-
-                val store = Store(
-                    "ok", "Burgers", 50, "10km", 0, false
-                )
 
 
             }
@@ -150,6 +140,9 @@ class StoreActivity : AppCompatActivity() {
 
     }
 
+    val store = Store(
+        "ok", "Burgers", 50, "10km", 0, false
+    )
 
 
         /*
