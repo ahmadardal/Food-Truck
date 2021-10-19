@@ -22,27 +22,6 @@ class StoreActivity : AppCompatActivity() {
     private lateinit var bottomNavigationView: BottomNavigationView
 
 
-    private val navigation = BottomNavigationView.OnNavigationItemSelectedListener { item ->
-        when (item.itemId) {
-            R.id.trucks -> {
-                return@OnNavigationItemSelectedListener false
-            }
-            R.id.settings -> {
-                item.isChecked = true
-                val intent = Intent(this@StoreActivity, OwnerSettingsActivity::class.java)
-                startActivity(intent)
-                return@OnNavigationItemSelectedListener true
-            }
-            R.id.maps -> {
-/*                val intent = Intent(this@MainActivity, MyRecipes::class.java)
-                startActivity(intent)
-                return@OnNavigationItemSelectedListener true*/
-            }
-        }
-        false
-
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_store)
@@ -54,7 +33,7 @@ class StoreActivity : AppCompatActivity() {
 
         bottomNavigationView = findViewById(R.id.bottom_navigation)
         bottomNavigationView.setOnNavigationItemSelectedListener(navigation)
-        bottomNavigationView.menu.getItem(0).isCheckable = false
+        bottomNavigationView.menu.getItem(0).isChecked = true
 
 
 
@@ -89,5 +68,27 @@ class StoreActivity : AppCompatActivity() {
 
             }
         })
+    }
+
+
+    private val navigation = BottomNavigationView.OnNavigationItemSelectedListener { item ->
+        when (item.itemId) {
+            R.id.trucks -> {
+                return@OnNavigationItemSelectedListener false
+            }
+            R.id.settings -> {
+                bottomNavigationView.menu.getItem(0).isChecked = false
+                val intent = Intent(this@StoreActivity, OwnerSettingsActivity::class.java)
+                startActivity(intent)
+                return@OnNavigationItemSelectedListener true
+            }
+            R.id.maps -> {
+/*                val intent = Intent(this@MainActivity, MyRecipes::class.java)
+                startActivity(intent)
+                return@OnNavigationItemSelectedListener true*/
+            }
+        }
+        false
+
     }
 }

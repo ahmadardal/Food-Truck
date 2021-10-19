@@ -11,9 +11,19 @@ private lateinit var bottomNavigationView: BottomNavigationView
 
 class OwnerSettingsActivity : AppCompatActivity() {
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_owner_settings)
+
+        bottomNavigationView = findViewById(R.id.bottom_navigation)
+        bottomNavigationView.setOnNavigationItemSelectedListener(navigation)
+        bottomNavigationView.menu.getItem(2).isChecked = true
+    }
+
     private val navigation = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.trucks -> {
+                bottomNavigationView.menu.getItem(2).isChecked = false
                 val intent = Intent(this, StoreActivity::class.java)
                 startActivity(intent)
                 return@OnNavigationItemSelectedListener true
@@ -30,14 +40,5 @@ class OwnerSettingsActivity : AppCompatActivity() {
         }
         false
 
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_owner_settings)
-
-        bottomNavigationView = findViewById(R.id.bottom_navigation)
-        bottomNavigationView.setOnNavigationItemSelectedListener(navigation)
-        bottomNavigationView.menu.getItem(0).isCheckable = false
     }
 }
