@@ -1,9 +1,13 @@
 package com.example.food_trock.activities
 
+import android.app.Activity
 import android.content.Intent
 import android.graphics.Color
+import android.graphics.drawable.BitmapDrawable
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import android.view.Window
 import android.view.WindowManager
@@ -17,7 +21,9 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
 import com.squareup.okhttp.Dispatcher
+import java.util.*
 
 
 class OwnerSettingsActivity : AppCompatActivity() {
@@ -29,6 +35,9 @@ class OwnerSettingsActivity : AppCompatActivity() {
     lateinit var ownerProfileIMG: ImageView
     lateinit var txtStatus: TextView
     val foodTruckCollectionRef = Firebase.firestore.collection("FoodTrucks")
+    var selectedPhotoUri: Uri? = null
+
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,6 +55,8 @@ class OwnerSettingsActivity : AppCompatActivity() {
 
         editTruckName = findViewById(R.id.editTruckName)
         editTruckPrice = findViewById(R.id.editTruckPrice)
+        ownerProfileIMG = findViewById(R.id.ownerProfileImage)
+
 
 
 
@@ -66,6 +77,7 @@ class OwnerSettingsActivity : AppCompatActivity() {
         // Saves the new truck map and updates database, other values are untouched.
         saveChangesBtn.setOnClickListener() {
             /*val oldTruck = getOldStoreInfo()*/
+            uploadImageToFirebaseStorage()
             val newTruckMap = getNewStoreMap()
             updateStore(/*oldTruck,*/newTruckMap)
         }
@@ -87,6 +99,15 @@ class OwnerSettingsActivity : AppCompatActivity() {
 
 
         }
+
+        ownerProfileIMG.setOnClickListener() {
+            Log.e("TEST","photo clicked")
+
+            val intent = Intent(Intent.ACTION_PICK)
+            intent.type = "image/*"
+            startActivityForResult(intent, 0)
+        }
+
         logOutBTN.setOnClickListener {
             logOut()
         }
@@ -112,17 +133,35 @@ class OwnerSettingsActivity : AppCompatActivity() {
 
  */
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == 0 && resultCode == Activity.RESULT_OK && data != null) {
+            Log.e("TEST","onActivityResult: photo was selected")
+
+            selectedPhotoUri = data.data
+
+            val bitmap = MediaStore.Images.Media.getBitmap(contentResolver,selectedPhotoUri)
+
+            val bitmapDrawable = BitmapDrawable(bitmap)
+            ownerProfileIMG.setImageDrawable(bitmapDrawable)
+        }
+    }
 
     // Creates a new store map based on info from editTexts, returns the map.
-    private fun getNewStoreMap (): Map<String, Any> {
+    private fun getNewStoreMap (profileImageURL: String = ""): Map<String, Any> {
         val truckName = editTruckName.text.toString()
         val truckPrice = editTruckPrice.text.toString()
+        val truckImage = profileImageURL
         val map = mutableMapOf<String, Any>()
         if(truckName.isNotEmpty()) {
             map["storeName"] = truckName
         }
         if(truckPrice.isNotEmpty()) {
             map["storePriceClass"] = truckPrice.toInt()
+        }
+        if(truckImage.isNotEmpty()) {
+            map["storeImage"] = truckImage
         }
         return map
     }
@@ -139,7 +178,28 @@ class OwnerSettingsActivity : AppCompatActivity() {
         // TODO: Function is placed inside switch status button.
     }
 
-    private fun logOut(){
+    private fun uploadImageToFirebaseStorage() {
+
+        if(selectedPhotoUri == null) return
+        val filename = UUID.randomUUID().toString()
+        val imagesRef = FirebaseStorage.getInstance().getReference("/images/$filename")
+
+        imagesRef.putFile(selectedPhotoUri!!)
+            .addOnSuccessListener {
+                Log.e("TEST","onUpload: successfully uploaded image: ${it.metadata?.path}")
+
+                imagesRef.downloadUrl.addOnSuccessListener {
+                    it.toString()
+                    Log.e("TEST","onUpload: FileLocation: $it")
+
+                    getNewStoreMap(it.toString())
+
+                }
+            }
+
+    }
+
+    fun logOut(){
         if(auth.currentUser != null){
             auth.signOut()
             val intent= Intent(this, LoginActivity::class.java )
