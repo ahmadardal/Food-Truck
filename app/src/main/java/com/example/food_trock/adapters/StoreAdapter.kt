@@ -9,6 +9,8 @@ import android.widget.RatingBar
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.example.food_trock.DataManager
 import com.example.food_trock.R
 import com.example.food_trock.models.Store
 import com.google.android.material.imageview.ShapeableImageView
@@ -35,7 +37,7 @@ class storeAdapter(val context: Context, val storeList: List<Store> ) :
 
     override fun onBindViewHolder(holder: storeViewHolder, position: Int) {
         val currentItem = storeList[position]
-        holder.storeImage.setImageResource(currentItem.storeImage)
+        Glide.with(context).load(currentItem.storeImage).into(holder.storeImage)
         holder.txtName.text = currentItem.storeName
         holder.txtPriceClass.text = currentItem.storePriceClass.toString()
         holder.txtDistance.text = currentItem.storeDistance

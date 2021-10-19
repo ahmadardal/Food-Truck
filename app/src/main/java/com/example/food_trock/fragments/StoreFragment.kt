@@ -8,6 +8,7 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
 import com.example.food_trock.R
 
 class StoreFragment : Fragment() {
@@ -25,7 +26,6 @@ class StoreFragment : Fragment() {
     ): View? {
 
 
-        //Log.e("TEST",data!!)
 
         val view = inflater.inflate(R.layout.store_fragment, container, false,)
 
@@ -39,13 +39,13 @@ class StoreFragment : Fragment() {
         var storeName: String? = arguments?.getString("storeName")
         var storePriceClass: Int? = arguments?.getInt("storePriceClass")
         var storeDistance: String? = arguments?.getString("storeDistance")
-        var storeIMG: Int? = arguments?.getInt("storeImage")
+        var storeIMG: String? = arguments?.getString("storeImage")
 
         txtStoreName.text = storeName
         txtPriceClass.text = storePriceClass.toString()
         txtDistance.text = storeDistance
         if (storeIMG != null) {
-            storeImage.setImageResource(storeIMG)
+            Glide.with(this).load(storeIMG).into(storeImage)
         }
 
 

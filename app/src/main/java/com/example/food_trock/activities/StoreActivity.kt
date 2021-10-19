@@ -68,7 +68,7 @@ class StoreActivity : AppCompatActivity() {
                 bundle.putString("storeName", selectedStore.storeName)
                 bundle.putInt("storePriceClass", selectedStore.storePriceClass)
                 bundle.putString("storeDistance", selectedStore.storeDistance)
-                bundle.putInt("storeImage",selectedStore.storeImage)
+                bundle.putString("storeImage",selectedStore.storeImage)
 
 
                 val transaction = supportFragmentManager.beginTransaction()
@@ -81,7 +81,7 @@ class StoreActivity : AppCompatActivity() {
         })
 
 
-        val store = Store(R.drawable.hamburger, "Burgers", 50, "10km", 0, false
+        val store = Store("ok", "Burgers", 50, "10km", 0, false
         )
         val email = "pikachu@test.se"
         val password = "hello123"
@@ -98,6 +98,10 @@ class StoreActivity : AppCompatActivity() {
 
 
 
+
+
+
+
         auth.signInWithEmailAndPassword(email,password).addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 Log.e("TEST", "onCreate: login successful")
@@ -106,6 +110,10 @@ class StoreActivity : AppCompatActivity() {
 
  */
 
+
+
+
+
         /*
         if (user != null) {
             db.collection("FoodTrucks").document(user.uid).set(store)
@@ -113,7 +121,9 @@ class StoreActivity : AppCompatActivity() {
 
          */
 
-
+        /** Queries through the collection-path FoodTrucks in the database to find data changes
+         * If store is online, the storelist is cleared and the online stores are added to the recyclerview
+         */
         db.collection("FoodTrucks").addSnapshotListener(object: EventListener<QuerySnapshot> {
             override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?) {
                 DataManager.stores.clear()
@@ -142,6 +152,9 @@ class StoreActivity : AppCompatActivity() {
 
     }
 
+    /**
+     * Opens the user profile, if signed in. Else opens the login activity.
+     */
     fun OpenUserProfile() {
         if (auth.currentUser != null) {
             val intent = Intent(this, OwnerSettingsActivity::class.java)

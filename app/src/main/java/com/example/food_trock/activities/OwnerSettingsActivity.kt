@@ -13,6 +13,7 @@ import android.view.Window
 import android.view.WindowManager
 import android.widget.*
 import androidx.appcompat.widget.SwitchCompat
+import com.bumptech.glide.Glide
 import com.example.food_trock.R
 import com.example.food_trock.models.Store
 import com.google.firebase.auth.FirebaseAuth
@@ -58,10 +59,10 @@ class OwnerSettingsActivity : AppCompatActivity() {
         ownerProfileIMG = findViewById(R.id.ownerProfileImage)
 
 
+        /** Checks if the owners shop is online or offline.
+         * Presets the switch status as well as profile picture
+        */
 
-
-
-        //Checks if the owners shop is online or offline. Sets the switch status.
         auth.currentUser?.let { foodTruckCollectionRef.document(it.uid).get().addOnSuccessListener { result ->
             if(result != null) {
                 val store = result.toObject(Store::class.java)
@@ -69,20 +70,23 @@ class OwnerSettingsActivity : AppCompatActivity() {
                     if(store.storeOnline) {
                         switchBtn.isChecked = true
                     }
+                    Glide.with(this)
+                        .load(store.storeImage)
+                        .into(ownerProfileIMG)
                 }
             }
         } }
 
 
-        // Saves the new truck map and updates database, other values are untouched.
+        /** Calls uploadImageToFirebaseStorage function which in turn calls getNewStoreMap.
+         */
         saveChangesBtn.setOnClickListener() {
             /*val oldTruck = getOldStoreInfo()*/
             uploadImageToFirebaseStorage()
-            val newTruckMap = getNewStoreMap()
-            updateStore(/*oldTruck,*/newTruckMap)
         }
 
-        // Checks and unchecks the switch button.
+        /** Checks and unchecks the switch button. If checked, uncheck and display offline vice versa.
+         */
         switchBtn.setOnCheckedChangeListener { _, isChecked ->
             when (switchBtn.isChecked) {
                 true -> {
@@ -100,6 +104,10 @@ class OwnerSettingsActivity : AppCompatActivity() {
 
         }
 
+
+        /**
+         * Starts the intent to pick an image from gallery.
+         */
         ownerProfileIMG.setOnClickListener() {
             Log.e("TEST","photo clicked")
 
@@ -114,24 +122,9 @@ class OwnerSettingsActivity : AppCompatActivity() {
     }
 
 
-/*
-    private fun getOldStoreInfo (): Store {
-        var oldStore = Store()
-        foodTruckCollectionRef.addSnapshotListener{snapshot,e ->
-            if(snapshot != null) {
-                for (document in snapshot.documents) {
-                    val oldStoreInfo = document.toObject(Store::class.java)
-                    if(oldStoreInfo!= null && oldStoreInfo.userID == auth.currentUser?.uid) {
-                        oldStore = oldStoreInfo
-                    }
-
-                }
-            }
-        }
-        return oldStore
-    }
-
- */
+    /**
+     * Turns the selected photo into a bitmap and sets the image.
+     */
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -143,62 +136,69 @@ class OwnerSettingsActivity : AppCompatActivity() {
 
             val bitmap = MediaStore.Images.Media.getBitmap(contentResolver,selectedPhotoUri)
 
-            val bitmapDrawable = BitmapDrawable(bitmap)
-            ownerProfileIMG.setImageDrawable(bitmapDrawable)
+            ownerProfileIMG.setImageBitmap(bitmap)
         }
     }
 
-    // Creates a new store map based on info from editTexts, returns the map.
-    private fun getNewStoreMap (profileImageURL: String = ""): Map<String, Any> {
+    /**
+     * Creates a new store map based on info from editTexts and takes in a profileImageURL
+     * sets the map into database and merges it leaving unchanged values as they were.
+     */
+    private fun getNewStoreMap (profileImageURL: String = "") {
         val truckName = editTruckName.text.toString()
         val truckPrice = editTruckPrice.text.toString()
         val truckImage = profileImageURL
         val map = mutableMapOf<String, Any>()
-        if(truckName.isNotEmpty()) {
+        if (truckName.isNotEmpty()) {
             map["storeName"] = truckName
         }
-        if(truckPrice.isNotEmpty()) {
+        if (truckPrice.isNotEmpty()) {
             map["storePriceClass"] = truckPrice.toInt()
         }
-        if(truckImage.isNotEmpty()) {
+        if (truckImage.isNotEmpty()) {
             map["storeImage"] = truckImage
         }
-        return map
+        auth.currentUser?.let {
+            foodTruckCollectionRef.document(it.uid).set(map, SetOptions.merge())
+        }
     }
 
-    // Sets the newTruckMap, does not replace untouched values.
-    private fun updateStore (/*truck: Store,*/newTruckMap: Map<String, Any>) {
-        auth.currentUser?.let { foodTruckCollectionRef.document(it.uid).set(newTruckMap, SetOptions.merge()) }
-
-
-    }
 
     private fun requestLocationPermission () {
         // TODO: 2021-10-18 Ask for location permission and set the current location of truck
         // TODO: Function is placed inside switch status button.
     }
 
+
+    /**
+     * Generates a filename with random UUID and loads it into /images.
+     * selectedPhotoUri gets placed under the filename and the url is downloaded and sent to
+     * getNewStoreMap() for mapping.
+     */
     private fun uploadImageToFirebaseStorage() {
 
-        if(selectedPhotoUri == null) return
-        val filename = UUID.randomUUID().toString()
-        val imagesRef = FirebaseStorage.getInstance().getReference("/images/$filename")
+        if(selectedPhotoUri != null) {
+            val filename = UUID.randomUUID().toString()
+            val imagesRef = FirebaseStorage.getInstance().getReference("/images/$filename")
 
-        imagesRef.putFile(selectedPhotoUri!!)
-            .addOnSuccessListener {
-                Log.e("TEST","onUpload: successfully uploaded image: ${it.metadata?.path}")
+            imagesRef.putFile(selectedPhotoUri!!)
+                .addOnSuccessListener {
+                    Log.e("TEST", "onUpload: successfully uploaded image: ${it.metadata?.path}")
 
-                imagesRef.downloadUrl.addOnSuccessListener {
-                    it.toString()
-                    Log.e("TEST","onUpload: FileLocation: $it")
+                    imagesRef.downloadUrl.addOnSuccessListener {
+                        it.toString()
+                        Log.e("TEST", "onUpload: FileLocation: $it")
 
-                    getNewStoreMap(it.toString())
+                        getNewStoreMap(it.toString())
 
+                    }
                 }
-            }
-
+        }
     }
 
+    /**
+     * Logs the truck owner out of the app. Returns to login activity.
+     */
     fun logOut(){
         if(auth.currentUser != null){
             auth.signOut()

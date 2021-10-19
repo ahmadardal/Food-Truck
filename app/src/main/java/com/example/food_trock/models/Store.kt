@@ -5,7 +5,7 @@ import androidx.cardview.widget.CardView
 import com.google.firebase.firestore.DocumentId
 
 data class Store(
-                 var storeImage: Int = 0,
+                 var storeImage: String= "",
                  var storeName: String = "",
                  var storePriceClass: Int = 0,
                  var storeDistance: String = "",
