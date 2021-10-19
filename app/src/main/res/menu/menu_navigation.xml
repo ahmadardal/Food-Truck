@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/trucks"
+        android:title="Trucks"
+        android:icon="@drawable/ic_truck"/>
+
+    <item
+        android:id="@+id/maps"
+        android:title="Maps"
+        android:icon="@drawable/ic_maps"/>
+
+
+    <item
+        android:id="@+id/settings"
+        android:title="Settings"
+        android:icon="@drawable/ic_settings"/>
+
+</menu>

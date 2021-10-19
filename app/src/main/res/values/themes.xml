@@ -4,12 +4,12 @@
         <item name="android:windowActionBarOverlay">false</item>
         <item name="windowActionBarOverlay">false</item> <!-- for ActionBarSherlock -->
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorPrimary">@color/white</item>
+        <item name="colorPrimaryVariant">@color/white</item>
         <item name="colorOnPrimary">@color/white</item>
 
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondary">@color/white</item>
         <item name="colorSecondaryVariant">@color/teal_700</item>
         <item name="colorOnSecondary">#F07F6C</item>
         <!-- Status bar color. -->
@@ -18,13 +18,18 @@
         <item name="android:windowFullscreen">true</item>
         <item name="colorPrimaryDark">@android:color/holo_orange_dark</item>
         <item name="android:windowNoTitle">true</item>
-
+        <item name="android:windowAnimationStyle">@null</item>
 
 
         <!-- Customize your theme here. -->
     </style>
 
+
     <style name="ShapeAppearanceOverlay.App.CornerSize50Percent" parent="">
         <item name="cornerSize">20dp</item>
+    </style>
+
+    <style name="RatingBar" parent="Theme.AppCompat">
+
     </style>
 </resources>
