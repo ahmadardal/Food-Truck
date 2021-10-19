@@ -7,17 +7,12 @@
     android:background="@drawable/main_background">
 
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardView3"
-        android:layout_width="140dp"
-        android:layout_height="140dp"
-        android:layout_marginTop="100dp"
-        app:cardCornerRadius="70dp"
     <Switch
         android:id="@+id/switchBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="112dp"
+        android:layout_marginBottom="125dp"
+        android:minWidth="48dp"
         android:minHeight="48dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -29,6 +24,7 @@
         android:id="@+id/txtFoodTruckStatus"
         android:layout_width="178dp"
         android:layout_height="25dp"
+        android:gravity="center"
         android:text="FoodTruck status"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
@@ -46,6 +42,7 @@
         android:id="@+id/txtStatus"
         android:layout_width="178dp"
         android:layout_height="25dp"
+        android:gravity="center"
         android:text="Offline"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
@@ -63,12 +60,14 @@
         android:id="@+id/bt_Logout"
         android:layout_width="300dp"
         android:layout_height="50dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="30dp"
         android:background="@drawable/login_button"
         android:text="@string/Bt_LogOut"
         android:textAllCaps="false"
         android:textColor="#EF3D64"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
@@ -95,6 +94,7 @@
         android:id="@+id/editTruckName"
         android:layout_width="300dp"
         android:layout_height="50dp"
+
         android:background="@drawable/transparent_plaintext"
         android:ems="10"
         android:hint="Name of your truck"
@@ -108,13 +108,13 @@
         app:layout_constraintHorizontal_bias="0.486"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.414" />
+        app:layout_constraintVertical_bias="0.354" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView3"
         android:layout_width="140dp"
         android:layout_height="140dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="40dp"
         app:cardCornerRadius="70dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.494"
@@ -152,13 +152,15 @@
         android:id="@+id/text_RedigeraBild"
         android:layout_width="207dp"
         android:layout_height="25dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginBottom="15dp"
+        android:gravity="center"
         android:text="SELECT PHOTO"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="#FFBBBC"
         android:textSize="14sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/editTruckName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView3" />

@@ -18,10 +18,6 @@
             android:exported="true"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity
-            android:name=".activities.OwnerSettingsActivity"
-            android:theme="@style/AppTheme"
-            android:exported="true" />
-        <activity
             android:name=".activities.SplashActivity"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />

@@ -1,15 +1,12 @@
 package com.example.food_trock.activities
 
 import android.content.Intent
-import android.content.res.ColorStateList
-import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.Window
 import android.view.WindowManager
 import android.widget.EditText
 import android.widget.ImageButton
-import android.widget.SearchView
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -20,8 +17,6 @@ import com.example.food_trock.models.Store
 import com.example.food_trock.fragments.StoreFragment
 import com.example.food_trock.adapters.storeAdapter
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.firebase.database.collection.LLRBNode
-import com.example.food_trock.models.StoreStatus
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.EventListener
@@ -43,8 +38,9 @@ class StoreActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        this.requestWindowFeature(Window.FEATURE_NO_TITLE);    this.getWindow().setFlags(
-            WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        this.requestWindowFeature(Window.FEATURE_NO_TITLE); this.getWindow().setFlags(
+            WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN
+        );
         setContentView(R.layout.activity_store)
 
 
@@ -65,6 +61,37 @@ class StoreActivity : AppCompatActivity() {
         auth = Firebase.auth
         val user = auth.currentUser
 
+        loginBtn.setOnClickListener() {
+            OpenUserProfile()
+        }
+        
+
+/*        auth.signInWithEmailAndPassword(email,password).addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                Log.e("TEST", "onCreate: login successful")
+            }
+        }*/
+
+        db.collection("FoodTrucks").addSnapshotListener(object: EventListener<QuerySnapshot> {
+            override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?) {
+                DataManager.stores.clear()
+                if (value != null) {
+                    for(document in value.documents) {
+                        val store = document.toObject(Store::class.java)
+                        if(store != null) {
+                            if(store.storeOnline) {
+                                DataManager.stores.add(store)
+                            } else if (!store.storeOnline) {
+                                DataManager.stores.remove(store)
+                            }
+                        }
+                        storeSize.text = "Result: ${DataManager.stores.size}"
+                        recyclerView.adapter?.notifyDataSetChanged()
+                    }
+                }
+            }
+        })
+
         storeAdapter.setOnItemClickListener(object : storeAdapter.onItemClickListener {
             override fun onItemClick(position: Int) {
 
@@ -77,7 +104,7 @@ class StoreActivity : AppCompatActivity() {
                 bundle.putString("storeName", selectedStore.storeName)
                 bundle.putInt("storePriceClass", selectedStore.storePriceClass)
                 bundle.putString("storeDistance", selectedStore.storeDistance)
-                bundle.putString("storeImage",selectedStore.storeImage)
+                bundle.putString("storeImage", selectedStore.storeImage)
 
 
                 val transaction = supportFragmentManager.beginTransaction()
@@ -92,10 +119,10 @@ class StoreActivity : AppCompatActivity() {
                 var storePriceClass: Int = selectedStore.storePriceClass
                 var storeDistance: String = selectedStore.storeDistance
 
-        val store = Store("ok", "Burgers", 50, "10km", 0, false
-        )
-        val email = "pikachu@test.se"
-        val password = "hello123"
+                val store = Store(
+                    "ok", "Burgers", 50, "10km", 0, false
+                )
+
 
             }
         })
@@ -122,18 +149,7 @@ class StoreActivity : AppCompatActivity() {
         false
 
     }
-}
-        }
 
-
-
-        auth.signInWithEmailAndPassword(email,password).addOnCompleteListener { task ->
-            if (task.isSuccessful) {
-                Log.e("TEST", "onCreate: login successful")
-            }
-        }
-
- */
 
 
         /*
@@ -146,33 +162,9 @@ class StoreActivity : AppCompatActivity() {
         /** Queries through the collection-path FoodTrucks in the database to find data changes
          * If store is online, the storelist is cleared and the online stores are added to the recyclerview
          */
-        db.collection("FoodTrucks").addSnapshotListener(object: EventListener<QuerySnapshot> {
-            override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?) {
-                DataManager.stores.clear()
-                if (value != null) {
-                    for(document in value.documents) {
-                        val store = document.toObject(Store::class.java)
-                        if(store != null) {
-                            if(store.storeOnline) {
-                                DataManager.stores.add(store)
-                            } else if (!store.storeOnline) {
-                                DataManager.stores.remove(store)
-                            }
-                        }
-                        storeSize.text = "Result: ${DataManager.stores.size}"
-                        recyclerView.adapter?.notifyDataSetChanged()
-                    }
-                }
-            }
-        })
 
 
-        loginBtn.setOnClickListener() {
-            OpenUserProfile()
-        }
 
-
-    }
 
     /**
      * Opens the user profile, if signed in. Else opens the login activity.
@@ -187,18 +179,3 @@ class StoreActivity : AppCompatActivity() {
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
