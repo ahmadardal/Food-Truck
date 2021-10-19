@@ -14,7 +14,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        var intent = Intent(this, OwnerSettingsActivity::class.java)
+        var intent = Intent(this, StoreActivity::class.java)
         startActivity(intent)
 
     }
