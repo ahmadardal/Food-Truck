@@ -77,7 +77,7 @@ class OwnerSettingsActivity : AppCompatActivity() {
         db = Firebase.firestore
         auth = Firebase.auth
 
-        editTruckName = findViewById(R.id.editTruckName)
+        editTruckName = findViewById(R.id.userNameActI)
         editTruckPrice = findViewById(R.id.editTruckPrice)
         ownerProfileIMG = findViewById(R.id.ownerProfileImage)
 

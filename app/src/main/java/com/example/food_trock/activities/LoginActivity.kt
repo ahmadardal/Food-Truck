@@ -10,20 +10,28 @@ import android.widget.TextView
 import android.widget.Toast
 import android.view.Window
 import android.view.WindowManager
+import android.widget.Button
 import com.example.food_trock.R
 import com.example.food_trock.firebase.FireStoreClass
-import com.example.food_trock.models.User
 import com.google.firebase.auth.FirebaseAuth
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var mProgressDialog: Dialog
+    private lateinit var btnLogin: Button
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);    this.getWindow().setFlags(
             WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_loginscreen)
+
+        btnLogin = findViewById(R.id.btn_login)
+        btnLogin.setOnClickListener {
+            signInRegisteredUser()
+        }
     }
+
 
     /**
      * A function for Sign-In using the registered user using the email and password.

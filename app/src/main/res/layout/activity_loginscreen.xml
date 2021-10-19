@@ -19,18 +19,18 @@
         app:srcCompat="@drawable/logo_foodtruck" />
 
     <EditText
-        android:id="@+id/editTruckName"
+        android:id="@+id/userNameActI"
         android:layout_width="300dp"
         android:layout_height="50dp"
+        android:layout_marginTop="50dp"
         android:background="@drawable/transparent_plaintext"
         android:ems="10"
-        android:hint="Username"
+        android:hint="E-mail"
         android:inputType="textPersonName"
         android:paddingStart="70dp"
         android:textAlignment="viewStart"
         android:textColor="#FFFFFF"
         android:textSize="14sp"
-        android:layout_marginTop="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
@@ -51,15 +51,15 @@
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTruckName" />
+        app:layout_constraintTop_toBottomOf="@+id/userNameActI" />
 
     <ImageView
         android:id="@+id/imagewView2"
         android:layout_width="66dp"
         android:layout_height="57dp"
-        app:layout_constraintBottom_toBottomOf="@+id/editTruckName"
-        app:layout_constraintStart_toStartOf="@+id/editTruckName"
-        app:layout_constraintTop_toTopOf="@+id/editTruckName"
+        app:layout_constraintBottom_toBottomOf="@+id/userNameActI"
+        app:layout_constraintStart_toStartOf="@+id/userNameActI"
+        app:layout_constraintTop_toTopOf="@+id/userNameActI"
         app:layout_constraintVertical_bias="0.45"
         app:srcCompat="@drawable/usericon" />
 
@@ -73,7 +73,7 @@
         app:srcCompat="@drawable/lock" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/button"
+        android:id="@+id/btn_login"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_marginTop="10dp"
@@ -111,5 +111,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_login" />
 </androidx.constraintlayout.widget.ConstraintLayout>
