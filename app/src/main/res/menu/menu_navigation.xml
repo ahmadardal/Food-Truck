@@ -2,6 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/favourites"
+        android:title="Favourites"
+        android:icon="@drawable/ic_favourites"/>
+
+    <item
         android:id="@+id/trucks"
         android:title="Trucks"
         android:icon="@drawable/ic_truck"/>
@@ -10,7 +15,6 @@
         android:id="@+id/maps"
         android:title="Maps"
         android:icon="@drawable/ic_maps"/>
-
 
     <item
         android:id="@+id/settings"

@@ -8,10 +8,22 @@
     tools:context=".MainActivity">
 
 
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/menuBackground"
+        app:itemIconTint="@color/navselector"
+        app:itemTextColor="@color/navselector"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/menu_navigation" />
+
     <EditText
         android:id="@+id/searchView"
         android:layout_width="354dp"
-        android:layout_height="41dp"
+        android:layout_height="48dp"
         android:layout_marginBottom="20sp"
         android:background="@drawable/rounded_searchbar"
         android:drawableLeft="@drawable/search_icon_gray"
@@ -41,18 +53,6 @@
         tools:ignore="SpeakableTextPresentCheck">
 
     </androidx.recyclerview.widget.RecyclerView>
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_navigation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:itemBackground="@color/menuBackground"
-        app:itemTextColor="@color/navselector"
-        app:itemIconTint="@color/navselector"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/menu_navigation" />
 
     <FrameLayout
         android:id="@+id/container"

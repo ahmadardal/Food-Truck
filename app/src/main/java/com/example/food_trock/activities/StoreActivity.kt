@@ -55,7 +55,7 @@ class StoreActivity : AppCompatActivity() {
 
         bottomNavigationView = findViewById(R.id.bottom_navigation)
         bottomNavigationView.setOnNavigationItemSelectedListener(navigation)
-        bottomNavigationView.menu.getItem(0).isChecked = true
+        bottomNavigationView.menu.getItem(1).isChecked = true
 
         db = Firebase.firestore
         auth = Firebase.auth
@@ -121,11 +121,17 @@ class StoreActivity : AppCompatActivity() {
 
     private val navigation = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
+            R.id.favourites -> {
+                bottomNavigationView.menu.getItem(1).isChecked = false
+                val intent = Intent(this@StoreActivity, FavouritesActivity::class.java)
+                startActivity(intent)
+                return@OnNavigationItemSelectedListener true
+            }
             R.id.trucks -> {
                 return@OnNavigationItemSelectedListener false
             }
             R.id.settings -> {
-                bottomNavigationView.menu.getItem(0).isChecked = false
+                bottomNavigationView.menu.getItem(1).isChecked = false
                 val intent = Intent(this@StoreActivity, OwnerSettingsActivity::class.java)
                 startActivity(intent)
                 return@OnNavigationItemSelectedListener true

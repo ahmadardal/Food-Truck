@@ -40,8 +40,14 @@ class OwnerSettingsActivity : AppCompatActivity() {
 
     private val navigation = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
+            R.id.favourites -> {
+                bottomNavigationView.menu.getItem(3).isChecked = false
+                val intent = Intent(this, FavouritesActivity::class.java)
+                startActivity(intent)
+                return@OnNavigationItemSelectedListener true
+            }
             R.id.trucks -> {
-                bottomNavigationView.menu.getItem(2).isChecked = false
+                bottomNavigationView.menu.getItem(3).isChecked = false
                 val intent = Intent(this, StoreActivity::class.java)
                 startActivity(intent)
                 return@OnNavigationItemSelectedListener true
@@ -68,7 +74,7 @@ class OwnerSettingsActivity : AppCompatActivity() {
 
         bottomNavigationView = findViewById(R.id.bottom_navigation)
         bottomNavigationView.setOnNavigationItemSelectedListener(navigation)
-        bottomNavigationView.menu.getItem(2).isChecked = true
+        bottomNavigationView.menu.getItem(3).isChecked = true
 
         var saveChangesBtn = findViewById<Button>(R.id.saveChangesBtn)
         var logOutBTN = findViewById<Button>(R.id.bt_Logout)
