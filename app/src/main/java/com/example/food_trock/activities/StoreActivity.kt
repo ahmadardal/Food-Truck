@@ -65,12 +65,11 @@ class StoreActivity : AppCompatActivity() {
             OpenUserProfile()
         }
         
+        
 
-/*        auth.signInWithEmailAndPassword(email,password).addOnCompleteListener { task ->
-            if (task.isSuccessful) {
-                Log.e("TEST", "onCreate: login successful")
-            }
-        }*/
+        /** Queries through the collection-path FoodTrucks in the database to find data changes
+         * If store is online, the storelist is cleared and the online stores are added to the recyclerview
+         */
 
         db.collection("FoodTrucks").addSnapshotListener(object: EventListener<QuerySnapshot> {
             override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?) {
@@ -156,10 +155,6 @@ class StoreActivity : AppCompatActivity() {
             db.collection("FoodTrucks").document(user.uid).set(store)
         }
 
-         */
-
-        /** Queries through the collection-path FoodTrucks in the database to find data changes
-         * If store is online, the storelist is cleared and the online stores are added to the recyclerview
          */
 
 

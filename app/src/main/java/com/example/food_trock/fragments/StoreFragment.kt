@@ -14,7 +14,6 @@ import com.example.food_trock.R
 class StoreFragment : Fragment() {
 
     lateinit var txtStoreName: TextView
-    lateinit var txtStoreInfo: TextView
     lateinit var txtPriceClass: TextView
     lateinit var txtDistance: TextView
     lateinit var storeImage: ImageView

@@ -23,7 +23,6 @@ RecyclerView.Adapter<menuListAdapter.menuViewHolder>(){
 
     override fun onBindViewHolder(holder: menuViewHolder, position: Int) {
         val currentItem = menuList[position]
-        holder.itemIMG.setImageResource(currentItem.menuIMG)
         holder.txtItemName.text = currentItem.menuName
         holder.txtItemPrice.text = currentItem.menuPrice.toString()
 
@@ -34,7 +33,6 @@ RecyclerView.Adapter<menuListAdapter.menuViewHolder>(){
     }
 
     inner class menuViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
-        val itemIMG: ImageView = itemView.findViewById(R.id.ItemIMG)
         val txtItemName: TextView = itemView.findViewById(R.id.txtItemName)
         val txtItemPrice: TextView = itemView.findViewById(R.id.txtItemPrice)
     }

@@ -21,7 +21,9 @@
         <item name="android:windowAnimationStyle">@null</item>
 
 
+
         <!-- Customize your theme here. -->
+
     </style>
 
 

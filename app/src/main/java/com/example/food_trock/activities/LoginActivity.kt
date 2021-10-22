@@ -51,7 +51,9 @@ class LoginActivity : AppCompatActivity() {
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         // Calling the FirestoreClass signInUser function to get the data of user from database.
-                        FireStoreClass().loadUserData(this@LoginActivity)
+                        //FireStoreClass().loadUserData(this@LoginActivity)
+                        val intent = Intent(this, OwnerSettingsActivity::class.java)
+                        startActivity(intent)
                     } else {
                         Toast.makeText(
                             this@LoginActivity,

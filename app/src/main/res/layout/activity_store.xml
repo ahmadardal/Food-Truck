@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#E8F4FB"
+    android:background="@drawable/main_background"
+    android:visibility="visible"
     tools:context=".MainActivity">
 
 
@@ -22,8 +23,8 @@
 
     <EditText
         android:id="@+id/searchView"
-        android:layout_width="354dp"
-        android:layout_height="48dp"
+        android:layout_width="364dp"
+        android:layout_height="39dp"
         android:layout_marginBottom="20sp"
         android:background="@drawable/rounded_searchbar"
         android:drawableLeft="@drawable/search_icon_gray"
@@ -34,22 +35,24 @@
         android:textColor="#403C3C"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintHorizontal_bias="0.473"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.18" />
+        app:layout_constraintVertical_bias="0.131" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
-        android:layout_width="389dp"
-        android:layout_height="448dp"
+        android:layout_width="0dp"
+        android:layout_height="490dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.47"
+        app:layout_constraintHorizontal_bias="0.461"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.785"
+        app:layout_constraintVertical_bias="0.73"
         tools:ignore="SpeakableTextPresentCheck">
 
     </androidx.recyclerview.widget.RecyclerView>
@@ -73,14 +76,15 @@
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-condensed"
         android:text="Available Foodtrucks"
-        android:textColor="#152C37"
+        android:textColor="#FFFFFF"
         android:textSize="28sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.157"
+        app:layout_constraintHorizontal_bias="0.186"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.066" />
+        app:layout_constraintVertical_bias="0.023" />
 
     <TextView
         android:id="@+id/txtStoreSize"
@@ -88,7 +92,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-condensed"
         android:text="Result: 0"
-        android:textColor="#4D4E4E"
+        android:textColor="#FFFFFF"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

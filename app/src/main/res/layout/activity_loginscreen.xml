@@ -44,7 +44,7 @@
         android:background="@drawable/transparent_plaintext"
         android:ems="10"
         android:hint="password"
-        android:inputType="textPersonName"
+        android:inputType="textPassword"
         android:paddingStart="70dp"
         android:textAlignment="viewStart"
         android:textColor="#FFFFFF"
