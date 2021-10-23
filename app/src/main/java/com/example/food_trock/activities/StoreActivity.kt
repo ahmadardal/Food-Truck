@@ -137,9 +137,10 @@ class StoreActivity : AppCompatActivity() {
                 return@OnNavigationItemSelectedListener true
             }
             R.id.maps -> {
-/*                val intent = Intent(this@MainActivity, MyRecipes::class.java)
+                bottomNavigationView.menu.getItem(1).isChecked = false
+               val intent = Intent(this@StoreActivity, MapsActivity::class.java)
                 startActivity(intent)
-                return@OnNavigationItemSelectedListener true*/
+                return@OnNavigationItemSelectedListener true
             }
         }
         false
