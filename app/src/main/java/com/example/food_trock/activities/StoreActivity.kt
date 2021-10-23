@@ -64,6 +64,8 @@ class StoreActivity : AppCompatActivity() {
         loginBtn.setOnClickListener() {
             OpenUserProfile()
         }
+
+
         
         
 
@@ -78,9 +80,9 @@ class StoreActivity : AppCompatActivity() {
                     for(document in value.documents) {
                         val store = document.toObject(Store::class.java)
                         if(store != null) {
-                            if(store.storeOnline) {
+                            if(store.storeStatus) {
                                 DataManager.stores.add(store)
-                            } else if (!store.storeOnline) {
+                            } else if (!store.storeStatus) {
                                 DataManager.stores.remove(store)
                             }
                         }
@@ -145,17 +147,9 @@ class StoreActivity : AppCompatActivity() {
 
     }
 
-    val store = Store(
-        "ok", "Burgers", 50, "10km", 0, false
-    )
 
 
-        /*
-        if (user != null) {
-            db.collection("FoodTrucks").document(user.uid).set(store)
-        }
 
-         */
 
 
 
