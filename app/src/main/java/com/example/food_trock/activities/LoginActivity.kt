@@ -12,7 +12,6 @@ import android.view.Window
 import android.view.WindowManager
 import android.widget.Button
 import com.example.food_trock.R
-import com.example.food_trock.firebase.FireStoreClass
 import com.google.firebase.auth.FirebaseAuth
 
 class LoginActivity : AppCompatActivity() {
@@ -39,7 +38,7 @@ class LoginActivity : AppCompatActivity() {
     private fun signInRegisteredUser() {
 
         // Here we get the text from editText and trim the space
-        val email: String = findViewById<EditText>(R.id.userNameActI).text.toString().trim { it <= ' ' }
+        val email: String = findViewById<EditText>(R.id.editItemName).text.toString().trim { it <= ' ' }
         val password: String = findViewById<EditText>(R.id.passwordActI).text.toString().trim { it <= ' ' }
 
         if (validateForm(email, password)) {

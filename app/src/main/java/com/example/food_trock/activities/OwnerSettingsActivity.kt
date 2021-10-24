@@ -11,8 +11,11 @@ import android.util.Log
 import android.view.Window
 import android.view.WindowManager
 import android.widget.*
+import androidx.cardview.widget.CardView
 import com.bumptech.glide.Glide
 import com.example.food_trock.R
+import com.example.food_trock.fragments.FoodMenuFragment
+import com.example.food_trock.fragments.StoreFragment
 import com.example.food_trock.models.Store
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
@@ -35,6 +38,7 @@ class OwnerSettingsActivity : AppCompatActivity() {
     lateinit var ownerProfileIMG: ImageView
     lateinit var txtStatus: TextView
     lateinit var txtEmail: TextView
+    lateinit var cardViewMenu: CardView
     val foodTruckCollectionRef = Firebase.firestore.collection("FoodTrucks")
     var selectedPhotoUri: Uri? = null
 
@@ -89,6 +93,7 @@ class OwnerSettingsActivity : AppCompatActivity() {
         editFullName = findViewById(R.id.editFullName)
         txtEmail = findViewById(R.id.txtEmail)
         ownerProfileIMG = findViewById(R.id.ownerProfileImage)
+        cardViewMenu = findViewById(R.id.cardViewMenus)
 
 
         /** Checks if the owners shop is online or offline.
@@ -123,6 +128,13 @@ class OwnerSettingsActivity : AppCompatActivity() {
         }
         saveFullNameBtn.setOnClickListener() {
             getNewStoreMap()
+        }
+        cardViewMenu.setOnClickListener() {
+            val menuFragment = FoodMenuFragment()
+
+            val transaction = supportFragmentManager.beginTransaction()
+            transaction.add(R.id.menuContainer, menuFragment, "menu")
+            transaction.commit()
         }
 
 
