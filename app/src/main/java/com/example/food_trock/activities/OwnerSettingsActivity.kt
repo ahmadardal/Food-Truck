@@ -195,6 +195,8 @@ class OwnerSettingsActivity : AppCompatActivity() {
 
             ownerProfileIMG.setImageBitmap(bitmap)
 
+
+
             uploadImageToFirebaseStorage()
         }
     }
@@ -237,7 +239,8 @@ class OwnerSettingsActivity : AppCompatActivity() {
     private fun uploadImageToFirebaseStorage() {
 
         if(selectedPhotoUri != null) {
-            val filename = UUID.randomUUID().toString()
+            //val filename = UUID.randomUUID().toString()
+            val filename = auth.currentUser?.uid
             val imagesRef = FirebaseStorage.getInstance().getReference("/images/$filename")
 
             imagesRef.putFile(selectedPhotoUri!!)

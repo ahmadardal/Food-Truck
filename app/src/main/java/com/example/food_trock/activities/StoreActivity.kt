@@ -65,7 +65,6 @@ class StoreActivity : AppCompatActivity() {
             OpenUserProfile()
         }
 
-
         
         
 
@@ -106,6 +105,7 @@ class StoreActivity : AppCompatActivity() {
                 bundle.putInt("storePriceClass", selectedStore.storePriceClass)
                 bundle.putString("storeDistance", selectedStore.storeDistance)
                 bundle.putString("storeImage", selectedStore.storeImage)
+                bundle.putString("storeID", selectedStore.UID)
 
 
                 val transaction = supportFragmentManager.beginTransaction()

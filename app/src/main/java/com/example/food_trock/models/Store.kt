@@ -7,4 +7,5 @@ data class Store(var fullName: String = "",
                  var storePriceClass: Int = 0,
                  var storeDistance: String = "",
                  var storeRating: Int = 5,
-                 var storeStatus: Boolean = false,)
+                 var storeStatus: Boolean = false,
+                 var UID: String = "")
