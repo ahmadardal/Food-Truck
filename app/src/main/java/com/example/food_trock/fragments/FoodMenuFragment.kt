@@ -45,12 +45,16 @@ class FoodMenuFragment: Fragment() {
         editItemName = view.findViewById(R.id.editItemName)
         editItemPrice = view.findViewById(R.id.editItemPrice)
         val addMenuBtn = view.findViewById<ImageButton>(R.id.addMenuBtn)
+        val backBtn = view.findViewById<ImageButton>(R.id.backBtn)
         db = Firebase.firestore
         auth = Firebase.auth
 
 
         addMenuBtn.setOnClickListener() {
             getAndSetNewMenuMap()
+        }
+        backBtn.setOnClickListener() {
+            activity?.supportFragmentManager?.beginTransaction()?.remove(this)?.commit()
         }
 
 

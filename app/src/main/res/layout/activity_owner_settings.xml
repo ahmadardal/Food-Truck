@@ -44,7 +44,7 @@
                 android:layout_marginTop="5dp"
                 android:fontFamily="sans-serif-condensed"
                 android:gravity="center"
-                android:text="MANAGE MENUS"
+                android:text="MY MENU"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textColor="#EF3D64"
                 android:textSize="24sp"
@@ -103,7 +103,7 @@
                 android:minHeight="48dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.525"
+                app:layout_constraintHorizontal_bias="0.721"
                 app:layout_constraintStart_toEndOf="@+id/txtStatus"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="UseSwitchCompatOrMaterialXml" />
