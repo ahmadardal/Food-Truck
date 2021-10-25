@@ -3,13 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    >
 
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="0dp"
-        android:layout_height="220dp"
+        android:layout_height="180dp"
+
         app:cardCornerRadius="20dp"
         app:cardElevation="-5dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -18,89 +21,164 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="#EDEDED">
 
-            <ImageView
-                android:id="@+id/imageView2"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="fitXY"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@color/white" />
-
-            <ImageView
-                android:id="@+id/storeImage"
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:scaleType="centerCrop"
-                android:visibility="visible"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0"
-                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
-                app:srcCompat="@drawable/hamburger" />
 
             <TextView
                 android:id="@+id/txtName"
-                android:layout_width="wrap_content"
+                android:layout_width="225dp"
                 android:layout_height="30dp"
-                android:fontFamily="sans-serif-condensed-medium"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
                 android:text="Ortens Truck"
-                android:textColor="#3A3939"
-                android:textSize="22sp"
-                app:layout_constraintBottom_toTopOf="@+id/ratingBar"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.056"
+                android:textColor="#5C202A"
+                android:textSize="24sp"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/storeImage" />
+                app:layout_constraintTop_toTopOf="parent" />
 
-            <RatingBar
-                android:id="@+id/ratingBar"
-                style="?android:attr/ratingBarStyleSmall"
+            <RelativeLayout
+                android:id="@+id/imageFoodRecycle"
+                android:layout_width="113dp"
+                android:layout_height="113dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="30dp"
+                android:background="@drawable/backgrund_image_food"
+
+                app:flow_horizontalAlign="center"
+                app:flow_verticalAlign="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/storeImage"
+                    android:layout_width="108dp"
+                    android:layout_height="108dp"
+
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/hamburger"
+                    app:circularflow_viewCenter="@string/My_Menu"
+
+                    app:civ_circle_background_color="#EDEDED" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/category"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:contentDescription="@string/app_name"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.048"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="5dp"
+                android:text="Burritos"
+                android:textColor="#F07F6C"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txtName" />
 
             <TextView
-                android:id="@+id/txtPriceClass"
+                android:id="@+id/category2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="$$"
-                android:textColor="#3A3939"
-                android:textSize="21sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/txtDistance"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.869"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/storeImage" />
-
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="79dp"
+                android:text="Street Tacos"
+                android:textColor="#F07F6C"
+                app:layout_constraintEnd_toStartOf="@+id/imageFoodRecycle"
+                app:layout_constraintStart_toEndOf="@+id/category"
+                app:layout_constraintTop_toBottomOf="@+id/txtName" />
 
             <TextView
                 android:id="@+id/txtDistance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="2,7km"
-                android:textColor="#3A3939"
-                android:textSize="14sp"
-                android:textStyle="normal"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.881"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="3dp"
+                android:text="10Km"
+                android:textColor="#A61830"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/slash"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/slash" />
+
+            <TextView
+                android:id="@+id/mellanslag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="9dp"
+
+                android:layout_marginBottom="10dp"
+                android:text="|"
+                android:textColor="#F07F6C"
+                android:textSize="14dp"
+                app:layout_constraintBottom_toTopOf="@+id/txtDistance"
+                app:layout_constraintEnd_toStartOf="@+id/category2"
+                app:layout_constraintHorizontal_bias="0.52"
+                app:layout_constraintStart_toEndOf="@+id/category"
+                app:layout_constraintTop_toBottomOf="@+id/txtName" />
+
+            <TextView
+                android:id="@+id/distancedesription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginEnd="15dp"
+                android:text="Distance"
+                android:textColor="#BCBCBC"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="@+id/slash"
+                app:layout_constraintEnd_toEndOf="@+id/txtDistance"
+                app:layout_constraintEnd_toStartOf="@+id/slash"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtDistance"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/txtPriceClass"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="$$"
+                android:textColor="#A61830"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/slash"
+                app:layout_constraintTop_toTopOf="@+id/slash" />
+
+            <TextView
+                android:id="@+id/priceDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="price"
+                android:textColor="#BCBCBC"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="@+id/txtPriceClass"
+                app:layout_constraintStart_toEndOf="@+id/slash"
+                app:layout_constraintStart_toStartOf="@+id/txtPriceClass"
                 app:layout_constraintTop_toBottomOf="@+id/txtPriceClass" />
+
+            <ImageView
+                android:id="@+id/slash"
+                android:layout_width="23dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintStart_toEndOf="@+id/txtDistance"
+                app:layout_constraintTop_toBottomOf="@+id/category2"
+                app:srcCompat="@drawable/slash" />
+
+            <ImageView
+                android:id="@+id/ratingBar"
+                android:layout_width="94dp"
+                android:layout_height="19dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginBottom="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:srcCompat="@drawable/rating2" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

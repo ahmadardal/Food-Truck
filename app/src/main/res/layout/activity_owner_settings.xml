@@ -14,6 +14,8 @@
         android:layout_marginBottom="125dp"
         android:minWidth="48dp"
         android:minHeight="48dp"
+        android:scrollbarAlwaysDrawHorizontalTrack="false"
+        android:scrollbarAlwaysDrawVerticalTrack="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -126,7 +128,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
-            app:srcCompat="@android:drawable/sym_def_app_icon" />
+            app:srcCompat="@drawable/user_image" />
     </androidx.cardview.widget.CardView>
 
     <EditText
@@ -187,6 +189,13 @@
         app:layout_constraintVertical_bias="0.571"
         app:srcCompat="@drawable/editicon" />
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="8dp"
+        android:background="@drawable/shadow"
+        app:layout_anchor="@+id/bottom_navigation"
+        app:layout_anchorGravity="top"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation" />
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
@@ -194,6 +203,7 @@
         android:background="@color/menuBackground"
         app:itemIconTint="@color/navselector"
         app:itemTextColor="@color/navselector"
+        app:labelVisibilityMode="unlabeled"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
