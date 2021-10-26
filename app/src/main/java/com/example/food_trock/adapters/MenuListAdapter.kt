@@ -24,13 +24,14 @@ RecyclerView.Adapter<menuListAdapter.menuViewHolder>(){
 
     lateinit var db: FirebaseFirestore
     lateinit var auth: FirebaseAuth
+    val OwnerMenusCollectionRef = db.collection("OwnerMenus")
 
     fun removeMenu(position: Int) {
         db = Firebase.firestore
         auth = Firebase.auth
 
         DataManager.menus[position].documentID?.let {
-            db.collection("OwnerMenus").document(auth.currentUser!!.uid)
+            OwnerMenusCollectionRef.document(auth.currentUser!!.uid)
                 .collection("Items").document(it).delete()
             Toast.makeText(context,"Successfully deleted ${DataManager.menus[position].foodName}."
                 , Toast.LENGTH_SHORT).show()
