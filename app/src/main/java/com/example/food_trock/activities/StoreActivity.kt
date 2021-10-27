@@ -119,7 +119,7 @@ class StoreActivity : AppCompatActivity() {
     }
 
 
-    private val navigation = BottomNavigationView.OnNavigationItemSelectedListener { item ->
+     val navigation = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.favourites -> {
                 bottomNavigationView.menu.getItem(1).isChecked = false
@@ -147,9 +147,6 @@ class StoreActivity : AppCompatActivity() {
 
     }
 
-    val store = Store(
-        "ok", "Burgers", 50, "10km", 0, false
-    )
 
 
         /*
