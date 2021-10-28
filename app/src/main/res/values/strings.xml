@@ -11,4 +11,11 @@
     <string name="Opening_hours">Opening Hours</string>
     <string name="Status">Status</string>
     <string name="please_wait">Please wait</string>
+    <string name="title_activity_maps">MapsActivity</string>
+    <string name="label_From">From:</string>
+    <string name="label_To">To:</string>
+    <string name="Modify">Modify</string>
+    <string name="label_Distance">Distance:</string>
+    <string name="label_Time">Time:</string>
+    <string name="label_Price">Price:</string>
 </resources>

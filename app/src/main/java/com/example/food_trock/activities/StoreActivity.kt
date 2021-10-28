@@ -95,7 +95,6 @@ class StoreActivity : AppCompatActivity() {
         storeAdapter.setOnItemClickListener(object : storeAdapter.onItemClickListener {
             override fun onItemClick(position: Int) {
 
-
                 val storeFragment = StoreFragment()
 
                 var selectedStore: Store = storeAdapter.storeList[position]
@@ -107,20 +106,15 @@ class StoreActivity : AppCompatActivity() {
                 bundle.putString("storeImage", selectedStore.storeImage)
                 bundle.putString("storeID", selectedStore.UID)
 
-
                 val transaction = supportFragmentManager.beginTransaction()
                 transaction.add(R.id.container, storeFragment, "store")
                 transaction.commit()
-
-
-
-
             }
         })
     }
 
 
-    private val navigation = BottomNavigationView.OnNavigationItemSelectedListener { item ->
+     val navigation = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.favourites -> {
                 bottomNavigationView.menu.getItem(1).isChecked = false
@@ -138,9 +132,10 @@ class StoreActivity : AppCompatActivity() {
                 return@OnNavigationItemSelectedListener true
             }
             R.id.maps -> {
-/*                val intent = Intent(this@MainActivity, MyRecipes::class.java)
+                bottomNavigationView.menu.getItem(1).isChecked = false
+               val intent = Intent(this@StoreActivity, MapsActivity::class.java)
                 startActivity(intent)
-                return@OnNavigationItemSelectedListener true*/
+                return@OnNavigationItemSelectedListener true
             }
         }
         false
