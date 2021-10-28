@@ -48,7 +48,7 @@ class MenuListFragment: Fragment() {
         addMenuBtn.setOnClickListener() {
             val addFoodFragment = AddFoodFragment()
 
-            val transaction = getFragmentManager()?.beginTransaction()
+            val transaction = childFragmentManager.beginTransaction()
             transaction?.add(R.id.addFoodContainer, addFoodFragment, "add")
             transaction?.commit()
         }

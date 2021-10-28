@@ -107,6 +107,10 @@ class AddFoodFragment: Fragment() {
         if(DataManager.menus.size < 10) {
             auth.currentUser?.let {
                 db.collection("OwnerMenus").document(it.uid).collection("Items").add(map)
+               /* Log.d("!!!", "getAndSetNewMenuMap: $activity")
+                Toast.makeText(activity?.applicationContext, "Successfully added to your menu!", Toast.LENGTH_SHORT ).show()
+
+                */
             }
         }
     }
@@ -133,6 +137,7 @@ class AddFoodFragment: Fragment() {
     }
 
     private fun removeFragment () {
-        activity?.supportFragmentManager?.beginTransaction()?.remove(this)?.commit()
+        parentFragmentManager.beginTransaction()?.remove(this)?.commit()
+      //  activity?.supportFragmentManager?.beginTransaction()?.remove(this)?.commit()
     }
 }
