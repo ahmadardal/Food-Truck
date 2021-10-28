@@ -18,17 +18,9 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.example.food_trock.databinding.ActivityMapsBinding
-import com.example.food_trock.models.Store
 import com.google.android.gms.location.*
 import com.google.android.libraries.places.api.Places
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.core.View
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
-import kotlinx.android.synthetic.main.activity_maps.*
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
@@ -37,8 +29,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var bottomNavigationView: BottomNavigationView
     private lateinit var locationProviderClient: FusedLocationProviderClient
     private var firstTime: Boolean = false
-   // lateinit var db: FirebaseFirestore
-    //lateinit var auth: FirebaseAuth
 
     lateinit var currentLocation: LatLng
 
@@ -80,7 +70,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         }
     }
 
-
     @SuppressWarnings("MissingPermission")
     private fun requestLocation() {
 
@@ -104,7 +93,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             }
         }
     }
-
 
     val callback = object:LocationCallback() {
         override fun onLocationAvailability(result: LocationAvailability) {
