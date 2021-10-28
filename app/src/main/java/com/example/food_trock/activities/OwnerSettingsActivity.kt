@@ -14,8 +14,7 @@ import android.widget.*
 import androidx.cardview.widget.CardView
 import com.bumptech.glide.Glide
 import com.example.food_trock.R
-import com.example.food_trock.fragments.FoodMenuFragment
-import com.example.food_trock.fragments.StoreFragment
+import com.example.food_trock.fragments.MenuListFragment
 import com.example.food_trock.models.Store
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
@@ -26,6 +25,9 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import java.util.*
+
+
+
 
 private lateinit var bottomNavigationView: BottomNavigationView
 
@@ -81,7 +83,7 @@ class OwnerSettingsActivity : AppCompatActivity() {
         bottomNavigationView.setOnNavigationItemSelectedListener(navigation)
         bottomNavigationView.menu.getItem(3).isChecked = true
 
-        var saveTruckNameBtn = findViewById<Button>(R.id.saveTruckNameBtn)
+        var saveTruckNameBtn = findViewById<Button>(R.id.actionBtn)
         var saveFullNameBtn = findViewById<Button>(R.id.saveFullNameBtn)
         var logOutBTN = findViewById<Button>(R.id.bt_Logout)
         var switchBtn = findViewById<Switch>(R.id.switchBtn)
@@ -130,7 +132,7 @@ class OwnerSettingsActivity : AppCompatActivity() {
             getNewStoreMap()
         }
         cardViewMenu.setOnClickListener() {
-            val menuFragment = FoodMenuFragment()
+            val menuFragment = MenuListFragment()
 
             val transaction = supportFragmentManager.beginTransaction()
             transaction.add(R.id.menuContainer, menuFragment, "menu")
@@ -185,6 +187,7 @@ class OwnerSettingsActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+
 
         if (requestCode == 0 && resultCode == Activity.RESULT_OK && data != null) {
             Log.e("TEST","onActivityResult: photo was selected")

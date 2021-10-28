@@ -10,7 +10,7 @@
     <ImageView
         android:id="@+id/imagewView2"
         android:layout_width="match_parent"
-        android:layout_height="225dp"
+        android:layout_height="220dp"
         android:scaleType="fitXY"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -52,7 +52,8 @@
                 android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/txtDistance"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:textColor="#439333" />
 
             <TextView
                 android:id="@+id/txtDistance"
@@ -104,9 +105,10 @@
                 android:id="@+id/txtStoreName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-condensed"
                 android:text="Store Name"
-                android:textColor="#575656"
-                android:textSize="24sp"
+                android:textColor="#292828"
+                android:textSize="30dp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -119,9 +121,10 @@
                 android:id="@+id/txtMenu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-condensed"
                 android:text="Menu"
-                android:textColor="#575656"
-                android:textSize="24sp"
+                android:textColor="#595858"
+                android:textSize="28dp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -150,8 +153,8 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerView3"
                 android:layout_width="0dp"
-                android:layout_height="210dp"
-                android:background="#DFDFDF"
+                android:layout_height="220dp"
+                android:background="#CAC9C9"
                 android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
