@@ -2,6 +2,7 @@ package com.example.food_trock.models
 
 import android.widget.RatingBar
 import androidx.cardview.widget.CardView
+import com.google.android.gms.maps.model.LatLng
 
 data class Store(
                  var storeImage: String= "",
@@ -10,4 +11,6 @@ data class Store(
                  var storeDistance: String = "",
                  var storeRating: Int = 5,
                  var storeOnline: Boolean = false,
-                 var storeDescription: String = "")
+                 var storeDescription: String = "",
+                 var storeLatitude: Double = 0.0,
+                 var storeLongitude: Double = 0.0)

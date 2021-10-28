@@ -95,7 +95,6 @@ class StoreActivity : AppCompatActivity() {
         storeAdapter.setOnItemClickListener(object : storeAdapter.onItemClickListener {
             override fun onItemClick(position: Int) {
 
-
                 val storeFragment = StoreFragment()
 
                 var selectedStore: Store = storeAdapter.storeList[position]
@@ -106,14 +105,9 @@ class StoreActivity : AppCompatActivity() {
                 bundle.putString("storeDistance", selectedStore.storeDistance)
                 bundle.putString("storeImage", selectedStore.storeImage)
 
-
                 val transaction = supportFragmentManager.beginTransaction()
                 transaction.add(R.id.container, storeFragment, "store")
                 transaction.commit()
-
-
-
-
             }
         })
     }

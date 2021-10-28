@@ -15,7 +15,6 @@ class FireStoreClass {
     // Create a instance of Firebase Firestore
     private val mFireStore = FirebaseFirestore.getInstance()
 
-
     fun getCurrentUserID(): String {
         // An Instance of currentUser using FirebaseAuth
         val currentUser = FirebaseAuth.getInstance().currentUser
@@ -29,9 +28,6 @@ class FireStoreClass {
         return currentUserID
     }
 
-    /**
-     * A function to make an entry of the registered user in the firestore database.
-     */
     fun registerUser(activity: RegisterAccountActivity, userInfo: com.example.food_trock.models.User) {
 
         mFireStore.collection(Constants.USERS)
