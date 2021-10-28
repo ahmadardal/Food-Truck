@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
+    android:background="@drawable/main_background"
     tools:context=".activities.FavouritesActivity">
 
     <View
@@ -14,6 +14,7 @@
         app:layout_anchor="@+id/bottom_navigation"
         app:layout_anchorGravity="top"
         app:layout_constraintBottom_toTopOf="@+id/bottom_navigation" />
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="0dp"
@@ -27,6 +28,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/menu_navigation" />
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:fontFamily="sans-serif-condensed"
+        android:text="Your Favorite Food-Trucks"
+        android:textColor="#FFFFFF"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.014" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

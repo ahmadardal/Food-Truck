@@ -3,6 +3,8 @@ package com.example.food_trock.activities
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Window
+import android.view.WindowManager
 import com.example.food_trock.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -27,9 +29,9 @@ class FavouritesActivity : AppCompatActivity() {
                 return@OnNavigationItemSelectedListener true
             }
             R.id.maps -> {
-/*                val intent = Intent(this@MainActivity, MyRecipes::class.java)
+                val intent = Intent(this@FavouritesActivity, MapsActivity::class.java)
                 startActivity(intent)
-                return@OnNavigationItemSelectedListener true*/
+                return@OnNavigationItemSelectedListener true
             }
         }
         false
@@ -38,6 +40,8 @@ class FavouritesActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        this.requestWindowFeature(Window.FEATURE_NO_TITLE); this.getWindow().setFlags(
+            WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
         setContentView(R.layout.activity_favourites)
 
         bottomNavigationView = findViewById(R.id.bottom_navigation)

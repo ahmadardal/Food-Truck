@@ -64,6 +64,8 @@ class StoreFragment : Fragment() {
             Glide.with(this).load(storeIMG).into(storeImage)
         }
 
+
+
         storeMenuList.clear()
         if (storeID != null) {
             if (storeID.isNotEmpty()) {
@@ -84,7 +86,7 @@ class StoreFragment : Fragment() {
                 if (storePriceClass != null) {
                     if (storePriceClass <= 70) {
                         txtPriceClass.text = "$"
-                    } else if (storePriceClass in 80..110) {
+                    } else if (storePriceClass in 71..110) {
                         txtPriceClass.text = "$$"
                     } else
                         txtPriceClass.text = "$$$"

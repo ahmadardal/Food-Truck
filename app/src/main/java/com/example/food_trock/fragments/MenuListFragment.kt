@@ -1,6 +1,7 @@
 package com.example.food_trock.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +13,7 @@ import com.example.food_trock.DataManager
 import com.example.food_trock.R
 import com.example.food_trock.adapters.menuListAdapter
 import com.example.food_trock.models.MenuItem
+import com.example.food_trock.models.Store
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.*
@@ -73,11 +75,30 @@ class MenuListFragment: Fragment() {
                         }
                     }
                     recyclerView.adapter?.notifyDataSetChanged()
+                    setAveragePrice()
                 }
             })
 
 
         return view
+    }
+
+    fun countAveragePrice() : Int {
+        var itemAddedPrice = 0
+
+        for(item in DataManager.menus) {
+            itemAddedPrice += item.foodPrice
+        }
+        var itemAveragePrice = itemAddedPrice / DataManager.menus.size
+
+        return itemAveragePrice
+    }
+
+    fun setAveragePrice () {
+        val newPriceClass = countAveragePrice()
+        Log.e("!!!", "$newPriceClass")
+        db.collection("FoodTrucks").document(auth.currentUser!!.uid)
+            .update(mapOf("storePriceClass" to newPriceClass))
     }
 
 }

@@ -65,7 +65,7 @@ class StoreActivity : AppCompatActivity() {
             OpenUserProfile()
         }
 
-        
+
         
 
         /** Queries through the collection-path FoodTrucks in the database to find data changes
@@ -102,7 +102,6 @@ class StoreActivity : AppCompatActivity() {
                 storeFragment.arguments = bundle
                 bundle.putString("storeName", selectedStore.storeName)
                 bundle.putInt("storePriceClass", selectedStore.storePriceClass)
-                bundle.putString("storeDistance", selectedStore.storeDistance)
                 bundle.putString("storeImage", selectedStore.storeImage)
                 bundle.putString("storeID", selectedStore.UID)
 

@@ -64,9 +64,9 @@ class OwnerSettingsActivity : AppCompatActivity() {
                 return@OnNavigationItemSelectedListener false
             }
             R.id.maps -> {
-/*                val intent = Intent(this@MainActivity, MyRecipes::class.java)
+                val intent = Intent(this@OwnerSettingsActivity, MapsActivity::class.java)
                 startActivity(intent)
-                return@OnNavigationItemSelectedListener true*/
+                return@OnNavigationItemSelectedListener true
             }
         }
         false
