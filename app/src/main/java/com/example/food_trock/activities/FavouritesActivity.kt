@@ -4,10 +4,12 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.food_trock.R
+import com.example.food_trock.firebase.FireStoreClass
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class FavouritesActivity : AppCompatActivity() {
     private lateinit var bottomNavigationView: BottomNavigationView
+    val userId = FireStoreClass().getCurrentUserID()
 
     private val navigation = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
@@ -15,6 +17,7 @@ class FavouritesActivity : AppCompatActivity() {
                 return@OnNavigationItemSelectedListener false
             }
             R.id.trucks -> {
+
                 bottomNavigationView.menu.getItem(0).isChecked = false
                 val intent = Intent(this@FavouritesActivity, StoreActivity::class.java)
                 startActivity(intent)

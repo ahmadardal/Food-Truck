@@ -57,7 +57,7 @@ class FireStoreClass {
     /**
      * A function to SignIn using firebase and get the user details from Firestore Database.
      */
-    fun loadUserData(activity: Activity, readBoardsList: Boolean = false) {
+    fun loadUserData(activity: Activity) {
 
         // Here we pass the collection name from which we wants the data.
         mFireStore.collection(Constants.USERS)

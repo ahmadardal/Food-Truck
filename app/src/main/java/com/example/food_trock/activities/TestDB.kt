@@ -33,7 +33,7 @@ class TestDB : AppCompatActivity() {
                 .set(foodTruckInfo, SetOptions.merge())
                 .addOnSuccessListener {
 
-                    // Here Show sucess msg
+                    // Here Show success msg
                     showResultTV.text = "Data skickat" +
                             "Name: ${foodTruckInfo.name}" +
                             "Description: ${foodTruckInfo.description}" +
