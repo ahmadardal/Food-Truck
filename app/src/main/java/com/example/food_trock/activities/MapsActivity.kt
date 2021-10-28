@@ -36,6 +36,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var binding: ActivityMapsBinding
     private lateinit var bottomNavigationView: BottomNavigationView
     private lateinit var locationProviderClient: FusedLocationProviderClient
+    private var firstTime: Boolean = false
    // lateinit var db: FirebaseFirestore
     //lateinit var auth: FirebaseAuth
 
@@ -96,12 +97,11 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     fun getStores() {
         for(store in DataManager.stores) {
             if(store != null) {
-                if(store.storeOnline) {
+                if(store.storeStatus) {
                     val storeLatLng = LatLng(store.storeLatitude, store.storeLongitude)
                     addMarker(storeLatLng, store.storeName)
                 }
             }
-
         }
     }
 
@@ -118,8 +118,13 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
             currentLocation = LatLng(lastLocation.latitude, lastLocation.longitude)
 
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 15f))
             addMarker(currentLocation, "myLocation")
+            getStores()
+
+            if (!firstTime) {
+                firstTime = true
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 15f))
+            }
         }
     }
 
