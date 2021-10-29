@@ -21,7 +21,9 @@
         <item name="android:windowAnimationStyle">@null</item>
 
 
+
         <!-- Customize your theme here. -->
+
     </style>
 
 
@@ -29,6 +31,11 @@
         <item name="cornerSize">20dp</item>
     </style>
 
+    <style name="ShapeAppearanceOverlay.App.RoundedBottom" parent="">
+        <item name="cornerSize">50dp</item>
+        <item name="cornerSizeBottomRight">50dp</item>
+        <item name="cornerSizeBottomLeft">50dp</item>
+</style>
     <style name="RatingBar" parent="Theme.AppCompat">
 
     </style>

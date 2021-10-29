@@ -19,7 +19,7 @@
         app:srcCompat="@drawable/logo_foodtruck" />
 
     <EditText
-        android:id="@+id/userNameActI"
+        android:id="@+id/editItemName"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_marginTop="50dp"
@@ -44,22 +44,22 @@
         android:background="@drawable/transparent_plaintext"
         android:ems="10"
         android:hint="password"
-        android:inputType="textPersonName"
+        android:inputType="textPassword"
         android:paddingStart="70dp"
         android:textAlignment="viewStart"
         android:textColor="#FFFFFF"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userNameActI" />
+        app:layout_constraintTop_toBottomOf="@+id/editItemName" />
 
     <ImageView
         android:id="@+id/imagewView2"
         android:layout_width="66dp"
         android:layout_height="57dp"
-        app:layout_constraintBottom_toBottomOf="@+id/userNameActI"
-        app:layout_constraintStart_toStartOf="@+id/userNameActI"
-        app:layout_constraintTop_toTopOf="@+id/userNameActI"
+        app:layout_constraintBottom_toBottomOf="@+id/editItemName"
+        app:layout_constraintStart_toStartOf="@+id/editItemName"
+        app:layout_constraintTop_toTopOf="@+id/editItemName"
         app:layout_constraintVertical_bias="0.45"
         app:srcCompat="@drawable/usericon" />
 
@@ -89,7 +89,7 @@
         app:layout_constraintVertical_bias="0.178" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/txtCreateAccount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="35dp"

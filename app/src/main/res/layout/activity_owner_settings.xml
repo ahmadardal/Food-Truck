@@ -7,108 +7,308 @@
     android:background="@drawable/main_background">
 
 
-    <Switch
-        android:id="@+id/switchBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="125dp"
-        android:minWidth="48dp"
-        android:minHeight="48dp"
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="25dp"
+        android:background="#FFFFFF"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="UseSwitchCompatOrMaterialXml" />
+        app:layout_constraintTop_toBottomOf="@+id/txtSelectPhoto"
+        app:layout_constraintVertical_bias="0.0" />
 
-    <TextView
-        android:id="@+id/txtFoodTruckStatus"
-        android:layout_width="178dp"
-        android:layout_height="25dp"
-        android:gravity="center"
-        android:text="FoodTruck status"
-        android:textAlignment="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColor="#FFFFFF"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/switchBtn"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewMenus"
+        android:layout_width="0dp"
+        android:layout_height="57dp"
+        android:layout_marginTop="5dp"
+        app:cardBackgroundColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTruckPrice"
-        app:layout_constraintVertical_bias="0.774" />
+        app:layout_constraintTop_toBottomOf="@+id/cardViewStatus"
+        app:layout_constraintVertical_bias="0.0">
 
-    <TextView
-        android:id="@+id/txtStatus"
-        android:layout_width="178dp"
-        android:layout_height="25dp"
-        android:gravity="center"
-        android:text="Offline"
-        android:textAlignment="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColor="#D1CBCB"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/switchBtn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTruckPrice"
-        app:layout_constraintVertical_bias="1.0" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/bt_Logout"
-        android:layout_width="300dp"
+            <TextView
+                android:id="@+id/txtMenus"
+                android:layout_width="183dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="5dp"
+                android:fontFamily="sans-serif-condensed"
+                android:gravity="center"
+                android:text="MY MENU"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="#EF3D64"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.497"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.4" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewStatus"
+        android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginTop="5dp"
-        android:layout_marginBottom="30dp"
-        android:background="@drawable/login_button"
-        android:text="@string/Bt_LogOut"
-        android:textAllCaps="false"
-        android:textColor="#EF3D64"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/switchBtn"
-        app:layout_constraintVertical_bias="0.285" />
-
-    <Button
-        android:id="@+id/saveChangesBtn"
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:background="@drawable/login_button"
-        android:text="Save Changes"
-        android:textAllCaps="false"
-        android:textColor="#EF3D64"
-        android:textStyle="bold"
+        app:cardBackgroundColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTruckPrice"
-        app:layout_constraintVertical_bias="0.088" />
+        app:layout_constraintTop_toBottomOf="@+id/cardViewEmail"
+        app:layout_constraintVertical_bias="0.0">
 
-    <EditText
-        android:id="@+id/userNameActI"
-        android:layout_width="300dp"
-        android:layout_height="50dp"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        android:background="@drawable/transparent_plaintext"
-        android:ems="10"
-        android:hint="Name of your truck"
-        android:inputType="textPersonName"
-        android:paddingStart="70dp"
-        android:textAlignment="viewStart"
-        android:textColor="#FFFFFF"
-        android:textSize="14sp"
+            <TextView
+                android:id="@+id/txtStatus"
+                android:layout_width="178dp"
+                android:layout_height="25dp"
+                android:layout_marginTop="5dp"
+                android:fontFamily="sans-serif-condensed"
+                android:text="OFFLINE"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="#837E7E"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.137"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.36" />
+
+            <Switch
+                android:id="@+id/switchBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="48dp"
+                android:minHeight="48dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.721"
+                app:layout_constraintStart_toEndOf="@+id/txtStatus"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="UseSwitchCompatOrMaterialXml" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewEmail"
+        android:layout_width="0dp"
+        android:layout_height="85dp"
+        android:layout_marginTop="5dp"
+        app:cardBackgroundColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.486"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardViewTruck"
+        app:layout_constraintVertical_bias="0.0">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/txtEmailTitle"
+                android:layout_width="178dp"
+                android:layout_height="25dp"
+                android:layout_marginTop="5dp"
+                android:fontFamily="sans-serif-condensed"
+                android:text="E-MAIL"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="#837E7E"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.137"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/txtEmail"
+                android:layout_width="250dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="129dp"
+                android:layout_marginBottom="7dp"
+                android:background="@android:color/transparent"
+                android:gravity="start|fill_horizontal"
+                android:minHeight="48dp"
+                android:textColor="#302F2F"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtEmailTitle" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewTruck"
+        android:layout_width="0dp"
+        android:layout_height="85dp"
+        android:layout_marginTop="5dp"
+        app:cardBackgroundColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardViewName"
+        app:layout_constraintVertical_bias="0.0">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/actionBtn"
+                android:layout_width="120dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="23dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="19dp"
+                android:background="@drawable/login_button"
+                android:text="Save Changes"
+                android:textAllCaps="false"
+                android:textColor="#EF3D64"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/editTruckName"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/txtTruckName"
+                android:layout_width="178dp"
+                android:layout_height="25dp"
+                android:layout_marginTop="5dp"
+                android:fontFamily="sans-serif-condensed"
+                android:text="TRUCK NAME"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="#837E7E"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.137"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/editTruckName"
+                android:layout_width="220dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="129dp"
+                android:layout_marginBottom="7dp"
+                android:background="@android:color/transparent"
+                android:minHeight="48dp"
+                android:textColor="#302F2F"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtTruckName" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewName"
+        android:layout_width="0dp"
+        android:layout_height="85dp"
+        android:layout_marginTop="15dp"
+        app:cardBackgroundColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.354" />
+        app:layout_constraintVertical_bias="0.386">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/txtFullName"
+                android:layout_width="178dp"
+                android:layout_height="25dp"
+                android:layout_marginTop="5dp"
+                android:fontFamily="sans-serif-condensed"
+                android:text="FULL NAME"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="#837E7E"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.137"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/editFullName"
+                android:layout_width="220dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="129dp"
+                android:background="@android:color/transparent"
+                android:minHeight="48dp"
+                android:textColor="#302F2F"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtFullName"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <Button
+                android:id="@+id/saveFullNameBtn"
+                android:layout_width="120dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="23dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="19dp"
+                android:background="@drawable/login_button"
+                android:text="Save Changes"
+                android:textAllCaps="false"
+                android:textColor="#EF3D64"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/editFullName"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView3"
@@ -127,65 +327,23 @@
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
             app:srcCompat="@android:drawable/sym_def_app_icon" />
+
     </androidx.cardview.widget.CardView>
 
-    <EditText
-        android:id="@+id/editTruckPrice"
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:background="@drawable/transparent_plaintext"
-        android:ems="10"
-        android:hint="Average price of menu"
-        android:inputType="textPersonName"
-        android:paddingStart="70dp"
-        android:textAlignment="viewStart"
-        android:textColor="#FFFFFF"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.486"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userNameActI"
-        app:layout_constraintVertical_bias="0.083" />
-
     <TextView
-        android:id="@+id/text_RedigeraBild"
+        android:id="@+id/txtSelectPhoto"
         android:layout_width="207dp"
         android:layout_height="25dp"
-        android:layout_marginBottom="15dp"
         android:gravity="center"
         android:text="SELECT PHOTO"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColor="#FFBBBC"
+        android:textColor="#FBE4E4"
         android:textSize="14sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/userNameActI"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView3" />
-
-    <ImageView
-        android:id="@+id/imageView7"
-        android:layout_width="66dp"
-        android:layout_height="57dp"
-        android:layout_marginStart="48dp"
-        app:layout_constraintBottom_toBottomOf="@+id/editTruckPrice"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/editTruckPrice"
-        app:layout_constraintVertical_bias="0.571"
-        app:srcCompat="@drawable/editicon" />
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="66dp"
-        android:layout_height="57dp"
-        android:layout_marginStart="48dp"
-        app:layout_constraintBottom_toBottomOf="@+id/userNameActI"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/userNameActI"
-        app:layout_constraintVertical_bias="0.571"
-        app:srcCompat="@drawable/editicon" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
@@ -194,10 +352,39 @@
         android:background="@color/menuBackground"
         app:itemIconTint="@color/navselector"
         app:itemTextColor="@color/navselector"
+        app:labelVisibilityMode="unlabeled"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/menu_navigation" />
+
+    <Button
+        android:id="@+id/bt_Logout"
+        android:layout_width="120dp"
+        android:layout_height="45dp"
+        android:background="@drawable/login_button"
+        android:text="Sign Out"
+        android:textAllCaps="false"
+        android:textColor="#EF3D64"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.941"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.023" />
+
+    <FrameLayout
+        android:id="@+id/menuContainer"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:elevation="5sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </FrameLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

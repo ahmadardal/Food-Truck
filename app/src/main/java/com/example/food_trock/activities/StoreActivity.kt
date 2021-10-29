@@ -64,13 +64,11 @@ class StoreActivity : AppCompatActivity() {
         loginBtn.setOnClickListener() {
             OpenUserProfile()
         }
-        
 
-/*        auth.signInWithEmailAndPassword(email,password).addOnCompleteListener { task ->
-            if (task.isSuccessful) {
-                Log.e("TEST", "onCreate: login successful")
-            }
-        }*/
+
+        /** Queries through the collection-path FoodTrucks in the database to find data changes
+         * If store is online, the storelist is cleared and the online stores are added to the recyclerview
+         */
 
         db.collection("FoodTrucks").addSnapshotListener(object: EventListener<QuerySnapshot> {
             override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?) {
@@ -79,9 +77,9 @@ class StoreActivity : AppCompatActivity() {
                     for(document in value.documents) {
                         val store = document.toObject(Store::class.java)
                         if(store != null) {
-                            if(store.storeOnline) {
+                            if(store.storeStatus) {
                                 DataManager.stores.add(store)
-                            } else if (!store.storeOnline) {
+                            } else if (!store.storeStatus) {
                                 DataManager.stores.remove(store)
                             }
                         }
@@ -95,7 +93,6 @@ class StoreActivity : AppCompatActivity() {
         storeAdapter.setOnItemClickListener(object : storeAdapter.onItemClickListener {
             override fun onItemClick(position: Int) {
 
-
                 val storeFragment = StoreFragment()
 
                 var selectedStore: Store = storeAdapter.storeList[position]
@@ -103,23 +100,18 @@ class StoreActivity : AppCompatActivity() {
                 storeFragment.arguments = bundle
                 bundle.putString("storeName", selectedStore.storeName)
                 bundle.putInt("storePriceClass", selectedStore.storePriceClass)
-                bundle.putString("storeDistance", selectedStore.storeDistance)
                 bundle.putString("storeImage", selectedStore.storeImage)
-
+                bundle.putString("storeID", selectedStore.UID)
 
                 val transaction = supportFragmentManager.beginTransaction()
                 transaction.add(R.id.container, storeFragment, "store")
                 transaction.commit()
-
-
-
-
             }
         })
     }
 
 
-    private val navigation = BottomNavigationView.OnNavigationItemSelectedListener { item ->
+     val navigation = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.favourites -> {
                 bottomNavigationView.menu.getItem(1).isChecked = false
@@ -137,30 +129,19 @@ class StoreActivity : AppCompatActivity() {
                 return@OnNavigationItemSelectedListener true
             }
             R.id.maps -> {
-/*                val intent = Intent(this@MainActivity, MyRecipes::class.java)
+                bottomNavigationView.menu.getItem(1).isChecked = false
+               val intent = Intent(this@StoreActivity, MapsActivity::class.java)
                 startActivity(intent)
-                return@OnNavigationItemSelectedListener true*/
+                return@OnNavigationItemSelectedListener true
             }
         }
         false
 
     }
 
-    val store = Store(
-        "ok", "Burgers", 50, "10km", 0, false
-    )
 
 
-        /*
-        if (user != null) {
-            db.collection("FoodTrucks").document(user.uid).set(store)
-        }
 
-         */
-
-        /** Queries through the collection-path FoodTrucks in the database to find data changes
-         * If store is online, the storelist is cleared and the online stores are added to the recyclerview
-         */
 
 
 

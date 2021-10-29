@@ -10,10 +10,11 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.food_trock.DataManager
 import com.example.food_trock.R
 import com.example.food_trock.models.Store
-import com.google.android.material.imageview.ShapeableImageView
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 class storeAdapter(val context: Context, val storeList: List<Store> ) :
     RecyclerView.Adapter<storeAdapter.storeViewHolder>() {
@@ -40,12 +41,21 @@ class storeAdapter(val context: Context, val storeList: List<Store> ) :
         Glide.with(context).load(currentItem.storeImage).into(holder.storeImage)
         holder.txtName.text = currentItem.storeName
         holder.txtPriceClass.text = currentItem.storePriceClass.toString()
-        holder.txtDistance.text = currentItem.storeDistance
-        holder.ratingBar.rating = currentItem.storeRating.toFloat()
+
+        if(currentItem.category2 == "") {
+            holder.txtCategory.text = "${currentItem.category1}"
+        } else {
+            holder.txtCategory.text = "${currentItem.category1} | ${currentItem.category2}"
+        }
+
+
+
+       // holder.txtDistance.text = currentItem.storeDistance
+       // holder.ratingBar.rating = currentItem.storeRating.toFloat()
 
         if (currentItem.storePriceClass <= 70) {
             holder.txtPriceClass.text = "$"
-        } else if (currentItem.storePriceClass in 80..105) {
+        } else if (currentItem.storePriceClass in 71..105) {
             holder.txtPriceClass.text = "$$"
         } else
             holder.txtPriceClass.text = "$$$"
@@ -59,12 +69,12 @@ class storeAdapter(val context: Context, val storeList: List<Store> ) :
 
     inner class storeViewHolder(itemView : View, listener: onItemClickListener) : RecyclerView.ViewHolder(itemView) {
 
-        var cardView: CardView = itemView.findViewById(R.id.cardView)
+        var txtCategory: TextView = itemView.findViewById(R.id.txtCategory)
         val storeImage: ImageView = itemView.findViewById(R.id.storeImage)
         val txtName: TextView = itemView.findViewById(R.id.txtName)
         val txtPriceClass: TextView = itemView.findViewById(R.id.txtPriceClass)
         val txtDistance: TextView = itemView.findViewById(R.id.txtDistance)
-        val ratingBar: RatingBar = itemView.findViewById(R.id.ratingBar)
+       // val ratingBar: RatingBar = itemView.findViewById(R.id.ratingBar)
 
         init {
             itemView.setOnClickListener {
@@ -74,4 +84,6 @@ class storeAdapter(val context: Context, val storeList: List<Store> ) :
 
     }
 
+
 }
+

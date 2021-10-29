@@ -17,7 +17,7 @@ class SplashActivity : AppCompatActivity() {
             WindowManager.LayoutParams.FLAG_FULLSCREEN
         )
         Handler().postDelayed({
-            val intent = Intent(this, MainActivity::class.java)
+            val intent = Intent(this, StoreActivity::class.java)
             startActivity(intent)
             finish()
         }, 3000)

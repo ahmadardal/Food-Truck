@@ -1,13 +1,13 @@
 package com.example.food_trock.models
 
-import android.widget.RatingBar
-import androidx.cardview.widget.CardView
-
-data class Store(
+data class Store(var fullName: String = "",
                  var storeImage: String= "",
                  var storeName: String = "",
                  var storePriceClass: Int = 0,
-                 var storeDistance: String = "",
                  var storeRating: Int = 5,
-                 var storeOnline: Boolean = false,
-                 var storeDescription: String = "")
+                 var storeStatus: Boolean = false,
+                 var UID: String = "",
+                 var storeLatitude: Double = 0.0,
+                 var storeLongitude: Double = 0.0,
+                 var category1: String = "",
+                 var category2: String = "")

@@ -12,12 +12,12 @@ import android.view.Window
 import android.view.WindowManager
 import android.widget.Button
 import com.example.food_trock.R
-import com.example.food_trock.firebase.FireStoreClass
 import com.google.firebase.auth.FirebaseAuth
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var mProgressDialog: Dialog
     private lateinit var btnLogin: Button
+    private lateinit var createAccount: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,7 +30,14 @@ class LoginActivity : AppCompatActivity() {
         btnLogin.setOnClickListener {
             signInRegisteredUser()
         }
+
+        createAccount = findViewById(R.id.txtCreateAccount)
+        createAccount.setOnClickListener() {
+            val intent = Intent(this, RegisterAccountActivity::class.java)
+            startActivity(intent)
+        }
     }
+
 
 
     /**
@@ -39,7 +46,7 @@ class LoginActivity : AppCompatActivity() {
     private fun signInRegisteredUser() {
 
         // Here we get the text from editText and trim the space
-        val email: String = findViewById<EditText>(R.id.userNameActI).text.toString().trim { it <= ' ' }
+        val email: String = findViewById<EditText>(R.id.editItemName).text.toString().trim { it <= ' ' }
         val password: String = findViewById<EditText>(R.id.passwordActI).text.toString().trim { it <= ' ' }
 
         if (validateForm(email, password)) {
@@ -51,7 +58,9 @@ class LoginActivity : AppCompatActivity() {
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         // Calling the FirestoreClass signInUser function to get the data of user from database.
-                        FireStoreClass().loadUserData(this@LoginActivity)
+                        //FireStoreClass().loadUserData(this@LoginActivity)
+                        val intent = Intent(this, OwnerSettingsActivity::class.java)
+                        startActivity(intent)
                     } else {
                         Toast.makeText(
                             this@LoginActivity,

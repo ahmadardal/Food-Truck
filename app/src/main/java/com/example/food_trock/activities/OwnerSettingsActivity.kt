@@ -11,8 +11,10 @@ import android.util.Log
 import android.view.Window
 import android.view.WindowManager
 import android.widget.*
+import androidx.cardview.widget.CardView
 import com.bumptech.glide.Glide
 import com.example.food_trock.R
+import com.example.food_trock.fragments.MenuListFragment
 import com.example.food_trock.models.Store
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
@@ -24,6 +26,9 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import java.util.*
 
+
+
+
 private lateinit var bottomNavigationView: BottomNavigationView
 
 class OwnerSettingsActivity : AppCompatActivity() {
@@ -31,9 +36,11 @@ class OwnerSettingsActivity : AppCompatActivity() {
     lateinit var db: FirebaseFirestore
     lateinit var auth: FirebaseAuth
     lateinit var editTruckName: EditText
-    lateinit var editTruckPrice: EditText
+    lateinit var editFullName: EditText
     lateinit var ownerProfileIMG: ImageView
     lateinit var txtStatus: TextView
+    lateinit var txtEmail: TextView
+    lateinit var cardViewMenu: CardView
     val foodTruckCollectionRef = Firebase.firestore.collection("FoodTrucks")
     var selectedPhotoUri: Uri? = null
 
@@ -57,9 +64,9 @@ class OwnerSettingsActivity : AppCompatActivity() {
                 return@OnNavigationItemSelectedListener false
             }
             R.id.maps -> {
-/*                val intent = Intent(this@MainActivity, MyRecipes::class.java)
+                val intent = Intent(this@OwnerSettingsActivity, MapsActivity::class.java)
                 startActivity(intent)
-                return@OnNavigationItemSelectedListener true*/
+                return@OnNavigationItemSelectedListener true
             }
         }
         false
@@ -76,16 +83,19 @@ class OwnerSettingsActivity : AppCompatActivity() {
         bottomNavigationView.setOnNavigationItemSelectedListener(navigation)
         bottomNavigationView.menu.getItem(3).isChecked = true
 
-        var saveChangesBtn = findViewById<Button>(R.id.saveChangesBtn)
+        var saveTruckNameBtn = findViewById<Button>(R.id.actionBtn)
+        var saveFullNameBtn = findViewById<Button>(R.id.saveFullNameBtn)
         var logOutBTN = findViewById<Button>(R.id.bt_Logout)
         var switchBtn = findViewById<Switch>(R.id.switchBtn)
         txtStatus = findViewById(R.id.txtStatus)
         db = Firebase.firestore
         auth = Firebase.auth
 
-        editTruckName = findViewById(R.id.userNameActI)
-        editTruckPrice = findViewById(R.id.editTruckPrice)
+        editTruckName = findViewById(R.id.editTruckName)
+        editFullName = findViewById(R.id.editFullName)
+        txtEmail = findViewById(R.id.txtEmail)
         ownerProfileIMG = findViewById(R.id.ownerProfileImage)
+        cardViewMenu = findViewById(R.id.cardViewMenus)
 
 
         /** Checks if the owners shop is online or offline.
@@ -97,12 +107,16 @@ class OwnerSettingsActivity : AppCompatActivity() {
                 if (result != null) {
                     val store = result.toObject(Store::class.java)
                     if (store != null) {
-                        if (store.storeOnline) {
+                        if (store.storeStatus) {
                             switchBtn.isChecked = true
                         }
                         Glide.with(this)
                             .load(store.storeImage)
                             .into(ownerProfileIMG)
+                        editTruckName.setText(store.storeName)
+                        editFullName.setText(store.fullName)
+                        txtEmail.text = auth.currentUser!!.email
+
                     }
                 }
             }
@@ -111,27 +125,38 @@ class OwnerSettingsActivity : AppCompatActivity() {
 
         /** Calls uploadImageToFirebaseStorage function which in turn calls getNewStoreMap.
          */
-        saveChangesBtn.setOnClickListener() {
-            /*val oldTruck = getOldStoreInfo()*/
-            uploadImageToFirebaseStorage()
+        saveTruckNameBtn.setOnClickListener() {
+            getNewStoreMap()
         }
+        saveFullNameBtn.setOnClickListener() {
+            getNewStoreMap()
+        }
+        cardViewMenu.setOnClickListener() {
+            val menuFragment = MenuListFragment()
+
+            val transaction = supportFragmentManager.beginTransaction()
+            transaction.add(R.id.menuContainer, menuFragment, "menu")
+            transaction.commit()
+        }
+
+
 
         /** Checks and unchecks the switch button. If checked, uncheck and display offline vice versa.
          */
         switchBtn.setOnCheckedChangeListener { _, isChecked ->
             when (switchBtn.isChecked) {
                 true -> {
-                    txtStatus.text = "Online"
+                    txtStatus.text = "ONLINE"
                     txtStatus.setTextColor(Color.parseColor("#FF5EC538"))
                     auth.currentUser?.let {
-                        foodTruckCollectionRef.document(it.uid).update("storeOnline", true)
+                        foodTruckCollectionRef.document(it.uid).update("storeStatus", true)
                     }
                 }
                 false -> {
-                    txtStatus.text = "Offline"
-                    txtStatus.setTextColor(Color.parseColor("#BCBABA"))
+                    txtStatus.text = "OFFLINE"
+                    txtStatus.setTextColor(Color.parseColor("#837E7E"))
                     auth.currentUser?.let {
-                        foodTruckCollectionRef.document(it.uid).update("storeOnline", false)
+                        foodTruckCollectionRef.document(it.uid).update("storeStatus", false)
                     }
                 }
             }
@@ -163,6 +188,7 @@ class OwnerSettingsActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
+
         if (requestCode == 0 && resultCode == Activity.RESULT_OK && data != null) {
             Log.e("TEST","onActivityResult: photo was selected")
 
@@ -171,6 +197,10 @@ class OwnerSettingsActivity : AppCompatActivity() {
             val bitmap = MediaStore.Images.Media.getBitmap(contentResolver,selectedPhotoUri)
 
             ownerProfileIMG.setImageBitmap(bitmap)
+
+
+
+            uploadImageToFirebaseStorage()
         }
     }
 
@@ -180,17 +210,17 @@ class OwnerSettingsActivity : AppCompatActivity() {
      */
     private fun getNewStoreMap (profileImageURL: String = "") {
         val truckName = editTruckName.text.toString()
-        val truckPrice = editTruckPrice.text.toString()
+        val fullName = editFullName.text.toString()
         val truckImage = profileImageURL
         val map = mutableMapOf<String, Any>()
         if (truckName.isNotEmpty()) {
             map["storeName"] = truckName
         }
-        if (truckPrice.isNotEmpty()) {
-            map["storePriceClass"] = truckPrice.toInt()
-        }
         if (truckImage.isNotEmpty()) {
             map["storeImage"] = truckImage
+        }
+        if (fullName.isNotEmpty()) {
+            map["fullName"] = fullName
         }
         auth.currentUser?.let {
             foodTruckCollectionRef.document(it.uid).set(map, SetOptions.merge())
@@ -212,7 +242,8 @@ class OwnerSettingsActivity : AppCompatActivity() {
     private fun uploadImageToFirebaseStorage() {
 
         if(selectedPhotoUri != null) {
-            val filename = UUID.randomUUID().toString()
+            //val filename = UUID.randomUUID().toString()
+            val filename = auth.currentUser?.uid
             val imagesRef = FirebaseStorage.getInstance().getReference("/images/$filename")
 
             imagesRef.putFile(selectedPhotoUri!!)
