@@ -63,27 +63,14 @@
             </RelativeLayout>
 
             <TextView
-                android:id="@+id/category"
+                android:id="@+id/txtCategory"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="5dp"
-                android:text="Category1"
+                android:text="Category1 | Category 2"
                 android:textColor="#F07F6C"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtName" />
-
-            <TextView
-                android:id="@+id/category2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="79dp"
-                android:text="Category 2"
-                android:textColor="#F07F6C"
-                app:layout_constraintEnd_toStartOf="@+id/imageFoodRecycle"
-                app:layout_constraintStart_toEndOf="@+id/category"
                 app:layout_constraintTop_toBottomOf="@+id/txtName" />
 
             <TextView
@@ -101,24 +88,6 @@
                 app:layout_constraintTop_toTopOf="@+id/slash" />
 
             <TextView
-                android:id="@+id/mellanslag"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="9dp"
-
-                android:layout_marginBottom="10dp"
-                android:text="|"
-                android:textColor="#F07F6C"
-                android:textSize="14dp"
-                app:layout_constraintBottom_toTopOf="@+id/txtDistance"
-                app:layout_constraintEnd_toStartOf="@+id/category2"
-                app:layout_constraintHorizontal_bias="0.52"
-                app:layout_constraintStart_toEndOf="@+id/category"
-                app:layout_constraintTop_toBottomOf="@+id/txtName" />
-
-            <TextView
                 android:id="@+id/txtPriceClass"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -134,10 +103,10 @@
                 android:id="@+id/slash"
                 android:layout_width="23dp"
                 android:layout_height="48dp"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginBottom="48dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/txtDistance"
-                app:layout_constraintTop_toBottomOf="@+id/category2"
                 app:srcCompat="@drawable/slash" />
 
             <ImageView

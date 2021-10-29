@@ -17,6 +17,7 @@ import com.google.firebase.auth.FirebaseAuth
 class LoginActivity : AppCompatActivity() {
     private lateinit var mProgressDialog: Dialog
     private lateinit var btnLogin: Button
+    private lateinit var createAccount: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,7 +30,14 @@ class LoginActivity : AppCompatActivity() {
         btnLogin.setOnClickListener {
             signInRegisteredUser()
         }
+
+        createAccount = findViewById(R.id.txtCreateAccount)
+        createAccount.setOnClickListener() {
+            val intent = Intent(this, RegisterAccountActivity::class.java)
+            startActivity(intent)
+        }
     }
+
 
 
     /**

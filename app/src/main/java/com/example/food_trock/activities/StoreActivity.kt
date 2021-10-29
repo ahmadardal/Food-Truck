@@ -66,8 +66,6 @@ class StoreActivity : AppCompatActivity() {
         }
 
 
-        
-
         /** Queries through the collection-path FoodTrucks in the database to find data changes
          * If store is online, the storelist is cleared and the online stores are added to the recyclerview
          */

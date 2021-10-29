@@ -42,6 +42,13 @@ class storeAdapter(val context: Context, val storeList: List<Store> ) :
         holder.txtName.text = currentItem.storeName
         holder.txtPriceClass.text = currentItem.storePriceClass.toString()
 
+        if(currentItem.category2 == "") {
+            holder.txtCategory.text = "${currentItem.category1}"
+        } else {
+            holder.txtCategory.text = "${currentItem.category1} | ${currentItem.category2}"
+        }
+
+
 
        // holder.txtDistance.text = currentItem.storeDistance
        // holder.ratingBar.rating = currentItem.storeRating.toFloat()
@@ -62,7 +69,7 @@ class storeAdapter(val context: Context, val storeList: List<Store> ) :
 
     inner class storeViewHolder(itemView : View, listener: onItemClickListener) : RecyclerView.ViewHolder(itemView) {
 
-        var cardView: CardView = itemView.findViewById(R.id.cardView)
+        var txtCategory: TextView = itemView.findViewById(R.id.txtCategory)
         val storeImage: ImageView = itemView.findViewById(R.id.storeImage)
         val txtName: TextView = itemView.findViewById(R.id.txtName)
         val txtPriceClass: TextView = itemView.findViewById(R.id.txtPriceClass)

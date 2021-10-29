@@ -85,11 +85,15 @@ class MenuListFragment: Fragment() {
 
     fun countAveragePrice() : Int {
         var itemAddedPrice = 0
+        var itemAveragePrice = 0
 
         for(item in DataManager.menus) {
             itemAddedPrice += item.foodPrice
         }
-        var itemAveragePrice = itemAddedPrice / DataManager.menus.size
+
+        if(itemAddedPrice > DataManager.menus.size) {
+            itemAveragePrice = itemAddedPrice / DataManager.menus.size
+        }
 
         return itemAveragePrice
     }

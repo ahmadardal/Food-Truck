@@ -20,11 +20,13 @@ import com.google.firebase.auth.FirebaseUser
 class RegisterAccountActivity : AppCompatActivity() {
 
     private lateinit var mProgressDialog: Dialog
-    val btn_signUp = findViewById<Button>(R.id.registerButtonActRA)
+    lateinit var btn_signUp: Button
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register_account)
 
+        btn_signUp = findViewById(R.id.registerButtonActRA)
         btn_signUp.setOnClickListener {
             registerUser()
         }
