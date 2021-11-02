@@ -47,6 +47,7 @@ class StoreActivity : AppCompatActivity() {
         storeSize = findViewById(R.id.txtStoreSize)
         recyclerView = findViewById(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
+
         var storeAdapter = storeAdapter(this, DataManager.stores)
         recyclerView.adapter = storeAdapter
         val search = findViewById<EditText>(R.id.searchView)
@@ -64,6 +65,7 @@ class StoreActivity : AppCompatActivity() {
         loginBtn.setOnClickListener() {
             OpenUserProfile()
         }
+
 
 
         /** Queries through the collection-path FoodTrucks in the database to find data changes
@@ -158,4 +160,92 @@ class StoreActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
+    fun filterPizza(temp :MutableList<Store>) : MutableList<Store>
+    {
+        for(objekt in DataManager.stores)
+        {
+            if (objekt.pizza){
+                DataManager.tempStores.add(objekt)
+
+
+            }
+            else return temp
+
+        }
+        return DataManager.tempStores
+
+    }
+    fun filterkorv(temp :MutableList<Store>) : MutableList<Store>
+    {
+        for(objekt in DataManager.stores)
+        {
+            if (objekt.pizza){
+                DataManager.tempStores.add(objekt)
+
+
+            }
+            else return temp
+
+        }
+        return DataManager.tempStores
+
+    }
+    fun filterVegetarian(temp :MutableList<Store>) : MutableList<Store>
+    {
+        for(objekt in DataManager.stores)
+        {
+            if (objekt.pizza){
+                DataManager.tempStores.add(objekt)
+
+
+            }
+            else return temp
+
+        }
+        return DataManager.tempStores
+
+    } fun filterAsian(temp :MutableList<Store>) : MutableList<Store>
+    {
+        for(objekt in DataManager.stores)
+        {
+            if (objekt.pizza){
+                DataManager.tempStores.add(objekt)
+
+
+            }
+            else return temp
+
+        }
+        return DataManager.tempStores
+
+    } fun filterkebab(temp :MutableList<Store>) : MutableList<Store>
+    {
+        for(objekt in DataManager.stores)
+        {
+            if (objekt.pizza){
+                DataManager.tempStores.add(objekt)
+
+
+            }
+            else return temp
+
+        }
+        return DataManager.tempStores
+
+    } fun filterHusmanskost(temp :MutableList<Store>) : MutableList<Store>
+    {
+        for(objekt in DataManager.stores)
+        {
+            if (objekt.pizza){
+                DataManager.tempStores.add(objekt)
+
+
+            }
+            else return temp
+
+        }
+        return DataManager.tempStores
+
+    }
+
 }
