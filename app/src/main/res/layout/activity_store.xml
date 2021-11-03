@@ -50,52 +50,12 @@
         app:layout_constraintTop_toBottomOf="@+id/txtStoreSize"
         app:layout_constraintVertical_bias="0.131" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/bt_searchfilter"
-        android:layout_width="57dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="-2dp"
-        android:background="@drawable/ser_icon"
-        app:layout_constraintBottom_toBottomOf="@+id/searchView"
-        app:layout_constraintStart_toStartOf="@+id/searchView"
-        app:layout_constraintTop_toTopOf="@+id/searchView" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="0dp"
-        android:layout_height="480dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="320dp"
-        android:layout_marginEnd="10dp"
-        android:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.842"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.49"
-        tools:ignore="SpeakableTextPresentCheck">
-
-    </androidx.recyclerview.widget.RecyclerView>
-
-    <FrameLayout
-        android:id="@+id/container"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:elevation="3sp"
-        android:textAlignment="textStart"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-    </FrameLayout>
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/group_tag"
         android:layout_width="0dp"
         android:layout_height="90dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="7dp"
         android:elevation="3sp"
         android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/recyclerView"
@@ -176,6 +136,48 @@
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/bt_searchfilter"
+        android:layout_width="57dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="-2dp"
+        android:background="@drawable/ser_icon"
+        app:layout_constraintBottom_toBottomOf="@+id/searchView"
+        app:layout_constraintStart_toStartOf="@+id/searchView"
+        app:layout_constraintTop_toTopOf="@+id/searchView" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="0dp"
+        android:layout_height="480dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="320dp"
+        android:layout_marginEnd="10dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.842"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.49"
+        tools:ignore="SpeakableTextPresentCheck">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:elevation="3sp"
+        android:textAlignment="textStart"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </FrameLayout>
 
 
     <TextView

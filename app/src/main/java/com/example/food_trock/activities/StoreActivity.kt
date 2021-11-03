@@ -110,6 +110,7 @@ class StoreActivity : AppCompatActivity() {
             filterkorv()
             storeSize.text = "Result: ${DataManager.stores.size}"
             recyclerView.adapter?.notifyDataSetChanged()
+        }
             /*if (korv.isSelected)
             {
                 db.collection("FoodTrucks").addSnapshotListener(object: EventListener<QuerySnapshot> {
@@ -165,7 +166,7 @@ class StoreActivity : AppCompatActivity() {
             */
 
 
-        }
+
         kebab.setOnClickListener {
             kebab.isSelected = !kebab.isSelected
             korv.isSelected = false
@@ -174,6 +175,8 @@ class StoreActivity : AppCompatActivity() {
             vegetarian.isSelected = false
             pizza.isSelected = false
 
+            DataManager.stores.clear()
+            filterkebab()
             storeSize.text = "Result: ${DataManager.stores.size}"
             recyclerView.adapter?.notifyDataSetChanged()
         }
@@ -185,6 +188,8 @@ class StoreActivity : AppCompatActivity() {
             vegetarian.isSelected = false
             pizza.isSelected = false
 
+            DataManager.stores.clear()
+            filterAsian()
             storeSize.text = "Result: ${DataManager.stores.size}"
             recyclerView.adapter?.notifyDataSetChanged()
         }
@@ -196,6 +201,8 @@ class StoreActivity : AppCompatActivity() {
             vegetarian.isSelected = false
             pizza.isSelected = false
 
+            DataManager.stores.clear()
+            filterHusmanskost()
             storeSize.text = "Result: ${DataManager.stores.size}"
             recyclerView.adapter?.notifyDataSetChanged()
         }
@@ -207,6 +214,8 @@ class StoreActivity : AppCompatActivity() {
             asian.isSelected = false
             pizza.isSelected = false
 
+            DataManager.stores.clear()
+            filterVegetarian()
             storeSize.text = "Result: ${DataManager.stores.size}"
             recyclerView.adapter?.notifyDataSetChanged()
         }
@@ -433,27 +442,37 @@ class StoreActivity : AppCompatActivity() {
     }
 
 
-    fun filterVegetarian(temp: MutableList<Store>): MutableList<Store> {
-        for (objekt in DataManager.stores) {
-            if (objekt.vegetarian) {
-                DataManager.tempStores.add(objekt)
+    fun filterVegetarian() {
+        if (vegetarian.isSelected) {
+            for (store in tempStores) {
+                if (store.vegetarian) {
+                    DataManager.stores.add(store)
+                }
+            }
+        } else if (!vegetarian.isSelected) {
+            for (store in tempStores) {
 
-
-            } else return temp
-
+                DataManager.stores.add(store)
+            }
         }
-        return DataManager.tempStores
 
     }
 
     fun filterAsian() {
-        for (objekt in DataManager.stores) {
-            if (!objekt.asian) {
-                DataManager.stores.remove(objekt)
-                // recyclerView.adapter?.notifyDataSetChanged()
+        if (asian.isSelected) {
+            for (store in tempStores) {
+                if (store.asian) {
+                    DataManager.stores.add(store)
+                }
+            }
+        } else if (!asian.isSelected) {
+            for (store in tempStores) {
 
+                DataManager.stores.add(store)
             }
         }
+
+    }
         /* for(objekt in DataManager.stores)
         {
             if (objekt.asian){
@@ -468,31 +487,37 @@ class StoreActivity : AppCompatActivity() {
 
         */
 
+
+
+    fun filterkebab(){
+        if (kebab.isSelected) {
+            for (store in tempStores) {
+                if (store.kebab) {
+                    DataManager.stores.add(store)
+                }
+            }
+        } else if (!kebab.isSelected) {
+            for (store in tempStores) {
+
+                DataManager.stores.add(store)
+            }
+        }
+
     }
 
-    fun filterkebab(temp: MutableList<Store>): MutableList<Store> {
-        for (objekt in DataManager.stores) {
-            if (objekt.kebab) {
-                DataManager.tempStores.add(objekt)
+    fun filterHusmanskost(){
+        if (husmanskost.isSelected) {
+            for (store in tempStores) {
+                if (store.husmaskost) {
+                    DataManager.stores.add(store)
+                }
+            }
+        } else if (!husmanskost.isSelected) {
+            for (store in tempStores) {
 
-
-            } else return temp
-
+                DataManager.stores.add(store)
+            }
         }
-        return DataManager.tempStores
-
-    }
-
-    fun filterHusmanskost(temp: MutableList<Store>): MutableList<Store> {
-        for (objekt in DataManager.stores) {
-            if (objekt.husmaskost) {
-                DataManager.tempStores.add(objekt)
-
-
-            } else return temp
-
-        }
-        return DataManager.tempStores
 
     }
 }
