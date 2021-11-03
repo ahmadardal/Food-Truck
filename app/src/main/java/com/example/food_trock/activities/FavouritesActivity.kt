@@ -120,6 +120,7 @@ class FavouritesActivity : AppCompatActivity() {
                 val store = task.toObject(Store::class.java)
                 if (store != null) {
                     DataManager.favorites.add(store)
+                    DataManager.favorites.sortBy { !it.storeStatus }
                     recyclerView.adapter?.notifyDataSetChanged()
                 }
             }
