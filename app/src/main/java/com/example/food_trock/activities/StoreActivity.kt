@@ -12,10 +12,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.food_trock.DataManager
+import com.example.food_trock.DataManager.tempStores
 import com.example.food_trock.R
 import com.example.food_trock.models.Store
 import com.example.food_trock.fragments.StoreFragment
 import com.example.food_trock.adapters.storeAdapter
+import com.example.food_trock.models.Dishes
+import com.example.food_trock.models.MenuItem
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -37,15 +40,15 @@ class StoreActivity : AppCompatActivity() {
     lateinit var db: FirebaseFirestore
     lateinit var auth: FirebaseAuth
 
-    lateinit var kebab : Button
-    lateinit var korv : Button
-    lateinit var husmanskost : Button
-    lateinit var vegetarian : Button
-    lateinit var asian : Button
-    lateinit var pizza : Button
-    lateinit var searchFilter : Button
-    lateinit var storeAdapter : storeAdapter
-    lateinit var tempList : MutableList<Store>
+    lateinit var kebab: Button
+    lateinit var korv: Button
+    lateinit var husmanskost: Button
+    lateinit var vegetarian: Button
+    lateinit var asian: Button
+    lateinit var pizza: Button
+    lateinit var searchFilter: Button
+    lateinit var storeAdapter: storeAdapter
+    lateinit var tempList: MutableList<Store>
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,8 +65,9 @@ class StoreActivity : AppCompatActivity() {
         asian = findViewById(R.id.bt_asian)
         vegetarian = findViewById(R.id.bt_vegetarian)
         searchFilter = findViewById(R.id.bt_searchfilter)
-        bt_searchfilter.setOnClickListener{
-            if (pizza.isSelected()||korv.isSelected()||kebab.isSelected()||asian.isSelected()||husmanskost.isSelected()||vegetarian.isSelected())
+        //tempcat.add("test")
+        // bt_searchfilter.setOnClickListener{
+        /* if (pizza.isSelected()||korv.isSelected()||kebab.isSelected()||asian.isSelected()||husmanskost.isSelected()||vegetarian.isSelected())
             {
                 DataManager.tempStores.clear()
                 mainFilter()
@@ -75,16 +79,37 @@ class StoreActivity : AppCompatActivity() {
 
         }
 
-        pizza.setOnClickListener{
-            pizza.isSelected= !pizza.isSelected
-            val tag = "pizza"
+            */
+
+        pizza.setOnClickListener {
+            pizza.isSelected = !pizza.isSelected
+            korv.isSelected = false
+            kebab.isSelected = false
+            husmanskost.isSelected = false
+            asian.isSelected = false
+            vegetarian.isSelected = false
+
+
+
+
+
             DataManager.stores.clear()
-            filter(tag)
+            filterPizza()
             storeSize.text = "Result: ${DataManager.stores.size}"
             recyclerView.adapter?.notifyDataSetChanged()
         }
-        korv.setOnClickListener{
-            korv.isSelected= !korv.isSelected
+        korv.setOnClickListener {
+            korv.isSelected = !korv.isSelected
+            kebab.isSelected = false
+            husmanskost.isSelected = false
+            asian.isSelected = false
+            vegetarian.isSelected = false
+            pizza.isSelected = false
+
+            DataManager.stores.clear()
+            filterkorv()
+            storeSize.text = "Result: ${DataManager.stores.size}"
+            recyclerView.adapter?.notifyDataSetChanged()
             /*if (korv.isSelected)
             {
                 db.collection("FoodTrucks").addSnapshotListener(object: EventListener<QuerySnapshot> {
@@ -121,6 +146,7 @@ class StoreActivity : AppCompatActivity() {
                                 if(store != null) {
                                     if(store.storeStatus ) {
                                         DataManager.stores.add(store)
+                                        templist.add(store)
                                     } else if (!store.storeStatus) {
                                         DataManager.stores.remove(store)
                                     }
@@ -139,20 +165,50 @@ class StoreActivity : AppCompatActivity() {
             */
 
 
+        }
+        kebab.setOnClickListener {
+            kebab.isSelected = !kebab.isSelected
+            korv.isSelected = false
+            husmanskost.isSelected = false
+            asian.isSelected = false
+            vegetarian.isSelected = false
+            pizza.isSelected = false
 
+            storeSize.text = "Result: ${DataManager.stores.size}"
+            recyclerView.adapter?.notifyDataSetChanged()
         }
-        kebab.setOnClickListener{
-            kebab.isSelected= !kebab.isSelected
+        asian.setOnClickListener {
+            asian.isSelected = !asian.isSelected
+            korv.isSelected = false
+            kebab.isSelected = false
+            husmanskost.isSelected = false
+            vegetarian.isSelected = false
+            pizza.isSelected = false
+
+            storeSize.text = "Result: ${DataManager.stores.size}"
+            recyclerView.adapter?.notifyDataSetChanged()
         }
-        asian.setOnClickListener{
-            asian.isSelected= !asian.isSelected
-            filterAsian()
+        husmanskost.setOnClickListener {
+            husmanskost.isSelected = !husmanskost.isSelected
+            korv.isSelected = false
+            kebab.isSelected = false
+            asian.isSelected = false
+            vegetarian.isSelected = false
+            pizza.isSelected = false
+
+            storeSize.text = "Result: ${DataManager.stores.size}"
+            recyclerView.adapter?.notifyDataSetChanged()
         }
-        husmanskost.setOnClickListener{
-            husmanskost.isSelected= !husmanskost.isSelected
-        }
-        vegetarian.setOnClickListener{
-            vegetarian.isSelected= !vegetarian.isSelected
+        vegetarian.setOnClickListener {
+            vegetarian.isSelected = !vegetarian.isSelected
+            korv.isSelected = false
+            kebab.isSelected = false
+            husmanskost.isSelected = false
+            asian.isSelected = false
+            pizza.isSelected = false
+
+            storeSize.text = "Result: ${DataManager.stores.size}"
+            recyclerView.adapter?.notifyDataSetChanged()
         }
 
 
@@ -181,23 +237,24 @@ class StoreActivity : AppCompatActivity() {
         }
 
 
-
         /** Queries through the collection-path FoodTrucks in the database to find data changes
          * If store is online, the storelist is cleared and the online stores are added to the recyclerview
          */
 
-        db.collection("FoodTrucks").addSnapshotListener(object: EventListener<QuerySnapshot> {
+        db.collection("FoodTrucks").addSnapshotListener(object : EventListener<QuerySnapshot> {
             override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?) {
                 DataManager.stores.clear()
                 if (value != null) {
-                    for(document in value.documents) {
+                    for (document in value.documents) {
                         val store = document.toObject(Store::class.java)
-                        if(store != null) {
-                            if(store.storeStatus) {
+                        if (store != null) {
+                            if (store.storeStatus) {
                                 DataManager.stores.add(store)
+                                tempStores.add(store)
 
                             } else if (!store.storeStatus) {
                                 DataManager.stores.remove(store)
+                                tempStores.remove(store)
                             }
                         }
                         storeSize.text = "Result: ${DataManager.stores.size}"
@@ -229,7 +286,7 @@ class StoreActivity : AppCompatActivity() {
     }
 
 
-     val navigation = BottomNavigationView.OnNavigationItemSelectedListener { item ->
+    val navigation = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.favourites -> {
                 bottomNavigationView.menu.getItem(1).isChecked = false
@@ -248,7 +305,7 @@ class StoreActivity : AppCompatActivity() {
             }
             R.id.maps -> {
                 bottomNavigationView.menu.getItem(1).isChecked = false
-               val intent = Intent(this@StoreActivity, MapsActivity::class.java)
+                val intent = Intent(this@StoreActivity, MapsActivity::class.java)
                 startActivity(intent)
                 return@OnNavigationItemSelectedListener true
             }
@@ -256,12 +313,6 @@ class StoreActivity : AppCompatActivity() {
         false
 
     }
-
-
-
-
-
-
 
 
     /**
@@ -278,7 +329,7 @@ class StoreActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
-    fun filter (tag :String)
+    /* fun filter (tag :String)
     {
 
 
@@ -294,68 +345,116 @@ class StoreActivity : AppCompatActivity() {
 
 
 
-     
+
     }
 
-    fun filterPizza(temp :MutableList<Store>) : MutableList<Store>
-    {
-        for(objekt in DataManager.stores)
-        {
-            if (objekt.pizza){
+    */
+    /*fun filter2 (tagar :List<String>) {
+        for (element in tagar) {
+            if (element == "pizza") {
+                for (store in tempList) {
+                    if (store.pizza) {
+                        DataManager.stores.add(store)
+                    }
+                }
+            } else if (element == "korv") {
+                for (store in tempList) {
+                    if (store.pizza) {
+                        DataManager.stores.add(store)
 
+                    }
+
+                }
+            } else if (element == "kebab") {
+                for (store in tempList) {
+                    if (store.pizza) {
+                        DataManager.stores.add(store)
+                    }
+                }
+            } else if (element == "vegetarian") {
+                for (store in tempList) {
+                    if (store.pizza) {
+                        DataManager.stores.add(store)
+                    }
+
+                }
+            } else if (element == "husmanskost") {
+                for (store in tempList) {
+                    if (store.pizza) {
+                        DataManager.stores.add(store)
+                    }
+
+                }
+            } else if(element == "asian")  {
+                for (store in tempList) {
+                    if (store.pizza) {
+                        DataManager.stores.add(store)
+                    }
+
+                }
+            }
+        }
+    }
+
+     */
+
+
+    fun filterPizza() {
+        if (pizza.isSelected) {
+            for (store in tempStores) {
+                if (store.pizza) {
+                    DataManager.stores.add(store)
+                }
+            }
+        } else if (!pizza.isSelected) {
+            for (store in tempStores) {
+
+                DataManager.stores.add(store)
+            }
+        }
+
+    }
+
+
+    fun filterkorv() {
+        if (korv.isSelected) {
+            for (store in tempStores) {
+                if (store.korv) {
+                    DataManager.stores.add(store)
+                }
+            }
+        } else if (!korv.isSelected) {
+            for (store in tempStores) {
+
+                DataManager.stores.add(store)
+            }
+        }
+
+    }
+
+
+    fun filterVegetarian(temp: MutableList<Store>): MutableList<Store> {
+        for (objekt in DataManager.stores) {
+            if (objekt.vegetarian) {
                 DataManager.tempStores.add(objekt)
 
 
-            }
-            else return temp
+            } else return temp
 
         }
         return DataManager.tempStores
 
     }
 
-    fun filterkorv(temp :MutableList<Store>) : MutableList<Store>
-    {
-        for(objekt in DataManager.stores)
-        {
-            if (objekt.korv){
-                DataManager.tempStores.add(objekt)
-
-
-            }
-            else return temp
-
-        }
-        return DataManager.tempStores
-
-    }
-
-
-    fun filterVegetarian(temp :MutableList<Store>) : MutableList<Store>
-    {
-        for(objekt in DataManager.stores)
-        {
-            if (objekt.vegetarian){
-                DataManager.tempStores.add(objekt)
-
-
-            }
-            else return temp
-
-        }
-        return DataManager.tempStores
-
-    }
-
-    fun filterAsian(){
-        for(objekt in DataManager.stores){
-            if(!objekt.asian){
+    fun filterAsian() {
+        for (objekt in DataManager.stores) {
+            if (!objekt.asian) {
                 DataManager.stores.remove(objekt)
-                recyclerView.adapter?.notifyDataSetChanged()
+                // recyclerView.adapter?.notifyDataSetChanged()
 
             }
         }
-       /* for(objekt in DataManager.stores)
+        /* for(objekt in DataManager.stores)
         {
             if (objekt.asian){
                 DataManager.tempStores.add(objekt)
@@ -371,38 +470,34 @@ class StoreActivity : AppCompatActivity() {
 
     }
 
-    fun filterkebab(temp :MutableList<Store>) : MutableList<Store>
-    {
-        for(objekt in DataManager.stores)
-        {
-            if (objekt.kebab){
+    fun filterkebab(temp: MutableList<Store>): MutableList<Store> {
+        for (objekt in DataManager.stores) {
+            if (objekt.kebab) {
                 DataManager.tempStores.add(objekt)
 
 
-            }
-            else return temp
+            } else return temp
 
         }
         return DataManager.tempStores
 
     }
 
-    fun filterHusmanskost(temp :MutableList<Store>) : MutableList<Store>
-    {
-        for(objekt in DataManager.stores)
-        {
-            if (objekt.husmaskost){
+    fun filterHusmanskost(temp: MutableList<Store>): MutableList<Store> {
+        for (objekt in DataManager.stores) {
+            if (objekt.husmaskost) {
                 DataManager.tempStores.add(objekt)
 
 
-            }
-            else return temp
+            } else return temp
 
         }
         return DataManager.tempStores
 
     }
-    fun mainFilter()
+}
+
+   /* fun mainFilter()
     {
 
 
@@ -417,4 +512,6 @@ class StoreActivity : AppCompatActivity() {
         recyclerView.adapter?.notifyDataSetChanged()
     }
 
-}
+    */
+
+
