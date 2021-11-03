@@ -2,9 +2,9 @@ package com.example.food_trock.activities
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.Window
 import android.view.WindowManager
+import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.TextView
@@ -25,15 +25,29 @@ import com.google.firebase.firestore.FirebaseFirestoreException
 import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import kotlinx.android.synthetic.main.activity_store.*
 
 class StoreActivity : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var bottomNavigationView: BottomNavigationView
 
+
     lateinit var storeSize: TextView
     lateinit var db: FirebaseFirestore
     lateinit var auth: FirebaseAuth
+    lateinit var kebab : Button
+    lateinit var korv : Button
+
+    lateinit var husmanskost : Button
+
+    lateinit var vegetarian : Button
+
+    lateinit var asian : Button
+
+    lateinit var pizza : Button
+    lateinit var searchFilter : Button
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,13 +56,51 @@ class StoreActivity : AppCompatActivity() {
             WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN
         );
         setContentView(R.layout.activity_store)
+        pizza = findViewById(R.id.pizza)
+        korv = findViewById(R.id.korv)
+        kebab = findViewById(R.id.kebab)
+        husmanskost = findViewById(R.id.husmanskost)
+        asian = findViewById(R.id.asian)
+        vegetarian = findViewById(R.id.vegetarian)
+        searchFilter = findViewById(R.id.searchfilter)
+        searchfilter.setOnClickListener{
+            if (pizza.isSelected()||korv.isSelected()||kebab.isSelected()||asian.isSelected()||husmanskost.isSelected()||vegetarian.isSelected())
+            {
+                mainFilter()
+
+            }
+            else {
+                DataManager.tempStores.addAll(DataManager.stores)
+            }
+
+        }
+
+        pizza.setOnClickListener{
+            pizza.isSelected= !pizza.isSelected
+        }
+        korv.setOnClickListener{
+            korv.isSelected= !korv.isSelected
+        }
+        kebab.setOnClickListener{
+            kebab.isSelected= !kebab.isSelected
+        }
+        asian.setOnClickListener{
+            asian.isSelected= !asian.isSelected
+        }
+        husmanskost.setOnClickListener{
+            husmanskost.isSelected= !husmanskost.isSelected
+        }
+        vegetarian.setOnClickListener{
+            vegetarian.isSelected= !vegetarian.isSelected
+        }
+
 
 
         storeSize = findViewById(R.id.txtStoreSize)
         recyclerView = findViewById(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        var storeAdapter = storeAdapter(this, DataManager.stores)
+        var storeAdapter = storeAdapter(this, DataManager.stores        )
         recyclerView.adapter = storeAdapter
         val search = findViewById<EditText>(R.id.searchView)
         val loginBtn = findViewById<ImageButton>(R.id.loginBtn)
@@ -151,6 +203,8 @@ class StoreActivity : AppCompatActivity() {
     /**
      * Opens the user profile, if signed in. Else opens the login activity.
      */
+
+
     fun OpenUserProfile() {
         if (auth.currentUser != null) {
             val intent = Intent(this, OwnerSettingsActivity::class.java)
@@ -160,11 +214,13 @@ class StoreActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
+
     fun filterPizza(temp :MutableList<Store>) : MutableList<Store>
     {
         for(objekt in DataManager.stores)
         {
             if (objekt.pizza){
+
                 DataManager.tempStores.add(objekt)
 
 
@@ -175,6 +231,7 @@ class StoreActivity : AppCompatActivity() {
         return DataManager.tempStores
 
     }
+
     fun filterkorv(temp :MutableList<Store>) : MutableList<Store>
     {
         for(objekt in DataManager.stores)
@@ -190,6 +247,8 @@ class StoreActivity : AppCompatActivity() {
         return DataManager.tempStores
 
     }
+
+
     fun filterVegetarian(temp :MutableList<Store>) : MutableList<Store>
     {
         for(objekt in DataManager.stores)
@@ -204,7 +263,9 @@ class StoreActivity : AppCompatActivity() {
         }
         return DataManager.tempStores
 
-    } fun filterAsian(temp :MutableList<Store>) : MutableList<Store>
+    }
+
+    fun filterAsian(temp :MutableList<Store>) : MutableList<Store>
     {
         for(objekt in DataManager.stores)
         {
@@ -218,7 +279,9 @@ class StoreActivity : AppCompatActivity() {
         }
         return DataManager.tempStores
 
-    } fun filterkebab(temp :MutableList<Store>) : MutableList<Store>
+    }
+
+    fun filterkebab(temp :MutableList<Store>) : MutableList<Store>
     {
         for(objekt in DataManager.stores)
         {
@@ -232,7 +295,9 @@ class StoreActivity : AppCompatActivity() {
         }
         return DataManager.tempStores
 
-    } fun filterHusmanskost(temp :MutableList<Store>) : MutableList<Store>
+    }
+
+    fun filterHusmanskost(temp :MutableList<Store>) : MutableList<Store>
     {
         for(objekt in DataManager.stores)
         {
@@ -246,6 +311,18 @@ class StoreActivity : AppCompatActivity() {
         }
         return DataManager.tempStores
 
+    }
+    fun mainFilter()
+    {
+
+
+        filterPizza(DataManager.stores)
+        filterAsian(DataManager.stores)
+        filterHusmanskost(DataManager.stores)
+        filterkebab(DataManager.stores)
+        filterkorv(DataManager.stores)
+        filterVegetarian(DataManager.stores)
+        DataManager.temp2Stores.addAll(DataManager.tempStores.distinct())
     }
 
 }
