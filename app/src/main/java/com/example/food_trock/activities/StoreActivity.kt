@@ -2,7 +2,6 @@ package com.example.food_trock.activities
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.Window
 import android.view.WindowManager
 import android.widget.EditText
@@ -45,7 +44,7 @@ class StoreActivity : AppCompatActivity() {
 
 
         storeSize = findViewById(R.id.txtStoreSize)
-        recyclerView = findViewById(R.id.recyclerView)
+        recyclerView = findViewById(R.id.recyclerViewFav)
         recyclerView.layoutManager = LinearLayoutManager(this)
         var storeAdapter = storeAdapter(this, DataManager.stores)
         recyclerView.adapter = storeAdapter
@@ -60,6 +59,14 @@ class StoreActivity : AppCompatActivity() {
         db = Firebase.firestore
         auth = Firebase.auth
         val user = auth.currentUser
+
+
+        /*val user1 = user?.email?.let { User(user!!.uid,"hello","hello2", it,"",0,) }
+        if (user1 != null) {
+            db.collection("Users").document(user!!.uid).set(user1)
+        }
+
+         */
 
         loginBtn.setOnClickListener() {
             OpenUserProfile()
@@ -138,8 +145,6 @@ class StoreActivity : AppCompatActivity() {
         false
 
     }
-
-
 
 
 

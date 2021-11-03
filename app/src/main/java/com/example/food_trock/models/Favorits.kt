@@ -2,7 +2,7 @@ package com.example.food_trock.models
 
 import android.security.identity.AccessControlProfileId
 
-data class Favorits(
+data class Favorite(
     val id: String = "",
     val userId: AccessControlProfileId,
     val foodTruckProfileId: AccessControlProfileId,
