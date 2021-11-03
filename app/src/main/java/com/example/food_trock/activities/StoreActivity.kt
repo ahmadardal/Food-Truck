@@ -44,6 +44,8 @@ class StoreActivity : AppCompatActivity() {
     lateinit var asian : Button
     lateinit var pizza : Button
     lateinit var searchFilter : Button
+    lateinit var storeAdapter : storeAdapter
+    lateinit var tempList : MutableList<Store>
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -63,6 +65,7 @@ class StoreActivity : AppCompatActivity() {
         bt_searchfilter.setOnClickListener{
             if (pizza.isSelected()||korv.isSelected()||kebab.isSelected()||asian.isSelected()||husmanskost.isSelected()||vegetarian.isSelected())
             {
+                DataManager.tempStores.clear()
                 mainFilter()
 
             }
@@ -74,15 +77,76 @@ class StoreActivity : AppCompatActivity() {
 
         pizza.setOnClickListener{
             pizza.isSelected= !pizza.isSelected
+            val tag = "pizza"
+            DataManager.stores.clear()
+            filter(tag)
+            storeSize.text = "Result: ${DataManager.stores.size}"
+            recyclerView.adapter?.notifyDataSetChanged()
         }
         korv.setOnClickListener{
             korv.isSelected= !korv.isSelected
+            /*if (korv.isSelected)
+            {
+                db.collection("FoodTrucks").addSnapshotListener(object: EventListener<QuerySnapshot> {
+                    override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?) {
+                        DataManager.stores.clear()
+                        if (value != null) {
+                            for(document in value.documents) {
+                                val store = document.toObject(Store::class.java)
+                                if(store != null) {
+                                    for( objekt in categoryList)
+
+                                    if(store.storeStatus && store.korv) {
+                                        DataManager.stores.add(store)
+                                    } else if (!store.storeStatus) {
+                                        DataManager.stores.remove(store)
+                                    }
+
+                                }
+                                storeSize.text = "Result: ${DataManager.stores.size}"
+                                recyclerView.adapter?.notifyDataSetChanged()
+                            }
+                        }
+                    }
+                })
+
+            }
+            else {
+                db.collection("FoodTrucks").addSnapshotListener(object: EventListener<QuerySnapshot> {
+                    override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?) {
+                        DataManager.stores.clear()
+                        if (value != null) {
+                            for(document in value.documents) {
+                                val store = document.toObject(Store::class.java)
+                                if(store != null) {
+                                    if(store.storeStatus ) {
+                                        DataManager.stores.add(store)
+                                    } else if (!store.storeStatus) {
+                                        DataManager.stores.remove(store)
+                                    }
+
+                                }
+                                storeSize.text = "Result: ${DataManager.stores.size}"
+                                recyclerView.adapter?.notifyDataSetChanged()
+                            }
+                        }
+                    }
+                })
+
+
+
+            }
+            */
+
+
+
         }
         kebab.setOnClickListener{
             kebab.isSelected= !kebab.isSelected
         }
         asian.setOnClickListener{
             asian.isSelected= !asian.isSelected
+            filterAsian()
         }
         husmanskost.setOnClickListener{
             husmanskost.isSelected= !husmanskost.isSelected
@@ -96,8 +160,9 @@ class StoreActivity : AppCompatActivity() {
         storeSize = findViewById(R.id.txtStoreSize)
         recyclerView = findViewById(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
+        storeAdapter = storeAdapter(this, DataManager.stores)
 
-        var storeAdapter = storeAdapter(this, DataManager.stores)
+
         recyclerView.adapter = storeAdapter
         val search = findViewById<EditText>(R.id.searchView)
         val loginBtn = findViewById<ImageButton>(R.id.loginBtn)
@@ -130,6 +195,7 @@ class StoreActivity : AppCompatActivity() {
                         if(store != null) {
                             if(store.storeStatus) {
                                 DataManager.stores.add(store)
+
                             } else if (!store.storeStatus) {
                                 DataManager.stores.remove(store)
                             }
@@ -140,6 +206,7 @@ class StoreActivity : AppCompatActivity() {
                 }
             }
         })
+
 
         storeAdapter.setOnItemClickListener(object : storeAdapter.onItemClickListener {
             override fun onItemClick(position: Int) {
@@ -211,6 +278,24 @@ class StoreActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
+    fun filter (tag :String)
+    {
+
+
+        if(pizza.isSelected()) {
+            for (store in tempList) {
+                if(store.category1 == tag || store.category2 == tag) {
+                    DataManager.stores.add(store)
+                }
+            }
+        } else if (!pizza.isSelected()) {
+            pizza.isSelected= !pizza.isSelected
+            }
+
+
+
+     
+    }
 
     fun filterPizza(temp :MutableList<Store>) : MutableList<Store>
     {
@@ -233,7 +318,7 @@ class StoreActivity : AppCompatActivity() {
     {
         for(objekt in DataManager.stores)
         {
-            if (objekt.pizza){
+            if (objekt.korv){
                 DataManager.tempStores.add(objekt)
 
 
@@ -250,7 +335,7 @@ class StoreActivity : AppCompatActivity() {
     {
         for(objekt in DataManager.stores)
         {
-            if (objekt.pizza){
+            if (objekt.vegetarian){
                 DataManager.tempStores.add(objekt)
 
 
@@ -262,11 +347,17 @@ class StoreActivity : AppCompatActivity() {
 
     }
 
-    fun filterAsian(temp :MutableList<Store>) : MutableList<Store>
-    {
-        for(objekt in DataManager.stores)
+    fun filterAsian(){
+        for(objekt in DataManager.stores){
+            if(!objekt.asian){
+                DataManager.stores.remove(objekt)
+                recyclerView.adapter?.notifyDataSetChanged()
+
+            }
+        }
+       /* for(objekt in DataManager.stores)
         {
-            if (objekt.pizza){
+            if (objekt.asian){
                 DataManager.tempStores.add(objekt)
 
 
@@ -275,6 +366,8 @@ class StoreActivity : AppCompatActivity() {
 
         }
         return DataManager.tempStores
+
+        */
 
     }
 
@@ -282,7 +375,7 @@ class StoreActivity : AppCompatActivity() {
     {
         for(objekt in DataManager.stores)
         {
-            if (objekt.pizza){
+            if (objekt.kebab){
                 DataManager.tempStores.add(objekt)
 
 
@@ -298,7 +391,7 @@ class StoreActivity : AppCompatActivity() {
     {
         for(objekt in DataManager.stores)
         {
-            if (objekt.pizza){
+            if (objekt.husmaskost){
                 DataManager.tempStores.add(objekt)
 
 
@@ -314,12 +407,14 @@ class StoreActivity : AppCompatActivity() {
 
 
         filterPizza(DataManager.stores)
-        filterAsian(DataManager.stores)
+        filterAsian()
         filterHusmanskost(DataManager.stores)
         filterkebab(DataManager.stores)
         filterkorv(DataManager.stores)
         filterVegetarian(DataManager.stores)
         DataManager.temp2Stores.addAll(DataManager.tempStores.distinct())
+        storeAdapter=storeAdapter(this,DataManager.temp2Stores)
+        recyclerView.adapter?.notifyDataSetChanged()
     }
 
 }
