@@ -37,7 +37,6 @@
         android:layout_height="48dp"
         android:layout_marginTop="5dp"
         android:background="@drawable/rounded_searchbar"
-
         android:ems="10"
         android:gravity="center_horizontal|left"
         android:hint="search"
@@ -51,8 +50,8 @@
         app:layout_constraintTop_toBottomOf="@+id/txtStoreSize"
         app:layout_constraintVertical_bias="0.131" />
 
-    <androidx.appcompat.widget.AppCompatImageButton
-        android:id="@+id/searchfilter"
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/bt_searchfilter"
         android:layout_width="57dp"
         android:layout_height="48dp"
         android:layout_marginStart="-2dp"
@@ -104,20 +103,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/searchView">
 
-        <Button
-            android:id="@+id/korv"
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/bt_korv"
             android:layout_width="wrap_content"
             android:layout_height="35dp"
             android:layout_marginStart="7dp"
             android:background="@drawable/tagselector"
             android:text="korv"
             android:textColor="@color/txt_tag_selector"
-            app:layout_constraintBottom_toBottomOf="@+id/husmanskost"
-            app:layout_constraintStart_toEndOf="@+id/husmanskost"
-            app:layout_constraintTop_toTopOf="@+id/husmanskost" />
+            app:layout_constraintBottom_toBottomOf="@+id/bt_husmanskost"
+            app:layout_constraintStart_toEndOf="@+id/bt_husmanskost"
+            app:layout_constraintTop_toTopOf="@+id/bt_husmanskost" />
 
-        <Button
-            android:id="@+id/pizza"
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/bt_pizza"
             android:layout_width="wrap_content"
             android:layout_height="35dp"
             android:layout_marginStart="10dp"
@@ -128,52 +127,52 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
-            android:id="@+id/husmanskost"
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/bt_husmanskost"
             android:layout_width="wrap_content"
             android:layout_height="35dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/tagselector"
             android:text="husmanskost"
             android:textColor="@color/txt_tag_selector"
-            app:layout_constraintStart_toStartOf="@+id/pizza"
-            app:layout_constraintTop_toBottomOf="@+id/pizza" />
+            app:layout_constraintStart_toStartOf="@+id/bt_pizza"
+            app:layout_constraintTop_toBottomOf="@+id/bt_pizza" />
 
-        <Button
-            android:id="@+id/asian"
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/bt_asian"
             android:layout_width="wrap_content"
             android:layout_height="35dp"
             android:layout_marginStart="7dp"
             android:background="@drawable/tagselector"
             android:text="Asian"
             android:textColor="@color/txt_tag_selector"
-            app:layout_constraintBottom_toBottomOf="@+id/kebab"
-            app:layout_constraintStart_toEndOf="@+id/kebab"
-            app:layout_constraintTop_toTopOf="@+id/kebab" />
+            app:layout_constraintBottom_toBottomOf="@+id/bt_kebab"
+            app:layout_constraintStart_toEndOf="@+id/bt_kebab"
+            app:layout_constraintTop_toTopOf="@+id/bt_kebab" />
 
-        <Button
-            android:id="@+id/vegetarian"
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/bt_vegetarian"
             android:layout_width="wrap_content"
             android:layout_height="35dp"
             android:layout_marginStart="7dp"
             android:background="@drawable/tagselector"
             android:text="vegetarian"
             android:textColor="@color/txt_tag_selector"
-            app:layout_constraintBottom_toBottomOf="@+id/pizza"
-            app:layout_constraintStart_toEndOf="@+id/pizza"
-            app:layout_constraintTop_toTopOf="@+id/pizza" />
+            app:layout_constraintBottom_toBottomOf="@+id/bt_pizza"
+            app:layout_constraintStart_toEndOf="@+id/bt_pizza"
+            app:layout_constraintTop_toTopOf="@+id/bt_pizza" />
 
-        <Button
-            android:id="@+id/kebab"
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/bt_kebab"
             android:layout_width="wrap_content"
             android:layout_height="35dp"
             android:layout_marginStart="7dp"
             android:background="@drawable/tagselector"
             android:text="kebab"
             android:textColor="@color/txt_tag_selector"
-            app:layout_constraintBottom_toBottomOf="@+id/vegetarian"
-            app:layout_constraintStart_toEndOf="@+id/vegetarian"
-            app:layout_constraintTop_toTopOf="@+id/vegetarian" />
+            app:layout_constraintBottom_toBottomOf="@+id/bt_vegetarian"
+            app:layout_constraintStart_toEndOf="@+id/bt_vegetarian"
+            app:layout_constraintTop_toTopOf="@+id/bt_vegetarian" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

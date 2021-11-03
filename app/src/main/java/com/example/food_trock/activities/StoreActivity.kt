@@ -36,15 +36,12 @@ class StoreActivity : AppCompatActivity() {
     lateinit var storeSize: TextView
     lateinit var db: FirebaseFirestore
     lateinit var auth: FirebaseAuth
+
     lateinit var kebab : Button
     lateinit var korv : Button
-
     lateinit var husmanskost : Button
-
     lateinit var vegetarian : Button
-
     lateinit var asian : Button
-
     lateinit var pizza : Button
     lateinit var searchFilter : Button
 
@@ -56,14 +53,14 @@ class StoreActivity : AppCompatActivity() {
             WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN
         );
         setContentView(R.layout.activity_store)
-        pizza = findViewById(R.id.pizza)
-        korv = findViewById(R.id.korv)
-        kebab = findViewById(R.id.kebab)
-        husmanskost = findViewById(R.id.husmanskost)
-        asian = findViewById(R.id.asian)
-        vegetarian = findViewById(R.id.vegetarian)
-        searchFilter = findViewById(R.id.searchfilter)
-        searchfilter.setOnClickListener{
+        pizza = findViewById(R.id.bt_pizza)
+        korv = findViewById(R.id.bt_korv)
+        kebab = findViewById(R.id.bt_kebab)
+        husmanskost = findViewById(R.id.bt_husmanskost)
+        asian = findViewById(R.id.bt_asian)
+        vegetarian = findViewById(R.id.bt_vegetarian)
+        searchFilter = findViewById(R.id.bt_searchfilter)
+        bt_searchfilter.setOnClickListener{
             if (pizza.isSelected()||korv.isSelected()||kebab.isSelected()||asian.isSelected()||husmanskost.isSelected()||vegetarian.isSelected())
             {
                 mainFilter()
@@ -100,7 +97,7 @@ class StoreActivity : AppCompatActivity() {
         recyclerView = findViewById(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        var storeAdapter = storeAdapter(this, DataManager.stores        )
+        var storeAdapter = storeAdapter(this, DataManager.stores)
         recyclerView.adapter = storeAdapter
         val search = findViewById<EditText>(R.id.searchView)
         val loginBtn = findViewById<ImageButton>(R.id.loginBtn)
