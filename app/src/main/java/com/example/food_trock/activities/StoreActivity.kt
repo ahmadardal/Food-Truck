@@ -89,10 +89,6 @@ class StoreActivity : AppCompatActivity() {
             asian.isSelected = false
             vegetarian.isSelected = false
 
-
-
-
-
             DataManager.stores.clear()
             filterPizza()
             storeSize.text = "Result: ${DataManager.stores.size}"
