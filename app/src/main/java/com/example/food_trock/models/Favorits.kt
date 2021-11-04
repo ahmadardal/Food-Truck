@@ -6,6 +6,5 @@ data class Favorite(
     val id: String = "",
     val userId: AccessControlProfileId,
     val foodTruckProfileId: AccessControlProfileId,
-
 ) {
 }
