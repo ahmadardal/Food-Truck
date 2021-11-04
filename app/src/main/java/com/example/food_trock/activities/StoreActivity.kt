@@ -92,7 +92,6 @@ class StoreActivity : AppCompatActivity() {
 
 
 
-
             DataManager.stores.clear()
             filterPizza()
             storeSize.text = "Result: ${DataManager.stores.size}"
@@ -338,74 +337,8 @@ class StoreActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
-    /* fun filter (tag :String)
-    {
 
 
-        if(pizza.isSelected()) {
-            for (store in tempList) {
-                if(store.category1 == tag || store.category2 == tag) {
-                    DataManager.stores.add(store)
-                }
-            }
-        } else if (!pizza.isSelected()) {
-            pizza.isSelected= !pizza.isSelected
-            }
-
-
-
-
-    }
-
-    */
-    /*fun filter2 (tagar :List<String>) {
-        for (element in tagar) {
-            if (element == "pizza") {
-                for (store in tempList) {
-                    if (store.pizza) {
-                        DataManager.stores.add(store)
-                    }
-                }
-            } else if (element == "korv") {
-                for (store in tempList) {
-                    if (store.pizza) {
-                        DataManager.stores.add(store)
-
-                    }
-
-                }
-            } else if (element == "kebab") {
-                for (store in tempList) {
-                    if (store.pizza) {
-                        DataManager.stores.add(store)
-                    }
-                }
-            } else if (element == "vegetarian") {
-                for (store in tempList) {
-                    if (store.pizza) {
-                        DataManager.stores.add(store)
-                    }
-
-                }
-            } else if (element == "husmanskost") {
-                for (store in tempList) {
-                    if (store.pizza) {
-                        DataManager.stores.add(store)
-                    }
-
-                }
-            } else if(element == "asian")  {
-                for (store in tempList) {
-                    if (store.pizza) {
-                        DataManager.stores.add(store)
-                    }
-
-                }
-            }
-        }
-    }
-
-     */
 
 
     fun filterPizza() {
@@ -473,19 +406,7 @@ class StoreActivity : AppCompatActivity() {
         }
 
     }
-        /* for(objekt in DataManager.stores)
-        {
-            if (objekt.asian){
-                DataManager.tempStores.add(objekt)
 
-
-            }
-            else return temp
-
-        }
-        return DataManager.tempStores
-
-        */
 
 
 
@@ -522,21 +443,6 @@ class StoreActivity : AppCompatActivity() {
     }
 }
 
-   /* fun mainFilter()
-    {
 
-
-        filterPizza(DataManager.stores)
-        filterAsian()
-        filterHusmanskost(DataManager.stores)
-        filterkebab(DataManager.stores)
-        filterkorv(DataManager.stores)
-        filterVegetarian(DataManager.stores)
-        DataManager.temp2Stores.addAll(DataManager.tempStores.distinct())
-        storeAdapter=storeAdapter(this,DataManager.temp2Stores)
-        recyclerView.adapter?.notifyDataSetChanged()
-    }
-
-    */
 
 

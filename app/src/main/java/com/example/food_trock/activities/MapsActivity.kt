@@ -149,6 +149,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     bottomNavigationView.menu.getItem(2).isChecked = false
                     val intent = Intent(this@MapsActivity, StoreActivity::class.java)
                     startActivity(intent)
+                    DataManager.tempStores.clear()
+
                     return@OnNavigationItemSelectedListener true
                 }
                 R.id.settings -> {

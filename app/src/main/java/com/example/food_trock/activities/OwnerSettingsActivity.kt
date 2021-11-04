@@ -13,6 +13,7 @@ import android.view.WindowManager
 import android.widget.*
 import androidx.cardview.widget.CardView
 import com.bumptech.glide.Glide
+import com.example.food_trock.DataManager
 import com.example.food_trock.R
 import com.example.food_trock.fragments.MenuListFragment
 import com.example.food_trock.models.Store
@@ -57,6 +58,8 @@ class OwnerSettingsActivity : AppCompatActivity() {
                 bottomNavigationView.menu.getItem(3).isChecked = false
                 val intent = Intent(this, StoreActivity::class.java)
                 startActivity(intent)
+                DataManager.tempStores.clear()
+
                 return@OnNavigationItemSelectedListener true
             }
             R.id.settings -> {
