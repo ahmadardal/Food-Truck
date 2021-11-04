@@ -31,7 +31,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/menu_navigation" />
 
-    <EditText
+    <androidx.appcompat.widget.SearchView
         android:id="@+id/searchView"
         android:layout_width="364dp"
         android:layout_height="48dp"
@@ -137,15 +137,6 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/bt_searchfilter"
-        android:layout_width="57dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="-2dp"
-        android:background="@drawable/ser_icon"
-        app:layout_constraintBottom_toBottomOf="@+id/searchView"
-        app:layout_constraintStart_toStartOf="@+id/searchView"
-        app:layout_constraintTop_toTopOf="@+id/searchView" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"

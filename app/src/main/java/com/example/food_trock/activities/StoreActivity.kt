@@ -57,6 +57,7 @@ class StoreActivity : AppCompatActivity() {
         this.requestWindowFeature(Window.FEATURE_NO_TITLE); this.getWindow().setFlags(
             WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN
         );
+        setTheme(R.style.Theme_FoodTruck)
         setContentView(R.layout.activity_store)
         pizza = findViewById(R.id.bt_pizza)
         korv = findViewById(R.id.bt_korv)
@@ -64,7 +65,7 @@ class StoreActivity : AppCompatActivity() {
         husmanskost = findViewById(R.id.bt_husmanskost)
         asian = findViewById(R.id.bt_asian)
         vegetarian = findViewById(R.id.bt_vegetarian)
-        searchFilter = findViewById(R.id.bt_searchfilter)
+
         //tempcat.add("test")
         // bt_searchfilter.setOnClickListener{
         /* if (pizza.isSelected()||korv.isSelected()||kebab.isSelected()||asian.isSelected()||husmanskost.isSelected()||vegetarian.isSelected())
