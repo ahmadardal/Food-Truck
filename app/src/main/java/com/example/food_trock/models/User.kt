@@ -8,6 +8,6 @@ data class User(
     val image: String = "",
     val mobile: Long = 0,
     val favorits: List<Favorits> = ArrayList(),
-    val role : List<Roles> = ArrayList()
+    var role: Roles,
 ) {
 }
