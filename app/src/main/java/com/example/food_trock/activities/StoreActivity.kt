@@ -272,6 +272,12 @@ class StoreActivity : AppCompatActivity() {
             }
         })
 
+        /*db.collection("FoodTrucks").document(auth.currentUser!!.uid).set(Store("blabla" ,
+            "","Rai ",
+            10,5,
+            false,auth.currentUser!!.uid,
+            0.0,0.0,
+            "Asian","Vegetarian",true,true,false,false,false,false))*/
 
         storeAdapter.setOnItemClickListener(object : storeAdapter.onItemClickListener {
             override fun onItemClick(position: Int) {
