@@ -229,7 +229,6 @@ class StoreActivity : AppCompatActivity() {
 
 
         recyclerView.adapter = storeAdapter
-        val search = findViewById<EditText>(R.id.searchView)
         val loginBtn = findViewById<ImageButton>(R.id.loginBtn)
 
 
