@@ -44,7 +44,7 @@ class StoreActivity : AppCompatActivity() {
 
 
         storeSize = findViewById(R.id.txtStoreSize)
-        recyclerView = findViewById(R.id.recyclerViewFav)
+        recyclerView = findViewById(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
         var storeAdapter = storeAdapter(this, DataManager.stores)
         recyclerView.adapter = storeAdapter

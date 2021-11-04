@@ -3,7 +3,6 @@ package com.example.food_trock.activities
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.Window
 import android.view.WindowManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,14 +13,12 @@ import com.example.food_trock.adapters.FavoritesAdapter
 import com.example.food_trock.firebase.FireStoreClass
 import com.example.food_trock.fragments.StoreFragment
 import com.example.food_trock.models.Store
-import com.example.food_trock.models.User
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_store.*
 import kotlinx.android.synthetic.main.store_item.*
-import kotlinx.coroutines.tasks.await
 
 class FavouritesActivity : AppCompatActivity() {
     private lateinit var bottomNavigationView: BottomNavigationView
@@ -69,7 +66,7 @@ class FavouritesActivity : AppCompatActivity() {
         bottomNavigationView.setOnNavigationItemSelectedListener(navigation)
         bottomNavigationView.menu.getItem(0).isChecked = true
 
-        recyclerView = findViewById(R.id.recyclerViewFav)
+        recyclerView = findViewById(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
         var favoritesAdapter = FavoritesAdapter(this, DataManager.favorites)
         recyclerView.adapter = favoritesAdapter

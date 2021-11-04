@@ -40,7 +40,7 @@
         android:hint="search"
         android:inputType="textPersonName"
         android:textColor="#403C3C"
-        app:layout_constraintBottom_toTopOf="@+id/recyclerViewFav"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.489"
         app:layout_constraintStart_toStartOf="parent"
@@ -48,7 +48,7 @@
         app:layout_constraintVertical_bias="0.131" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewFav"
+        android:id="@+id/recyclerView"
         android:layout_width="0dp"
         android:layout_height="480dp"
         android:layout_marginStart="10dp"
