@@ -43,6 +43,7 @@ class RegisterAccountActivity : AppCompatActivity() {
         val passwordConfirmed: String = findViewById<EditText>(R.id.passwordConfirmaion).text.toString().trim { it <= ' ' }
 
         if (validateForm(name, email, password, passwordConfirmed)) {
+            //اگه فیلد ها خالی نبود شرط داخل کد اجرا میشود
             // Show the progress dialog.
             showProgressDialog(resources.getString(R.string.please_wait))
             FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
@@ -55,7 +56,7 @@ class RegisterAccountActivity : AppCompatActivity() {
                             // Firebase registered user
                             val firebaseUser: FirebaseUser = task.result!!.user!!
                             // Registered Email
-                            val registeredEmail = firebaseUser.email!!
+                        val registeredEmail = firebaseUser.email!!
 
                             val user = User(
                                 firebaseUser.uid, name, registeredEmail

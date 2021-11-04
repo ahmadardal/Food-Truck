@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Window
 import android.view.WindowManager
+import com.example.food_trock.DataManager
 import com.example.food_trock.R
 import com.example.food_trock.firebase.FireStoreClass
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -23,6 +24,8 @@ class FavouritesActivity : AppCompatActivity() {
                 bottomNavigationView.menu.getItem(0).isChecked = false
                 val intent = Intent(this@FavouritesActivity, StoreActivity::class.java)
                 startActivity(intent)
+                DataManager.tempStores.clear()
+
                 return@OnNavigationItemSelectedListener true
             }
             R.id.settings -> {
