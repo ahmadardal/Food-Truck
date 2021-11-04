@@ -1,26 +1,35 @@
 package com.example.food_trock.activities
 
+import android.R.attr.height
+import android.R.attr.width
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.drawable.Drawable
 import android.location.LocationManager
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Looper
 import android.provider.Settings
+import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.FutureTarget
+import com.bumptech.glide.request.target.CustomTarget
+import com.bumptech.glide.request.transition.Transition
 import com.example.food_trock.DataManager
 import com.example.food_trock.R
+import com.example.food_trock.databinding.ActivityMapsBinding
+import com.google.android.gms.location.*
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
-import com.example.food_trock.databinding.ActivityMapsBinding
-import com.google.android.gms.location.*
+import com.google.android.gms.maps.model.*
 import com.google.android.libraries.places.api.Places
 import com.google.android.material.bottomnavigation.BottomNavigationView
+
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
@@ -51,6 +60,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
         onGPS()
+        
     }
 
     private fun onGPS() {
@@ -88,7 +98,24 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             if(store != null) {
                 if(store.storeStatus) {
                     val storeLatLng = LatLng(store.storeLatitude, store.storeLongitude)
-                    addMarker(storeLatLng, store.storeName)
+
+                    Glide.with(this)
+                        .asBitmap()
+                        .load(store.storeImage)
+                        .fitCenter()
+                        .into(object : CustomTarget<Bitmap>(100, 100){
+                            override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
+                                addMarker(storeLatLng, store.storeName, resource)
+                            }
+                            override fun onLoadCleared(placeholder: Drawable?) {
+                                // this is called when imageView is cleared on lifecycle call or for
+                                // some other reason.
+                                // if you are referencing the bitmap somewhere else too other than this imageView
+                                // clear it here as you can no longer have the bitmap
+                            }
+                        })
+
+
                 }
             }
         }
@@ -106,7 +133,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
             currentLocation = LatLng(lastLocation.latitude, lastLocation.longitude)
 
-            addMarker(currentLocation, "myLocation")
+            addMarker(currentLocation, "myLocation", null)
             getStores()
 
             if (!firstTime) {
@@ -121,11 +148,15 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
     }
 
-    fun addMarker(latLng: LatLng, title :String){
-
-        val markerOptions = MarkerOptions().position(latLng).title(title)
-       mMap.addMarker(markerOptions)
-
+    fun addMarker(latLng: LatLng, title :String, image: Bitmap?){
+        if (image != null) {
+            val Icon: BitmapDescriptor = BitmapDescriptorFactory.fromBitmap(image)
+            val markerOptions = MarkerOptions().position(latLng).title(title).icon(Icon)
+            mMap.addMarker(markerOptions)
+        } else {
+            val markerOptions = MarkerOptions().position(latLng).title(title)
+            mMap.addMarker(markerOptions)
+        }
     }
 
     override fun onResume() {
@@ -149,8 +180,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     bottomNavigationView.menu.getItem(2).isChecked = false
                     val intent = Intent(this@MapsActivity, StoreActivity::class.java)
                     startActivity(intent)
-                    DataManager.tempStores.clear()
-
                     return@OnNavigationItemSelectedListener true
                 }
                 R.id.settings -> {
