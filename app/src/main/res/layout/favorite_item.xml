@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp">
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="0dp"
+        android:layout_height="180dp"
+
+        app:cardCornerRadius="20dp"
+        app:cardElevation="-5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#FFFFFF">
+
+
+            <TextView
+                android:id="@+id/txtName"
+                android:layout_width="225dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:text="Truck Name"
+                android:textColor="#5C202A"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <RelativeLayout
+                android:id="@+id/imageFoodRecycle"
+                android:layout_width="125dp"
+                android:layout_height="125dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="30dp"
+                android:background="@drawable/backgrund_image_food"
+
+                app:flow_horizontalAlign="center"
+                app:flow_verticalAlign="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/storeImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/hamburger"
+
+                    app:circularflow_viewCenter="@string/My_Menu"
+                    app:civ_circle_background_color="#EDEDED" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/txtCategory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="5dp"
+                android:text="Category1 | Category 2"
+                android:textColor="#F07F6C"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtName" />
+
+            <TextView
+                android:id="@+id/txtDistance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="3dp"
+                android:text="10Km"
+                android:textColor="#A61830"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/slash"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/slash" />
+
+            <TextView
+                android:id="@+id/txtPriceClass"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="$$"
+                android:textColor="#A61830"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/slash"
+                app:layout_constraintTop_toTopOf="@+id/slash" />
+
+            <ImageView
+                android:id="@+id/slash"
+                android:layout_width="23dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginBottom="48dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/txtDistance"
+                app:srcCompat="@drawable/slash" />
+
+            <ImageView
+                android:id="@+id/ratingBar"
+                android:layout_width="94dp"
+                android:layout_height="19dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginBottom="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:srcCompat="@drawable/rating2" />
+
+            <ImageButton
+                android:id="@+id/favBtn"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/color_transparent"
+                android:scaleType="fitXY"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.986"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.071"
+                app:srcCompat="@drawable/ic_favourites"
+                app:tint="@color/transparentTint" />
+
+            <TextView
+                android:id="@+id/txtOnline"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_marginTop="5dp"
+                android:fontFamily="sans-serif-condensed"
+                android:text="OFFLINE"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="#837E7E"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.828"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

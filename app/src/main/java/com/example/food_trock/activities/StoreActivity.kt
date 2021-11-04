@@ -240,6 +240,14 @@ class StoreActivity : AppCompatActivity() {
         auth = Firebase.auth
         val user = auth.currentUser
 
+
+        /*val user1 = user?.email?.let { User(user!!.uid,"hello","hello2", it,"",0,) }
+        if (user1 != null) {
+            db.collection("Users").document(user!!.uid).set(user1)
+        }
+
+         */
+
         loginBtn.setOnClickListener() {
             OpenUserProfile()
         }
@@ -327,6 +335,12 @@ class StoreActivity : AppCompatActivity() {
         false
 
     }
+
+
+
+
+
+
 
 
     /**
