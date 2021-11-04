@@ -113,7 +113,6 @@
         android:text="Send email link"
         android:textColor="#fff"
         android:textStyle="bold"
-        android:text_size="22sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
