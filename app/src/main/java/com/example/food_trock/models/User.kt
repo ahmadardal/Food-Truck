@@ -9,5 +9,6 @@ data class User(
     val mobile: Long = 0,
     val favorites: List<Favorite> = ArrayList(),
     val role : List<Roles> = ArrayList()
+
 ) {
 }

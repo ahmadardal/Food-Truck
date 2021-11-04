@@ -19,5 +19,7 @@ class MainActivity : AppCompatActivity() {
         var intent = Intent(this, StoreActivity::class.java)
         startActivity(intent)
 
+
+
     }
 }

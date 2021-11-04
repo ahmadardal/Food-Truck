@@ -11,6 +11,7 @@ import android.widget.TextView
 import android.widget.Toast
 import com.example.food_trock.R
 import com.example.food_trock.firebase.FireStoreClass
+import com.example.food_trock.models.Roles
 import com.example.food_trock.models.User
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.AuthResult
@@ -41,8 +42,10 @@ class RegisterAccountActivity : AppCompatActivity() {
         val email: String = findViewById<EditText>(R.id.userNameActRA).text.toString().trim { it <= ' ' }
         val password: String = findViewById<EditText>(R.id.passwordActRA).text.toString().trim { it <= ' ' }
         val passwordConfirmed: String = findViewById<EditText>(R.id.passwordConfirmaion).text.toString().trim { it <= ' ' }
+        var assignedRole : Roles = Roles(admin = false, client = true, foodTruckOwner = false)
 
         if (validateForm(name, email, password, passwordConfirmed)) {
+            //اگه فیلد ها خالی نبود شرط داخل کد اجرا میشود
             // Show the progress dialog.
             showProgressDialog(resources.getString(R.string.please_wait))
             FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
@@ -55,10 +58,10 @@ class RegisterAccountActivity : AppCompatActivity() {
                             // Firebase registered user
                             val firebaseUser: FirebaseUser = task.result!!.user!!
                             // Registered Email
-                            val registeredEmail = firebaseUser.email!!
+                        val registeredEmail = firebaseUser.email!!
 
                             val user = User(
-                                firebaseUser.uid, name, registeredEmail
+                                firebaseUser.uid, name, registeredEmail, role = assignedRole
                             )
 
                             // call the registerUser function of FirestoreClass to make an entry in the database.

@@ -15,6 +15,9 @@
         app:layout_anchor="@+id/bottom_navigation"
         app:layout_anchorGravity="top"
         app:layout_constraintBottom_toTopOf="@+id/bottom_navigation" />
+
+
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="0dp"
@@ -31,14 +34,14 @@
     <EditText
         android:id="@+id/searchView"
         android:layout_width="364dp"
-        android:layout_height="39dp"
+        android:layout_height="48dp"
         android:layout_marginTop="5dp"
         android:background="@drawable/rounded_searchbar"
-        android:drawableLeft="@drawable/search_icon_gray"
         android:ems="10"
         android:gravity="center_horizontal|left"
         android:hint="search"
         android:inputType="textPersonName"
+        android:paddingStart="60dp"
         android:textColor="#403C3C"
         app:layout_constraintBottom_toTopOf="@+id/recyclerView"
         app:layout_constraintEnd_toEndOf="parent"
@@ -47,11 +50,109 @@
         app:layout_constraintTop_toBottomOf="@+id/txtStoreSize"
         app:layout_constraintVertical_bias="0.131" />
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/group_tag"
+        android:layout_width="0dp"
+        android:layout_height="90dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="7dp"
+        android:elevation="3sp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchView">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/bt_korv"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_marginStart="7dp"
+            android:background="@drawable/tagselector"
+            android:text="korv"
+            android:textColor="@color/txt_tag_selector"
+            app:layout_constraintBottom_toBottomOf="@+id/bt_husmanskost"
+            app:layout_constraintStart_toEndOf="@+id/bt_husmanskost"
+            app:layout_constraintTop_toTopOf="@+id/bt_husmanskost" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/bt_pizza"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/tagselector"
+            android:text="pizza"
+            android:textColor="@color/txt_tag_selector"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/bt_husmanskost"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/tagselector"
+            android:text="husmanskost"
+            android:textColor="@color/txt_tag_selector"
+            app:layout_constraintStart_toStartOf="@+id/bt_pizza"
+            app:layout_constraintTop_toBottomOf="@+id/bt_pizza" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/bt_asian"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_marginStart="7dp"
+            android:background="@drawable/tagselector"
+            android:text="Asian"
+            android:textColor="@color/txt_tag_selector"
+            app:layout_constraintBottom_toBottomOf="@+id/bt_kebab"
+            app:layout_constraintStart_toEndOf="@+id/bt_kebab"
+            app:layout_constraintTop_toTopOf="@+id/bt_kebab" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/bt_vegetarian"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_marginStart="7dp"
+            android:background="@drawable/tagselector"
+            android:text="vegetarian"
+            android:textColor="@color/txt_tag_selector"
+            app:layout_constraintBottom_toBottomOf="@+id/bt_pizza"
+            app:layout_constraintStart_toEndOf="@+id/bt_pizza"
+            app:layout_constraintTop_toTopOf="@+id/bt_pizza" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/bt_kebab"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_marginStart="7dp"
+            android:background="@drawable/tagselector"
+            android:text="kebab"
+            android:textColor="@color/txt_tag_selector"
+            app:layout_constraintBottom_toBottomOf="@+id/bt_vegetarian"
+            app:layout_constraintStart_toEndOf="@+id/bt_vegetarian"
+            app:layout_constraintTop_toTopOf="@+id/bt_vegetarian" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/bt_searchfilter"
+        android:layout_width="57dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="-2dp"
+        android:background="@drawable/ser_icon"
+        app:layout_constraintBottom_toBottomOf="@+id/searchView"
+        app:layout_constraintStart_toStartOf="@+id/searchView"
+        app:layout_constraintTop_toTopOf="@+id/searchView" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="0dp"
         android:layout_height="480dp"
         android:layout_marginStart="10dp"
+        android:layout_marginTop="320dp"
         android:layout_marginEnd="10dp"
         android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
@@ -59,7 +160,7 @@
         app:layout_constraintHorizontal_bias="0.842"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.956"
+        app:layout_constraintVertical_bias="0.49"
         tools:ignore="SpeakableTextPresentCheck">
 
     </androidx.recyclerview.widget.RecyclerView>
@@ -69,6 +170,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:elevation="3sp"
+        android:textAlignment="textStart"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

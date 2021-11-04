@@ -10,6 +10,8 @@ object DataManager {
     val menus = mutableListOf<MenuItem>()
 
     val favorites = mutableListOf<Store>()
+    val tempStores = mutableListOf<Store>()
+    val temp2Stores = mutableListOf<Store>()
 
 
 }
