@@ -37,9 +37,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var binding: ActivityMapsBinding
     private lateinit var bottomNavigationView: BottomNavigationView
     private lateinit var locationProviderClient: FusedLocationProviderClient
-    private var firstTime: Boolean = false
+    private var firstTime: Boolean = true
 
-    lateinit var currentLocation: LatLng
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,38 +58,18 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
-        onGPS()
-        
-    }
-
-    private fun onGPS() {
-        if (!isLocationEnabled()) {
-            startActivity(Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS))
+        getStores()
+        if (firstTime) {
+            firstTime = false
+            addMarker(
+                LatLng(DataManager.currentLat.toDouble(), DataManager.currentLng.toDouble()),
+                "Your are here",
+                null
+            )
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(DataManager.currentLat.toDouble(), DataManager.currentLng.toDouble()), 15f))
         } else {
-            fetchLocation()
+            //update marker position
         }
-    }
-
-    private fun fetchLocation() {
-        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), 200)
-            return
-        } else {
-            requestLocation()
-        }
-    }
-
-    @SuppressWarnings("MissingPermission")
-    private fun requestLocation() {
-
-        val requestLocation = LocationRequest()
-        requestLocation.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
-        requestLocation.interval = 50
-        requestLocation.fastestInterval = 50
-
-        locationProviderClient.requestLocationUpdates(
-            requestLocation, callback, Looper.myLooper()
-        )
     }
 
     fun getStores() {
@@ -121,33 +100,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         }
     }
 
-    val callback = object:LocationCallback() {
-        override fun onLocationAvailability(result: LocationAvailability) {
-            super.onLocationAvailability(result)
-        }
-
-        override fun onLocationResult(result: LocationResult) {
-            super.onLocationResult(result)
-
-            val lastLocation = result?.lastLocation
-
-            currentLocation = LatLng(lastLocation.latitude, lastLocation.longitude)
-
-            addMarker(currentLocation, "myLocation", null)
-            getStores()
-
-            if (!firstTime) {
-                firstTime = true
-                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 15f))
-            }
-        }
-    }
-
-    private fun isLocationEnabled() : Boolean {
-        val locationManager = applicationContext.getSystemService(Context.LOCATION_SERVICE) as LocationManager
-        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
-    }
-
     fun addMarker(latLng: LatLng, title :String, image: Bitmap?){
         if (image != null) {
             val Icon: BitmapDescriptor = BitmapDescriptorFactory.fromBitmap(image)
@@ -161,7 +113,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     override fun onResume() {
         super.onResume()
-        onGPS()
     }
 
     fun getButtonNavigationBar(){

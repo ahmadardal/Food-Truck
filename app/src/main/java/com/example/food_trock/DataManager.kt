@@ -11,6 +11,7 @@ object DataManager {
 
     val tempStores = mutableListOf<Store>()
     val temp2Stores = mutableListOf<Store>()
-
+    var currentLat: String = ""
+    var currentLng: String = ""
 
 }
