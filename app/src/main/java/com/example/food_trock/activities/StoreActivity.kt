@@ -46,9 +46,7 @@ class StoreActivity : AppCompatActivity() {
     lateinit var vegetarian: Button
     lateinit var asian: Button
     lateinit var pizza: Button
-    lateinit var searchFilter: Button
     lateinit var storeAdapter: storeAdapter
-    lateinit var tempList: MutableList<Store>
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -64,22 +62,6 @@ class StoreActivity : AppCompatActivity() {
         husmanskost = findViewById(R.id.bt_husmanskost)
         asian = findViewById(R.id.bt_asian)
         vegetarian = findViewById(R.id.bt_vegetarian)
-        searchFilter = findViewById(R.id.bt_searchfilter)
-        //tempcat.add("test")
-        // bt_searchfilter.setOnClickListener{
-        /* if (pizza.isSelected()||korv.isSelected()||kebab.isSelected()||asian.isSelected()||husmanskost.isSelected()||vegetarian.isSelected())
-            {
-                DataManager.tempStores.clear()
-                mainFilter()
-
-            }
-            else {
-                DataManager.tempStores.addAll(DataManager.stores)
-            }
-
-        }
-
-            */
 
         pizza.setOnClickListener {
             pizza.isSelected = !pizza.isSelected
@@ -228,7 +210,6 @@ class StoreActivity : AppCompatActivity() {
 
 
         recyclerView.adapter = storeAdapter
-        val search = findViewById<EditText>(R.id.searchView)
         val loginBtn = findViewById<ImageButton>(R.id.loginBtn)
 
 
