@@ -68,108 +68,29 @@ class StoreActivity : AppCompatActivity() {
 
 
         pizzaBtn.setOnClickListener {
-            if(pizzaBtn.isSelected) {
-                pizzaBtn.isSelected = false
-                DataManager.stores.clear()
-                for (store in tempStores) {
-                    DataManager.stores.add(store)
-                }
-            } else {
-                filter("Pizza")
+            filter("Pizza",pizzaBtn.isSelected)
             }
-            storeSize.text = "Result: ${DataManager.stores.size}"
-            recyclerView.adapter?.notifyDataSetChanged()
-        }
+
         hotdogBtn.setOnClickListener {
-            if(hotdogBtn.isSelected) {
-                hotdogBtn.isSelected = false
-                DataManager.stores.clear()
-                for (store in tempStores) {
-                    DataManager.stores.add(store)
-                }
-            } else {
-                filter("Hotdog")
-            }
-            storeSize.text = "Result: ${DataManager.stores.size}"
-            recyclerView.adapter?.notifyDataSetChanged()
+            filter("Hotdog",hotdogBtn.isSelected)
         }
         kebabBtn.setOnClickListener {
-            if(kebabBtn.isSelected) {
-                kebabBtn.isSelected = false
-                DataManager.stores.clear()
-                for (store in tempStores) {
-                    DataManager.stores.add(store)
-                }
-            } else {
-                filter("Kebab")
-            }
-            storeSize.text = "Result: ${DataManager.stores.size}"
-            recyclerView.adapter?.notifyDataSetChanged()
+            filter("Kebab",kebabBtn.isSelected)
         }
         japaneseBtn.setOnClickListener {
-            if(japaneseBtn.isSelected) {
-                japaneseBtn.isSelected = false
-                DataManager.stores.clear()
-                for (store in tempStores) {
-                    DataManager.stores.add(store)
-                }
-            } else {
-                filter("Japanese")
-            }
-            storeSize.text = "Result: ${DataManager.stores.size}"
-            recyclerView.adapter?.notifyDataSetChanged()
+            filter("Japanese",japaneseBtn.isSelected)
         }
         sandwhichBtn.setOnClickListener {
-            if(sandwhichBtn.isSelected) {
-                sandwhichBtn.isSelected = false
-                DataManager.stores.clear()
-                for (store in tempStores) {
-                    DataManager.stores.add(store)
-                }
-            } else {
-                filter("Sandwhiches")
-            }
-            storeSize.text = "Result: ${DataManager.stores.size}"
-            recyclerView.adapter?.notifyDataSetChanged()
+            filter("Sandwhiches",sandwhichBtn.isSelected)
         }
         vegetarianBtn.setOnClickListener {
-            if(vegetarianBtn.isSelected) {
-                vegetarianBtn.isSelected = false
-                DataManager.stores.clear()
-                for (store in tempStores) {
-                    DataManager.stores.add(store)
-                }
-            } else {
-                filter("Vegetarian")
-            }
-            storeSize.text = "Result: ${DataManager.stores.size}"
-            recyclerView.adapter?.notifyDataSetChanged()
+            filter("Vegetarian",vegetarianBtn.isSelected)
         }
         dessertBtn.setOnClickListener {
-            if(dessertBtn.isSelected) {
-                dessertBtn.isSelected = false
-                DataManager.stores.clear()
-                for (store in tempStores) {
-                    DataManager.stores.add(store)
-                }
-            } else {
-                filter("Desserts")
-            }
-            storeSize.text = "Result: ${DataManager.stores.size}"
-            recyclerView.adapter?.notifyDataSetChanged()
+            filter("Desserts",dessertBtn.isSelected)
         }
         smoothiesBtn.setOnClickListener {
-            if(smoothiesBtn.isSelected) {
-                smoothiesBtn.isSelected = false
-                DataManager.stores.clear()
-                for (store in tempStores) {
-                    DataManager.stores.add(store)
-                }
-            } else {
-                filter("Smoothies")
-            }
-            storeSize.text = "Result: ${DataManager.stores.size}"
-            recyclerView.adapter?.notifyDataSetChanged()
+            filter("Smoothies",smoothiesBtn.isSelected)
         }
 
 
@@ -311,9 +232,9 @@ class StoreActivity : AppCompatActivity() {
     }
 
 
-    fun filter (selectedTag: String) {
+    fun filter (selectedTag: String, selected: Boolean) {
         DataManager.stores.clear()
-        selectAndDisselectTags(selectedTag)
+        selectAndDisselectTags(selectedTag,selected)
         for(store in tempStores) {
             if(store.category1 == selectedTag || store.category2 == selectedTag) {
                 DataManager.stores.add(store)
@@ -323,7 +244,30 @@ class StoreActivity : AppCompatActivity() {
         recyclerView.adapter?.notifyDataSetChanged()
     }
 
-    fun selectAndDisselectTags (selectedTag: String) {
+    fun selectAndDisselectTags (selectedTag: String, selected: Boolean) {
+
+        disselectAll()
+        if (selected) {
+            DataManager.stores.clear()
+            for (store in tempStores) {
+                DataManager.stores.add(store)
+            }
+        } else {
+            when (selectedTag) {
+                "Pizza" -> pizzaBtn.isSelected = true
+                "Hotdog" -> hotdogBtn.isSelected = true
+                "Kebab" -> kebabBtn.isSelected = true
+                "Sandwhiches" -> sandwhichBtn.isSelected = true
+                "Japanese" -> japaneseBtn.isSelected = true
+                "Vegetarian" -> vegetarianBtn.isSelected = true
+                "Desserts" -> dessertBtn.isSelected = true
+                "Smoothies" -> smoothiesBtn.isSelected = true
+            }
+        }
+
+    }
+
+    private fun disselectAll () {
         pizzaBtn.isSelected = false
         hotdogBtn.isSelected = false
         kebabBtn.isSelected = false
@@ -332,17 +276,6 @@ class StoreActivity : AppCompatActivity() {
         vegetarianBtn.isSelected = false
         dessertBtn.isSelected = false
         smoothiesBtn.isSelected = false
-
-        when (selectedTag) {
-            "Pizza" -> pizzaBtn.isSelected = true
-            "Hotdog" -> hotdogBtn.isSelected = true
-            "Kebab" -> kebabBtn.isSelected = true
-            "Sandwhiches" -> sandwhichBtn.isSelected = true
-            "Japanese" -> japaneseBtn.isSelected = true
-            "Vegetarian" -> vegetarianBtn.isSelected = true
-            "Desserts" -> dessertBtn.isSelected = true
-            "Smoothies" -> smoothiesBtn.isSelected = true
-        }
     }
 
 }
