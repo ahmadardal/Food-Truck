@@ -97,7 +97,7 @@
         app:srcCompat="@drawable/ic_baseline_add_photo_alternate_24" />
 
     <Button
-        android:id="@+id/actionBtn"
+        android:id="@+id/saveTruckNameBtn"
         android:layout_width="200dp"
         android:layout_height="45dp"
         android:background="@drawable/login_button"
@@ -137,7 +137,7 @@
         app:layout_constraintEnd_toEndOf="@+id/textView9"
         app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="@+id/textView9"
-        app:layout_constraintTop_toBottomOf="@+id/actionBtn"
+        app:layout_constraintTop_toBottomOf="@+id/saveTruckNameBtn"
         app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

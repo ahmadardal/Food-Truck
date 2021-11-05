@@ -13,7 +13,6 @@ import com.example.food_trock.DataManager
 import com.example.food_trock.R
 import com.example.food_trock.adapters.menuListAdapter
 import com.example.food_trock.models.MenuItem
-import com.example.food_trock.models.Store
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.*
@@ -41,7 +40,7 @@ class MenuListFragment: Fragment() {
         var addMenuAdapter = menuListAdapter(view.context, DataManager.menus)
         recyclerView.adapter = addMenuAdapter
 
-        val addMenuBtn = view.findViewById<Button>(R.id.actionBtn)
+        val addMenuBtn = view.findViewById<Button>(R.id.saveTruckNameBtn)
         val backBtn = view.findViewById<ImageButton>(R.id.backBtn)
         db = Firebase.firestore
         auth = Firebase.auth

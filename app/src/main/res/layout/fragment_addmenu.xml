@@ -51,7 +51,7 @@
     </FrameLayout>
 
     <Button
-        android:id="@+id/actionBtn"
+        android:id="@+id/saveTruckNameBtn"
         android:layout_width="220dp"
         android:layout_height="45dp"
         android:background="@drawable/login_button"
@@ -74,11 +74,11 @@
         android:layout_marginBottom="5dp"
         android:elevation="1sp"
         app:cardCornerRadius="70dp"
-        app:layout_constraintBottom_toBottomOf="@+id/actionBtn"
-        app:layout_constraintEnd_toEndOf="@+id/actionBtn"
+        app:layout_constraintBottom_toBottomOf="@+id/saveTruckNameBtn"
+        app:layout_constraintEnd_toEndOf="@+id/saveTruckNameBtn"
         app:layout_constraintHorizontal_bias="0.81"
-        app:layout_constraintStart_toStartOf="@+id/actionBtn"
-        app:layout_constraintTop_toTopOf="@+id/actionBtn"
+        app:layout_constraintStart_toStartOf="@+id/saveTruckNameBtn"
+        app:layout_constraintTop_toTopOf="@+id/saveTruckNameBtn"
         app:layout_constraintVertical_bias="0.45">>
 
         <ImageView

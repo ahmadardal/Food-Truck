@@ -1,6 +1,7 @@
 package com.example.food_trock.adapters
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -42,8 +43,12 @@ class storeAdapter(val context: Context, val storeList: List<Store> ) :
         holder.txtName.text = currentItem.storeName
         holder.txtPriceClass.text = currentItem.storePriceClass.toString()
 
-        if(currentItem.category2 == "") {
+        if(currentItem.category2 == "Empty" && currentItem.category1 != "Empty") {
             holder.txtCategory.text = "${currentItem.category1}"
+        } else if (currentItem.category1 == "Empty" && currentItem.category2 != "Empty") {
+            holder.txtCategory.text = "${currentItem.category2}"
+        } else if (currentItem.category1 == "Empty" && currentItem.category2 == "Empty") {
+            holder.txtCategory.text = " "
         } else {
             holder.txtCategory.text = "${currentItem.category1} | ${currentItem.category2}"
         }

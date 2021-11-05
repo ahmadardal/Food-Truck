@@ -25,6 +25,7 @@ import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
+import kotlinx.android.synthetic.main.activity_owner_settings.*
 import java.util.*
 
 
@@ -38,12 +39,19 @@ class OwnerSettingsActivity : AppCompatActivity() {
     lateinit var auth: FirebaseAuth
     lateinit var editTruckName: EditText
     lateinit var editFullName: EditText
+    lateinit var editPhoneNumber: EditText
     lateinit var ownerProfileIMG: ImageView
     lateinit var txtStatus: TextView
     lateinit var txtEmail: TextView
     lateinit var cardViewMenu: CardView
     val foodTruckCollectionRef = Firebase.firestore.collection("FoodTrucks")
     var selectedPhotoUri: Uri? = null
+    lateinit var tag1DropDown: AutoCompleteTextView
+    lateinit var tag2DropDown: AutoCompleteTextView
+    lateinit var tagsAdapter: ArrayAdapter<String>
+    val listOfTags = mutableListOf("Empty","Desserts","Smoothies","Vegetarian","Kebab","Hotdog",
+        "Pizza","Japanese","Sandwhiches")
+
 
 
     private val navigation = BottomNavigationView.OnNavigationItemSelectedListener { item ->
@@ -86,44 +94,29 @@ class OwnerSettingsActivity : AppCompatActivity() {
         bottomNavigationView.setOnNavigationItemSelectedListener(navigation)
         bottomNavigationView.menu.getItem(3).isChecked = true
 
-        var saveTruckNameBtn = findViewById<Button>(R.id.actionBtn)
-        var saveFullNameBtn = findViewById<Button>(R.id.saveFullNameBtn)
-        var logOutBTN = findViewById<Button>(R.id.bt_Logout)
-        var switchBtn = findViewById<Switch>(R.id.switchBtn)
+        val saveTruckNameBtn = findViewById<Button>(R.id.saveTruckNameBtn)
+        val saveFullNameBtn = findViewById<Button>(R.id.saveFullNameBtn)
+        val savePhoneBtn = findViewById<Button>(R.id.savePhoneBtn)
+        val logOutBTN = findViewById<Button>(R.id.bt_Logout)
+        val switchBtn = findViewById<Switch>(R.id.switchBtn)
         txtStatus = findViewById(R.id.txtStatus)
         db = Firebase.firestore
         auth = Firebase.auth
 
         editTruckName = findViewById(R.id.editTruckName)
         editFullName = findViewById(R.id.editFullName)
+        editPhoneNumber = findViewById(R.id.editPhone)
         txtEmail = findViewById(R.id.txtEmail)
         ownerProfileIMG = findViewById(R.id.ownerProfileImage)
         cardViewMenu = findViewById(R.id.cardViewMenus)
+        tag1DropDown = findViewById(R.id.autoCompleteTag1)
+        tag2DropDown = findViewById(R.id.autoCompleteTag2)
 
 
-        /** Checks if the owners shop is online or offline.
-         * Presets the switch status as well as profile picture
-         */
 
-        auth.currentUser?.let {
-            foodTruckCollectionRef.document(it.uid).get().addOnSuccessListener { result ->
-                if (result != null) {
-                    val store = result.toObject(Store::class.java)
-                    if (store != null) {
-                        if (store.storeStatus) {
-                            switchBtn.isChecked = true
-                        }
-                        Glide.with(this)
-                            .load(store.storeImage)
-                            .into(ownerProfileIMG)
-                        editTruckName.setText(store.storeName)
-                        editFullName.setText(store.fullName)
-                        txtEmail.text = auth.currentUser!!.email
 
-                    }
-                }
-            }
-        }
+        setUserInfo()
+
 
 
         /** Calls uploadImageToFirebaseStorage function which in turn calls getNewStoreMap.
@@ -132,6 +125,9 @@ class OwnerSettingsActivity : AppCompatActivity() {
             getNewStoreMap()
         }
         saveFullNameBtn.setOnClickListener() {
+            getNewStoreMap()
+        }
+        savePhoneBtn.setOnClickListener() {
             getNewStoreMap()
         }
         cardViewMenu.setOnClickListener() {
@@ -182,6 +178,22 @@ class OwnerSettingsActivity : AppCompatActivity() {
         logOutBTN.setOnClickListener {
             logOut()
         }
+
+        tagsAdapter = ArrayAdapter(this,R.layout.dropdown_item,listOfTags)
+        tag1DropDown.setAdapter(tagsAdapter)
+        tag2DropDown.setAdapter(tagsAdapter)
+
+        tag1DropDown.setOnItemClickListener { adapterView, view, position, id ->
+            var tag = adapterView.getItemAtPosition(position).toString()
+            getNewStoreMap("",tag,"")
+
+        }
+        tag2DropDown.setOnItemClickListener { adapterView, view, position, id ->
+            var tag = adapterView.getItemAtPosition(position).toString()
+            getNewStoreMap("","",tag)
+        }
+
+
     }
 
     /**
@@ -211,10 +223,15 @@ class OwnerSettingsActivity : AppCompatActivity() {
      * Creates a new store map based on info from editTexts and takes in a profileImageURL
      * sets the map into database and merges it leaving unchanged values as they were.
      */
-    private fun getNewStoreMap (profileImageURL: String = "") {
+    private fun getNewStoreMap (profileImageURL: String = "",
+                                category1: String = "",
+                                category2: String = "") {
         val truckName = editTruckName.text.toString()
         val fullName = editFullName.text.toString()
+        val phoneNumber = editPhoneNumber.text.toString()
         val truckImage = profileImageURL
+        val tag1 = category1
+        val tag2 = category2
         val map = mutableMapOf<String, Any>()
         if (truckName.isNotEmpty()) {
             map["storeName"] = truckName
@@ -224,6 +241,15 @@ class OwnerSettingsActivity : AppCompatActivity() {
         }
         if (fullName.isNotEmpty()) {
             map["fullName"] = fullName
+        }
+        if (tag1.isNotEmpty()) {
+            map["category1"] = tag1
+        }
+        if (tag2.isNotEmpty()) {
+            map["category2"] = tag2
+        }
+        if (phoneNumber.isNotEmpty()) {
+            map["phoneNumber"] = phoneNumber
         }
         auth.currentUser?.let {
             foodTruckCollectionRef.document(it.uid).set(map, SetOptions.merge())
@@ -261,6 +287,31 @@ class OwnerSettingsActivity : AppCompatActivity() {
 
                     }
                 }
+        }
+    }
+
+    private fun setUserInfo () {
+        auth.currentUser?.let {
+            foodTruckCollectionRef.document(it.uid).get().addOnSuccessListener { result ->
+                if (result != null) {
+                    val store = result.toObject(Store::class.java)
+                    if (store != null) {
+                        if (store.storeStatus) {
+                            switchBtn.isChecked = true
+                        }
+                        Glide.with(this)
+                            .load(store.storeImage)
+                            .into(ownerProfileIMG)
+                        editTruckName.setText(store.storeName)
+                        editFullName.setText(store.fullName)
+                        txtEmail.text = auth.currentUser!!.email
+                        editPhoneNumber.setText(store.phoneNumber)
+                        autoCompleteTag1.setHint(store.category1)
+                        autoCompleteTag2.setHint(store.category2)
+
+                    }
+                }
+            }
         }
     }
 
