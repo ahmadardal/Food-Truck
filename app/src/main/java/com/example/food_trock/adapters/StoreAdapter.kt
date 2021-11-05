@@ -64,8 +64,6 @@ class storeAdapter(val context: Context, val storeList: List<Store> ) :
             holder.txtPriceClass.text = "$$"
         } else
             holder.txtPriceClass.text = "$$$"
-
-
     }
 
     override fun getItemCount(): Int {

@@ -40,6 +40,7 @@ class OwnerSettingsActivity : AppCompatActivity() {
     lateinit var editTruckName: EditText
     lateinit var editFullName: EditText
     lateinit var editPhoneNumber: EditText
+    lateinit var editOpenHrs: EditText
     lateinit var ownerProfileIMG: ImageView
     lateinit var txtStatus: TextView
     lateinit var txtEmail: TextView
@@ -97,6 +98,7 @@ class OwnerSettingsActivity : AppCompatActivity() {
         val saveTruckNameBtn = findViewById<Button>(R.id.saveTruckNameBtn)
         val saveFullNameBtn = findViewById<Button>(R.id.saveFullNameBtn)
         val savePhoneBtn = findViewById<Button>(R.id.savePhoneBtn)
+        val saveOpenHrsBtn = findViewById<Button>(R.id.saveOpeningHrs)
         val logOutBTN = findViewById<Button>(R.id.bt_Logout)
         val switchBtn = findViewById<Switch>(R.id.switchBtn)
         txtStatus = findViewById(R.id.txtStatus)
@@ -106,6 +108,7 @@ class OwnerSettingsActivity : AppCompatActivity() {
         editTruckName = findViewById(R.id.editTruckName)
         editFullName = findViewById(R.id.editFullName)
         editPhoneNumber = findViewById(R.id.editPhone)
+        editOpenHrs = findViewById(R.id.editOpeningHrs)
         txtEmail = findViewById(R.id.txtEmail)
         ownerProfileIMG = findViewById(R.id.ownerProfileImage)
         cardViewMenu = findViewById(R.id.cardViewMenus)
@@ -130,6 +133,10 @@ class OwnerSettingsActivity : AppCompatActivity() {
         savePhoneBtn.setOnClickListener() {
             getNewStoreMap()
         }
+        saveOpenHrsBtn.setOnClickListener() {
+            getNewStoreMap()
+        }
+
         cardViewMenu.setOnClickListener() {
             val menuFragment = MenuListFragment()
 
@@ -229,6 +236,7 @@ class OwnerSettingsActivity : AppCompatActivity() {
         val truckName = editTruckName.text.toString()
         val fullName = editFullName.text.toString()
         val phoneNumber = editPhoneNumber.text.toString()
+        val openHours = editOpenHrs.text.toString()
         val truckImage = profileImageURL
         val tag1 = category1
         val tag2 = category2
@@ -250,6 +258,9 @@ class OwnerSettingsActivity : AppCompatActivity() {
         }
         if (phoneNumber.isNotEmpty()) {
             map["phoneNumber"] = phoneNumber
+        }
+        if (openHours.isNotEmpty()) {
+            map["openHrs"] = openHours
         }
         auth.currentUser?.let {
             foodTruckCollectionRef.document(it.uid).set(map, SetOptions.merge())
@@ -306,6 +317,7 @@ class OwnerSettingsActivity : AppCompatActivity() {
                         editFullName.setText(store.fullName)
                         txtEmail.text = auth.currentUser!!.email
                         editPhoneNumber.setText(store.phoneNumber)
+                        editOpenHrs.setText(store.openHrs)
                         autoCompleteTag1.setHint(store.category1)
                         autoCompleteTag2.setHint(store.category2)
 

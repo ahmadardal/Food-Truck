@@ -34,8 +34,8 @@ class StoreActivity : AppCompatActivity() {
 
 
     lateinit var storeSize: TextView
-    lateinit var db: FirebaseFirestore
-    lateinit var auth: FirebaseAuth
+    val db: FirebaseFirestore = Firebase.firestore
+    val auth: FirebaseAuth = Firebase.auth
 
     lateinit var kebabBtn: Button
     lateinit var hotdogBtn: Button
@@ -55,6 +55,7 @@ class StoreActivity : AppCompatActivity() {
             WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN
         );
         setContentView(R.layout.activity_store)
+
         pizzaBtn = findViewById(R.id.bt_pizza)
         hotdogBtn = findViewById(R.id.bt_hotdog)
         kebabBtn = findViewById(R.id.bt_kebab)
@@ -63,9 +64,20 @@ class StoreActivity : AppCompatActivity() {
         vegetarianBtn = findViewById(R.id.bt_vegetarian)
         smoothiesBtn = findViewById(R.id.bt_Smoothie)
         dessertBtn = findViewById(R.id.bt_Dessert)
+        storeSize = findViewById(R.id.txtStoreSize)
+
+        recyclerView = findViewById(R.id.recyclerView)
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        storeAdapter = storeAdapter(this, DataManager.stores)
+        recyclerView.adapter = storeAdapter
+        val loginBtn = findViewById<ImageButton>(R.id.loginBtn)
+
+        bottomNavigationView = findViewById(R.id.bottom_navigation)
+        bottomNavigationView.setOnNavigationItemSelectedListener(navigation)
+        bottomNavigationView.menu.getItem(1).isChecked = true
 
 
-
+        getStores()
 
         pizzaBtn.setOnClickListener {
             filter("Pizza",pizzaBtn.isSelected)
@@ -92,73 +104,15 @@ class StoreActivity : AppCompatActivity() {
         smoothiesBtn.setOnClickListener {
             filter("Smoothies",smoothiesBtn.isSelected)
         }
-
-
-
-        storeSize = findViewById(R.id.txtStoreSize)
-        recyclerView = findViewById(R.id.recyclerView)
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        storeAdapter = storeAdapter(this, DataManager.stores)
-
-
-        recyclerView.adapter = storeAdapter
-        val loginBtn = findViewById<ImageButton>(R.id.loginBtn)
-
-
-        bottomNavigationView = findViewById(R.id.bottom_navigation)
-        bottomNavigationView.setOnNavigationItemSelectedListener(navigation)
-        bottomNavigationView.menu.getItem(1).isChecked = true
-
-        db = Firebase.firestore
-        auth = Firebase.auth
-        val user = auth.currentUser
-
-
-        /*val user1 = user?.email?.let { User(user!!.uid,"hello","hello2", it,"",0,) }
-        if (user1 != null) {
-            db.collection("Users").document(user!!.uid).set(user1)
+        swipeRefreshLayout.setOnRefreshListener { 
+            getStores()
+            swipeRefreshLayout.isRefreshing = false
         }
-
-         */
-
         loginBtn.setOnClickListener() {
             OpenUserProfile()
         }
 
 
-        /** Queries through the collection-path FoodTrucks in the database to find data changes
-         * If store is online, the storelist is cleared and the online stores are added to the recyclerview
-         */
-
-        db.collection("FoodTrucks").addSnapshotListener(object : EventListener<QuerySnapshot> {
-            override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?) {
-                DataManager.stores.clear()
-                if (value != null) {
-                    for (document in value.documents) {
-                        val store = document.toObject(Store::class.java)
-                        if (store != null) {
-                            if (store.storeStatus) {
-                                DataManager.stores.add(store)
-                                tempStores.add(store)
-
-                            } else if (!store.storeStatus) {
-                                DataManager.stores.remove(store)
-                                tempStores.remove(store)
-                            }
-                        }
-                        storeSize.text = "Result: ${DataManager.stores.size}"
-                        recyclerView.adapter?.notifyDataSetChanged()
-                    }
-                }
-            }
-        })
-
-        /*db.collection("FoodTrucks").document(auth.currentUser!!.uid).set(Store("blabla" ,
-            "","Rai ",
-            10,5,
-            false,auth.currentUser!!.uid,
-            0.0,0.0,
-            "Asian","Vegetarian",true,true,false,false,false,false))*/
 
         storeAdapter.setOnItemClickListener(object : storeAdapter.onItemClickListener {
             override fun onItemClick(position: Int) {
@@ -172,6 +126,8 @@ class StoreActivity : AppCompatActivity() {
                 bundle.putInt("storePriceClass", selectedStore.storePriceClass)
                 bundle.putString("storeImage", selectedStore.storeImage)
                 bundle.putString("storeID", selectedStore.UID)
+                bundle.putString("phoneNumber",selectedStore.phoneNumber)
+                bundle.putString("openHrs)",selectedStore.openHrs)
 
                 val transaction = supportFragmentManager.beginTransaction()
                 transaction.add(R.id.container, storeFragment, "store")
@@ -231,6 +187,33 @@ class StoreActivity : AppCompatActivity() {
         }
     }
 
+    /** Queries through the collection-path FoodTrucks in the database to retrieve documents
+        If store is online, it is added to the stores list which is displayed in recyclerview
+     */
+
+    fun getStores () {
+        db.collection("FoodTrucks").get().addOnSuccessListener { task ->
+            if (task != null) {
+                DataManager.stores.clear()
+                tempStores.clear()
+                disselectAll()
+                for(document in task.documents) {
+                    val store = document.toObject(Store::class.java)
+                    if(store != null) {
+                        if(store.storeStatus) {
+                            DataManager.stores.add(store)
+                            tempStores.add(store)
+                        } else if (!store.storeStatus) {
+                            DataManager.stores.remove(store)
+                            tempStores.remove(store)
+                        }
+                    }
+                }
+                storeSize.text = "Result: ${DataManager.stores.size}"
+                recyclerView.adapter?.notifyDataSetChanged()
+            }
+        }
+    }
 
     fun filter (selectedTag: String, selected: Boolean) {
         DataManager.stores.clear()

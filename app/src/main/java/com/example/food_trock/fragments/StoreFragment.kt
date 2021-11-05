@@ -1,5 +1,6 @@
 package com.example.food_trock.fragments
 
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -42,6 +43,7 @@ class StoreFragment : Fragment() {
     val usersReference = auth.currentUser?.let { db.collection("Users").document(it.uid) }
 
 
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -67,46 +69,28 @@ class StoreFragment : Fragment() {
         var storeDistance: String? = arguments?.getString("storeDistance")
         var storeIMG: String? = arguments?.getString("storeImage")
         var storeID: String? = arguments?.getString("storeID")
+        var openHrs: String? = arguments?.getString("openHrs")
+        var phoneNumber: String? = arguments?.getString("phoneNumber")
 
+
+        refreshList()
         setFavorite()
 
-
+        if (storePriceClass != null) {
+            if (storePriceClass!! <= 70) {
+                txtPriceClass.text = "$"
+            } else if (storePriceClass in 71..105) {
+                txtPriceClass.text = "$$"
+            } else
+                txtPriceClass.text = "$$$"
+        }
+        txtPriceClass.setTextColor(Color.parseColor("#A61830"))
         txtStoreName.text = storeName
-        txtPriceClass.text = storePriceClass.toString()
         txtDistance.text = storeDistance
         if (storeIMG != null) {
             Glide.with(this).load(storeIMG).into(storeImage)
         }
 
-
-
-        storeMenuList.clear()
-        if (storeID != null) {
-            if (storeID.isNotEmpty()) {
-                db.collection("OwnerMenus").document(storeID).collection("Items").get()
-                    .addOnSuccessListener { snapshot ->
-                        if (snapshot != null) {
-                            for (menu in snapshot.documents) {
-                                val item = menu.toObject(MenuItem::class.java)
-                                if (item != null) {
-                                    storeMenuList.add(item)
-                                }
-                            }
-                        }
-                        recyclerView.adapter?.notifyDataSetChanged()
-                    }
-
-
-                if (storePriceClass != null) {
-                    if (storePriceClass <= 70) {
-                        txtPriceClass.text = "$"
-                    } else if (storePriceClass in 71..110) {
-                        txtPriceClass.text = "$$"
-                    } else
-                        txtPriceClass.text = "$$$"
-                }
-            }
-        }
 
         returnBtn.setOnClickListener() {
             activity?.supportFragmentManager?.beginTransaction()?.remove(this)?.commit()
@@ -119,6 +103,29 @@ class StoreFragment : Fragment() {
         return view
 
 
+    }
+
+    fun refreshList () {
+
+        var storeID: String? = arguments?.getString("storeID")
+        storeMenuList.clear()
+        if (storeID != null) {
+            if (storeID!!.isNotEmpty()) {
+                db.collection("OwnerMenus").document(storeID!!).collection("Items").get()
+                    .addOnSuccessListener { snapshot ->
+                        if (snapshot != null) {
+                            for (menu in snapshot.documents) {
+                                val item = menu.toObject(MenuItem::class.java)
+                                if (item != null) {
+                                    storeMenuList.add(item)
+                                }
+                            }
+                        }
+                        recyclerView.adapter?.notifyDataSetChanged()
+                    }
+
+            }
+        }
     }
 
     fun addFavorite(isFavorite: Boolean) {
