@@ -45,16 +45,42 @@
         app:layout_constraintVertical_bias="0.0">
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/bt_korv"
+            android:id="@+id/bt_hotdog"
             android:layout_width="wrap_content"
             android:layout_height="35dp"
             android:layout_marginStart="7dp"
             android:background="@drawable/tagselector"
-            android:text="korv"
+            android:text="Hotdog"
             android:textColor="@color/txt_tag_selector"
-            app:layout_constraintBottom_toBottomOf="@+id/bt_husmanskost"
-            app:layout_constraintStart_toEndOf="@+id/bt_husmanskost"
-            app:layout_constraintTop_toTopOf="@+id/bt_husmanskost" />
+            app:layout_constraintBottom_toBottomOf="@+id/bt_Sandwhich"
+            app:layout_constraintStart_toEndOf="@+id/bt_Sandwhich"
+            app:layout_constraintTop_toTopOf="@+id/bt_Sandwhich" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/bt_Smoothie"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/tagselector"
+            android:text="Smoothie"
+            android:textColor="@color/txt_tag_selector"
+            app:layout_constraintBottom_toBottomOf="@+id/bt_hotdog"
+            app:layout_constraintStart_toEndOf="@+id/bt_hotdog"
+            app:layout_constraintTop_toTopOf="@+id/bt_hotdog"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/bt_Dessert"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/tagselector"
+            android:text="Dessert"
+            android:textColor="@color/txt_tag_selector"
+            app:layout_constraintBottom_toBottomOf="@+id/bt_Smoothie"
+            app:layout_constraintStart_toEndOf="@+id/bt_Smoothie"
+            app:layout_constraintTop_toTopOf="@+id/bt_Smoothie"
+            app:layout_constraintVertical_bias="0.0" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/bt_pizza"
@@ -69,23 +95,23 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/bt_husmanskost"
+            android:id="@+id/bt_Sandwhich"
             android:layout_width="wrap_content"
             android:layout_height="35dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/tagselector"
-            android:text="husmanskost"
+            android:text="Sandwhich"
             android:textColor="@color/txt_tag_selector"
             app:layout_constraintStart_toStartOf="@+id/bt_pizza"
             app:layout_constraintTop_toBottomOf="@+id/bt_pizza" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/bt_asian"
+            android:id="@+id/bt_Japanese"
             android:layout_width="wrap_content"
             android:layout_height="35dp"
             android:layout_marginStart="7dp"
             android:background="@drawable/tagselector"
-            android:text="Asian"
+            android:text="Japanese"
             android:textColor="@color/txt_tag_selector"
             app:layout_constraintBottom_toBottomOf="@+id/bt_kebab"
             app:layout_constraintStart_toEndOf="@+id/bt_kebab"
