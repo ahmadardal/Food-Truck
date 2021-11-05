@@ -68,28 +68,108 @@ class StoreActivity : AppCompatActivity() {
 
 
         pizzaBtn.setOnClickListener {
-            filter("Pizza")
+            if(pizzaBtn.isSelected) {
+                pizzaBtn.isSelected = false
+                DataManager.stores.clear()
+                for (store in tempStores) {
+                    DataManager.stores.add(store)
+                }
+            } else {
+                filter("Pizza")
+            }
+            storeSize.text = "Result: ${DataManager.stores.size}"
+            recyclerView.adapter?.notifyDataSetChanged()
         }
         hotdogBtn.setOnClickListener {
-            filter("Hotdog")
+            if(hotdogBtn.isSelected) {
+                hotdogBtn.isSelected = false
+                DataManager.stores.clear()
+                for (store in tempStores) {
+                    DataManager.stores.add(store)
+                }
+            } else {
+                filter("Hotdog")
+            }
+            storeSize.text = "Result: ${DataManager.stores.size}"
+            recyclerView.adapter?.notifyDataSetChanged()
         }
         kebabBtn.setOnClickListener {
-            filter("Kebab")
+            if(kebabBtn.isSelected) {
+                kebabBtn.isSelected = false
+                DataManager.stores.clear()
+                for (store in tempStores) {
+                    DataManager.stores.add(store)
+                }
+            } else {
+                filter("Kebab")
+            }
+            storeSize.text = "Result: ${DataManager.stores.size}"
+            recyclerView.adapter?.notifyDataSetChanged()
         }
         japaneseBtn.setOnClickListener {
-            filter("Japanese")
+            if(japaneseBtn.isSelected) {
+                japaneseBtn.isSelected = false
+                DataManager.stores.clear()
+                for (store in tempStores) {
+                    DataManager.stores.add(store)
+                }
+            } else {
+                filter("Japanese")
+            }
+            storeSize.text = "Result: ${DataManager.stores.size}"
+            recyclerView.adapter?.notifyDataSetChanged()
         }
         sandwhichBtn.setOnClickListener {
-            filter("Sandwhiches")
+            if(sandwhichBtn.isSelected) {
+                sandwhichBtn.isSelected = false
+                DataManager.stores.clear()
+                for (store in tempStores) {
+                    DataManager.stores.add(store)
+                }
+            } else {
+                filter("Sandwhiches")
+            }
+            storeSize.text = "Result: ${DataManager.stores.size}"
+            recyclerView.adapter?.notifyDataSetChanged()
         }
         vegetarianBtn.setOnClickListener {
-            filter("Vegetarian")
+            if(vegetarianBtn.isSelected) {
+                vegetarianBtn.isSelected = false
+                DataManager.stores.clear()
+                for (store in tempStores) {
+                    DataManager.stores.add(store)
+                }
+            } else {
+                filter("Vegetarian")
+            }
+            storeSize.text = "Result: ${DataManager.stores.size}"
+            recyclerView.adapter?.notifyDataSetChanged()
         }
         dessertBtn.setOnClickListener {
-            filter("Desserts")
+            if(dessertBtn.isSelected) {
+                dessertBtn.isSelected = false
+                DataManager.stores.clear()
+                for (store in tempStores) {
+                    DataManager.stores.add(store)
+                }
+            } else {
+                filter("Desserts")
+            }
+            storeSize.text = "Result: ${DataManager.stores.size}"
+            recyclerView.adapter?.notifyDataSetChanged()
         }
         smoothiesBtn.setOnClickListener {
-            filter("Smoothies")
+            if(smoothiesBtn.isSelected) {
+                smoothiesBtn.isSelected = false
+                DataManager.stores.clear()
+                for (store in tempStores) {
+                    DataManager.stores.add(store)
+                }
+            } else {
+                filter("Smoothies")
+            }
+            storeSize.text = "Result: ${DataManager.stores.size}"
+            recyclerView.adapter?.notifyDataSetChanged()
         }
 
 
