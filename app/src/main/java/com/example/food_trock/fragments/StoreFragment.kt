@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
@@ -25,6 +26,8 @@ import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import de.hdodenhof.circleimageview.CircleImageView
+import kotlinx.android.synthetic.main.favorite_item.*
 import kotlinx.android.synthetic.main.store_fragment.*
 import kotlinx.coroutines.*
 import kotlinx.coroutines.tasks.await
@@ -56,7 +59,7 @@ class StoreFragment : Fragment() {
         recyclerView.adapter = StoreMenuAdapter
 
         val returnBtn = view.findViewById<ImageButton>(R.id.storeReturnBtn)
-        val favBtn = view.findViewById<ImageButton>(R.id.favBtn)
+        val favBtn = view.findViewById<Button>(R.id.favBtn)
         txtStoreName = view.findViewById(R.id.txtStoreName)
         txtPriceClass = view.findViewById(R.id.txtPriceClass)
         txtDistance = view.findViewById(R.id.txtDistance)
@@ -112,9 +115,9 @@ class StoreFragment : Fragment() {
             activity?.supportFragmentManager?.beginTransaction()?.remove(this)?.commit()
         }
 
-        favBtn.setOnClickListener() {
+       /* favBtn.setOnClickListener() {
             isFavorite()
-        }
+        }*/
 
         return view
 
