@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:textAlignment="viewStart"
+    tools:context=".activities.RegisterAccountActivity">
+
+    <ImageView
+        android:id="@+id/createAccountBanner"
+        android:layout_width="0dp"
+        android:layout_height="250dp"
+        android:scaleType="fitXY"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/loginbackground3" />
+
+    <ImageView
+        android:id="@+id/imageView7"
+        android:layout_width="370dp"
+        android:layout_height="420dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.428"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/createAccountBanner"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/loginholderrectangle" />
+
+    <EditText
+        android:id="@+id/fullNameActRA"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/transparent_plaintext2"
+        android:ems="10"
+        android:hint="Full name"
+        android:inputType="textPersonName"
+        android:paddingStart="70dp"
+        android:textAlignment="viewStart"
+        android:textColor="#2E2E2E"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/createAccountBanner" />
+
+    <EditText
+        android:id="@+id/userNameActRA"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/transparent_plaintext2"
+        android:ems="10"
+        android:hint="E-mail"
+        android:inputType="textPersonName"
+        android:paddingStart="70dp"
+        android:textAlignment="viewStart"
+        android:textColor="#2E2E2E"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fullNameActRA" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="66dp"
+        android:layout_height="57dp"
+        app:layout_constraintBottom_toBottomOf="@+id/fullNameActRA"
+        app:layout_constraintStart_toStartOf="@+id/fullNameActRA"
+        app:layout_constraintTop_toTopOf="@+id/fullNameActRA"
+        app:srcCompat="@drawable/usericon" />
+
+    <ImageView
+        android:id="@+id/imageView10"
+        android:layout_width="66dp"
+        android:layout_height="57dp"
+        app:layout_constraintBottom_toBottomOf="@+id/userNameActRA"
+        app:layout_constraintStart_toStartOf="@+id/userNameActRA"
+        app:layout_constraintTop_toTopOf="@+id/userNameActRA"
+        app:srcCompat="@drawable/usericon" />
+
+    <EditText
+        android:id="@+id/passwordConfirmaion"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/transparent_plaintext2"
+        android:ems="10"
+        android:hint="Confirm your password"
+        android:inputType="textPassword"
+        android:paddingStart="70dp"
+        android:textAlignment="viewStart"
+        android:textColor="#2E2E2E"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/passwordActRA" />
+
+    <ImageView
+        android:id="@+id/imageView9"
+        android:layout_width="66dp"
+        android:layout_height="57dp"
+        app:layout_constraintBottom_toBottomOf="@+id/passwordConfirmaion"
+        app:layout_constraintStart_toStartOf="@+id/passwordConfirmaion"
+        app:layout_constraintTop_toTopOf="@+id/passwordConfirmaion"
+        app:srcCompat="@drawable/lock" />
+
+    <TextView
+        android:id="@+id/txtSecondHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:shadowColor="#2B2B2B"
+        android:shadowRadius="2"
+        android:text="Gain access to exclusive perks!"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/txtFirstHeader"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/txtFirstHeader"
+        app:layout_constraintTop_toBottomOf="@+id/txtFirstHeader" />
+
+    <EditText
+        android:id="@+id/passwordActRA"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/transparent_plaintext2"
+        android:ems="10"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:paddingStart="70dp"
+        android:textAlignment="viewStart"
+        android:textColor="#2E2E2E"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/userNameActRA" />
+
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="66dp"
+        android:layout_height="57dp"
+        app:layout_constraintBottom_toBottomOf="@+id/passwordActRA"
+        app:layout_constraintStart_toStartOf="@+id/passwordActRA"
+        app:layout_constraintTop_toTopOf="@+id/passwordActRA"
+        app:srcCompat="@drawable/lock" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/registerButtonActRA"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="38dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/main_background_rounded"
+        android:text="Register"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView7"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/passwordConfirmaion"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/txtFirstHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:shadowColor="#2B2B2B"
+        android:shadowRadius="2"
+        android:text="Create account"
+        android:textColor="@color/white"
+        android:textSize="35sp"
+        android:textStyle="normal|bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.079"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/logoImg"
+        android:layout_width="279dp"
+        android:layout_height="161dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.256"
+        app:srcCompat="@drawable/foodtrack" />
+
+    <TextView
+        android:id="@+id/txtThirdHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:shadowColor="#2B2B2B"
+        android:shadowRadius="2"
+        android:text="+ Food Truck Menus!"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/txtSecondHeader"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/txtSecondHeader"
+        app:layout_constraintTop_toBottomOf="@+id/txtSecondHeader" />
+
+    <TextView
+        android:id="@+id/txtFourthHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:shadowColor="#2B2B2B"
+        android:shadowRadius="2"
+        android:text="+ Add Favorites!"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/txtThirdHeader"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/txtThirdHeader"
+        app:layout_constraintTop_toBottomOf="@+id/txtThirdHeader" />
+
+    <ImageButton
+        android:id="@+id/returnToLoginBtn"
+        android:layout_width="39dp"
+        android:layout_height="39dp"
+        android:background="@android:color/transparent"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="@+id/createAccountBanner"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.037"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.075"
+        app:srcCompat="@drawable/backarrow" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -44,7 +44,7 @@ class OwnerSettingsActivity : AppCompatActivity() {
     lateinit var ownerProfileIMG: ImageView
     lateinit var txtStatus: TextView
     lateinit var txtEmail: TextView
-    lateinit var cardViewMenu: CardView
+    lateinit var txtMyName: TextView
     val foodTruckCollectionRef = Firebase.firestore.collection("FoodTrucks")
     var selectedPhotoUri: Uri? = null
     lateinit var tag1DropDown: AutoCompleteTextView
@@ -95,10 +95,8 @@ class OwnerSettingsActivity : AppCompatActivity() {
         bottomNavigationView.setOnNavigationItemSelectedListener(navigation)
         bottomNavigationView.menu.getItem(3).isChecked = true
 
-        val saveTruckNameBtn = findViewById<Button>(R.id.saveTruckNameBtn)
-        val saveFullNameBtn = findViewById<Button>(R.id.saveFullNameBtn)
-        val savePhoneBtn = findViewById<Button>(R.id.savePhoneBtn)
-        val saveOpenHrsBtn = findViewById<Button>(R.id.saveOpeningHrs)
+        val saveChangesBtn = findViewById<Button>(R.id.saveChangesBtn)
+        val manageMenuBtn = findViewById<Button>(R.id.manageMenusBtn)
         val logOutBTN = findViewById<Button>(R.id.bt_Logout)
         val switchBtn = findViewById<Switch>(R.id.switchBtn)
         txtStatus = findViewById(R.id.txtStatus)
@@ -111,9 +109,9 @@ class OwnerSettingsActivity : AppCompatActivity() {
         editOpenHrs = findViewById(R.id.editOpeningHrs)
         txtEmail = findViewById(R.id.txtEmail)
         ownerProfileIMG = findViewById(R.id.ownerProfileImage)
-        cardViewMenu = findViewById(R.id.cardViewMenus)
         tag1DropDown = findViewById(R.id.autoCompleteTag1)
         tag2DropDown = findViewById(R.id.autoCompleteTag2)
+        txtMyName = findViewById(R.id.txtMyName)
 
 
 
@@ -124,20 +122,11 @@ class OwnerSettingsActivity : AppCompatActivity() {
 
         /** Calls uploadImageToFirebaseStorage function which in turn calls getNewStoreMap.
          */
-        saveTruckNameBtn.setOnClickListener() {
-            getNewStoreMap()
-        }
-        saveFullNameBtn.setOnClickListener() {
-            getNewStoreMap()
-        }
-        savePhoneBtn.setOnClickListener() {
-            getNewStoreMap()
-        }
-        saveOpenHrsBtn.setOnClickListener() {
+        saveChangesBtn.setOnClickListener() {
             getNewStoreMap()
         }
 
-        cardViewMenu.setOnClickListener() {
+        manageMenuBtn.setOnClickListener() {
             val menuFragment = MenuListFragment()
 
             val transaction = supportFragmentManager.beginTransaction()
@@ -318,6 +307,7 @@ class OwnerSettingsActivity : AppCompatActivity() {
                         txtEmail.text = auth.currentUser!!.email
                         editPhoneNumber.setText(store.phoneNumber)
                         editOpenHrs.setText(store.openHrs)
+                        txtMyName.text = store.storeName
                         autoCompleteTag1.setHint(store.category1)
                         autoCompleteTag2.setHint(store.category2)
 

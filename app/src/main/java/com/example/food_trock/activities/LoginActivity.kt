@@ -24,14 +24,14 @@ class LoginActivity : AppCompatActivity() {
 
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);    this.getWindow().setFlags(
             WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.activity_loginscreen)
+        setContentView(R.layout.alternative_loginscreen)
 
         btnLogin = findViewById(R.id.btn_login)
         btnLogin.setOnClickListener {
             signInRegisteredUser()
         }
 
-        createAccount = findViewById(R.id.txtCreateAccount)
+        createAccount = findViewById(R.id.txtSignUp)
         createAccount.setOnClickListener() {
             val intent = Intent(this, RegisterAccountActivity::class.java)
             startActivity(intent)
