@@ -46,8 +46,8 @@ class LoginActivity : AppCompatActivity() {
     private fun signInRegisteredUser() {
 
         // Here we get the text from editText and trim the space
-        val email: String = findViewById<EditText>(R.id.editItemName).text.toString().trim { it <= ' ' }
-        val password: String = findViewById<EditText>(R.id.passwordActI).text.toString().trim { it <= ' ' }
+        val email: String = findViewById<EditText>(R.id.editCreateEmail).text.toString().trim { it <= ' ' }
+        val password: String = findViewById<EditText>(R.id.editPassword).text.toString().trim { it <= ' ' }
 
         if (validateForm(email, password)) {
             // Show the progress dialog.

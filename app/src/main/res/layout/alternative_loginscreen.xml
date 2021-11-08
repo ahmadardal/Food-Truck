@@ -35,60 +35,57 @@
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/loginholderrectangle" />
 
-    <EditText
-        android:id="@+id/editItemName"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/txtInputEmail"
+        style="@style/TextInputLayoutStyleLogin"
         android:layout_width="300dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="50dp"
-        android:background="@drawable/transparent_plaintext2"
-        android:ems="10"
+        android:layout_height="wrap_content"
         android:hint="E-mail"
-        android:inputType="textPersonName"
-        android:paddingStart="70dp"
-        android:textAlignment="viewStart"
-        android:textColor="#2E2E2E"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.504"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:boxCornerRadiusBottomEnd="20dp"
+        app:boxCornerRadiusBottomStart="20dp"
+        app:boxCornerRadiusTopEnd="20dp"
+        app:boxCornerRadiusTopStart="20dp"
+        app:endIconMode="clear_text"
+        app:hintTextAppearance="@style/TextLabel"
+        app:hintTextColor="#EF3D64"
+        app:layout_constraintEnd_toEndOf="@+id/imageView7"
+        app:layout_constraintStart_toStartOf="@+id/imageView7"
+        app:layout_constraintTop_toBottomOf="@+id/logoImg"
+        app:startIconDrawable="@drawable/ic_baseline_person_24">
 
-    <ImageView
-        android:id="@+id/imagewView2"
-        android:layout_width="66dp"
-        android:layout_height="57dp"
-        app:layout_constraintBottom_toBottomOf="@+id/editItemName"
-        app:layout_constraintStart_toStartOf="@+id/editItemName"
-        app:layout_constraintTop_toTopOf="@+id/editItemName"
-        app:srcCompat="@drawable/usericon" />
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editCreateEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-    <EditText
-        android:id="@+id/passwordActI"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputPassword"
+        style="@style/TextInputLayoutStyleLogin"
         android:layout_width="300dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="32dp"
-        android:background="@drawable/transparent_plaintext2"
-        android:ems="10"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
         android:hint="Password"
-        android:inputType="textPassword"
-        android:paddingStart="70dp"
-        android:textAlignment="viewStart"
-        android:textColor="#FF2E2E2E"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editItemName" />
+        app:boxCornerRadiusBottomEnd="20dp"
+        app:boxCornerRadiusBottomStart="20dp"
+        app:boxCornerRadiusTopEnd="20dp"
+        app:boxCornerRadiusTopStart="20dp"
+        app:endIconMode="password_toggle"
+        app:hintTextAppearance="@style/TextLabel"
+        app:hintTextColor="#EF3D64"
+        app:layout_constraintEnd_toEndOf="@+id/imageView7"
+        app:layout_constraintStart_toStartOf="@+id/imageView7"
+        app:layout_constraintTop_toBottomOf="@+id/txtInputEmail"
+        app:startIconDrawable="@drawable/ic_baseline_lock_24">
 
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="66dp"
-        android:layout_height="57dp"
-        app:layout_constraintBottom_toBottomOf="@+id/passwordActI"
-        app:layout_constraintStart_toStartOf="@+id/passwordActI"
-        app:layout_constraintTop_toTopOf="@+id/passwordActI"
-        app:layout_constraintVertical_bias="0.285"
-        app:srcCompat="@drawable/lock" />
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:textSize="18sp" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_login"
@@ -122,7 +119,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
         android:text="Don't have an account?"
-        android:textColor="#FF3C3C3C"
+        android:textColor="#919191"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -156,7 +153,7 @@
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/passwordActI" />
+        app:layout_constraintTop_toBottomOf="@+id/textInputPassword" />
 
     <TextView
         android:id="@+id/txtFirstHeader"

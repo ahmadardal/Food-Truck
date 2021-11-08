@@ -1,16 +1,13 @@
 package com.example.food_trock.activities
 
 import android.app.Dialog
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
-import android.util.Log
 import android.view.Window
 import android.view.WindowManager
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import com.example.food_trock.R
 import com.example.food_trock.firebase.FireStoreClass
 import com.example.food_trock.models.Roles
@@ -24,6 +21,7 @@ class RegisterAccountActivity : AppCompatActivity() {
 
     private lateinit var mProgressDialog: Dialog
     lateinit var btn_signUp: Button
+    lateinit var btn_return: ImageButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,10 +29,17 @@ class RegisterAccountActivity : AppCompatActivity() {
             WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.create_account)
 
-        btn_signUp = findViewById(R.id.registerButtonActRA)
+        btn_signUp = findViewById(R.id.registerBtn)
         btn_signUp.setOnClickListener {
             registerUser()
         }
+        btn_return = findViewById(R.id.returnToLoginBtn)
+        btn_return.setOnClickListener() {
+            val intent = Intent(this,LoginActivity::class.java)
+            startActivity(intent)
+        }
+
+
     }
 
     /**
@@ -42,10 +47,10 @@ class RegisterAccountActivity : AppCompatActivity() {
      */
     private fun registerUser() {
         // Here we get the text from editText and trim the space
-        val name: String = findViewById<EditText>(R.id.fullNameActRA).text.toString().trim { it <= ' ' }
-        val email: String = findViewById<EditText>(R.id.userNameActRA).text.toString().trim { it <= ' ' }
-        val password: String = findViewById<EditText>(R.id.passwordActRA).text.toString().trim { it <= ' ' }
-        val passwordConfirmed: String = findViewById<EditText>(R.id.passwordConfirmaion).text.toString().trim { it <= ' ' }
+        val name: String = findViewById<EditText>(R.id.editFullName).text.toString().trim { it <= ' ' }
+        val email: String = findViewById<EditText>(R.id.editCreateEmail).text.toString().trim { it <= ' ' }
+        val password: String = findViewById<EditText>(R.id.editPassword).text.toString().trim { it <= ' ' }
+        val passwordConfirmed: String = findViewById<EditText>(R.id.editConfirmPassword).text.toString().trim { it <= ' ' }
         var assignedRole : Roles = Roles(admin = false, client = true, foodTruckOwner = false)
 
         if (validateForm(name, email, password, passwordConfirmed)) {

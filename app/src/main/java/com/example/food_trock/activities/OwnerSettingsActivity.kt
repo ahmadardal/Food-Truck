@@ -122,6 +122,7 @@ class OwnerSettingsActivity : AppCompatActivity() {
 
         /** Calls uploadImageToFirebaseStorage function which in turn calls getNewStoreMap.
          */
+
         saveChangesBtn.setOnClickListener() {
             getNewStoreMap()
         }

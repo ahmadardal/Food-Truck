@@ -25,8 +25,8 @@
 
     <ImageButton
         android:id="@+id/backBtn"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:background="@drawable/color_transparent"
         android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -35,7 +35,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.022"
-        app:srcCompat="@drawable/returnarrow" />
+        app:srcCompat="@drawable/backarrow" />
 
     <FrameLayout
         android:id="@+id/addFoodContainer"
