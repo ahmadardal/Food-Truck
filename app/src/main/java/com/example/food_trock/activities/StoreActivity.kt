@@ -50,10 +50,10 @@ class StoreActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         this.requestWindowFeature(Window.FEATURE_NO_TITLE); this.getWindow().setFlags(
-            WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN
-        );
+            WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
+
+        setTheme(R.style.Theme_FoodTruck)
         setContentView(R.layout.activity_store)
 
         pizzaBtn = findViewById(R.id.bt_pizza)
