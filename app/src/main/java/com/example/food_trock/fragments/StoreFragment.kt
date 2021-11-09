@@ -37,6 +37,9 @@ class StoreFragment : Fragment() {
     lateinit var txtStoreName: TextView
     lateinit var txtPriceClass: TextView
     lateinit var txtDistance: TextView
+    lateinit var txtPhoneNumber: TextView
+    lateinit var txtOpeningHours: TextView
+    lateinit var txtStoreRating: TextView
     lateinit var storeImage: ImageView
     lateinit var recyclerView: RecyclerView
     val storeMenuList = mutableListOf<MenuItem>()
@@ -64,34 +67,16 @@ class StoreFragment : Fragment() {
         txtStoreName = view.findViewById(R.id.txtStoreName)
         txtPriceClass = view.findViewById(R.id.txtPriceClass)
         txtDistance = view.findViewById(R.id.txtDistance)
+        txtPhoneNumber = view.findViewById(R.id.txtPhoneNumber)
+        txtOpeningHours = view.findViewById(R.id.txtOpeningHours)
+        txtStoreRating = view.findViewById(R.id.txtStoreRating)
         storeImage = view.findViewById(R.id.imagewView2)
 
-        var storeName: String? = arguments?.getString("storeName")
-        var storePriceClass: Int? = arguments?.getInt("storePriceClass")
-        var storeDistance: String? = arguments?.getString("storeDistance")
-        var storeIMG: String? = arguments?.getString("storeImage")
-        var storeID: String? = arguments?.getString("storeID")
-        var openHrs: String? = arguments?.getString("openHrs")
-        var phoneNumber: String? = arguments?.getString("phoneNumber")
 
-
-        refreshList()
+        setStoreInfo()
         setFavorite()
+        refreshList()
 
-        if (storePriceClass != null) {
-            if (storePriceClass!! <= 70) {
-                txtPriceClass.text = "$"
-            } else if (storePriceClass in 71..105) {
-                txtPriceClass.text = "$$"
-            } else
-                txtPriceClass.text = "$$$"
-        }
-        txtPriceClass.setTextColor(Color.parseColor("#A61830"))
-        txtStoreName.text = storeName
-        txtDistance.text = storeDistance
-        if (storeIMG != null) {
-            Glide.with(this).load(storeIMG).into(storeImage)
-        }
 
 
         returnBtn.setOnClickListener() {
@@ -216,6 +201,37 @@ class StoreFragment : Fragment() {
         }
 
 
+    }
+
+    fun setStoreInfo() {
+
+        val storeName: String? = arguments?.getString("storeName")
+        val storePriceClass: Int? = arguments?.getInt("storePriceClass")
+        val storeDistance: String? = arguments?.getString("storeDistance")
+        val storeIMG: String? = arguments?.getString("storeImage")
+        var storeID: String? = arguments?.getString("storeID")
+        val openHrs: String? = arguments?.getString("openHrs")
+        val phoneNumber: String? = arguments?.getString("phoneNumber")
+        val storeRating: Float? = arguments?.getFloat("rating")
+
+        if (storePriceClass != null) {
+            if (storePriceClass!! <= 70) {
+                txtPriceClass.text = "$"
+            } else if (storePriceClass in 71..105) {
+                txtPriceClass.text = "$$"
+            } else
+                txtPriceClass.text = "$$$"
+        }
+        txtPriceClass.setTextColor(Color.parseColor("#A61830"))
+        txtStoreName.text = storeName
+        txtDistance.text = storeDistance
+        txtOpeningHours.text = openHrs
+        txtPhoneNumber.text = phoneNumber
+        txtStoreRating.text = storeRating.toString()
+
+        if (storeIMG != null) {
+            Glide.with(this).load(storeIMG).into(storeImage)
+        }
     }
 
 

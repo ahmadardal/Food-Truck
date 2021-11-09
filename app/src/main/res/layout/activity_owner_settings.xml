@@ -28,7 +28,7 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardViewOpenHrs"
                 android:layout_width="0dp"
-                android:layout_height="80dp"
+                android:layout_height="95dp"
                 android:layout_marginTop="5dp"
                 app:cardBackgroundColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -123,8 +123,8 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardViewPhone"
-                android:layout_width="411dp"
-                android:layout_height="80dp"
+                android:layout_width="0dp"
+                android:layout_height="95dp"
                 android:layout_marginTop="5dp"
                 app:cardBackgroundColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -171,7 +171,7 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardViewName"
                 android:layout_width="0dp"
-                android:layout_height="80dp"
+                android:layout_height="95dp"
                 android:layout_marginTop="5dp"
                 app:cardBackgroundColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -206,6 +206,7 @@
                             android:id="@+id/editFullName"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:maxLength="14"
                             android:textSize="18sp" />
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -216,7 +217,7 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardViewTruck"
                 android:layout_width="0dp"
-                android:layout_height="85dp"
+                android:layout_height="95dp"
                 android:layout_marginTop="5dp"
                 app:cardBackgroundColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -238,6 +239,8 @@
                         app:boxCornerRadiusBottomStart="12dp"
                         app:boxCornerRadiusTopEnd="12dp"
                         app:boxCornerRadiusTopStart="12dp"
+                        app:counterEnabled="true"
+                        app:counterMaxLength="15"
                         app:hintTextAppearance="@style/TextLabel"
                         app:hintTextColor="#434343"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -251,6 +254,7 @@
                             android:id="@+id/editTruckName"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:maxLength="15"
                             android:textSize="18sp" />
                     </com.google.android.material.textfield.TextInputLayout>
 
