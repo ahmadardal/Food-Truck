@@ -121,13 +121,13 @@
                 android:progressTint="#A61830"
                 android:scaleX="1.4"
                 android:scaleY="1.4"
+                android:stepSize="0.1"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/txtPriceClass"
-                app:layout_constraintHorizontal_bias="0.319"
-                app:layout_constraintStart_toStartOf="@+id/txtDistance"
+                app:layout_constraintEnd_toStartOf="@+id/imageFoodRecycle"
+                app:layout_constraintHorizontal_bias="0.198"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txtDistance"
-                app:layout_constraintVertical_bias="0.107"
-                android:stepSize="0.1"/>
+                app:layout_constraintVertical_bias="0.0" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
