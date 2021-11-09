@@ -1,18 +1,9 @@
 package com.example.food_trock.activities
 
-import android.app.Activity
-import android.content.Context
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.Canvas
+import android.graphics.*
 import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.util.DisplayMetrics
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.TextView
-import androidx.annotation.DrawableRes
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
@@ -26,7 +17,6 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import de.hdodenhof.circleimageview.CircleImageView
 
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
@@ -56,6 +46,19 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
+            mMap.setOnMarkerClickListener { marker ->
+
+                if (marker.isInfoWindowShown) {
+                    for (store in DataManager.stores) {
+                        if (store.storeName == marker.tag) {
+
+                        }
+                    }
+                } else {
+                    marker.showInfoWindow()
+                }
+                true
+            }
         getStores()
         if (DataManager.currentLng != "" && DataManager.currentLat != null && firstTime) {
             firstTime = false
@@ -63,40 +66,11 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 LatLng(DataManager.currentLat.toDouble(), DataManager.currentLng.toDouble()),
                 "Your are here",
                 null
-            )
+            , null)
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(DataManager.currentLat.toDouble(), DataManager.currentLng.toDouble()), 15f))
         } else {
             //update marker position
         }
-    }
-
-    fun addCustomMarker(context: Context, resource: Bitmap?, _name: String?): Bitmap {
-        val marker: View =
-            (context.getSystemService(LAYOUT_INFLATER_SERVICE) as LayoutInflater).inflate(
-                com.example.food_trock.R.layout.custom_marker_layout,
-                null
-            )
-        val markerImage = marker.findViewById(com.example.food_trock.R.id.user_dp) as CircleImageView
-       // markerImage.setImageResource(resource)
-        markerImage.setImageBitmap(resource)
-        val txt_name = marker.findViewById(com.example.food_trock.R.id.name) as TextView
-        txt_name.text = _name
-        val displayMetrics = DisplayMetrics()
-        (context as Activity).windowManager.defaultDisplay.getMetrics(displayMetrics)
-        marker.setLayoutParams(ViewGroup.LayoutParams(52, ViewGroup.LayoutParams.WRAP_CONTENT))
-        marker.measure(displayMetrics.widthPixels, displayMetrics.heightPixels)
-        marker.layout(0, 0, displayMetrics.widthPixels, displayMetrics.heightPixels)
-        marker.buildDrawingCache()
-        val bitmap = Bitmap.createBitmap(
-            marker.getMeasuredWidth(),
-            marker.getMeasuredHeight(),
-            Bitmap.Config.ARGB_8888
-        )
-        val canvas = Canvas(bitmap)
-        marker.draw(canvas)
-
-        return bitmap;
-
     }
 
     fun getStores() {
@@ -109,9 +83,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                         .asBitmap()
                         .load(store.storeImage)
                         .fitCenter()
-                        .into(object : CustomTarget<Bitmap>(100, 100){
+                        .into(object : CustomTarget<Bitmap>(200, 200){
                             override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
-                                addMarker(storeLatLng, store.storeName, resource)
+                                addMarker(storeLatLng, store.storeName, resource, store.storeName)
                             }
                             override fun onLoadCleared(placeholder: Drawable?) {
                                 // this is called when imageView is cleared on lifecycle call or for
@@ -127,11 +101,36 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         }
     }
 
-    fun addMarker(latLng: LatLng, title :String, image: Bitmap?){
+    private fun getCroppedBitmap(bitmap: Bitmap): Bitmap? {
+        val output = Bitmap.createBitmap(
+            bitmap.width,
+            bitmap.height, Bitmap.Config.ARGB_8888
+        )
+        val canvas = Canvas(output)
+        val color = -0xbdbdbe
+        val paint = Paint()
+        val rect = Rect(0, 0, bitmap.width, bitmap.height)
+        paint.isAntiAlias = true
+        canvas.drawARGB(0, 0, 0, 0)
+        paint.color = color
+        // canvas.drawRoundRect(rectF, roundPx, roundPx, paint);
+        canvas.drawCircle(
+            (bitmap.width / 2).toFloat(), (bitmap.height / 2).toFloat(), (
+                    bitmap.width / 4).toFloat(), paint
+        )
+        paint.xfermode = PorterDuffXfermode(PorterDuff.Mode.SRC_IN)
+        canvas.drawBitmap(bitmap, rect, rect, paint)
+        //Bitmap _bmp = Bitmap.createScaledBitmap(output, 60, 60, false);
+        //return _bmp;
+        return output
+    }
+
+    fun addMarker(latLng: LatLng, title :String, image: Bitmap?, tag: String?){
         if (image != null) {
-            val Icon: BitmapDescriptor = BitmapDescriptorFactory.fromBitmap(addCustomMarker(this, image, title))
+            val Icon: BitmapDescriptor = BitmapDescriptorFactory.fromBitmap(getCroppedBitmap(image))
             val markerOptions = MarkerOptions().position(latLng).title(title).icon(Icon)
-            mMap.addMarker(markerOptions)
+
+            mMap.addMarker(markerOptions).setTag(tag)
         } else {
             val markerOptions = MarkerOptions().position(latLng).title(title)
             mMap.addMarker(markerOptions)

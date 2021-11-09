@@ -49,8 +49,8 @@ class MyLocation (var context: Context, var activity: Activity) {
 
         val requestLocation = LocationRequest()
         requestLocation.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
-        requestLocation.interval = 50
-        requestLocation.fastestInterval = 50
+        requestLocation.interval = 1
+        requestLocation.fastestInterval = 1
 
         locationProviderClient.requestLocationUpdates(
             requestLocation, callback, Looper.myLooper()
