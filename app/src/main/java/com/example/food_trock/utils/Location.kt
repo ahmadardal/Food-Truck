@@ -7,6 +7,7 @@ import android.content.pm.PackageManager
 import android.location.LocationManager
 import android.os.Looper
 import android.provider.Settings
+import android.util.Log
 import androidx.core.app.ActivityCompat
 import com.example.food_trock.DataManager
 import com.google.android.gms.location.LocationAvailability
@@ -14,6 +15,7 @@ import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.*
+import com.google.android.libraries.places.api.Places
 
 class MyLocation (var context: Context, var activity: Activity) {
     private var locationProviderClient: FusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(activity)
@@ -24,8 +26,10 @@ class MyLocation (var context: Context, var activity: Activity) {
     }
 
     fun getLocation() {
+        Places.initialize(context, "AIzaSyBhTEjTc18EJg3UiLW_x8GemJNgu5Ljhdw")
         if (!isLocationEnabled()) {
             activity.startActivity(Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS))
+            fetchLocation()
         } else {
             fetchLocation()
         }
@@ -60,7 +64,7 @@ class MyLocation (var context: Context, var activity: Activity) {
 
         override fun onLocationResult(result: LocationResult) {
             super.onLocationResult(result)
-
+            Log.e("TEST123", "test123")
             val lastLocation = result?.lastLocation
             DataManager.currentLat = lastLocation.latitude.toString()
             DataManager.currentLng = lastLocation.longitude.toString()

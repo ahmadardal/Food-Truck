@@ -1,25 +1,23 @@
 package com.example.food_trock.activities
 
-import android.R.attr.height
-import android.R.attr.width
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.graphics.Canvas
 import android.graphics.drawable.Drawable
-import android.location.LocationManager
 import android.os.Bundle
-import android.os.Looper
-import android.provider.Settings
-import android.util.Log
+import android.util.DisplayMetrics
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.TextView
+import androidx.annotation.DrawableRes
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.FutureTarget
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
 import com.example.food_trock.DataManager
-import com.example.food_trock.R
 import com.example.food_trock.databinding.ActivityMapsBinding
 import com.google.android.gms.location.*
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -27,8 +25,8 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
-import com.google.android.libraries.places.api.Places
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import de.hdodenhof.circleimageview.CircleImageView
 
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
@@ -46,20 +44,20 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         setContentView(binding.root)
 
         val mapFragment = supportFragmentManager
-            .findFragmentById(R.id.map) as SupportMapFragment
+            .findFragmentById(com.example.food_trock.R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
         locationProviderClient = LocationServices.getFusedLocationProviderClient(this)
 
         getButtonNavigationBar()
-        Places.initialize(applicationContext, "AIzaSyBhTEjTc18EJg3UiLW_x8GemJNgu5Ljhdw")
+
 
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
         getStores()
-        if (firstTime) {
+        if (DataManager.currentLng != "" && DataManager.currentLat != null && firstTime) {
             firstTime = false
             addMarker(
                 LatLng(DataManager.currentLat.toDouble(), DataManager.currentLng.toDouble()),
@@ -70,6 +68,35 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         } else {
             //update marker position
         }
+    }
+
+    fun addCustomMarker(context: Context, resource: Bitmap?, _name: String?): Bitmap {
+        val marker: View =
+            (context.getSystemService(LAYOUT_INFLATER_SERVICE) as LayoutInflater).inflate(
+                com.example.food_trock.R.layout.custom_marker_layout,
+                null
+            )
+        val markerImage = marker.findViewById(com.example.food_trock.R.id.user_dp) as CircleImageView
+       // markerImage.setImageResource(resource)
+        markerImage.setImageBitmap(resource)
+        val txt_name = marker.findViewById(com.example.food_trock.R.id.name) as TextView
+        txt_name.text = _name
+        val displayMetrics = DisplayMetrics()
+        (context as Activity).windowManager.defaultDisplay.getMetrics(displayMetrics)
+        marker.setLayoutParams(ViewGroup.LayoutParams(52, ViewGroup.LayoutParams.WRAP_CONTENT))
+        marker.measure(displayMetrics.widthPixels, displayMetrics.heightPixels)
+        marker.layout(0, 0, displayMetrics.widthPixels, displayMetrics.heightPixels)
+        marker.buildDrawingCache()
+        val bitmap = Bitmap.createBitmap(
+            marker.getMeasuredWidth(),
+            marker.getMeasuredHeight(),
+            Bitmap.Config.ARGB_8888
+        )
+        val canvas = Canvas(bitmap)
+        marker.draw(canvas)
+
+        return bitmap;
+
     }
 
     fun getStores() {
@@ -102,7 +129,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     fun addMarker(latLng: LatLng, title :String, image: Bitmap?){
         if (image != null) {
-            val Icon: BitmapDescriptor = BitmapDescriptorFactory.fromBitmap(image)
+            val Icon: BitmapDescriptor = BitmapDescriptorFactory.fromBitmap(addCustomMarker(this, image, title))
             val markerOptions = MarkerOptions().position(latLng).title(title).icon(Icon)
             mMap.addMarker(markerOptions)
         } else {
@@ -116,30 +143,30 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     fun getButtonNavigationBar(){
-        bottomNavigationView = findViewById(R.id.bottom_navigation)
+        bottomNavigationView = findViewById(com.example.food_trock.R.id.bottom_navigation)
         bottomNavigationView.menu.getItem(2).isChecked = true
 
         val navigation = BottomNavigationView.OnNavigationItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.favourites -> {
+                com.example.food_trock.R.id.favourites -> {
                     bottomNavigationView.menu.getItem(2).isChecked = false
                     val intent = Intent(this@MapsActivity, FavouritesActivity::class.java)
                     startActivity(intent)
                     return@OnNavigationItemSelectedListener true
                 }
-                R.id.trucks -> {
+                com.example.food_trock.R.id.trucks -> {
                     bottomNavigationView.menu.getItem(2).isChecked = false
                     val intent = Intent(this@MapsActivity, StoreActivity::class.java)
                     startActivity(intent)
                     return@OnNavigationItemSelectedListener true
                 }
-                R.id.settings -> {
+                com.example.food_trock.R.id.settings -> {
                     bottomNavigationView.menu.getItem(2).isChecked = false
                     val intent = Intent(this@MapsActivity, OwnerSettingsActivity::class.java)
                     startActivity(intent)
                     return@OnNavigationItemSelectedListener true
                 }
-                R.id.maps -> {
+                com.example.food_trock.R.id.maps -> {
                     return@OnNavigationItemSelectedListener false
                 }
             }

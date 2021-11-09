@@ -30,9 +30,7 @@ class storeAdapter(val context: Context, val storeList: List<Store> ) :
     }
 
     fun setOnItemClickListener(listener: onItemClickListener) {
-
         mListener = listener
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): storeViewHolder {

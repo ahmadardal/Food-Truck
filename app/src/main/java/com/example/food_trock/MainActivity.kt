@@ -29,10 +29,11 @@ class MainActivity : AppCompatActivity() {
 
         Places.initialize(applicationContext, "AIzaSyBhTEjTc18EJg3UiLW_x8GemJNgu5Ljhdw")
 
-        val myLocation = MyLocation(applicationContext, this)
-        myLocation.getLocation()
         var intent = Intent(this, StoreActivity::class.java)
         startActivity(intent)
+
+        val myLocation = MyLocation(applicationContext, this)
+        myLocation.getLocation()
 
     }
 }
