@@ -4,12 +4,15 @@ import android.content.Intent
 import android.graphics.*
 import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
 import com.example.food_trock.DataManager
+import com.example.food_trock.R
 import com.example.food_trock.databinding.ActivityMapsBinding
+import com.example.food_trock.fragments.StoreFragment
 import com.google.android.gms.location.*
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -47,13 +50,24 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
             mMap.setOnMarkerClickListener { marker ->
+                for (store in DataManager.stores) {
+                    if (store.storeName == marker.tag) {
+                        Log.e("test", "test")
+                        val storeFragment = StoreFragment()
+                        val bundle = Bundle()
+                        storeFragment.arguments = bundle
+                        bundle.putString("storeName", store.storeName)
+                        bundle.putInt("storePriceClass", store.storePriceClass)
+                        bundle.putString("storeImage", store.storeImage)
+                        bundle.putString("storeID", store.UID)
 
-                if (marker.isInfoWindowShown) {
-                    for (store in DataManager.stores) {
-                        if (store.storeName == marker.tag) {
-
-                        }
+                        val transaction = supportFragmentManager.beginTransaction()
+                        transaction.add(R.id.container, storeFragment, "store")
+                        transaction.commit()
                     }
+                }
+                if (marker.isInfoWindowShown) {
+
                 } else {
                     marker.showInfoWindow()
                 }

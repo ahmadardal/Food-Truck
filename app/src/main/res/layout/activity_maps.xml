@@ -35,6 +35,16 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:context=".activities.MapsActivity" />
 
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:elevation="5sp"
+        tools:layout_editor_absoluteX="6dp"
+        tools:layout_editor_absoluteY="333dp">
+
+    </FrameLayout>
+
     <!-- Button Bar -->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
