@@ -40,7 +40,7 @@ class MenuListFragment: Fragment() {
         var addMenuAdapter = menuListAdapter(view.context, DataManager.menus)
         recyclerView.adapter = addMenuAdapter
 
-        val addMenuBtn = view.findViewById<Button>(R.id.saveTruckNameBtn)
+        val addMenuBtn = view.findViewById<ImageButton>(R.id.addMenuBtn)
         val backBtn = view.findViewById<ImageButton>(R.id.backBtn)
         db = Firebase.firestore
         auth = Firebase.auth

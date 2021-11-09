@@ -53,7 +53,7 @@ class StoreActivity : AppCompatActivity() {
         this.requestWindowFeature(Window.FEATURE_NO_TITLE); this.getWindow().setFlags(
             WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
 
-        setTheme(R.style.Theme_FoodTruck)
+        setTheme(R.style.AppTheme)
         setContentView(R.layout.activity_store)
 
         pizzaBtn = findViewById(R.id.bt_pizza)
@@ -217,12 +217,14 @@ class StoreActivity : AppCompatActivity() {
 
     fun filter (selectedTag: String, selected: Boolean) {
         DataManager.stores.clear()
-        selectAndDisselectTags(selectedTag,selected)
-        for(store in tempStores) {
-            if(store.category1 == selectedTag || store.category2 == selectedTag) {
-                DataManager.stores.add(store)
+        if(!selected) {
+            for (store in tempStores) {
+                if (store.category1 == selectedTag || store.category2 == selectedTag) {
+                    DataManager.stores.add(store)
+                }
             }
         }
+        selectAndDisselectTags(selectedTag,selected)
         storeSize.text = "Result: ${DataManager.stores.size}"
         recyclerView.adapter?.notifyDataSetChanged()
     }
@@ -247,7 +249,6 @@ class StoreActivity : AppCompatActivity() {
                 "Smoothies" -> smoothiesBtn.isSelected = true
             }
         }
-
     }
 
     private fun disselectAll () {

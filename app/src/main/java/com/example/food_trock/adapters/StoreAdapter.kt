@@ -1,6 +1,7 @@
 package com.example.food_trock.adapters
 
 import android.content.Context
+import android.media.Rating
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -42,6 +43,7 @@ class storeAdapter(val context: Context, val storeList: List<Store> ) :
         Glide.with(context).load(currentItem.storeImage).into(holder.storeImage)
         holder.txtName.text = currentItem.storeName
         holder.txtPriceClass.text = currentItem.storePriceClass.toString()
+        holder.ratingBar.rating = currentItem.storeRating
 
         if(currentItem.category2 == "Empty" && currentItem.category1 != "Empty") {
             holder.txtCategory.text = "${currentItem.category1}"
@@ -76,6 +78,7 @@ class storeAdapter(val context: Context, val storeList: List<Store> ) :
         val storeImage: ImageView = itemView.findViewById(R.id.storeImage)
         val txtName: TextView = itemView.findViewById(R.id.txtName)
         val txtPriceClass: TextView = itemView.findViewById(R.id.txtPriceClass)
+        val ratingBar: RatingBar = itemView.findViewById(R.id.storeRatingBar)
         val txtDistance: TextView = itemView.findViewById(R.id.txtDistance)
        // val ratingBar: RatingBar = itemView.findViewById(R.id.ratingBar)
 

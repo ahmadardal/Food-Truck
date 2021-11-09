@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -27,6 +28,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.store_fragment.*
+import kotlinx.android.synthetic.main.store_item.*
 import kotlinx.coroutines.*
 import kotlinx.coroutines.tasks.await
 
@@ -136,11 +138,12 @@ class StoreFragment : Fragment() {
         if (isFavorite) {
             usersReference?.update("favorites", FieldValue.arrayRemove(storeID))
 
-            context?.let { ContextCompat.getColor(it, R.color.transparentTint) }?.let {
+            context?.let { ContextCompat.getColor(it, R.color.white) }?.let {
                 favBtn.setColorFilter(
                     it, android.graphics.PorterDuff.Mode.SRC_IN
                 )
             }
+            cardViewFavorite.setCardBackgroundColor(Color.parseColor("#EF3D64"))
 
         } else if (!isFavorite) {
 
@@ -151,6 +154,7 @@ class StoreFragment : Fragment() {
                     it, android.graphics.PorterDuff.Mode.SRC_IN
                 )
             }
+            cardViewFavorite.setCardBackgroundColor(Color.parseColor("#FFFFFF"))
         }
 
     }
@@ -176,6 +180,8 @@ class StoreFragment : Fragment() {
                                 it, android.graphics.PorterDuff.Mode.SRC_IN
                             )
                         }
+                        cardViewFavorite.setCardBackgroundColor(Color.parseColor("#FFFFFF"))
+
                         addFavorite(true)
                         Log.e("!!!","true")
                         break
@@ -203,6 +209,7 @@ class StoreFragment : Fragment() {
                                 it, android.graphics.PorterDuff.Mode.SRC_IN
                             )
                         }
+                        cardViewFavorite.setCardBackgroundColor(Color.parseColor("#FFFFFF"))
                     }
                 }
             }

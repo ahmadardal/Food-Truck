@@ -76,6 +76,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="#333333"
+                    android:backgroundTint="#F1F1F1"
                     app:srcCompat="@drawable/ic_baseline_remove" />
             </androidx.cardview.widget.CardView>
 

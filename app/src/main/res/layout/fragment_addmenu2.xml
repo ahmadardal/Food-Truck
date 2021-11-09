@@ -33,7 +33,7 @@
         style="@style/TextInputLayoutStyleLogin"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="38dp"
+        android:layout_marginTop="35dp"
         android:hint="Item Price"
         app:boxCornerRadiusBottomEnd="20dp"
         app:boxCornerRadiusBottomStart="20dp"
@@ -58,7 +58,7 @@
         style="@style/TextInputLayoutStyleLogin"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="38dp"
+        android:layout_marginTop="35dp"
         android:hint="Item Name"
         app:boxCornerRadiusBottomEnd="20dp"
         app:boxCornerRadiusBottomStart="20dp"
@@ -104,7 +104,7 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout2"
-        app:layout_constraintVertical_bias="0.314" />
+        app:layout_constraintVertical_bias="0.401" />
 
     <ImageButton
         android:id="@+id/returnBtn"
