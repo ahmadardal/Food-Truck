@@ -12,8 +12,12 @@ import android.os.Bundle
 import android.os.Looper
 import android.provider.Settings
 import android.util.Log
+import android.view.View
+import android.widget.ImageView
+import android.widget.RatingBar
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
+import androidx.cardview.widget.CardView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.FutureTarget
 import com.bumptech.glide.request.target.CustomTarget
@@ -37,6 +41,11 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var binding: ActivityMapsBinding
     private lateinit var bottomNavigationView: BottomNavigationView
     private lateinit var locationProviderClient: FusedLocationProviderClient
+    lateinit var cardStoreInfo: CardView
+    lateinit var cardStoreImage: ImageView
+    lateinit var cardStoreName: TextView
+    lateinit var cardRating: RatingBar
+    lateinit var cardRatingTxt: TextView
     private var firstTime: Boolean = true
 
 
@@ -52,18 +61,44 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         locationProviderClient = LocationServices.getFusedLocationProviderClient(this)
 
         getButtonNavigationBar()
-        Places.initialize(applicationContext, "AIzaSyBhTEjTc18EJg3UiLW_x8GemJNgu5Ljhdw")
+
+        cardStoreInfo = findViewById(R.id.cardStoreInfo)
+        cardStoreImage = findViewById(R.id.cardStoreImage)
+        cardStoreName = findViewById(R.id.cardStoreName)
+        cardRating = findViewById(R.id.cardRatingBar)
+        cardRatingTxt = findViewById(R.id.txtCardRating)
+
 
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
+            mMap.setOnMarkerClickListener { marker ->
+                for (store in DataManager.stores) {
+                    if (store.storeName == marker.tag) {
+                        cardStoreInfo.visibility = View.VISIBLE
+                        Glide.with(this).load(store.storeImage).into(cardStoreImage)
+                        cardStoreName.text = store.storeName
+                        cardRating.rating = store.storeRating.toFloat()
+                        cardRatingTxt.text = store.storeRating.toString()
+                    }
+                }
+                if (marker.isInfoWindowShown) {
+
+                } else {
+                    marker.showInfoWindow()
+                }
+                true
+            }
+        mMap.setOnMapClickListener {
+            cardStoreInfo.visibility = View.GONE
+        }
         getStores()
         if (firstTime) {
             firstTime = false
             addMarker(
                 LatLng(DataManager.currentLat.toDouble(), DataManager.currentLng.toDouble()),
-                "Your are here",
+                "You are here",
                 null
             )
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(DataManager.currentLat.toDouble(), DataManager.currentLng.toDouble()), 15f))
