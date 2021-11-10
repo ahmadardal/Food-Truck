@@ -2,6 +2,7 @@ package com.example.food_trock.firebase
 
 import android.app.Activity
 import android.util.Log
+import com.example.food_trock.DataManager
 import com.example.food_trock.activities.AddNewAdminActivity
 import com.example.food_trock.activities.AdminAddFoodTruckActivity
 import com.example.food_trock.activities.LoginActivity
@@ -166,6 +167,7 @@ class FireStoreClass {
 
                 // Here we have received the document snapshot which is converted into the User Data model object.
                 val loggedInUser = document.toObject(User::class.java)!!
+                DataManager.currentUserId = getCurrentUserID()
 
                 // Here call a function of base activity for transferring the result to it.
                 when (activity) {

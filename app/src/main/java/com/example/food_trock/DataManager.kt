@@ -13,5 +13,6 @@ object DataManager {
     val tempStores = mutableListOf<Store>()
     var currentLat: String = ""
     var currentLng: String = ""
+    var currentUserId: String = "wTkOJxu0wngNQ5f4zVw2PheRQsq1"
 
 }

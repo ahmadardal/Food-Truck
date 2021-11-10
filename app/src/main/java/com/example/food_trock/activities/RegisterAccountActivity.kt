@@ -55,7 +55,7 @@ class RegisterAccountActivity : AppCompatActivity() {
         var assignedRole : Roles = Roles(admin = false, client = true, foodTruckOwner = false)
 
         if (validateForm(name, email, password, passwordConfirmed)) {
-            //اگه فیلد ها خالی نبود شرط داخل کد اجرا میشود
+
             // Show the progress dialog.
             showProgressDialog(resources.getString(R.string.please_wait))
             FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
