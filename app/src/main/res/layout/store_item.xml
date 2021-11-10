@@ -109,15 +109,25 @@
                 app:layout_constraintStart_toEndOf="@+id/txtDistance"
                 app:srcCompat="@drawable/slash" />
 
-            <ImageView
-                android:id="@+id/ratingBar"
-                android:layout_width="94dp"
-                android:layout_height="19dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginBottom="20dp"
+            <RatingBar
+                android:id="@+id/storeRatingBar"
+                style="@style/Widget.AppCompat.RatingBar.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:max="5"
+                android:numStars="5"
+                android:progressBackgroundTint="#F8BAB0"
+                android:progressTint="#A61830"
+                android:scaleX="1.4"
+                android:scaleY="1.4"
+                android:stepSize="0.1"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/imageFoodRecycle"
+                app:layout_constraintHorizontal_bias="0.198"
                 app:layout_constraintStart_toStartOf="parent"
-                app:srcCompat="@drawable/rating2" />
+                app:layout_constraintTop_toBottomOf="@+id/txtDistance"
+                app:layout_constraintVertical_bias="0.0" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

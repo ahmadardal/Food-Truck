@@ -1,7 +1,8 @@
 package com.example.food_trock.adapters
 
 import android.content.Context
-import android.location.Location.distanceBetween
+import android.media.Rating
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,7 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.food_trock.DataManager
 import com.example.food_trock.DataManager.currentLat
 import com.example.food_trock.DataManager.currentLng
 import com.example.food_trock.R
@@ -19,6 +21,8 @@ import com.example.food_trock.models.Store
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import java.math.RoundingMode
+import java.text.DecimalFormat
 
 class storeAdapter(val context: Context, val storeList: List<Store> ) :
     RecyclerView.Adapter<storeAdapter.storeViewHolder>() {
@@ -30,9 +34,7 @@ class storeAdapter(val context: Context, val storeList: List<Store> ) :
     }
 
     fun setOnItemClickListener(listener: onItemClickListener) {
-
         mListener = listener
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): storeViewHolder {
@@ -45,9 +47,14 @@ class storeAdapter(val context: Context, val storeList: List<Store> ) :
         Glide.with(context).load(currentItem.storeImage).into(holder.storeImage)
         holder.txtName.text = currentItem.storeName
         holder.txtPriceClass.text = currentItem.storePriceClass.toString()
+        holder.ratingBar.rating = currentItem.storeRating
 
-        if(currentItem.category2 == "") {
+        if(currentItem.category2 == "Empty" && currentItem.category1 != "Empty") {
             holder.txtCategory.text = "${currentItem.category1}"
+        } else if (currentItem.category1 == "Empty" && currentItem.category2 != "Empty") {
+            holder.txtCategory.text = "${currentItem.category2}"
+        } else if (currentItem.category1 == "Empty" && currentItem.category2 == "Empty") {
+            holder.txtCategory.text = " "
         } else {
             holder.txtCategory.text = "${currentItem.category1} | ${currentItem.category2}"
         }
@@ -88,7 +95,12 @@ class storeAdapter(val context: Context, val storeList: List<Store> ) :
             dist = rad2deg(dist)
             dist = dist * 60 * 1.1515
             dist = dist * 1.609344
-            return dist.toString() + " km"
+
+            val df = DecimalFormat("#.##")
+            df.roundingMode = RoundingMode.CEILING
+
+
+            return (df.format(dist)+" km")
         }
         catch (e: Exception) {
             return "n/a";
@@ -116,6 +128,7 @@ class storeAdapter(val context: Context, val storeList: List<Store> ) :
         val storeImage: ImageView = itemView.findViewById(R.id.storeImage)
         val txtName: TextView = itemView.findViewById(R.id.txtName)
         val txtPriceClass: TextView = itemView.findViewById(R.id.txtPriceClass)
+        val ratingBar: RatingBar = itemView.findViewById(R.id.storeRatingBar)
         val txtDistance: TextView = itemView.findViewById(R.id.txtDistance)
        // val ratingBar: RatingBar = itemView.findViewById(R.id.ratingBar)
 

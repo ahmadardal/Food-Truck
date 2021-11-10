@@ -18,4 +18,15 @@
     <string name="label_Distance">Distance:</string>
     <string name="label_Time">Time:</string>
     <string name="label_Price">Price:</string>
+    <string-array name="food_tags">
+        <item>Desserts</item>
+        <item>Smoothies</item>
+        <item>Vegetarian</item>
+        <item>Kebab</item>
+        <item>Hotdog</item>
+        <item>Pizza</item>
+        <item>Japanese</item>
+        <item>Sandwhiches</item>
+
+    </string-array>
 </resources>

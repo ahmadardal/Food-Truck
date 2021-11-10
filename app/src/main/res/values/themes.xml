@@ -22,9 +22,14 @@
 
 
 
+
         <!-- Customize your theme here. -->
 
     </style>
+
+
+
+
 
 
     <style name="ShapeAppearanceOverlay.App.CornerSize50Percent" parent="">
@@ -36,7 +41,27 @@
         <item name="cornerSizeBottomRight">50dp</item>
         <item name="cornerSizeBottomLeft">50dp</item>
 </style>
+
+    <style name="TextInputLayoutStyleSettings" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxStrokeColor">#FF5C5C5C</item>
+        <item name="boxStrokeWidth">2dp</item>
+    </style>
+
+    <style name="TextInputLayoutStyleLogin" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+        <item name="boxStrokeColor">#ef5e68</item>
+        <item name="boxStrokeWidth">2dp</item>
+    </style>
+
+    <style name="TextLabel" parent="TextAppearance.Design.Hint">
+        <item name="android:textSize">18sp</item>
+    </style>
+
     <style name="RatingBar" parent="Theme.AppCompat">
 
+    </style>
+
+    <style name="splashScreenTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash</item>
+        <item name="android:windowFullscreen">true</item>
     </style>
 </resources>

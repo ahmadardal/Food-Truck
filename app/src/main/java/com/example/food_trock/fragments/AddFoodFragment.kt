@@ -47,7 +47,7 @@ class AddFoodFragment: Fragment() {
         db = Firebase.firestore
         auth = Firebase.auth
         val returnBtn = view.findViewById<ImageButton>(R.id.returnBtn)
-        val saveChangesBtn = view.findViewById<Button>(R.id.actionBtn)
+        val saveChangesBtn = view.findViewById<Button>(R.id.saveTruckNameBtn)
 
         txtItemCount.text = "You can add a maximum of 10 items\nYou have ${DataManager.menus.size} items"
 

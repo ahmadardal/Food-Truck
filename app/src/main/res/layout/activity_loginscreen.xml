@@ -8,12 +8,15 @@
     android:backgroundTintMode="multiply"
     tools:context=".MainActivity">
 
+
+
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="217dp"
-        android:layout_height="204dp"
-        android:layout_marginTop="50dp"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_marginTop="40dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/logo_foodtruck" />
@@ -22,7 +25,7 @@
         android:id="@+id/editItemName"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/transparent_plaintext"
         android:ems="10"
         android:hint="E-mail"
@@ -36,11 +39,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
+    <ImageView
+        android:id="@+id/imagewView2"
+        android:layout_width="66dp"
+        android:layout_height="57dp"
+        app:layout_constraintBottom_toBottomOf="@+id/editItemName"
+        app:layout_constraintStart_toStartOf="@+id/editItemName"
+        app:layout_constraintTop_toTopOf="@+id/editItemName"
+        app:layout_constraintVertical_bias="0.142"
+        app:srcCompat="@drawable/usericon" />
+
     <EditText
-        android:id="@+id/passwordActI"
+        android:id="@+id/editPassword"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="32dp"
         android:background="@drawable/transparent_plaintext"
         android:ems="10"
         android:hint="password"
@@ -50,26 +63,18 @@
         android:textColor="#FFFFFF"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editItemName" />
-
-    <ImageView
-        android:id="@+id/imagewView2"
-        android:layout_width="66dp"
-        android:layout_height="57dp"
-        app:layout_constraintBottom_toBottomOf="@+id/editItemName"
-        app:layout_constraintStart_toStartOf="@+id/editItemName"
-        app:layout_constraintTop_toTopOf="@+id/editItemName"
-        app:layout_constraintVertical_bias="0.45"
-        app:srcCompat="@drawable/usericon" />
 
     <ImageView
         android:id="@+id/imageView3"
         android:layout_width="66dp"
         android:layout_height="57dp"
-        app:layout_constraintBottom_toBottomOf="@+id/passwordActI"
-        app:layout_constraintStart_toStartOf="@+id/passwordActI"
-        app:layout_constraintTop_toTopOf="@+id/passwordActI"
+        app:layout_constraintBottom_toBottomOf="@+id/editPassword"
+        app:layout_constraintStart_toStartOf="@+id/editPassword"
+        app:layout_constraintTop_toTopOf="@+id/editPassword"
+        app:layout_constraintVertical_bias="0.285"
         app:srcCompat="@drawable/lock" />
 
     <androidx.appcompat.widget.AppCompatButton
@@ -85,7 +90,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/passwordActI"
+        app:layout_constraintTop_toBottomOf="@+id/editPassword"
         app:layout_constraintVertical_bias="0.178" />
 
     <TextView
@@ -112,4 +117,6 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_login" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
