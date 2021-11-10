@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.PersistableBundle
+import android.util.Log
 import android.view.Window
 import android.view.WindowManager
 import android.widget.Button
@@ -14,8 +15,8 @@ class AdminPortalActivity : AppCompatActivity() {
     private lateinit var btnAddNewAdmin : Button
     private lateinit var btnEnableFT : Button
 
-    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-        super.onCreate(savedInstanceState, persistentState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);    this.getWindow().setFlags(
             WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_admin_portal)
@@ -36,6 +37,8 @@ class AdminPortalActivity : AppCompatActivity() {
             /*val intent = Intent(this, AdminAddFoodTruckActivity::class.java)
             startActivity(intent)*/
         }
+
+        Log.e("!!!","portal")
     }
 
 

@@ -5,7 +5,7 @@ data class User(
     val fullName: String = "",
     val email: String = "",
     val image: String = "",
-    val mobile: Long = 0,
+    val mobile: String = "",
     val favorites: List<String> = ArrayList(),
     val role : Roles = Roles(false,false,false)
 

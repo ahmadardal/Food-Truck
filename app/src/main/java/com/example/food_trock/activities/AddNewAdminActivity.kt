@@ -22,18 +22,17 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 
 class AddNewAdminActivity : AppCompatActivity() {
-    private lateinit var btnAddNewAdmin : Button
     private lateinit var mProgressDialog: Dialog
 
-    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-        super.onCreate(savedInstanceState, persistentState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);    this.getWindow().setFlags(
             WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.activity_admin_add_foodtruck)
+        setContentView(R.layout.activity_add_new_admin)
 
 
 
-        btnAddNewAdmin = findViewById(R.id.btn_add_admin)
+       val btnAddNewAdmin = findViewById<Button>(R.id.btn_add_admin)
         btnAddNewAdmin.setOnClickListener {
             addNewAdmin()
         }

@@ -59,7 +59,7 @@ class LoginActivity : AppCompatActivity() {
                     if (task.isSuccessful) {
                         // Calling the FirestoreClass signInUser function to get the data of user from database.
                         //FireStoreClass().loadUserData(this@LoginActivity)
-                        val intent = Intent(this, OwnerSettingsActivity::class.java)
+                        val intent = Intent(this, AdminPortalActivity::class.java)
                         startActivity(intent)
                     } else {
                         Toast.makeText(
@@ -119,5 +119,9 @@ class LoginActivity : AppCompatActivity() {
      */
     fun hideProgressDialog() {
         mProgressDialog.dismiss()
+    }
+
+    fun getUserRole() {
+        
     }
 }

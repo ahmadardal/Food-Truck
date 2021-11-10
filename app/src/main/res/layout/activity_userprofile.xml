@@ -29,6 +29,8 @@
                 android:id="@+id/saveChangesBtn2"
                 android:layout_width="220dp"
                 android:layout_height="58dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
                 android:background="@drawable/main_background_rounded"
                 android:text="Save Changes"
                 android:textAllCaps="false"
@@ -254,18 +256,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
-        android:gravity="start|fill_horizontal"
+        android:gravity="start"
         android:minHeight="48dp"
-        android:text="Truck Name"
+        android:text="My Name"
         android:textColor="#FFFFFF"
         android:textSize="25dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/scrollView2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.178"
+        app:layout_constraintHorizontal_bias="0.141"
         app:layout_constraintStart_toEndOf="@+id/cardViewProfile"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.505" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

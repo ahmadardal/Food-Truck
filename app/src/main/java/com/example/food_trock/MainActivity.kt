@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Looper
 import android.provider.Settings
+import android.util.Log
 import androidx.core.app.ActivityCompat
 import com.example.food_trock.activities.MapsActivity
 import com.example.food_trock.activities.OwnerSettingsActivity
@@ -31,6 +32,8 @@ class MainActivity : AppCompatActivity() {
         Places.initialize(applicationContext, "AIzaSyBhTEjTc18EJg3UiLW_x8GemJNgu5Ljhdw")
         val myLocation = MyLocation(this, this)
         myLocation.getLocation()
+
+        Log.e("!!!","main")
 
 
 
