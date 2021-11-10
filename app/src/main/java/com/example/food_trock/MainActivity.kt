@@ -14,6 +14,7 @@ import com.example.food_trock.activities.MapsActivity
 import com.example.food_trock.activities.OwnerSettingsActivity
 import com.example.food_trock.activities.SplashActivity
 import com.example.food_trock.activities.StoreActivity
+import com.example.food_trock.firebase.FireStoreClass
 import com.example.food_trock.utils.MyLocation
 import com.google.android.gms.location.*
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -31,6 +32,7 @@ class MainActivity : AppCompatActivity() {
 
         val myLocation = MyLocation(applicationContext, this)
         myLocation.getLocation()
+
         var intent = Intent(this, StoreActivity::class.java)
         startActivity(intent)
 

@@ -12,9 +12,14 @@ import android.util.Log
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.getSystemService
+import com.example.food_trock.DataManager
+import com.example.food_trock.activities.AddNewAdmin
 import com.example.food_trock.activities.AdminAddFoodTruckActivity
 import com.example.food_trock.activities.LoginActivity
 import com.example.food_trock.activities.RegisterAccountActivity
+import com.example.food_trock.models.Approvement
+import com.example.food_trock.models.FoodTruckAdministration
+import com.example.food_trock.models.FoodTruckProfile
 import com.example.food_trock.models.Roles
 import com.example.food_trock.utils.Constants
 import com.google.firebase.auth.FirebaseAuth
@@ -36,7 +41,6 @@ class FireStoreClass {
         if (currentUser != null) {
             currentUserID = currentUser.uid
         }
-
         return currentUserID
     }
 
@@ -61,7 +65,9 @@ class FireStoreClass {
                 )
             }
     }
-
+    /**
+     * A function to make an entry of the registered foodtruck in the firestore database.
+     */
     fun registerUser(activity: AdminAddFoodTruckActivity, userInfo: com.example.food_trock.models.User) {
 
         mFireStore.collection(Constants.USERS)
@@ -70,7 +76,44 @@ class FireStoreClass {
             // Here the userInfo are Field and the SetOption is set to merge. It is for if we wants to merge
             .set(userInfo, SetOptions.merge())
             .addOnSuccessListener {
+                val foodTruck = FoodTruckProfile(
+                    userId = userInfo.id,
+                    available = true
+                )
+                val approvement = Approvement(
+                    adminId = getCurrentUserID(),
+                    foodTruckProfileId = foodTruck.id
+                )
+                val ftAdministration = FoodTruckAdministration(
+                    approved = true,
+                    approvementId = approvement.id,
+                    foodTruckProfileId = foodTruck.id,
+                    email = userInfo.email
+                )
+                registerFoodTruck(foodTruck,approvement,ftAdministration)
+                // Here call a function of base activity for transferring the result to it.
+                activity.userRegisteredSuccess()
+            }
+            .addOnFailureListener { e ->
+                activity.hideProgressDialog()
+                Log.e(
+                    activity.javaClass.simpleName,
+                    "Error writing document",
+                    e
+                )
+            }
+    }
+    /**
+     * A function to make an entry of the registered admin in the firestore database.
+     */
+    fun registerUser(activity: AddNewAdmin, userInfo: com.example.food_trock.models.User) {
 
+        mFireStore.collection(Constants.USERS)
+            // Document ID for users fields. Here the document it is the User ID.
+            .document(getCurrentUserID())
+            // Here the userInfo are Field and the SetOption is set to merge. It is for if we wants to merge
+            .set(userInfo, SetOptions.merge())
+            .addOnSuccessListener {
                 // Here call a function of base activity for transferring the result to it.
                 activity.userRegisteredSuccess()
             }
@@ -84,53 +127,41 @@ class FireStoreClass {
             }
     }
 
+    /**
+     * A function to make an entry of the registered foodtruck in the firestore database.
+     */
+    fun registerFoodTruck(foodTruckInfo: FoodTruckProfile, approvement: Approvement,ftAdministration: FoodTruckAdministration) {
 
+        mFireStore.collection("FoodTruckProfile").document()
+            // Here the userInfo are Field and the SetOption is set to merge. It is for if we wants to merge
+            .set(foodTruckInfo, SetOptions.merge())
+            .addOnSuccessListener {
 
-/*    fun getLocation() {
+                // Here regsiter approvement
+                mFireStore.collection("Approvement").document()
+                    // Here the userInfo are Field and the SetOption is set to merge. It is for if we wants to merge
+                    .set(approvement, SetOptions.merge())
+                    .addOnSuccessListener{
 
-        var locationManager = getSystemService(LOCATION_SERVICE) as LocationManager?
+                        //Here we register ftAdministration
+                        mFireStore.collection("FoodTruckAdministration").document()
+                            // Here the userInfo are Field and the SetOption is set to merge. It is for if we wants to merge
+                            .set(ftAdministration, SetOptions.merge())
+                            .addOnSuccessListener{
 
-        var locationListener = object : LocationListener {
-            fun onLocationChanged(location: Location?) {
-                var latitute = location!!.latitude
-                var longitute = location!!.longitude
-
-                Log.i("test", "Latitute: $latitute ; Longitute: $longitute")
+                            }
+                    }
 
             }
-
-        }
-
-        try {
-            locationManager!!.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0L, 0f, locationListener)
-        } catch (ex:SecurityException) {
-            Toast.makeText(applicationContext, "Fehler bei der Erfassung!", Toast.LENGTH_SHORT).show()
-        }
-
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-            != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(
-                this,
-                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
-                PERMISSION_REQUEST_ACCESS_FINE_LOCATION)
-            return
-        }
-        locationManager!!.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0L, 0f, locationListener)
-    }
-
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == PERMISSION_REQUEST_ACCESS_FINE_LOCATION) {
-            when (grantResults[0]) {
-                PackageManager.PERMISSION_GRANTED -> getLocation()
-                PackageManager.PERMISSION_DENIED -> //Tell to user the need of grant permission
+            .addOnFailureListener { e ->
+                Log.e(
+                    this.javaClass.simpleName,
+                    "Error writing document",
+                    e
+                )
             }
-        }
     }
 
-    companion object {
-        private const val PERMISSION_REQUEST_ACCESS_FINE_LOCATION = 100
-    }*/
 
     /**
      * A function to SignIn using firebase and get the user details from Firestore Database.

@@ -58,7 +58,7 @@ class TestDB : AppCompatActivity() {
          * Not complete yet, have to test itr
          */
         fun loadFoodTruckData() {
-
+            // 1-
             // Here we pass the collection name from which we wants the data.
             mFireStore.collection("FoodTruckProfile")
                 // The document id to get the Fields of user.
@@ -66,7 +66,7 @@ class TestDB : AppCompatActivity() {
                 .get()
                 .addOnSuccessListener { document ->
                     Log.e(this.javaClass.simpleName, document.toString())
-
+            // 2-
                     // Here we have received the document snapshot which is converted into the User Data model object.
                     val gottenFoodTruckData = document.toObject(FoodTruckProfile::class.java)!!
                     // Here Show sucess msg
@@ -76,6 +76,7 @@ class TestDB : AppCompatActivity() {
                             "Description keyWord: ${gottenFoodTruckData.descriptionKeyWord}" +
                             "Country: ${gottenFoodTruckData.country}" +
                             "PhoneNr: ${gottenFoodTruckData.phoneNr}"
+            // 3-
                 }
                 .addOnFailureListener { e ->
                     showResultTV.text = "Failed to get data, sorry"
@@ -86,6 +87,7 @@ class TestDB : AppCompatActivity() {
                         e
                     )
                 }
+            // 4-
         }
 
 
