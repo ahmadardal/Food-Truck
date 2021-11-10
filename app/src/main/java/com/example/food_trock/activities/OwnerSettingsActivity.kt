@@ -104,7 +104,7 @@ class OwnerSettingsActivity : AppCompatActivity() {
 
         editTruckName = findViewById(R.id.editTruckName)
         editFullName = findViewById(R.id.editFullName)
-        editPhoneNumber = findViewById(R.id.editUserPhone)
+        editPhoneNumber = findViewById(R.id.editPhoneNumber)
         editOpenHrs = findViewById(R.id.editOpeningHrs)
         txtEmail = findViewById(R.id.txtEmail)
         ownerProfileIMG = findViewById(R.id.ownerProfileImage)
