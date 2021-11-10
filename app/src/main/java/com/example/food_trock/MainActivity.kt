@@ -28,10 +28,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         Places.initialize(applicationContext, "AIzaSyBhTEjTc18EJg3UiLW_x8GemJNgu5Ljhdw")
-
-        val myLocation = MyLocation(applicationContext, this)
+        val myLocation = MyLocation(this, this)
         myLocation.getLocation()
-        var intent = Intent(this, StoreActivity::class.java)
+
+        val intent = Intent(this, StoreActivity::class.java)
         startActivity(intent)
 
     }

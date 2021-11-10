@@ -12,7 +12,10 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.food_trock.DataManager.currentLat
+import com.example.food_trock.DataManager.currentLng
 import com.example.food_trock.R
+import com.example.food_trock.firebase.FireStoreClass
 import com.example.food_trock.models.Store
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
@@ -30,9 +33,7 @@ class storeAdapter(val context: Context, val storeList: List<Store> ) :
     }
 
     fun setOnItemClickListener(listener: onItemClickListener) {
-
         mListener = listener
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): storeViewHolder {
@@ -59,7 +60,8 @@ class storeAdapter(val context: Context, val storeList: List<Store> ) :
 
 
 
-       // holder.txtDistance.text = currentItem.storeDistance
+        // holder.txtDistance.text = currentItem.storeDistance
+        holder.txtDistance.text = distanceBetweenInKm(currentLat, currentLng, currentItem.storeLatitude, currentItem.storeLongitude)
        // holder.ratingBar.rating = currentItem.storeRating.toFloat()
 
         if (currentItem.storePriceClass <= 70) {

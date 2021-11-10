@@ -100,6 +100,7 @@ class StoreFragment : Fragment() {
             if (storeID!!.isNotEmpty()) {
                 db.collection("OwnerMenus").document(storeID!!).collection("Items").get()
                     .addOnSuccessListener { snapshot ->
+                        //2
                         if (snapshot != null) {
                             for (menu in snapshot.documents) {
                                 val item = menu.toObject(MenuItem::class.java)
@@ -110,8 +111,8 @@ class StoreFragment : Fragment() {
                         }
                         recyclerView.adapter?.notifyDataSetChanged()
                     }
-
             }
+            //5
         }
     }
 
