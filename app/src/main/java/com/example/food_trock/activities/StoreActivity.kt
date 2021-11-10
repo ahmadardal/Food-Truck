@@ -11,11 +11,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.food_trock.DataManager
+import com.example.food_trock.DataManager.currentLat
+import com.example.food_trock.DataManager.currentLng
 import com.example.food_trock.DataManager.tempStores
 import com.example.food_trock.R
 import com.example.food_trock.models.Store
 import com.example.food_trock.fragments.StoreFragment
 import com.example.food_trock.adapters.storeAdapter
+import com.example.food_trock.utils.MyLocation
+import com.google.android.libraries.places.api.Places
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -26,6 +30,8 @@ import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_store.*
+import java.math.RoundingMode
+import java.text.DecimalFormat
 
 class StoreActivity : AppCompatActivity() {
 
@@ -76,7 +82,9 @@ class StoreActivity : AppCompatActivity() {
         bottomNavigationView.setOnNavigationItemSelectedListener(navigation)
         bottomNavigationView.menu.getItem(1).isChecked = true
 
-
+        Places.initialize(applicationContext, "AIzaSyBhTEjTc18EJg3UiLW_x8GemJNgu5Ljhdw")
+        val myLocation = MyLocation(this, this)
+        myLocation.getLocation()
         getStores()
 
         pizzaBtn.setOnClickListener {
@@ -202,6 +210,7 @@ class StoreActivity : AppCompatActivity() {
                     val store = document.toObject(Store::class.java)
                     if(store != null) {
                         if(store.storeStatus) {
+                            store.distance = calculateDistance(currentLat, currentLng,store.storeLatitude,store.storeLongitude)
                             DataManager.stores.add(store)
                             tempStores.add(store)
                         } else if (!store.storeStatus) {
@@ -210,6 +219,7 @@ class StoreActivity : AppCompatActivity() {
                         }
                     }
                 }
+                DataManager.stores.sortBy { it.distance }
                 storeSize.text = "Result: ${DataManager.stores.size}"
                 recyclerView.adapter?.notifyDataSetChanged()
             }
@@ -225,6 +235,7 @@ class StoreActivity : AppCompatActivity() {
                 }
             }
         }
+        DataManager.stores.sortBy { it.distance }
         selectAndDisselectTags(selectedTag,selected)
         storeSize.text = "Result: ${DataManager.stores.size}"
         recyclerView.adapter?.notifyDataSetChanged()
@@ -237,6 +248,7 @@ class StoreActivity : AppCompatActivity() {
             DataManager.stores.clear()
             for (store in tempStores) {
                 DataManager.stores.add(store)
+                DataManager.stores.sortBy { it.distance }
             }
         } else {
             when (selectedTag) {
@@ -262,6 +274,45 @@ class StoreActivity : AppCompatActivity() {
         dessertBtn.isSelected = false
         smoothiesBtn.isSelected = false
     }
+
+    fun calculateDistance (startLatitude: String,
+                             startLongitude: String,
+                             endLatitude: Double,
+                             endLongitude: Double,
+    ):Double {
+        try {
+            val startLat = startLatitude.toDouble()
+            val startLong = startLongitude.toDouble()
+            val endLat = endLatitude
+            val endLong = endLongitude
+
+            val theta = startLong - endLong
+            var dist = Math.sin(deg2rad(startLat)) * Math.sin(deg2rad(endLat)) + Math.cos(deg2rad(startLat)) * Math.cos(deg2rad(endLat)) * Math.cos(deg2rad(theta))
+            dist = Math.acos(dist)
+            dist = rad2deg(dist)
+            dist = dist * 60 * 1.1515
+            dist = dist * 1.609344
+
+            val df = DecimalFormat("#.##")
+            df.roundingMode = RoundingMode.CEILING
+
+
+            return dist
+        }
+        catch (e: Exception) {
+            return 0.0
+        }
+
+
+    }
+    private fun deg2rad(deg: Double): Double {
+        return deg * Math.PI / 180.0
+    }
+
+    private fun rad2deg(rad: Double): Double {
+        return rad * 180.0 / Math.PI
+    }
+
 
 }
 

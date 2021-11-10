@@ -12,6 +12,7 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.food_trock.DataManager
 import com.example.food_trock.DataManager.currentLat
 import com.example.food_trock.DataManager.currentLng
 import com.example.food_trock.R

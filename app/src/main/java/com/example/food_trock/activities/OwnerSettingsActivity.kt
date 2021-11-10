@@ -144,15 +144,23 @@ class OwnerSettingsActivity : AppCompatActivity() {
                 true -> {
                     txtStatus.text = "ONLINE"
                     txtStatus.setTextColor(Color.parseColor("#FF5EC538"))
+                    val map = mutableMapOf<String, Any?>()
+                    map["storeStatus"] = true
+                    map["storeLatitude"] = DataManager.currentLat.toDouble()
+                    map["storeLongitude"] = DataManager.currentLng.toDouble()
                     auth.currentUser?.let {
-                        foodTruckCollectionRef.document(it.uid).update("storeStatus", true)
+                        foodTruckCollectionRef.document(it.uid).update(map)
                     }
                 }
                 false -> {
                     txtStatus.text = "OFFLINE"
                     txtStatus.setTextColor(Color.parseColor("#837E7E"))
+                    val map = mutableMapOf<String, Any?>()
+                    map["storeStatus"] = false
+                    map["storeLatitude"] = DataManager.currentLat.toDouble()
+                    map["storeLongitude"] = DataManager.currentLng.toDouble()
                     auth.currentUser?.let {
-                        foodTruckCollectionRef.document(it.uid).update("storeStatus", false)
+                        foodTruckCollectionRef.document(it.uid).update(map)
                     }
                 }
             }

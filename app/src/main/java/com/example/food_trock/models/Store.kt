@@ -12,4 +12,5 @@ data class Store(var fullName: String = "",
                  var storeLatitude: Double = 0.0,
                  var storeLongitude: Double = 0.0,
                  var category1: String = "",
-                 var category2: String = "")
+                 var category2: String = "",
+                 var distance: Double = 0.0)
