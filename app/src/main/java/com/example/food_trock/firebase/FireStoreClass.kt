@@ -166,8 +166,9 @@ class FireStoreClass {
                 Log.e(activity.javaClass.simpleName, document.toString())
 
                 // Here we have received the document snapshot which is converted into the User Data model object.
-                val loggedInUser = document.toObject(User::class.java)!!
+                val loggedInUser = document.toObject(com.example.food_trock.models.User::class.java)!!
                 DataManager.currentUserId = getCurrentUserID()
+                DataManager.currentUserRole = loggedInUser.role
 
                 // Here call a function of base activity for transferring the result to it.
                 when (activity) {

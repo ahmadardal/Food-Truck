@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.food_trock.DataManager
 import com.example.food_trock.DataManager.currentLat
 import com.example.food_trock.DataManager.currentLng
+import com.example.food_trock.DataManager.currentUserRole
 import com.example.food_trock.DataManager.tempStores
 import com.example.food_trock.R
 import com.example.food_trock.models.Store
@@ -125,24 +126,31 @@ class StoreActivity : AppCompatActivity() {
         storeAdapter.setOnItemClickListener(object : storeAdapter.onItemClickListener {
             override fun onItemClick(position: Int) {
 
-                val storeFragment = StoreFragment()
+                if(auth.currentUser != null) {
+                    val storeFragment = StoreFragment()
 
-                var selectedStore: Store = storeAdapter.storeList[position]
-                val bundle = Bundle()
-                storeFragment.arguments = bundle
-                bundle.putString("storeName", selectedStore.storeName)
-                bundle.putInt("storePriceClass", selectedStore.storePriceClass)
-                bundle.putString("storeImage", selectedStore.storeImage)
-                bundle.putString("storeID", selectedStore.UID)
-                bundle.putString("phoneNumber",selectedStore.phoneNumber)
-                bundle.putString("openHrs",selectedStore.openHrs)
-                bundle.putFloat("rating",selectedStore.storeRating)
-                bundle.putDouble("lat",selectedStore.storeLatitude)
-                bundle.putDouble("long",selectedStore.storeLongitude)
+                    var selectedStore: Store = storeAdapter.storeList[position]
+                    val bundle = Bundle()
+                    storeFragment.arguments = bundle
+                    bundle.putString("storeName", selectedStore.storeName)
+                    bundle.putInt("storePriceClass", selectedStore.storePriceClass)
+                    bundle.putString("storeImage", selectedStore.storeImage)
+                    bundle.putString("storeID", selectedStore.UID)
+                    bundle.putString("phoneNumber",selectedStore.phoneNumber)
+                    bundle.putString("openHrs",selectedStore.openHrs)
+                    bundle.putFloat("rating",selectedStore.storeRating)
+                    bundle.putDouble("lat",selectedStore.storeLatitude)
+                    bundle.putDouble("long",selectedStore.storeLongitude)
 
-                val transaction = supportFragmentManager.beginTransaction()
-                transaction.add(R.id.container, storeFragment, "store")
-                transaction.commit()
+                    val transaction = supportFragmentManager.beginTransaction()
+                    transaction.add(R.id.container, storeFragment, "store")
+                    transaction.commit()
+                } else {
+                    val intentLogin = Intent(this@StoreActivity,LoginActivity::class.java)
+                    startActivity(intentLogin)
+                }
+
+
             }
         })
     }
@@ -161,8 +169,23 @@ class StoreActivity : AppCompatActivity() {
             }
             R.id.settings -> {
                 bottomNavigationView.menu.getItem(1).isChecked = false
-                val intent = Intent(this@StoreActivity, OwnerSettingsActivity::class.java)
-                startActivity(intent)
+
+                val intentAdmin = Intent(this, AdminPortalActivity::class.java)
+                val intentClient = Intent(this, UserProfileActivity::class.java)
+                val intentTruckOwner = Intent(this, OwnerSettingsActivity::class.java)
+                val intentLogin = Intent(this, LoginActivity::class.java)
+
+
+                if(DataManager.currentUserRole.admin) {
+                    startActivity(intentAdmin)
+                } else if (DataManager.currentUserRole.foodTruckOwner) {
+                    startActivity(intentTruckOwner)
+                } else if (DataManager.currentUserRole.client){
+                    startActivity(intentClient)
+                } else {
+                    startActivity(intentLogin)
+                }
+
                 return@OnNavigationItemSelectedListener true
             }
             R.id.maps -> {

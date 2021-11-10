@@ -46,8 +46,23 @@ class FavouritesActivity : AppCompatActivity() {
             }
             R.id.settings -> {
                 bottomNavigationView.menu.getItem(0).isChecked = false
-                val intent = Intent(this@FavouritesActivity, OwnerSettingsActivity::class.java)
-                startActivity(intent)
+
+                val intentAdmin = Intent(this, AdminPortalActivity::class.java)
+                val intentClient = Intent(this, UserProfileActivity::class.java)
+                val intentTruckOwner = Intent(this, OwnerSettingsActivity::class.java)
+                val intentLogin = Intent(this, LoginActivity::class.java)
+
+
+                if(DataManager.currentUserRole.admin) {
+                    startActivity(intentAdmin)
+                } else if (DataManager.currentUserRole.foodTruckOwner) {
+                    startActivity(intentTruckOwner)
+                } else if (DataManager.currentUserRole.client){
+                    startActivity(intentClient)
+                } else {
+                    startActivity(intentLogin)
+                }
+
                 return@OnNavigationItemSelectedListener true
             }
             R.id.maps -> {

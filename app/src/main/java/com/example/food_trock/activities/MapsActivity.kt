@@ -29,6 +29,8 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.EventListener
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreException
@@ -50,6 +52,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     lateinit var cardRating: RatingBar
     lateinit var cardRatingTxt: TextView
     private var firstTime: Boolean = true
+    val auth : FirebaseAuth = Firebase.auth
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -106,25 +109,32 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         }
 
         moreInfoBtn.setOnClickListener() {
-            val storeFragment = StoreFragment()
 
-            for(store in DataManager.stores) {
-                if(store.storeName == cardStoreName.text) {
-                    val bundle = Bundle()
-                    storeFragment.arguments = bundle
-                    bundle.putString("storeName", store.storeName)
-                    bundle.putInt("storePriceClass", store.storePriceClass)
-                    bundle.putString("storeImage", store.storeImage)
-                    bundle.putString("storeID", store.UID)
-                    bundle.putString("phoneNumber",store.phoneNumber)
-                    bundle.putString("openHrs",store.openHrs)
-                    bundle.putFloat("rating",store.storeRating)
+            if(auth.currentUser != null) {
+                val storeFragment = StoreFragment()
 
-                    val transaction = supportFragmentManager.beginTransaction()
-                    transaction.add(R.id.container, storeFragment, "store")
-                    transaction.commit()
+                for(store in DataManager.stores) {
+                    if(store.storeName == cardStoreName.text) {
+                        val bundle = Bundle()
+                        storeFragment.arguments = bundle
+                        bundle.putString("storeName", store.storeName)
+                        bundle.putInt("storePriceClass", store.storePriceClass)
+                        bundle.putString("storeImage", store.storeImage)
+                        bundle.putString("storeID", store.UID)
+                        bundle.putString("phoneNumber",store.phoneNumber)
+                        bundle.putString("openHrs",store.openHrs)
+                        bundle.putFloat("rating",store.storeRating)
+
+                        val transaction = supportFragmentManager.beginTransaction()
+                        transaction.add(R.id.container, storeFragment, "store")
+                        transaction.commit()
+                    }
                 }
+            } else {
+                val intentLogin = Intent(this,LoginActivity::class.java)
+                startActivity(intentLogin)
             }
+
         }
         if (DataManager.currentLng != "" && DataManager.currentLat != null && firstTime) {
             firstTime = false
@@ -253,8 +263,22 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 }
                 R.id.settings -> {
                     bottomNavigationView.menu.getItem(2).isChecked = false
-                    val intent = Intent(this@MapsActivity, OwnerSettingsActivity::class.java)
-                    startActivity(intent)
+                    val intentAdmin = Intent(this, AdminPortalActivity::class.java)
+                    val intentClient = Intent(this, UserProfileActivity::class.java)
+                    val intentTruckOwner = Intent(this, OwnerSettingsActivity::class.java)
+                    val intentLogin = Intent(this, LoginActivity::class.java)
+
+
+                    if(DataManager.currentUserRole.admin) {
+                        startActivity(intentAdmin)
+                    } else if (DataManager.currentUserRole.foodTruckOwner) {
+                        startActivity(intentTruckOwner)
+                    } else if (DataManager.currentUserRole.client){
+                        startActivity(intentClient)
+                    } else {
+                        startActivity(intentLogin)
+                    }
+
                     return@OnNavigationItemSelectedListener true
                 }
                 R.id.maps -> {

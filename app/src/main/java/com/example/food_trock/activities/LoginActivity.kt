@@ -11,13 +11,22 @@ import android.widget.Toast
 import android.view.Window
 import android.view.WindowManager
 import android.widget.Button
+import com.example.food_trock.DataManager
 import com.example.food_trock.R
+import com.example.food_trock.firebase.FireStoreClass
+import com.example.food_trock.models.User
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var mProgressDialog: Dialog
     private lateinit var btnLogin: Button
     private lateinit var createAccount: TextView
+    val db: FirebaseFirestore = Firebase.firestore
+    val auth: FirebaseAuth = Firebase.auth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +48,6 @@ class LoginActivity : AppCompatActivity() {
     }
 
 
-
     /**
      * A function for Sign-In using the registered user using the email and password.
      */
@@ -58,9 +66,7 @@ class LoginActivity : AppCompatActivity() {
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         // Calling the FirestoreClass signInUser function to get the data of user from database.
-                        //FireStoreClass().loadUserData(this@LoginActivity)
-                        val intent = Intent(this, AdminPortalActivity::class.java)
-                        startActivity(intent)
+                        FireStoreClass().loadUserData(this@LoginActivity)
                     } else {
                         Toast.makeText(
                             this@LoginActivity,
@@ -90,11 +96,23 @@ class LoginActivity : AppCompatActivity() {
     /**
      * A function to get the user details from the firestore database after authentication.
      */
-    fun signInSuccess(user: com.google.firebase.firestore.auth.User) {
+    fun signInSuccess(user: User) {
 
         hideProgressDialog()
 
-        startActivity(Intent(this@LoginActivity, SplashActivity::class.java))
+        val intentAdmin = Intent(this@LoginActivity, AdminPortalActivity::class.java)
+        val intentClient = Intent(this@LoginActivity, UserProfileActivity::class.java)
+        val intentTruckOwner = Intent(this@LoginActivity, OwnerSettingsActivity::class.java)
+
+
+        if(DataManager.currentUserRole.admin) {
+            startActivity(intentAdmin)
+        } else if (DataManager.currentUserRole.foodTruckOwner) {
+            startActivity(intentTruckOwner)
+        } else {
+            startActivity(intentClient)
+        }
+
         this.finish()
     }
 
@@ -121,7 +139,6 @@ class LoginActivity : AppCompatActivity() {
         mProgressDialog.dismiss()
     }
 
-    fun getUserRole() {
-        
-    }
+
+
 }
