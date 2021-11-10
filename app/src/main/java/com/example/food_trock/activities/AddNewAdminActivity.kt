@@ -21,7 +21,7 @@ import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 
-class AddNewAdmin : AppCompatActivity() {
+class AddNewAdminActivity : AppCompatActivity() {
     private lateinit var btnAddNewAdmin : Button
     private lateinit var mProgressDialog: Dialog
 
@@ -71,11 +71,11 @@ class AddNewAdmin : AppCompatActivity() {
 
 
                             // call the registerUser function of FirestoreClass to make an entry in the database.
-                            FireStoreClass().registerUser(this@AddNewAdmin, user)
+                            FireStoreClass().registerUser(this@AddNewAdminActivity, user)
                             sendverificationEmail(name,email, password)
                         } else {
                             Toast.makeText(
-                                this@AddNewAdmin,
+                                this@AddNewAdminActivity,
                                 task.exception!!.message,
                                 Toast.LENGTH_SHORT
                             ).show()
@@ -137,14 +137,14 @@ class AddNewAdmin : AppCompatActivity() {
     fun userRegisteredSuccess() {
 
         Toast.makeText(
-            this@AddNewAdmin,
+            this@AddNewAdminActivity,
             "You have successfully registered a new FoodTruck.",
             Toast.LENGTH_SHORT
         ).show()
 
         // Hide the progress dialog
         hideProgressDialog()
-        val intent = Intent(this, AdminPortal::class.java)
+        val intent = Intent(this, AdminPortalActivity::class.java)
         startActivity(intent)
         // Finish the Sign-Up Screen
         finish()

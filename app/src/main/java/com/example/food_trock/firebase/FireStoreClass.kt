@@ -1,26 +1,14 @@
 package com.example.food_trock.firebase
 
-import android.Manifest
 import android.app.Activity
-import android.content.Context.LOCATION_SERVICE
-import android.content.pm.PackageManager
-import android.location.Location
-import android.location.LocationListener
-import android.location.LocationManager
-import android.os.Bundle
 import android.util.Log
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.getSystemService
-import com.example.food_trock.DataManager
-import com.example.food_trock.activities.AddNewAdmin
+import com.example.food_trock.activities.AddNewAdminActivity
 import com.example.food_trock.activities.AdminAddFoodTruckActivity
 import com.example.food_trock.activities.LoginActivity
 import com.example.food_trock.activities.RegisterAccountActivity
 import com.example.food_trock.models.Approvement
 import com.example.food_trock.models.FoodTruckAdministration
 import com.example.food_trock.models.FoodTruckProfile
-import com.example.food_trock.models.Roles
 import com.example.food_trock.utils.Constants
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -106,7 +94,7 @@ class FireStoreClass {
     /**
      * A function to make an entry of the registered admin in the firestore database.
      */
-    fun registerUser(activity: AddNewAdmin, userInfo: com.example.food_trock.models.User) {
+    fun registerUser(activity: AddNewAdminActivity, userInfo: com.example.food_trock.models.User) {
 
         mFireStore.collection(Constants.USERS)
             // Document ID for users fields. Here the document it is the User ID.

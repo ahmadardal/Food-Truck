@@ -9,7 +9,7 @@ import android.view.WindowManager
 import android.widget.Button
 import com.example.food_trock.R
 
-class AdminPortal : AppCompatActivity() {
+class AdminPortalActivity : AppCompatActivity() {
     private lateinit var btnAddNewFT : Button
     private lateinit var btnAddNewAdmin : Button
     private lateinit var btnEnableFT : Button
@@ -29,7 +29,7 @@ class AdminPortal : AppCompatActivity() {
             startActivity(intent)
         }
         btnAddNewAdmin.setOnClickListener {
-            val intent = Intent(this, AddNewAdmin::class.java)
+            val intent = Intent(this, AddNewAdminActivity::class.java)
             startActivity(intent)
         }
         btnEnableFT.setOnClickListener {

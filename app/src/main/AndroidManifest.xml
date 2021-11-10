@@ -20,10 +20,10 @@
         android:supportsRtl="true"
         android:theme="@android:style/Theme.Holo.NoActionBar.Fullscreen">
         <activity
-            android:name=".activities.AddNewAdmin"
+            android:name=".activities.AddNewAdminActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.AdminPortal"
+            android:name=".activities.AdminPortalActivity"
             android:exported="false" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.

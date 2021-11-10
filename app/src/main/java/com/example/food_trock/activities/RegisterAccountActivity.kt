@@ -39,7 +39,7 @@ class RegisterAccountActivity : AppCompatActivity() {
     private fun registerUser() {
         // Here we get the text from editText and trim the space
         val name: String = findViewById<EditText>(R.id.fullNameActRA).text.toString().trim { it <= ' ' }
-        val email: String = findViewById<EditText>(R.id.userNameActRA).text.toString().trim { it <= ' ' }
+        val email: String = findViewById<EditText>(R.id.userEmailActRA).text.toString().trim { it <= ' ' }
         val password: String = findViewById<EditText>(R.id.passwordActRA).text.toString().trim { it <= ' ' }
         val passwordConfirmed: String = findViewById<EditText>(R.id.passwordConfirmaion).text.toString().trim { it <= ' ' }
         var assignedRole : Roles = Roles(admin = false, client = true, foodTruckOwner = false)

@@ -5,7 +5,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.PersistableBundle
 import android.text.TextUtils
-import android.util.Log
 import android.view.Window
 import android.view.WindowManager
 import android.widget.Button
@@ -20,8 +19,6 @@ import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.firestore.SetOptions
-import java.time.Instant
 
 class AdminAddFoodTruckActivity: AppCompatActivity() {
 
@@ -147,7 +144,7 @@ class AdminAddFoodTruckActivity: AppCompatActivity() {
 
         // Hide the progress dialog
         hideProgressDialog()
-        val intent = Intent(this, AdminPortal::class.java)
+        val intent = Intent(this, AdminPortalActivity::class.java)
         startActivity(intent)
         // Finish the Sign-Up Screen
         finish()
