@@ -51,6 +51,7 @@ class RegisterAccountActivity : AppCompatActivity() {
         val email: String = findViewById<EditText>(R.id.editCreateEmail).text.toString().trim { it <= ' ' }
         val password: String = findViewById<EditText>(R.id.editPassword).text.toString().trim { it <= ' ' }
         val passwordConfirmed: String = findViewById<EditText>(R.id.editConfirmPassword).text.toString().trim { it <= ' ' }
+        
         var assignedRole : Roles = Roles(admin = false, client = true, foodTruckOwner = false)
 
         if (validateForm(name, email, password, passwordConfirmed)) {

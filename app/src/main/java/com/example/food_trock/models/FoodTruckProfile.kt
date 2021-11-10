@@ -11,6 +11,7 @@ data class FoodTruckProfile(
     val available: Boolean = false,
     val geoQueries: String = "",
     val openHours: String = "",
-    val menu: List<Dishes> = ArrayList()
+    val menu: List<Dishes> = ArrayList(),
+    val userId: String = ""
 ) {
 }

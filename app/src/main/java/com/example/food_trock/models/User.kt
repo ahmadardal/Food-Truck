@@ -7,7 +7,7 @@ data class User(
     val image: String = "",
     val mobile: Long = 0,
     val favorites: List<String> = ArrayList(),
-    val role : Roles = Roles(),
+    val role : Roles
 
 ) {
 }

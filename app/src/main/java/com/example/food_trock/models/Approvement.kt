@@ -8,6 +8,6 @@ data class Approvement(
     val id : String = "",
     val adminId : String = "",
     val approvementDate : Instant = Instant.now(),
-    val foodTruckProfileId: AccessControlProfileId
+    val foodTruckProfileId: String
 ) {
 }
