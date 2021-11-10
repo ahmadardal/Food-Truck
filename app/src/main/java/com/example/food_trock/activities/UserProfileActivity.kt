@@ -4,18 +4,20 @@ import android.app.Activity
 import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.view.Window
 import android.view.WindowManager
 import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat.startActivity
 import com.bumptech.glide.Glide
 import com.example.food_trock.DataManager
 import com.example.food_trock.R
 import com.example.food_trock.fragments.MenuListFragment
 import com.example.food_trock.models.Store
+import com.example.food_trock.models.User
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -25,32 +27,21 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.activity_owner_settings.*
-import java.util.*
-
-
-
+import kotlinx.android.synthetic.main.activity_userprofile.*
 
 private lateinit var bottomNavigationView: BottomNavigationView
 
-class OwnerSettingsActivity : AppCompatActivity() {
+class UserProfileActivity : AppCompatActivity() {
 
     lateinit var db: FirebaseFirestore
     lateinit var auth: FirebaseAuth
-    lateinit var editTruckName: EditText
     lateinit var editFullName: EditText
     lateinit var editPhoneNumber: EditText
-    lateinit var editOpenHrs: EditText
     lateinit var ownerProfileIMG: ImageView
-    lateinit var txtStatus: TextView
     lateinit var txtEmail: TextView
     lateinit var txtMyName: TextView
-    val foodTruckCollectionRef = Firebase.firestore.collection("FoodTrucks")
     var selectedPhotoUri: Uri? = null
-    lateinit var tag1DropDown: AutoCompleteTextView
-    lateinit var tag2DropDown: AutoCompleteTextView
-    lateinit var tagsAdapter: ArrayAdapter<String>
-    val listOfTags = mutableListOf("Empty","Desserts","Smoothies","Vegetarian","Kebab","Hotdog",
-        "Pizza","Japanese","Sandwhiches")
+    val userCollectionRef = Firebase.firestore.collection("Users")
 
 
 
@@ -75,7 +66,7 @@ class OwnerSettingsActivity : AppCompatActivity() {
                 return@OnNavigationItemSelectedListener false
             }
             R.id.maps -> {
-                val intent = Intent(this@OwnerSettingsActivity, MapsActivity::class.java)
+                val intent = Intent(this@UserProfileActivity, MapsActivity::class.java)
                 startActivity(intent)
                 return@OnNavigationItemSelectedListener true
             }
@@ -88,28 +79,21 @@ class OwnerSettingsActivity : AppCompatActivity() {
         this.requestWindowFeature(Window.FEATURE_NO_TITLE); this.getWindow().setFlags(
             WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN
         );
-        setContentView(R.layout.activity_owner_settings)
+        setContentView(R.layout.activity_userprofile)
 
         bottomNavigationView = findViewById(R.id.bottom_navigation)
         bottomNavigationView.setOnNavigationItemSelectedListener(navigation)
         bottomNavigationView.menu.getItem(3).isChecked = true
 
         val saveChangesBtn = findViewById<Button>(R.id.saveChangesBtn)
-        val manageMenuBtn = findViewById<Button>(R.id.manageMenusBtn)
         val logOutBTN = findViewById<Button>(R.id.bt_Logout)
-        val switchBtn = findViewById<Switch>(R.id.switchBtn)
-        txtStatus = findViewById(R.id.txtStatus)
         db = Firebase.firestore
         auth = Firebase.auth
 
-        editTruckName = findViewById(R.id.editTruckName)
-        editFullName = findViewById(R.id.editFullName)
+        editFullName = findViewById(R.id.editUserFullName)
         editPhoneNumber = findViewById(R.id.editUserPhone)
-        editOpenHrs = findViewById(R.id.editOpeningHrs)
         txtEmail = findViewById(R.id.txtEmail)
         ownerProfileIMG = findViewById(R.id.ownerProfileImage)
-        tag1DropDown = findViewById(R.id.autoCompleteTag1)
-        tag2DropDown = findViewById(R.id.autoCompleteTag2)
         txtMyName = findViewById(R.id.txtMyName)
 
 
@@ -122,50 +106,10 @@ class OwnerSettingsActivity : AppCompatActivity() {
         /** Calls uploadImageToFirebaseStorage function which in turn calls getNewStoreMap.
          */
 
-        saveChangesBtn.setOnClickListener() {
+        saveChangesBtn2.setOnClickListener() {
             getNewStoreMap()
         }
 
-        manageMenuBtn.setOnClickListener() {
-            val menuFragment = MenuListFragment()
-
-            val transaction = supportFragmentManager.beginTransaction()
-            transaction.add(R.id.menuContainer, menuFragment, "menu")
-            transaction.commit()
-        }
-
-
-
-        /** Checks and unchecks the switch button. If checked, uncheck and display offline vice versa.
-         */
-        switchBtn.setOnCheckedChangeListener { _, isChecked ->
-            when (switchBtn.isChecked) {
-                true -> {
-                    txtStatus.text = "ONLINE"
-                    txtStatus.setTextColor(Color.parseColor("#FF5EC538"))
-                    val map = mutableMapOf<String, Any?>()
-                    map["storeStatus"] = true
-                    map["storeLatitude"] = DataManager.currentLat.toDouble()
-                    map["storeLongitude"] = DataManager.currentLng.toDouble()
-                    auth.currentUser?.let {
-                        foodTruckCollectionRef.document(it.uid).update(map)
-                    }
-                }
-                false -> {
-                    txtStatus.text = "OFFLINE"
-                    txtStatus.setTextColor(Color.parseColor("#837E7E"))
-                    val map = mutableMapOf<String, Any?>()
-                    map["storeStatus"] = false
-                    map["storeLatitude"] = DataManager.currentLat.toDouble()
-                    map["storeLongitude"] = DataManager.currentLng.toDouble()
-                    auth.currentUser?.let {
-                        foodTruckCollectionRef.document(it.uid).update(map)
-                    }
-                }
-            }
-
-
-        }
 
 
         /**
@@ -183,19 +127,6 @@ class OwnerSettingsActivity : AppCompatActivity() {
             logOut()
         }
 
-        tagsAdapter = ArrayAdapter(this,R.layout.dropdown_item,listOfTags)
-        tag1DropDown.setAdapter(tagsAdapter)
-        tag2DropDown.setAdapter(tagsAdapter)
-
-        tag1DropDown.setOnItemClickListener { adapterView, view, position, id ->
-            var tag = adapterView.getItemAtPosition(position).toString()
-            getNewStoreMap("",tag,"")
-
-        }
-        tag2DropDown.setOnItemClickListener { adapterView, view, position, id ->
-            var tag = adapterView.getItemAtPosition(position).toString()
-            getNewStoreMap("","",tag)
-        }
 
 
     }
@@ -227,48 +158,25 @@ class OwnerSettingsActivity : AppCompatActivity() {
      * Creates a new store map based on info from editTexts and takes in a profileImageURL
      * sets the map into database and merges it leaving unchanged values as they were.
      */
-    private fun getNewStoreMap (profileImageURL: String = "",
-                                category1: String = "",
-                                category2: String = "") {
-        val truckName = editTruckName.text.toString()
+    private fun getNewStoreMap (profileImageURL: String = "") {
         val fullName = editFullName.text.toString()
         val phoneNumber = editPhoneNumber.text.toString()
-        val openHours = editOpenHrs.text.toString()
-        val truckImage = profileImageURL
-        val tag1 = category1
-        val tag2 = category2
+        val profilePicture = profileImageURL
         val map = mutableMapOf<String, Any>()
-        if (truckName.isNotEmpty()) {
-            map["storeName"] = truckName
-        }
-        if (truckImage.isNotEmpty()) {
-            map["storeImage"] = truckImage
+        if (profilePicture.isNotEmpty()) {
+            map["image"] = profilePicture
         }
         if (fullName.isNotEmpty()) {
             map["fullName"] = fullName
         }
-        if (tag1.isNotEmpty()) {
-            map["category1"] = tag1
-        }
-        if (tag2.isNotEmpty()) {
-            map["category2"] = tag2
-        }
         if (phoneNumber.isNotEmpty()) {
-            map["phoneNumber"] = phoneNumber
-        }
-        if (openHours.isNotEmpty()) {
-            map["openHrs"] = openHours
+            map["mobile"] = phoneNumber
         }
         auth.currentUser?.let {
-            foodTruckCollectionRef.document(it.uid).set(map, SetOptions.merge())
+            userCollectionRef.document(it.uid).set(map, SetOptions.merge())
         }
     }
 
-
-    private fun requestLocationPermission () {
-        // TODO: 2021-10-18 Ask for location permission and set the current location of truck
-        // TODO: Function is placed inside switch status button.
-    }
 
 
     /**
@@ -300,24 +208,17 @@ class OwnerSettingsActivity : AppCompatActivity() {
 
     private fun setUserInfo () {
         auth.currentUser?.let {
-            foodTruckCollectionRef.document(it.uid).get().addOnSuccessListener { result ->
+            userCollectionRef.document(it.uid).get().addOnSuccessListener { result ->
                 if (result != null) {
-                    val store = result.toObject(Store::class.java)
-                    if (store != null) {
-                        if (store.storeStatus) {
-                            switchBtn.isChecked = true
-                        }
+                    val user : User? = result.toObject(User::class.java)
+                    if (user != null) {
                         Glide.with(this)
-                            .load(store.storeImage)
+                            .load(user.image)
                             .into(ownerProfileIMG)
-                        editTruckName.setText(store.storeName)
-                        editFullName.setText(store.fullName)
+                        editFullName.setText(user.fullName)
                         txtEmail.text = auth.currentUser!!.email
-                        editPhoneNumber.setText(store.phoneNumber)
-                        editOpenHrs.setText(store.openHrs)
-                        txtMyName.text = store.storeName
-                        autoCompleteTag1.setHint(store.category1)
-                        autoCompleteTag2.setHint(store.category2)
+                        editPhoneNumber.setText(user.mobile.toString())
+                        txtMyName.text = user.fullName
 
                     }
                 }
@@ -336,5 +237,4 @@ class OwnerSettingsActivity : AppCompatActivity() {
         }
 
     }
-
 }
