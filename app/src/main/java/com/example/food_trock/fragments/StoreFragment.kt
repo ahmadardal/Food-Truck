@@ -1,5 +1,6 @@
 package com.example.food_trock.fragments
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -17,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.food_trock.DataManager
 import com.example.food_trock.R
+import com.example.food_trock.activities.MapsActivity
 import com.example.food_trock.adapters.StoreMenuListAdapter
 import com.example.food_trock.adapters.menuListAdapter
 import com.example.food_trock.models.MenuItem
@@ -63,6 +65,7 @@ class StoreFragment : Fragment() {
         recyclerView.adapter = StoreMenuAdapter
 
         val returnBtn = view.findViewById<ImageButton>(R.id.storeReturnBtn)
+        val locationBtn = view.findViewById<ImageButton>(R.id.locationBtn)
         val favBtn = view.findViewById<ImageButton>(R.id.favBtn)
         txtStoreName = view.findViewById(R.id.txtStoreName)
         txtPriceClass = view.findViewById(R.id.txtPriceClass)
@@ -81,6 +84,19 @@ class StoreFragment : Fragment() {
 
         returnBtn.setOnClickListener() {
             activity?.supportFragmentManager?.beginTransaction()?.remove(this)?.commit()
+        }
+
+        locationBtn.setOnClickListener() {
+            val storeLat: Double? = arguments?.getDouble("lat")
+            val storeLong: Double? = arguments?.getDouble("long")
+            var intent = Intent(activity,MapsActivity::class.java)
+
+            intent.putExtra("key","KEY_STORE")
+            intent.putExtra("lat",storeLat)
+            intent.putExtra("long",storeLong)
+            startActivity(intent)
+
+
         }
 
         favBtn.setOnClickListener() {

@@ -137,6 +137,8 @@ class StoreActivity : AppCompatActivity() {
                 bundle.putString("phoneNumber",selectedStore.phoneNumber)
                 bundle.putString("openHrs",selectedStore.openHrs)
                 bundle.putFloat("rating",selectedStore.storeRating)
+                bundle.putDouble("lat",selectedStore.storeLatitude)
+                bundle.putDouble("long",selectedStore.storeLongitude)
 
                 val transaction = supportFragmentManager.beginTransaction()
                 transaction.add(R.id.container, storeFragment, "store")

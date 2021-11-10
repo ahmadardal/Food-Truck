@@ -78,6 +78,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
 
         getStores()
+        val storeLatFocus = intent.getDoubleExtra("lat",0.0)
+        val storeLongFocus = intent.getDoubleExtra("long",0.0)
+        val focusKey = intent.getStringExtra("key")
         mMap = googleMap
         mMap.setOnMarkerClickListener { marker ->
                 for (store in DataManager.stores) {
@@ -131,8 +134,18 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 null
             , null)
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(DataManager.currentLat.toDouble(), DataManager.currentLng.toDouble()), 15f))
-        } else {
-            //update marker position
+        }
+        if(focusKey == "KEY_STORE") {
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(storeLatFocus,storeLongFocus),15f))
+            for (store in DataManager.stores) {
+                if (storeLatFocus == store.storeLatitude) {
+                    cardStoreInfo.visibility = View.VISIBLE
+                    Glide.with(this).load(store.storeImage).into(cardStoreImage)
+                    cardStoreName.text = store.storeName
+                    cardRating.rating = store.storeRating
+                    cardRatingTxt.text = store.storeRating.toString()
+                }
+            }
         }
     }
 
