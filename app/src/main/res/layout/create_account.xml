@@ -20,16 +20,18 @@
 
     <ImageView
         android:id="@+id/imageView7"
-        android:layout_width="370dp"
-        android:layout_height="420dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="250dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="15dp"
         android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.428"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/createAccountBanner"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/loginholderrectangle" />
 
@@ -142,19 +144,16 @@
         android:id="@+id/registerBtn"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginTop="15dp"
         android:background="@drawable/main_background_rounded"
         android:text="Register"
         android:textColor="#FFFFFF"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView7"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputConfirmPassword"
-        app:layout_constraintVertical_bias="0.51" />
+        app:layout_constraintTop_toBottomOf="@+id/textInputConfirmPassword" />
 
     <TextView
         android:id="@+id/txtSecondHeader"
