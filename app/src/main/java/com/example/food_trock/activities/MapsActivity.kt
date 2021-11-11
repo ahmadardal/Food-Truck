@@ -18,7 +18,6 @@ import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
 import com.example.food_trock.DataManager
 import com.example.food_trock.R
-import com.example.food_trock.adapters.storeAdapter
 import com.example.food_trock.databinding.ActivityMapsBinding
 import com.example.food_trock.fragments.StoreFragment
 import com.example.food_trock.models.Store
@@ -54,7 +53,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     lateinit var cardRatingTxt: TextView
     private var firstTime: Boolean = true
     val auth : FirebaseAuth = Firebase.auth
-
+    val markers = mutableListOf<Marker>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -89,23 +88,15 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         mMap = googleMap
 
         if (DataManager.currentLng != "" && DataManager.currentLat != null) {
-/*            addMarker(
+            addMarker(
                 LatLng(DataManager.currentLat.toDouble(), DataManager.currentLng.toDouble()),
                 "You are here",
-                myLocationPin
-                , null)*/
-            val markerOptions = MarkerOptions()
-                .position(LatLng(DataManager.currentLat.toDouble(),DataManager.currentLng.toDouble())).title("You are here!")
-            mMap.addMarker(markerOptions)
-            Log.e("Testing", DataManager.currentLng)
+                null
+                , null)
 
             if (firstTime) {
-                Log.e("Test2", "test2")
                 firstTime = false
-                val lat = markerOptions.position.latitude
-                val lng = markerOptions.position.longitude
-                Log.e("Test1", lat.toString())
-                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(lat, lng), 15f))
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(DataManager.currentLat.toDouble(), DataManager.currentLng.toDouble()), 15f))
             }
         }
 
@@ -176,6 +167,14 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         }
     }
 
+    private fun removeAllMarkers() {
+        for (mLocationMarker in markers) {
+            mLocationMarker.remove()
+        }
+        markers.clear()
+    }
+
+
     fun getStores() {
 
         val db: FirebaseFirestore = Firebase.firestore
@@ -184,14 +183,12 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?) {
                 if(value != null) {
                     DataManager.stores.clear()
+                    removeAllMarkers()
+
                     for(document in value.documents) {
                         val store = document.toObject(Store::class.java)
                         if (store != null && store.storeStatus) {
-                            DataManager.stores.add(store)
                             loadMarker(store)
-                        } else {
-                            DataManager.stores.remove(store)
-
                         }
                     }
                 }
@@ -201,7 +198,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     private fun loadMarker (store: Store) {
-
+        DataManager.stores.add(store)
+        Log.e("StoreSize", DataManager.stores.size.toString())
         val storeLatLng = LatLng(store.storeLatitude, store.storeLongitude)
         Glide.with(this)
             .asBitmap()
@@ -248,12 +246,13 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         if (image != null) {
             val Icon: BitmapDescriptor = BitmapDescriptorFactory.fromBitmap(getCroppedBitmap(image))
             val markerOptions = MarkerOptions().position(latLng).title(title).icon(Icon)
+            val marker: Marker =  mMap.addMarker(markerOptions)
+            marker.setTag(tag)
 
-            mMap.addMarker(markerOptions).setTag(tag)
+            markers.add(marker)
         } else {
-
-            val markerOptions = MarkerOptions().position(latLng).title(title)
-            mMap.addMarker(markerOptions)
+            val markerOptions = MarkerOptions().position(latLng).title("You are here")
+            mMap.addMarker(markerOptions).setTag(tag)
         }
     }
 

@@ -1,9 +1,6 @@
 package com.example.food_trock
 
-import com.example.food_trock.models.MenuItem
-import com.example.food_trock.models.Roles
-import com.example.food_trock.models.Store
-import com.example.food_trock.models.User
+import com.example.food_trock.models.*
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -39,6 +36,4 @@ object DataManager {
         }
 
     }
-
-
 }
