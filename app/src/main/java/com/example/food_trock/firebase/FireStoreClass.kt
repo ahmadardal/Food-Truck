@@ -65,9 +65,10 @@ class FireStoreClass {
             .set(userInfo, SetOptions.merge())
             .addOnSuccessListener {
                 val foodTruck = Store(
-                    UID = userInfo.id
+                    UID = userInfo.id,
+                    fullName = userInfo.fullName
                 )
-                val approvement = Approvement(
+/*                val approvement = Approvement(
                     adminId = getCurrentUserID(),
                     foodTruckProfileId = foodTruck.UID
                 )
@@ -76,8 +77,8 @@ class FireStoreClass {
                     approvementId = approvement.id,
                     foodTruckProfileId = foodTruck.UID,
                     email = userInfo.email
-                )
-                registerFoodTruck(foodTruck,approvement,ftAdministration)
+                )*/
+                registerFoodTruck(activity,foodTruck)
                 // Here call a function of base activity for transferring the result to it.
                 activity.userRegisteredSuccess()
             }
@@ -117,28 +118,13 @@ class FireStoreClass {
     /**
      * A function to make an entry of the registered foodtruck in the firestore database.
      */
-    fun registerFoodTruck(foodTruckInfo: Store, approvement: Approvement, ftAdministration: FoodTruckAdministration) {
+    fun registerFoodTruck(activity: AdminAddFoodTruckActivity, foodTruckInfo: Store) {
 
         mFireStore.collection("FoodTrucks").document(foodTruckInfo.UID)
             // Here the userInfo are Field and the SetOption is set to merge. It is for if we wants to merge
             .set(foodTruckInfo, SetOptions.merge())
             .addOnSuccessListener {
-
-                // Here regsiter approvement
-                mFireStore.collection("Approvement").document()
-                    // Here the userInfo are Field and the SetOption is set to merge. It is for if we wants to merge
-                    .set(approvement, SetOptions.merge())
-                    .addOnSuccessListener{
-
-                        //Here we register ftAdministration
-                        mFireStore.collection("FoodTruckAdministration").document()
-                            // Here the userInfo are Field and the SetOption is set to merge. It is for if we wants to merge
-                            .set(ftAdministration, SetOptions.merge())
-                            .addOnSuccessListener{
-
-                            }
-                    }
-
+                activity.userRegisteredSuccess()
             }
             .addOnFailureListener { e ->
                 Log.e(
