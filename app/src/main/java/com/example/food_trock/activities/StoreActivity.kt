@@ -2,6 +2,7 @@ package com.example.food_trock.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.Window
 import android.view.WindowManager
 import android.widget.Button
@@ -178,8 +179,10 @@ class StoreActivity : AppCompatActivity() {
                 } else if (DataManager.currentUserRole.foodTruckOwner) {
                     startActivity(intentTruckOwner)
                 } else if (DataManager.currentUserRole.client){
+                    Log.e("!!!","intentClient")
                     startActivity(intentClient)
                 } else {
+                    Log.e("!!!","intentLogin")
                     startActivity(intentLogin)
                 }
 

@@ -9,6 +9,7 @@ import android.view.Window
 import android.view.WindowManager
 import android.widget.Button
 import android.widget.ImageButton
+import com.example.food_trock.DataManager
 import com.example.food_trock.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -53,6 +54,9 @@ class AdminPortalActivity : AppCompatActivity() {
     fun logout (){
         if(auth.currentUser != null){
             auth.signOut()
+            DataManager.currentUserRole.admin = false
+            DataManager.currentUserRole.client = false
+            DataManager.currentUserRole.foodTruckOwner = false
             val intentLogin = Intent(this@AdminPortalActivity, LoginActivity::class.java)
             startActivity(intentLogin)
         }

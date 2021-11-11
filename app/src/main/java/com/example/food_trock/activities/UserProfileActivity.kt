@@ -235,6 +235,9 @@ class UserProfileActivity : AppCompatActivity() {
     fun logOut(){
         if(auth.currentUser != null){
             auth.signOut()
+            DataManager.currentUserRole.admin = false
+            DataManager.currentUserRole.client = false
+            DataManager.currentUserRole.foodTruckOwner = false
             val intent= Intent(this, LoginActivity::class.java )
             startActivity(intent)
         }
