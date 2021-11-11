@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.location.Location
 import android.location.LocationManager
 import android.os.Looper
 import android.provider.Settings
@@ -40,8 +41,20 @@ class MyLocation (var context: Context, var activity: Activity) {
             ActivityCompat.requestPermissions(activity, arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), 200)
             return
         } else {
+            getLast()
             requestLocation()
         }
+    }
+
+    @SuppressWarnings("MissingPermission")
+    private fun getLast() {
+        locationProviderClient.lastLocation
+            .addOnSuccessListener { location : Location? ->
+                if (location != null) {
+                    DataManager.currentLat = location.latitude.toString()
+                    DataManager.currentLng = location.longitude.toString()
+                }
+            }
     }
 
     @SuppressWarnings("MissingPermission")
