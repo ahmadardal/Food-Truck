@@ -13,7 +13,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.food_trock.DataManager
 import com.example.food_trock.DataManager.currentLat
 import com.example.food_trock.DataManager.currentLng
-import com.example.food_trock.DataManager.currentUserRole
 import com.example.food_trock.DataManager.tempStores
 import com.example.food_trock.R
 import com.example.food_trock.models.Store
@@ -24,10 +23,7 @@ import com.google.android.libraries.places.api.Places
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.firestore.EventListener
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.FirebaseFirestoreException
-import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_store.*
@@ -50,8 +46,8 @@ class StoreActivity : AppCompatActivity() {
     lateinit var vegetarianBtn: Button
     lateinit var japaneseBtn: Button
     lateinit var pizzaBtn: Button
-    lateinit var smoothiesBtn: Button
-    lateinit var sandwhichBtn: Button
+    lateinit var mexicanBtn: Button
+    lateinit var burgerBtn: Button
     lateinit var storeAdapter: storeAdapter
 
 
@@ -66,10 +62,10 @@ class StoreActivity : AppCompatActivity() {
         pizzaBtn = findViewById(R.id.bt_pizza)
         hotdogBtn = findViewById(R.id.bt_hotdog)
         kebabBtn = findViewById(R.id.bt_kebab)
-        sandwhichBtn = findViewById(R.id.bt_Sandwhich)
+        burgerBtn = findViewById(R.id.bt_Burger)
         japaneseBtn = findViewById(R.id.bt_Japanese)
         vegetarianBtn = findViewById(R.id.bt_vegetarian)
-        smoothiesBtn = findViewById(R.id.bt_Smoothie)
+        mexicanBtn = findViewById(R.id.bt_Mexican)
         dessertBtn = findViewById(R.id.bt_Dessert)
         storeSize = findViewById(R.id.txtStoreSize)
 
@@ -101,17 +97,17 @@ class StoreActivity : AppCompatActivity() {
         japaneseBtn.setOnClickListener {
             filter("Japanese",japaneseBtn.isSelected)
         }
-        sandwhichBtn.setOnClickListener {
-            filter("Sandwhiches",sandwhichBtn.isSelected)
+        burgerBtn.setOnClickListener {
+            filter("Burger",burgerBtn.isSelected)
         }
         vegetarianBtn.setOnClickListener {
             filter("Vegetarian",vegetarianBtn.isSelected)
         }
         dessertBtn.setOnClickListener {
-            filter("Desserts",dessertBtn.isSelected)
+            filter("Dessert",dessertBtn.isSelected)
         }
-        smoothiesBtn.setOnClickListener {
-            filter("Smoothies",smoothiesBtn.isSelected)
+        mexicanBtn.setOnClickListener {
+            filter("Mexican",mexicanBtn.isSelected)
         }
         swipeRefreshLayout.setOnRefreshListener { 
             getStores()
@@ -160,8 +156,13 @@ class StoreActivity : AppCompatActivity() {
         when (item.itemId) {
             R.id.favourites -> {
                 bottomNavigationView.menu.getItem(1).isChecked = false
-                val intent = Intent(this@StoreActivity, FavouritesActivity::class.java)
-                startActivity(intent)
+                val intentLogin = Intent(this@StoreActivity, LoginActivity::class.java)
+                val intentFavorites = Intent(this@StoreActivity, FavouritesActivity::class.java)
+                if(auth.currentUser != null) {
+                    startActivity(intentFavorites)
+                } else {
+                    startActivity(intentLogin)
+                }
                 return@OnNavigationItemSelectedListener true
             }
             R.id.trucks -> {
@@ -280,11 +281,11 @@ class StoreActivity : AppCompatActivity() {
                 "Pizza" -> pizzaBtn.isSelected = true
                 "Hotdog" -> hotdogBtn.isSelected = true
                 "Kebab" -> kebabBtn.isSelected = true
-                "Sandwhiches" -> sandwhichBtn.isSelected = true
+                "Burger" -> burgerBtn.isSelected = true
                 "Japanese" -> japaneseBtn.isSelected = true
                 "Vegetarian" -> vegetarianBtn.isSelected = true
-                "Desserts" -> dessertBtn.isSelected = true
-                "Smoothies" -> smoothiesBtn.isSelected = true
+                "Dessert" -> dessertBtn.isSelected = true
+                "Mexican" -> mexicanBtn.isSelected = true
             }
         }
     }
@@ -293,11 +294,11 @@ class StoreActivity : AppCompatActivity() {
         pizzaBtn.isSelected = false
         hotdogBtn.isSelected = false
         kebabBtn.isSelected = false
-        sandwhichBtn.isSelected = false
+        burgerBtn.isSelected = false
         japaneseBtn.isSelected = false
         vegetarianBtn.isSelected = false
         dessertBtn.isSelected = false
-        smoothiesBtn.isSelected = false
+        mexicanBtn.isSelected = false
     }
 
     fun calculateDistance (startLatitude: String,

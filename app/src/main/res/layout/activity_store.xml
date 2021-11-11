@@ -82,18 +82,18 @@
             android:text="Hotdog"
             android:textAllCaps="false"
             android:textColor="@color/txt_tag_selector"
-            app:layout_constraintBottom_toBottomOf="@+id/bt_Sandwhich"
-            app:layout_constraintStart_toEndOf="@+id/bt_Sandwhich"
-            app:layout_constraintTop_toTopOf="@+id/bt_Sandwhich" />
+            app:layout_constraintBottom_toBottomOf="@+id/bt_Burger"
+            app:layout_constraintStart_toEndOf="@+id/bt_Burger"
+            app:layout_constraintTop_toTopOf="@+id/bt_Burger" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/bt_Smoothie"
+            android:id="@+id/bt_Mexican"
             android:layout_width="wrap_content"
             android:layout_height="35dp"
-            android:textAllCaps="false"
             android:layout_marginStart="8dp"
             android:background="@drawable/tagselector"
-            android:text="Smoothie"
+            android:text="Mexican"
+            android:textAllCaps="false"
             android:textColor="@color/txt_tag_selector"
             app:layout_constraintBottom_toBottomOf="@+id/bt_hotdog"
             app:layout_constraintStart_toEndOf="@+id/bt_hotdog"
@@ -109,9 +109,9 @@
             android:background="@drawable/tagselector"
             android:text="Dessert"
             android:textColor="@color/txt_tag_selector"
-            app:layout_constraintBottom_toBottomOf="@+id/bt_Smoothie"
-            app:layout_constraintStart_toEndOf="@+id/bt_Smoothie"
-            app:layout_constraintTop_toTopOf="@+id/bt_Smoothie"
+            app:layout_constraintBottom_toBottomOf="@+id/bt_Mexican"
+            app:layout_constraintStart_toEndOf="@+id/bt_Mexican"
+            app:layout_constraintTop_toTopOf="@+id/bt_Mexican"
             app:layout_constraintVertical_bias="0.0" />
 
         <androidx.appcompat.widget.AppCompatButton
@@ -128,13 +128,13 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/bt_Sandwhich"
+            android:id="@+id/bt_Burger"
             android:layout_width="wrap_content"
             android:layout_height="35dp"
-            android:textAllCaps="false"
             android:layout_marginTop="10dp"
             android:background="@drawable/tagselector"
-            android:text="Sandwhich"
+            android:text="Burger"
+            android:textAllCaps="false"
             android:textColor="@color/txt_tag_selector"
             app:layout_constraintStart_toStartOf="@+id/bt_pizza"
             app:layout_constraintTop_toBottomOf="@+id/bt_pizza" />

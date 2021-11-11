@@ -19,6 +19,8 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.store_fragment.*
+import java.math.RoundingMode
+import java.text.DecimalFormat
 
 class FavoritesAdapter(val context: Context, val favoriteList: List<Store> ) :
     RecyclerView.Adapter<FavoritesAdapter.favoriteViewHolder>() {
@@ -61,6 +63,10 @@ class FavoritesAdapter(val context: Context, val favoriteList: List<Store> ) :
         holder.txtName.text = currentItem.storeName
         holder.txtPriceClass.text = currentItem.storePriceClass.toString()
 
+        holder.txtDistance.text = distanceBetweenInKm(
+            DataManager.currentLat,
+            DataManager.currentLng, currentItem.storeLatitude, currentItem.storeLongitude)
+
         if(currentItem.category2 == "Empty" && currentItem.category1 != "Empty") {
             holder.txtCategory.text = "${currentItem.category1}"
         } else if (currentItem.category1 == "Empty" && currentItem.category2 != "Empty") {
@@ -99,6 +105,46 @@ class FavoritesAdapter(val context: Context, val favoriteList: List<Store> ) :
             holder.txtPriceClass.text = "$$$"
 
 
+    }
+
+    fun distanceBetweenInKm (startLatitude: String,
+                             startLongitude: String,
+                             endLatitude: Double,
+                             endLongitude: Double,
+    ):String {
+        try {
+            val startLat = startLatitude.toDouble()
+            val startLong = startLongitude.toDouble()
+            val endLat = endLatitude
+            val endLong = endLongitude
+
+            val theta = startLong - endLong
+            var dist = Math.sin(deg2rad(startLat)) * Math.sin(deg2rad(endLat)) + Math.cos(deg2rad(startLat)) * Math.cos(deg2rad(endLat)) * Math.cos(deg2rad(theta))
+            dist = Math.acos(dist)
+            dist = rad2deg(dist)
+            dist = dist * 60 * 1.1515
+            dist = dist * 1.609344
+
+            val df = DecimalFormat("#.##")
+            df.roundingMode = RoundingMode.CEILING
+
+
+            return (df.format(dist)+" km")
+        }
+        catch (e: Exception) {
+            return "n/a";
+        }
+
+
+
+
+    }
+    private fun deg2rad(deg: Double): Double {
+        return deg * Math.PI / 180.0
+    }
+
+    private fun rad2deg(rad: Double): Double {
+        return rad * 180.0 / Math.PI
     }
 
     override fun getItemCount(): Int {

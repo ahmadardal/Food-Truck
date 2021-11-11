@@ -25,8 +25,8 @@ class AdminAddFoodTruckActivity: AppCompatActivity() {
     private lateinit var btnAddNewFT : Button
     private lateinit var mProgressDialog: Dialog
 
-    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-    super.onCreate(savedInstanceState, persistentState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
     this.requestWindowFeature(Window.FEATURE_NO_TITLE);    this.getWindow().setFlags(
         WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
     setContentView(R.layout.activity_admin_add_foodtruck)

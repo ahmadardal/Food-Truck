@@ -27,7 +27,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="$$"
-                android:textSize="28sp"
+                android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/txtStoreName"
@@ -45,10 +45,10 @@
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/txtStoreName"
-                app:layout_constraintHorizontal_bias="0.288"
+                app:layout_constraintHorizontal_bias="0.281"
                 app:layout_constraintStart_toEndOf="@+id/txtPriceClass"
                 app:layout_constraintTop_toBottomOf="@+id/txtStoreName"
-                app:layout_constraintVertical_bias="0.155" />
+                app:layout_constraintVertical_bias="0.0" />
 
             <TextView
                 android:id="@+id/txtStoreName"
@@ -58,7 +58,7 @@
                 android:fontFamily="sans-serif-condensed"
                 android:text="Store Name"
                 android:textColor="#404040"
-                android:textSize="30dp"
+                android:textSize="24sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

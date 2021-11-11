@@ -9,12 +9,11 @@ import com.example.food_trock.activities.LoginActivity
 import com.example.food_trock.activities.RegisterAccountActivity
 import com.example.food_trock.models.Approvement
 import com.example.food_trock.models.FoodTruckAdministration
-import com.example.food_trock.models.FoodTruckProfile
+import com.example.food_trock.models.Store
 import com.example.food_trock.utils.Constants
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
-import com.google.firebase.firestore.auth.User
 
 class FireStoreClass {
 
@@ -65,18 +64,17 @@ class FireStoreClass {
             // Here the userInfo are Field and the SetOption is set to merge. It is for if we wants to merge
             .set(userInfo, SetOptions.merge())
             .addOnSuccessListener {
-                val foodTruck = FoodTruckProfile(
-                    userId = userInfo.id,
-                    available = true
+                val foodTruck = Store(
+                    UID = userInfo.id
                 )
                 val approvement = Approvement(
                     adminId = getCurrentUserID(),
-                    foodTruckProfileId = foodTruck.id
+                    foodTruckProfileId = foodTruck.UID
                 )
                 val ftAdministration = FoodTruckAdministration(
                     approved = true,
                     approvementId = approvement.id,
-                    foodTruckProfileId = foodTruck.id,
+                    foodTruckProfileId = foodTruck.UID,
                     email = userInfo.email
                 )
                 registerFoodTruck(foodTruck,approvement,ftAdministration)
@@ -119,9 +117,9 @@ class FireStoreClass {
     /**
      * A function to make an entry of the registered foodtruck in the firestore database.
      */
-    fun registerFoodTruck(foodTruckInfo: FoodTruckProfile, approvement: Approvement,ftAdministration: FoodTruckAdministration) {
+    fun registerFoodTruck(foodTruckInfo: Store, approvement: Approvement, ftAdministration: FoodTruckAdministration) {
 
-        mFireStore.collection("FoodTruckProfile").document()
+        mFireStore.collection("FoodTrucks").document(foodTruckInfo.UID)
             // Here the userInfo are Field and the SetOption is set to merge. It is for if we wants to merge
             .set(foodTruckInfo, SetOptions.merge())
             .addOnSuccessListener {

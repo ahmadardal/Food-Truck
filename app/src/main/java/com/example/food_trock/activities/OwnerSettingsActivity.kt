@@ -49,8 +49,8 @@ class OwnerSettingsActivity : AppCompatActivity() {
     lateinit var tag1DropDown: AutoCompleteTextView
     lateinit var tag2DropDown: AutoCompleteTextView
     lateinit var tagsAdapter: ArrayAdapter<String>
-    val listOfTags = mutableListOf("Empty","Desserts","Smoothies","Vegetarian","Kebab","Hotdog",
-        "Pizza","Japanese","Sandwhiches")
+    val listOfTags = mutableListOf("Empty","Dessert","Burger","Vegetarian","Kebab","Hotdog",
+        "Pizza","Japanese","Mexican")
 
 
 
@@ -106,7 +106,7 @@ class OwnerSettingsActivity : AppCompatActivity() {
         editFullName = findViewById(R.id.editFullName)
         editPhoneNumber = findViewById(R.id.editPhoneNumber)
         editOpenHrs = findViewById(R.id.editOpeningHrs)
-        txtEmail = findViewById(R.id.txtEmail)
+        txtEmail = findViewById(R.id.txtMyEmail)
         ownerProfileIMG = findViewById(R.id.ownerProfileImage)
         tag1DropDown = findViewById(R.id.autoCompleteTag1)
         tag2DropDown = findViewById(R.id.autoCompleteTag2)

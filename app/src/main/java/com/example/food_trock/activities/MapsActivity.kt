@@ -251,8 +251,13 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             when (item.itemId) {
                 R.id.favourites -> {
                     bottomNavigationView.menu.getItem(2).isChecked = false
-                    val intent = Intent(this@MapsActivity, FavouritesActivity::class.java)
-                    startActivity(intent)
+                    val intentLogin = Intent(this, LoginActivity::class.java)
+                    val intentFavorites = Intent(this, FavouritesActivity::class.java)
+                    if(auth.currentUser != null) {
+                        startActivity(intentFavorites)
+                    } else {
+                        startActivity(intentLogin)
+                    }
                     return@OnNavigationItemSelectedListener true
                 }
                 R.id.trucks -> {
