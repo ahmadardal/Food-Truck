@@ -34,6 +34,7 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.alternative_loginscreen)
 
         btnLogin = findViewById(R.id.btn_login)
+        homeBtn = findViewById(R.id.homeBtn)
         btnLogin.setOnClickListener {
             signInRegisteredUser()
         }
