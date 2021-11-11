@@ -46,6 +46,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var binding: ActivityMapsBinding
     private lateinit var bottomNavigationView: BottomNavigationView
     private lateinit var locationProviderClient: FusedLocationProviderClient
+    private lateinit var myLocationPin: Bitmap
     lateinit var cardStoreInfo: CardView
     lateinit var cardStoreImage: ImageView
     lateinit var cardStoreName: TextView
@@ -75,6 +76,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         cardRating = findViewById(R.id.cardRatingBar)
         cardRatingTxt = findViewById(R.id.txtCardRating)
 
+        myLocationPin = BitmapFactory.decodeResource(applicationContext.resources, R.drawable.mylocation)
 
     }
 
@@ -85,6 +87,29 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         val storeLongFocus = intent.getDoubleExtra("long",0.0)
         val focusKey = intent.getStringExtra("key")
         mMap = googleMap
+
+        if (DataManager.currentLng != "" && DataManager.currentLat != null) {
+/*            addMarker(
+                LatLng(DataManager.currentLat.toDouble(), DataManager.currentLng.toDouble()),
+                "You are here",
+                myLocationPin
+                , null)*/
+            val latLng = LatLng(59.403036, 17.947568)
+            val markerOptions = MarkerOptions().position(latLng).title("You are here!")
+            mMap.addMarker(markerOptions)
+            Log.e("Testing", DataManager.currentLng)
+
+            if (firstTime) {
+                Log.e("Test2", "test2")
+                firstTime = false
+                val lat = markerOptions.position.latitude
+                val lng = markerOptions.position.longitude
+                Log.e("Test1", lat.toString())
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(lat, lng), 15f))
+            }
+        }
+
+
         mMap.setOnMarkerClickListener { marker ->
                 for (store in DataManager.stores) {
                     if (store.storeName == marker.tag) {
@@ -136,15 +161,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             }
 
         }
-        if (DataManager.currentLng != "" && DataManager.currentLat != null && firstTime) {
-            firstTime = false
-            addMarker(
-                LatLng(DataManager.currentLat.toDouble(), DataManager.currentLng.toDouble()),
-                "You are here",
-                null
-            , null)
-                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(DataManager.currentLat.toDouble(), DataManager.currentLng.toDouble()), 15f))
-        }
+
         if(focusKey == "KEY_STORE") {
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(storeLatFocus,storeLongFocus),15f))
             for (store in DataManager.stores) {
@@ -234,6 +251,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
             mMap.addMarker(markerOptions).setTag(tag)
         } else {
+
             val markerOptions = MarkerOptions().position(latLng).title(title)
             mMap.addMarker(markerOptions)
         }

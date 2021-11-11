@@ -151,7 +151,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView3"
         android:layout_width="0dp"
-        android:layout_height="260dp"
+        android:layout_height="wrap_content"
         android:background="#E8E8E8"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"

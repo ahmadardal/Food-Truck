@@ -54,7 +54,6 @@ class FavouritesActivity : AppCompatActivity() {
                 val intentTruckOwner = Intent(this, OwnerSettingsActivity::class.java)
                 val intentLogin = Intent(this, LoginActivity::class.java)
 
-
                 if(DataManager.currentUserRole.admin) {
                     startActivity(intentAdmin)
                 } else if (DataManager.currentUserRole.foodTruckOwner) {

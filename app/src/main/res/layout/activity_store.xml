@@ -181,6 +181,7 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+
     <FrameLayout
         android:id="@+id/container"
         android:layout_width="0dp"
@@ -188,13 +189,12 @@
         android:elevation="3sp"
         android:textAlignment="textStart"
         android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/view3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
     </FrameLayout>
-
 
     <TextView
         android:id="@+id/textView"
