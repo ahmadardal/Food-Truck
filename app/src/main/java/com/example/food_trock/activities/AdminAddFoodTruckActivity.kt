@@ -7,10 +7,7 @@ import android.os.PersistableBundle
 import android.text.TextUtils
 import android.view.Window
 import android.view.WindowManager
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.example.food_trock.R
 import com.example.food_trock.firebase.FireStoreClass
@@ -32,7 +29,11 @@ class AdminAddFoodTruckActivity: AppCompatActivity() {
     setContentView(R.layout.activity_admin_add_foodtruck)
 
 
-
+        val btnBackToAdmin = findViewById<ImageButton>(R.id.back_to_admin_portal)
+        btnBackToAdmin.setOnClickListener{
+            val intentAdmin = Intent(this@AdminAddFoodTruckActivity, AdminPortalActivity::class.java)
+            startActivity(intentAdmin)
+        }
         btnAddNewFT = findViewById(R.id.btn_add_ft)
         btnAddNewFT.setOnClickListener {
             addNewFoodTruck()

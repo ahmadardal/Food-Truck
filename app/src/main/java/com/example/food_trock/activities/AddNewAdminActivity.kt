@@ -1,5 +1,6 @@
 package com.example.food_trock.activities
 
+import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -8,10 +9,7 @@ import android.os.PersistableBundle
 import android.text.TextUtils
 import android.view.Window
 import android.view.WindowManager
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import com.example.food_trock.R
 import com.example.food_trock.firebase.FireStoreClass
 import com.example.food_trock.models.Roles
@@ -24,14 +22,18 @@ import com.google.firebase.auth.FirebaseUser
 class AddNewAdminActivity : AppCompatActivity() {
     private lateinit var mProgressDialog: Dialog
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);    this.getWindow().setFlags(
             WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_add_new_admin)
 
-
-
+       val btnBackToAdmin = findViewById<ImageButton>(R.id.back_to_admin_portal)
+        btnBackToAdmin.setOnClickListener{
+            val intentAdmin = Intent(this@AddNewAdminActivity, AdminPortalActivity::class.java)
+            startActivity(intentAdmin)
+        }
        val btnAddNewAdmin = findViewById<Button>(R.id.btn_add_admin)
         btnAddNewAdmin.setOnClickListener {
             addNewAdmin()
