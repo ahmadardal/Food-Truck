@@ -12,7 +12,7 @@
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="35dp"
         android:fontFamily="sans-serif-condensed"
         android:text="My Truck Menu"
         android:textColor="#FFFFFF"
@@ -78,14 +78,15 @@
         android:id="@+id/cardViewProfile"
         android:layout_width="60dp"
         android:layout_height="60dp"
+        android:layout_marginEnd="20dp"
         android:elevation="1sp"
         app:cardCornerRadius="70dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.945"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.948"
+        app:layout_constraintStart_toEndOf="@+id/textView6"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.029">
+        app:layout_constraintVertical_bias="0.047">
 
         <ImageButton
             android:id="@+id/addMenuBtn"

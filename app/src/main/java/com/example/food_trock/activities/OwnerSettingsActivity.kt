@@ -217,6 +217,9 @@ class OwnerSettingsActivity : AppCompatActivity() {
 
             ownerProfileIMG.setImageBitmap(bitmap)
 
+            Glide.with(this).load(bitmap).into(ownerProfileIMG)
+
+
 
 
             uploadImageToFirebaseStorage()
@@ -262,6 +265,7 @@ class OwnerSettingsActivity : AppCompatActivity() {
         auth.currentUser?.let {
             foodTruckCollectionRef.document(it.uid).set(map, SetOptions.merge())
         }
+        txtMyName.text = truckName
     }
 
 

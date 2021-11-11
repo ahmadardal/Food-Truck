@@ -58,7 +58,7 @@ RecyclerView.Adapter<menuListAdapter.menuViewHolder>(){
     override fun onBindViewHolder(holder: menuViewHolder, position: Int) {
         val currentItem = menuList[position]
         holder.txtItemName.text = currentItem.foodName
-        holder.txtItemPrice.text = currentItem.foodPrice.toString()
+        holder.txtItemPrice.text = "${currentItem.foodPrice} :-"
         holder.itemPosition = position
         Glide.with(context).load(currentItem.foodImage).into(holder.itemImage)
 

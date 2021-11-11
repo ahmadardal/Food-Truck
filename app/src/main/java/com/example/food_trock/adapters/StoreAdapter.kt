@@ -55,8 +55,12 @@ class storeAdapter(val context: Context, val storeList: List<Store> ) :
             holder.txtCategory.text = "${currentItem.category2}"
         } else if (currentItem.category1 == "Empty" && currentItem.category2 == "Empty") {
             holder.txtCategory.text = " "
-        } else {
+        } else if (currentItem.category1 != "Empty" && currentItem.category2 != "Empty"){
             holder.txtCategory.text = "${currentItem.category1} | ${currentItem.category2}"
+        } else if (currentItem.category2 == ""){
+            holder.txtCategory.text = "${currentItem.category1}"
+        } else {
+            holder.txtCategory.text = "${currentItem.category2}"
         }
 
 
