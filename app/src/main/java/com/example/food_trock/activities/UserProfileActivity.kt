@@ -37,7 +37,7 @@ class UserProfileActivity : AppCompatActivity() {
     lateinit var auth: FirebaseAuth
     lateinit var editFullName: EditText
     lateinit var editPhoneNumber: EditText
-    lateinit var ownerProfileIMG: ImageView
+    lateinit var userProfileIMG: ImageView
     lateinit var txtEmail: TextView
     lateinit var txtMyName: TextView
     var selectedPhotoUri: Uri? = null
@@ -85,7 +85,7 @@ class UserProfileActivity : AppCompatActivity() {
         bottomNavigationView.setOnNavigationItemSelectedListener(navigation)
         bottomNavigationView.menu.getItem(3).isChecked = true
 
-        val saveChangesBtn = findViewById<Button>(R.id.saveChangesBtn)
+        val saveChangesBtn = findViewById<Button>(R.id.saveChangesBtn2)
         val logOutBTN = findViewById<Button>(R.id.bt_Logout)
         db = Firebase.firestore
         auth = Firebase.auth
@@ -93,7 +93,7 @@ class UserProfileActivity : AppCompatActivity() {
         editFullName = findViewById(R.id.editUserFullName)
         editPhoneNumber = findViewById(R.id.editUserPhone)
         txtEmail = findViewById(R.id.txtEmail)
-        ownerProfileIMG = findViewById(R.id.ownerProfileImage)
+        userProfileIMG = findViewById(R.id.userProfileImage)
         txtMyName = findViewById(R.id.txtMyName)
 
 
@@ -106,8 +106,9 @@ class UserProfileActivity : AppCompatActivity() {
         /** Calls uploadImageToFirebaseStorage function which in turn calls getNewStoreMap.
          */
 
-        saveChangesBtn2.setOnClickListener() {
+        saveChangesBtn.setOnClickListener() {
             getNewStoreMap()
+            Toast.makeText(this,"Settings saved",Toast.LENGTH_SHORT).show()
         }
 
 
@@ -115,7 +116,7 @@ class UserProfileActivity : AppCompatActivity() {
         /**
          * Starts the intent to pick an image from gallery.
          */
-        ownerProfileIMG.setOnClickListener() {
+        userProfileIMG.setOnClickListener() {
             Log.e("TEST", "photo clicked")
 
             val intent = Intent(Intent.ACTION_PICK)
@@ -146,7 +147,9 @@ class UserProfileActivity : AppCompatActivity() {
 
             val bitmap = MediaStore.Images.Media.getBitmap(contentResolver,selectedPhotoUri)
 
-            ownerProfileIMG.setImageBitmap(bitmap)
+            userProfileIMG.setImageBitmap(bitmap)
+
+            Glide.with(this).load(bitmap).into(userProfileIMG)
 
 
 
@@ -214,7 +217,7 @@ class UserProfileActivity : AppCompatActivity() {
                     if (user != null) {
                         Glide.with(this)
                             .load(user.image)
-                            .into(ownerProfileIMG)
+                            .into(userProfileIMG)
                         editFullName.setText(user.fullName)
                         txtEmail.text = auth.currentUser!!.email
                         editPhoneNumber.setText(user.mobile.toString())

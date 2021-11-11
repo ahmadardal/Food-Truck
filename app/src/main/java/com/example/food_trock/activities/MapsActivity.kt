@@ -94,8 +94,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 "You are here",
                 myLocationPin
                 , null)*/
-            val latLng = LatLng(59.403036, 17.947568)
-            val markerOptions = MarkerOptions().position(latLng).title("You are here!")
+            val markerOptions = MarkerOptions()
+                .position(LatLng(DataManager.currentLat.toDouble(),DataManager.currentLng.toDouble())).title("You are here!")
             mMap.addMarker(markerOptions)
             Log.e("Testing", DataManager.currentLng)
 
@@ -191,6 +191,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                             loadMarker(store)
                         } else {
                             DataManager.stores.remove(store)
+
                         }
                     }
                 }

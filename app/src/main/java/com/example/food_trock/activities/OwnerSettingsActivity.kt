@@ -49,7 +49,6 @@ class OwnerSettingsActivity : AppCompatActivity() {
     lateinit var tag1DropDown: AutoCompleteTextView
     lateinit var tag2DropDown: AutoCompleteTextView
     lateinit var tagsAdapter: ArrayAdapter<String>
-    var firstTimeLocation = true
     val listOfTags = mutableListOf("Empty","Dessert","Burger","Vegetarian","Kebab","Hotdog",
         "Pizza","Japanese","Mexican")
 
@@ -125,6 +124,7 @@ class OwnerSettingsActivity : AppCompatActivity() {
 
         saveChangesBtn.setOnClickListener() {
             getNewStoreMap()
+            Toast.makeText(this,"Settings saved",Toast.LENGTH_SHORT).show()
         }
 
         manageMenuBtn.setOnClickListener() {
@@ -144,7 +144,6 @@ class OwnerSettingsActivity : AppCompatActivity() {
                 true -> {
                     txtStatus.text = "ONLINE"
                     txtStatus.setTextColor(Color.parseColor("#FF5EC538"))
-                    if(!firstTimeLocation) {
                         val map = mutableMapOf<String, Any?>()
                         map["storeStatus"] = true
                         map["storeLatitude"] = DataManager.currentLat.toDouble()
@@ -152,19 +151,19 @@ class OwnerSettingsActivity : AppCompatActivity() {
                         auth.currentUser?.let {
                             foodTruckCollectionRef.document(it.uid).update(map)
                         }
-                    }
-                    firstTimeLocation = false
+
                 }
                 false -> {
                     txtStatus.text = "OFFLINE"
                     txtStatus.setTextColor(Color.parseColor("#837E7E"))
                     val map = mutableMapOf<String, Any?>()
-                    map["storeStatus"] = false
-                    map["storeLatitude"] = DataManager.currentLat.toDouble()
-                    map["storeLongitude"] = DataManager.currentLng.toDouble()
-                    auth.currentUser?.let {
-                        foodTruckCollectionRef.document(it.uid).update(map)
-                    }
+                        map["storeStatus"] = false
+                        map["storeLatitude"] = DataManager.currentLat.toDouble()
+                        map["storeLongitude"] = DataManager.currentLng.toDouble()
+                        auth.currentUser?.let {
+                            foodTruckCollectionRef.document(it.uid).update(map)
+                        }
+
                 }
             }
 

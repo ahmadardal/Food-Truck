@@ -5,12 +5,9 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
 import android.view.Window
 import android.view.WindowManager
-import android.widget.Button
+import android.widget.*
 import com.example.food_trock.DataManager
 import com.example.food_trock.R
 import com.example.food_trock.firebase.FireStoreClass
@@ -24,6 +21,7 @@ import com.google.firebase.ktx.Firebase
 class LoginActivity : AppCompatActivity() {
     private lateinit var mProgressDialog: Dialog
     private lateinit var btnLogin: Button
+    private lateinit var homeBtn: ImageButton
     private lateinit var createAccount: TextView
     val db: FirebaseFirestore = Firebase.firestore
     val auth: FirebaseAuth = Firebase.auth
@@ -38,6 +36,10 @@ class LoginActivity : AppCompatActivity() {
         btnLogin = findViewById(R.id.btn_login)
         btnLogin.setOnClickListener {
             signInRegisteredUser()
+        }
+        homeBtn.setOnClickListener() {
+            val intent = Intent(this,StoreActivity::class.java)
+            startActivity(intent)
         }
 
         createAccount = findViewById(R.id.txtSignUp)
@@ -83,10 +85,10 @@ class LoginActivity : AppCompatActivity() {
      */
     private fun validateForm(email: String, password: String): Boolean {
         return if (TextUtils.isEmpty(email)) {
-            Toast.makeText(applicationContext,"Email/Epost/Epost-adress!!!",Toast.LENGTH_LONG)
+            Toast.makeText(applicationContext,"Enter a valid email",Toast.LENGTH_LONG)
             false
         } else if (TextUtils.isEmpty(password)) {
-            Toast.makeText(applicationContext,"Kom igen! Du borde kunna ditt lösenord!!",Toast.LENGTH_LONG)
+            Toast.makeText(applicationContext,"Password cannot be empty",Toast.LENGTH_LONG)
             false
         } else {
             true

@@ -73,7 +73,6 @@ class StoreActivity : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
         storeAdapter = storeAdapter(this, DataManager.stores)
         recyclerView.adapter = storeAdapter
-        val loginBtn = findViewById<ImageButton>(R.id.loginBtn)
 
         bottomNavigationView = findViewById(R.id.bottom_navigation)
         bottomNavigationView.setOnNavigationItemSelectedListener(navigation)
@@ -112,9 +111,6 @@ class StoreActivity : AppCompatActivity() {
         swipeRefreshLayout.setOnRefreshListener { 
             getStores()
             swipeRefreshLayout.isRefreshing = false
-        }
-        loginBtn.setOnClickListener() {
-            OpenUserProfile()
         }
 
 
