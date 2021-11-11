@@ -191,7 +191,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                             loadMarker(store)
                         } else {
                             DataManager.stores.remove(store)
-                            mMap.clear()
                         }
                     }
                 }
