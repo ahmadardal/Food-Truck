@@ -49,6 +49,7 @@ class OwnerSettingsActivity : AppCompatActivity() {
     lateinit var tag1DropDown: AutoCompleteTextView
     lateinit var tag2DropDown: AutoCompleteTextView
     lateinit var tagsAdapter: ArrayAdapter<String>
+    var firstTimeLocation = true
     val listOfTags = mutableListOf("Empty","Dessert","Burger","Vegetarian","Kebab","Hotdog",
         "Pizza","Japanese","Mexican")
 
@@ -143,13 +144,16 @@ class OwnerSettingsActivity : AppCompatActivity() {
                 true -> {
                     txtStatus.text = "ONLINE"
                     txtStatus.setTextColor(Color.parseColor("#FF5EC538"))
-                    val map = mutableMapOf<String, Any?>()
-                    map["storeStatus"] = true
-                    map["storeLatitude"] = DataManager.currentLat.toDouble()
-                    map["storeLongitude"] = DataManager.currentLng.toDouble()
-                    auth.currentUser?.let {
-                        foodTruckCollectionRef.document(it.uid).update(map)
+                    if(!firstTimeLocation) {
+                        val map = mutableMapOf<String, Any?>()
+                        map["storeStatus"] = true
+                        map["storeLatitude"] = DataManager.currentLat.toDouble()
+                        map["storeLongitude"] = DataManager.currentLng.toDouble()
+                        auth.currentUser?.let {
+                            foodTruckCollectionRef.document(it.uid).update(map)
+                        }
                     }
+                    firstTimeLocation = false
                 }
                 false -> {
                     txtStatus.text = "OFFLINE"
